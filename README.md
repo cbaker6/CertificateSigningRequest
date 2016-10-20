@@ -11,7 +11,8 @@ To use, initiatlize the class using one of the following:
 
 Then simply build your CSR using your publicKey(bits) and privateKey using, let builtCSR = csr.build(publicKeyBits, privateKey: privateKey).
 
-Note: You will need to import CommonCrypto into your project. If you don't have this setup, follow the directions here: http://stackoverflow.com/questions/25248598/importing-commoncrypto-in-a-swift-framework?answertab=votes#tab-top
+Note1: You can get your publicKey in bit form by querying it from the iOS keychain using String(kSecReturnData): kCFBooleanTrue. 
 
+Note2: You will need to import CommonCrypto into your project. If you don't have this setup, follow the directions here: http://stackoverflow.com/questions/25248598/importing-commoncrypto-in-a-swift-framework?answertab=votes#tab-top
 
 Feel free to use in your projects and contribute to this one.
