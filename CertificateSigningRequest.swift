@@ -77,24 +77,24 @@ public class CertificateSigningRequest:NSObject {
     private let SEQUENCE_tag:UInt8 = 0x30
     private let SET_tag:UInt8 = 0x31
     
-    public init(cCommonName: String?, cOrganizationName:String?, cOrganizationUnitName:String?, cCountryName:String?, cSecureHashAlgorithm: SecureHashAlgorithm){
+    public init(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, secureHashAlgorithm: SecureHashAlgorithm){
         
-        commonName = cCommonName
-        organizationName = cOrganizationName
-        organizationUnitName = cOrganizationUnitName
-        countryName = cCountryName
-        subjectDER = nil
-        secureHashAlgorithm = cSecureHashAlgorithm
+        self.commonName = commonName
+        self.organizationName = organizationName
+        self.organizationUnitName = organizationUnitName
+        self.countryName = countryName
+        self.subjectDER = nil
+        self.secureHashAlgorithm = secureHashAlgorithm
         
         super.init()
     }
     
     public convenience override init(){
-        self.init(cCommonName: nil, cOrganizationName:nil, cOrganizationUnitName:nil, cCountryName:nil, cSecureHashAlgorithm: SecureHashAlgorithm.SHA1)
+        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, secureHashAlgorithm: SecureHashAlgorithm.SHA1)
     }
     
     public convenience init(cSecureHashAlgorithm: SecureHashAlgorithm){
-        self.init(cCommonName: nil, cOrganizationName:nil, cOrganizationUnitName:nil, cCountryName:nil, cSecureHashAlgorithm: cSecureHashAlgorithm)
+        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, secureHashAlgorithm: cSecureHashAlgorithm)
     }
     
     public func build(_ publicKeyBits:Data, privateKey: SecKey) -> Data?{
