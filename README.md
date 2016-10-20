@@ -6,8 +6,8 @@ Additions have been made to allow SHA256 and SHA512.
 
 To use, initiatlize the class using one of the following: 
 - let csr = CertificateSigningRequest()
-- let csr = CertificateSigningRequest(cSecureHashAlgorithm: SecureHashAlgorithm)
-- let csr = CertificateSigningRequest(cCommonName: String?, cOrganizationName:String?, cOrganizationUnitName:String?, cCountryName:String?, cSecureHashAlgorithm: SecureHashAlgorithm)
+- let csr = CertificateSigningRequest(cryptoAlgorithm: CryptoAlgorithm)
+- let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, cryptoAlgorithm: CryptoAlgorithm)
 
 Then simply build your CSR using your publicKey(bits) and privateKey using, let builtCSR = csr.build(publicKeyBits, privateKey: privateKey).
 
