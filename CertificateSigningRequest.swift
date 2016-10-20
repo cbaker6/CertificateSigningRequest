@@ -79,7 +79,7 @@ public class CertificateSigningRequest:NSObject {
     private let commonName:String?
     
     private var subjectDER:Data?
-    private var secureHashAlgorithm: CryptoAlgorithm!
+    private var cryptoAlgorithm: CryptoAlgorithm!
     
     private let OBJECT_commonName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x03]
     private let OBJECT_countryName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x06]
@@ -102,24 +102,24 @@ public class CertificateSigningRequest:NSObject {
     private let SEQUENCE_tag:UInt8 = 0x30
     private let SET_tag:UInt8 = 0x31
     
-    public init(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, secureHashAlgorithm: CryptoAlgorithm){
+    public init(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, cryptoAlgorithm: CryptoAlgorithm){
         
         self.commonName = commonName
         self.organizationName = organizationName
         self.organizationUnitName = organizationUnitName
         self.countryName = countryName
         self.subjectDER = nil
-        self.secureHashAlgorithm = secureHashAlgorithm
+        self.cryptoAlgorithm = cryptoAlgorithm
         
         super.init()
     }
     
     public convenience override init(){
-        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, secureHashAlgorithm: CryptoAlgorithm.sha1)
+        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, cryptoAlgorithm: CryptoAlgorithm.sha1)
     }
     
-    public convenience init(secureHashAlgorithm: CryptoAlgorithm){
-        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, secureHashAlgorithm: secureHashAlgorithm)
+    public convenience init(cryptoAlgorithm: CryptoAlgorithm){
+        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, cryptoAlgorithm: cryptoAlgorithm)
     }
     
     public func build(_ publicKeyBits:Data, privateKey: SecKey) -> Data?{
@@ -131,14 +131,14 @@ public class CertificateSigningRequest:NSObject {
         certificationRequestInfo.copyBytes(to: &certificationRequestInfoBytes, count: certificationRequestInfo.count)
         var digest:[UInt8]
         
-        switch secureHashAlgorithm! {
+        switch cryptoAlgorithm! {
         case .sha1:
             
             // Build signature - step 1: SHA1 hash
             var SHA1 = CC_SHA1_CTX()
             CC_SHA1_Init(&SHA1)
             CC_SHA1_Update(&SHA1, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-            digest = [UInt8](repeating: 0, count: secureHashAlgorithm.digestLength)
+            digest = [UInt8](repeating: 0, count: cryptoAlgorithm.digestLength)
             CC_SHA1_Final(&digest, &SHA1)
             shaBytes = SEQUENCE_OBJECT_sha1WithRSAEncryption
             padding = SecPadding.PKCS1SHA1
@@ -149,7 +149,7 @@ public class CertificateSigningRequest:NSObject {
             var SHA256 = CC_SHA256_CTX()
             CC_SHA256_Init(&SHA256)
             CC_SHA256_Update(&SHA256, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-            digest = [UInt8](repeating: 0, count: secureHashAlgorithm.digestLength)
+            digest = [UInt8](repeating: 0, count: cryptoAlgorithm.digestLength)
             CC_SHA256_Final(&digest, &SHA256)
             shaBytes = SEQUENCE_OBJECT_sha256WithRSAEncryption
             padding = SecPadding.PKCS1SHA256
@@ -160,14 +160,14 @@ public class CertificateSigningRequest:NSObject {
             var SHA512 = CC_SHA512_CTX()
             CC_SHA512_Init(&SHA512)
             CC_SHA512_Update(&SHA512, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-            digest = [UInt8](repeating: 0, count: secureHashAlgorithm.digestLength)
+            digest = [UInt8](repeating: 0, count: cryptoAlgorithm.digestLength)
             CC_SHA512_Final(&digest, &SHA512)
             shaBytes = SEQUENCE_OBJECT_sha512WithRSAEncryption
             padding = SecPadding.PKCS1SHA512
             
         default:
             
-            print("Error: crypto algotirthm \(secureHashAlgorithm) is not implemented")
+            print("Error: crypto algotirthm \(cryptoAlgorithm) is not implemented")
             return nil
         }
         
