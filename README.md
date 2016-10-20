@@ -9,7 +9,7 @@ To use, initiatlize the class using one of the following:
 - let csr = CertificateSigningRequest(cSecureHashAlgorithm: SecureHashAlgorithm)
 - let csr = CertificateSigningRequest(cCommonName: String?, cOrganizationName:String?, cOrganizationUnitName:String?, cCountryName:String?, cSecureHashAlgorithm: SecureHashAlgorithm)
 
-Then simply build your CSR using your publicKey(bits) and privateKey using, let csr = sccr.build(publicKeyBits, privateKey: privateKey).
+Then simply build your CSR using your publicKey(bits) and privateKey using, let builtCSR = csr.build(publicKeyBits, privateKey: privateKey).
 
 Note: You will need to import CommonCrypto into your project. If you don't have this setup, follow the directions here: http://stackoverflow.com/questions/25248598/importing-commoncrypto-in-a-swift-framework?answertab=votes#tab-top
 
