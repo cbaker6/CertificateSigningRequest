@@ -78,7 +78,7 @@ public class CertificateSigningRequest:NSObject {
     private let organizationUnitName:String?
     private let commonName:String?
     
-    private var subjectDER:Data?
+    private var subjectDER:NSData?
     private var cryptoAlgorithm: CryptoAlgorithm!
     
     private let OBJECT_commonName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x03]
@@ -122,7 +122,7 @@ public class CertificateSigningRequest:NSObject {
         self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, cryptoAlgorithm: cryptoAlgorithm)
     }
     
-    public func build(_ publicKeyBits:Data, privateKey: SecKey) -> Data?{
+    public func build(_ publicKeyBits:NSData, privateKey: SecKey) -> NSData?{
         
         var certificationRequestInfo = buldCertificationRequestInfo(publicKeyBits)
         var shaBytes:[UInt8]
@@ -183,11 +183,11 @@ public class CertificateSigningRequest:NSObject {
             return nil
         }
         
-        var certificationRequest = Data(capacity: 1024)
+        var certificationRequest = NSData(capacity: 1024)
         certificationRequest.append(certificationRequestInfo)
         certificationRequest.append(shaBytes, count: shaBytes.count)
         
-        var signData = Data(capacity: 257)
+        var signData = NSData(capacity: 257)
         let zero:UInt8 = 0 // Prepend zero
         signData.append(zero)
         signData.append(signature, count: signatureLen)
@@ -198,15 +198,15 @@ public class CertificateSigningRequest:NSObject {
         return certificationRequest
     }
     
-    func buldCertificationRequestInfo(_ publicKeyBits:Data) -> Data{
-        var certificationRequestInfo = Data(capacity: 256)
+    func buldCertificationRequestInfo(_ publicKeyBits:NSData) -> NSData{
+        var certificationRequestInfo = NSData(capacity: 256)
         
         //Add version
         let version: [UInt8] = [0x02, 0x01, 0x00] // ASN.1 Representation of integer with value 1
         certificationRequestInfo.append(version, count: version.count)
         
         //Add subject
-        var subject = Data(capacity: 256)
+        var subject = NSData(capacity: 256)
         if countryName != nil{
             appendSubjectItem(OBJECT_countryName, value: countryName!, into: &subject)
         }
@@ -243,14 +243,14 @@ public class CertificateSigningRequest:NSObject {
     }
     
     /// Utility class methods ...
-    func buildPublicKeyInfo(_ publicKeyBits:Data)-> Data{
+    func buildPublicKeyInfo(_ publicKeyBits:NSData)-> NSData{
         
-        var publicKeyInfo = Data(capacity: 390)
+        var publicKeyInfo = NSData(capacity: 390)
         
         publicKeyInfo.append(OBJECT_rsaEncryptionNULL, count: OBJECT_rsaEncryptionNULL.count)
         enclose(&publicKeyInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
         
-        var publicKeyASN = Data(capacity: 260)
+        var publicKeyASN = NSData(capacity: 260)
         
         let mod = getPublicKeyMod(publicKeyBits)
         let integer:UInt8 = 0x02 //Integer
@@ -273,14 +273,14 @@ public class CertificateSigningRequest:NSObject {
         return publicKeyInfo
     }
     
-    func appendSubjectItem(_ what:[UInt8], value: String, into: inout Data ) ->(){
+    func appendSubjectItem(_ what:[UInt8], value: String, inout into: NSData ) ->(){
         
         if what.count != 5{
             print("Error: attempting to a non-subject item")
             return
         }
         
-        var subjectItem = Data(capacity: 128)
+        var subjectItem = NSData(capacity: 128)
         
         subjectItem.append(what, count: what.count)
         appendUTF8String(string: value, into: &subjectItem)
@@ -290,7 +290,7 @@ public class CertificateSigningRequest:NSObject {
         into.append(subjectItem)
     }
     
-    func appendUTF8String(string: String, into: inout Data) ->(){
+    func appendUTF8String(string: String, inout into: NSData) ->(){
         
         let strType:UInt8 = 0x0C //UTF8STRING
     
@@ -299,7 +299,7 @@ public class CertificateSigningRequest:NSObject {
         into.append(string.data(using: String.Encoding.utf8)!)
     }
     
-    func appendDERLength(_ length: Int, into: inout Data){
+    func appendDERLength(_ length: Int, inout into: NSData){
         
         assert(length < 0x8000)
         
@@ -321,7 +321,7 @@ public class CertificateSigningRequest:NSObject {
         }
     }
     
-    func appendBITSTRING(_ data: Data, into: inout Data)->(){
+    func appendBITSTRING(_ data: NSData, inout into: NSData)->(){
         
         let strType:UInt8 = 0x03 //BIT STRING
         into.append(strType)
@@ -329,9 +329,9 @@ public class CertificateSigningRequest:NSObject {
         into.append(data)
     }
     
-    func enclose(_ data: inout Data, by: UInt8){
+    func enclose(inout _ data: NSData, by: UInt8){
         
-        var newData = Data(capacity: data.count + 4)
+        var newData = NSData(capacity: data.count + 4)
         
         newData.append(by)
         appendDERLength(data.count, into: &newData)
@@ -340,9 +340,9 @@ public class CertificateSigningRequest:NSObject {
         data = newData
     }
     
-    func prependByte(_ byte: UInt8, into: inout Data)->(){
+    func prependByte(_ byte: UInt8, inout into: NSData)->(){
      
-        var newData = Data(capacity: into.count + 1)
+        var newData = NSData(capacity: into.count + 1)
         
         newData.append(byte)
         newData.append(into)
@@ -352,7 +352,7 @@ public class CertificateSigningRequest:NSObject {
     
     // From http://stackoverflow.com/questions/3840005/how-to-find-out-the-modulus-and-exponent-of-rsa-public-key-on-iphone-objective-c
     
-    func getPublicKeyExp(_ publicKeyBits:Data)->Data{
+    func getPublicKeyExp(_ publicKeyBits:NSData)->NSData{
         
         var iterator = 0
         
@@ -371,7 +371,7 @@ public class CertificateSigningRequest:NSObject {
         return publicKeyBits.subdata(in: range)
     }
     
-    func getPublicKeyMod(_ publicKeyBits: Data)->Data{
+    func getPublicKeyMod(_ publicKeyBits: NSData)->NSData{
         
         var iterator = 0
         
@@ -386,7 +386,7 @@ public class CertificateSigningRequest:NSObject {
         return publicKeyBits.subdata(in: range)
     }
     
-    func derEncodingGetSizeFrom(_ buf: Data, at iterator: inout Int)->Int{
+    func derEncodingGetSizeFrom(_ buf: NSData, inout at iterator: Int)->Int{
         
         var data = [UInt8](repeating: 0, count: buf.count)
         buf.copyBytes(to: &data, count: buf.count)
