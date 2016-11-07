@@ -122,13 +122,15 @@ public class CertificateSigningRequest:NSObject {
         self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, cryptoAlgorithm: cryptoAlgorithm)
     }
     
-    public func build(_ publicKeyBits:NSData, privateKey: SecKey) -> NSData?{
+    public func build(publicKeyBits:NSData, privateKey: SecKey) -> NSData?{
         
         var certificationRequestInfo = buldCertificationRequestInfo(publicKeyBits)
         var shaBytes:[UInt8]
         var padding:SecPadding
-        var certificationRequestInfoBytes = [UInt8](repeating: 0, count: certificationRequestInfo.count)
-        certificationRequestInfo.copyBytes(to: &certificationRequestInfoBytes, count: certificationRequestInfo.count)
+       
+        var certificationRequestInfoBytes = [UInt8](count: certificationRequestInfo.length, repeatedValue: 0)
+        certificationRequestInfo.getBytes(&certificationRequestInfoBytes, length: certificationRequestInfo.length)
+    
         var digest:[UInt8]
         
         switch cryptoAlgorithm! {
@@ -137,8 +139,8 @@ public class CertificateSigningRequest:NSObject {
             // Build signature - step 1: SHA1 hash
             var SHA1 = CC_SHA1_CTX()
             CC_SHA1_Init(&SHA1)
-            CC_SHA1_Update(&SHA1, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-            digest = [UInt8](repeating: 0, count: cryptoAlgorithm.digestLength)
+            CC_SHA1_Update(&SHA1, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.length))
+            digest = [UInt8](count: cryptoAlgorithm.digestLength, repeatedValue: 0)
             CC_SHA1_Final(&digest, &SHA1)
             shaBytes = SEQUENCE_OBJECT_sha1WithRSAEncryption
             padding = SecPadding.PKCS1SHA1
@@ -148,8 +150,8 @@ public class CertificateSigningRequest:NSObject {
             // Build signature - step 1: SHA256 hash
             var SHA256 = CC_SHA256_CTX()
             CC_SHA256_Init(&SHA256)
-            CC_SHA256_Update(&SHA256, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-            digest = [UInt8](repeating: 0, count: cryptoAlgorithm.digestLength)
+            CC_SHA256_Update(&SHA256, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.length))
+            digest = [UInt8](count: cryptoAlgorithm.digestLength, repeatedValue: 0)
             CC_SHA256_Final(&digest, &SHA256)
             shaBytes = SEQUENCE_OBJECT_sha256WithRSAEncryption
             padding = SecPadding.PKCS1SHA256
@@ -159,8 +161,8 @@ public class CertificateSigningRequest:NSObject {
             // Build signature - step 1: SHA512 hash
             var SHA512 = CC_SHA512_CTX()
             CC_SHA512_Init(&SHA512)
-            CC_SHA512_Update(&SHA512, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-            digest = [UInt8](repeating: 0, count: cryptoAlgorithm.digestLength)
+            CC_SHA512_Update(&SHA512, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.length))
+            digest = [UInt8](count: cryptoAlgorithm.digestLength, repeatedValue: 0)
             CC_SHA512_Final(&digest, &SHA512)
             shaBytes = SEQUENCE_OBJECT_sha512WithRSAEncryption
             padding = SecPadding.PKCS1SHA512
@@ -173,7 +175,7 @@ public class CertificateSigningRequest:NSObject {
         
         
         // Build signature - step 2: Sign hash
-        var signature = [UInt8](repeating: 0, count: 256)
+        var signature = [UInt8](count: 256, repeatedValue: 0)
         var signatureLen = signature.count
         
         let result = SecKeyRawSign(privateKey, padding, digest, digest.count, &signature, &signatureLen)
@@ -183,14 +185,16 @@ public class CertificateSigningRequest:NSObject {
             return nil
         }
         
-        var certificationRequest = NSData(capacity: 1024)
-        certificationRequest.append(certificationRequestInfo)
-        certificationRequest.append(shaBytes, count: shaBytes.count)
+        var certificationRequest = NSMutableData()
+        certificationRequest = NSMutableData(bytes: &certificationRequest, length: 1024)
+        certificationRequest.appendBytes(&certificationRequestInfo, length: 1)
+        certificationRequest.appendBytes(&shaBytes, length: shaBytes.count)
         
-        var signData = NSData(capacity: 257)
-        let zero:UInt8 = 0 // Prepend zero
-        signData.append(zero)
-        signData.append(signature, count: signatureLen)
+        var signData = NSMutableData()
+        signData = NSMutableData(bytes: &signData, length: 257)
+        var zero:UInt8 = 0 // Prepend zero
+        signData.appendBytes(&zero, length: 1)
+        signData.appendBytes(&signature, length: signatureLen)
         appendBITSTRING(signData, into: &certificationRequest)
         
         enclose(&certificationRequest, by: SEQUENCE_tag) // Enclose into SEQUENCE
@@ -198,15 +202,17 @@ public class CertificateSigningRequest:NSObject {
         return certificationRequest
     }
     
-    func buldCertificationRequestInfo(_ publicKeyBits:NSData) -> NSData{
-        var certificationRequestInfo = NSData(capacity: 256)
+    func buldCertificationRequestInfo(publicKeyBits:NSData) -> NSData{
+        var certificationRequestInfo = NSMutableData()
+        certificationRequestInfo = NSMutableData(bytes: &certificationRequestInfo, length: 256)
         
         //Add version
         let version: [UInt8] = [0x02, 0x01, 0x00] // ASN.1 Representation of integer with value 1
-        certificationRequestInfo.append(version, count: version.count)
+        certificationRequestInfo.appendBytes(version, length: version.count)
         
         //Add subject
-        var subject = NSData(capacity: 256)
+        var subject = NSMutableData()
+        subject = NSMutableData(bytes: &subject, length: 256)
         if countryName != nil{
             appendSubjectItem(OBJECT_countryName, value: countryName!, into: &subject)
         }
@@ -227,15 +233,15 @@ public class CertificateSigningRequest:NSObject {
         
         subjectDER = subject
         
-        certificationRequestInfo.append(subject)
+        certificationRequestInfo.appendBytes(&subject, length: 1)
         
         //Add public key info
-        let publicKeyInfo = buildPublicKeyInfo(publicKeyBits)
-        certificationRequestInfo.append(publicKeyInfo)
+        var publicKeyInfo = buildPublicKeyInfo(publicKeyBits)
+        certificationRequestInfo.appendBytes(&publicKeyInfo, length: 1)
         
         // Add attributes
         let attributes:[UInt8] = [0xA0, 0x00]
-        certificationRequestInfo.append(attributes, count: attributes.count)
+        certificationRequestInfo.appendBytes(attributes, length: attributes.count)
         
         enclose(&certificationRequestInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
         
@@ -243,25 +249,26 @@ public class CertificateSigningRequest:NSObject {
     }
     
     /// Utility class methods ...
-    func buildPublicKeyInfo(_ publicKeyBits:NSData)-> NSData{
+    func buildPublicKeyInfo(publicKeyBits:NSData)-> NSData{
         
-        var publicKeyInfo = NSData(capacity: 390)
-        
-        publicKeyInfo.append(OBJECT_rsaEncryptionNULL, count: OBJECT_rsaEncryptionNULL.count)
+        var publicKeyInfo = NSMutableData()
+        publicKeyInfo = NSMutableData(bytes: &publicKeyInfo, length: 390)
+        publicKeyInfo.appendBytes(OBJECT_rsaEncryptionNULL, length: OBJECT_rsaEncryptionNULL.count)
         enclose(&publicKeyInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
         
-        var publicKeyASN = NSData(capacity: 260)
+        var publicKeyASN = NSMutableData()
+        publicKeyASN = NSMutableData(bytes: &publicKeyASN, length: 260)
         
-        let mod = getPublicKeyMod(publicKeyBits)
-        let integer:UInt8 = 0x02 //Integer
-        publicKeyASN.append(integer)
-        appendDERLength(mod.count, into: &publicKeyASN)
-        publicKeyASN.append(mod)
+        var mod = getPublicKeyMod(publicKeyBits)
+        var integer:UInt8 = 0x02 //Integer
+        publicKeyASN.appendBytes(&integer, length: 1)
+        appendDERLength(mod.length, into: &publicKeyASN)
+        publicKeyASN.appendBytes(&mod, length: 1)
         
-        let exp = getPublicKeyExp(publicKeyBits)
-        publicKeyASN.append(integer)
-        appendDERLength(exp.count, into: &publicKeyASN)
-        publicKeyASN.append(exp)
+        var exp = getPublicKeyExp(publicKeyBits)
+        publicKeyASN.appendBytes(&integer, length: 1)
+        appendDERLength(exp.length, into: &publicKeyASN)
+        publicKeyASN.appendBytes(&exp, length: 1)
         
         enclose(&publicKeyASN, by: SEQUENCE_tag)// Enclose into ??
         prependByte(0x00, into: &publicKeyASN) //Prepend 0 (?)
@@ -273,86 +280,90 @@ public class CertificateSigningRequest:NSObject {
         return publicKeyInfo
     }
     
-    func appendSubjectItem(_ what:[UInt8], value: String, inout into: NSData ) ->(){
+    func appendSubjectItem(what:[UInt8], value: String, inout into: NSMutableData) ->(){
         
         if what.count != 5{
             print("Error: attempting to a non-subject item")
             return
         }
         
-        var subjectItem = NSData(capacity: 128)
-        
-        subjectItem.append(what, count: what.count)
-        appendUTF8String(string: value, into: &subjectItem)
+        var subjectItem = NSMutableData()
+        subjectItem = NSMutableData(bytes: &subjectItem, length:  128)
+        subjectItem.appendBytes(what, length: what.count)
+        appendUTF8String(value, into: &subjectItem)
         enclose(&subjectItem, by: SEQUENCE_tag)
         enclose(&subjectItem, by: SET_tag)
         
-        into.append(subjectItem)
+        into.appendBytes(&subjectItem, length: 1)
     }
     
-    func appendUTF8String(string: String, inout into: NSData) ->(){
+    func appendUTF8String(string: String, inout into: NSMutableData) ->(){
         
-        let strType:UInt8 = 0x0C //UTF8STRING
+        var strType:UInt8 = 0x0C //UTF8STRING
     
-        into.append(strType)
-        appendDERLength(string.lengthOfBytes(using: String.Encoding.utf8), into: &into)
-        into.append(string.data(using: String.Encoding.utf8)!)
+        into.appendBytes(&strType, length: 1)
+        appendDERLength(string.lengthOfBytesUsingEncoding(NSUTF8StringEncoding), into: &into)
+        var mutableStringData = string.dataUsingEncoding(NSUTF8StringEncoding)!
+        into.appendBytes(&mutableStringData, length: 1)
     }
     
-    func appendDERLength(_ length: Int, inout into: NSData){
+    func appendDERLength(length: Int, inout into: NSMutableData){
         
         assert(length < 0x8000)
         
         if length < 128{
-            let d = UInt8(length)
-            into.append(d)
+            var d = UInt8(length)
+            into.appendBytes(&d, length: 1)
             
         }else if (length < 0x100){
             
             var d: [UInt8] = [0x81, UInt8(length & 0xFF)]
-            into.append(&d, count: d.count)
+            into.appendBytes(&d, length: d.count)
             
         }else if length < 0x8000{
             
             let preRes:UInt = UInt(length & 0xFF00)
             let res = UInt8(preRes >> 8)
             var d: [UInt8] = [0x82, res, UInt8(length & 0xFF)]
-            into.append(&d, count: d.count)
+            into.appendBytes(&d, length: d.count)
         }
     }
     
-    func appendBITSTRING(_ data: NSData, inout into: NSData)->(){
+    func appendBITSTRING(data: NSData, inout into: NSMutableData)->(){
         
-        let strType:UInt8 = 0x03 //BIT STRING
-        into.append(strType)
-        appendDERLength(data.count, into: &into)
-        into.append(data)
+        var strType:UInt8 = 0x03 //BIT STRING
+        into.appendBytes(&strType, length: 1)
+        var mutableData = data
+        appendDERLength(mutableData.length, into: &into)
+        into.appendBytes(&mutableData, length: 1)
     }
     
-    func enclose(inout _ data: NSData, by: UInt8){
+    func enclose(inout data: NSMutableData, by: UInt8){
         
-        var newData = NSData(capacity: data.count + 4)
-        
-        newData.append(by)
-        appendDERLength(data.count, into: &newData)
-        newData.append(data)
+        var newData = NSMutableData()
+        newData = NSMutableData(bytes: &newData, length: data.length + 4)
+        var mutableBy = by
+        newData.appendBytes(&mutableBy, length: 1)
+        appendDERLength(data.length, into: &newData)
+        newData.appendBytes(&data, length: 1)
         
         data = newData
     }
     
-    func prependByte(_ byte: UInt8, inout into: NSData)->(){
+    func prependByte(byte: UInt8, inout into: NSMutableData)->(){
      
-        var newData = NSData(capacity: into.count + 1)
-        
-        newData.append(byte)
-        newData.append(into)
+        var newData = NSMutableData()
+        newData = NSMutableData(bytes: &newData, length: into.length + 1)
+        var mutableByte = byte
+        newData.appendBytes(&mutableByte, length: 1)
+        newData.appendBytes(&into, length: 1)
         
         into = newData
     }
     
     // From http://stackoverflow.com/questions/3840005/how-to-find-out-the-modulus-and-exponent-of-rsa-public-key-on-iphone-objective-c
     
-    func getPublicKeyExp(_ publicKeyBits:NSData)->NSData{
+    func getPublicKeyExp(publicKeyBits:NSData)->NSData{
         
         var iterator = 0
         
@@ -366,12 +377,10 @@ public class CertificateSigningRequest:NSObject {
         iterator+=1 // TYPE - bit stream exp
         let expSize = derEncodingGetSizeFrom(publicKeyBits, at: &iterator)
         
-        let range:Range<Int> = iterator ..< (iterator + expSize)
-        
-        return publicKeyBits.subdata(in: range)
+        return publicKeyBits.subdataWithRange(NSMakeRange(iterator, expSize))
     }
     
-    func getPublicKeyMod(_ publicKeyBits: NSData)->NSData{
+    func getPublicKeyMod(publicKeyBits: NSData)->NSData{
         
         var iterator = 0
         
@@ -381,15 +390,13 @@ public class CertificateSigningRequest:NSObject {
         iterator+=1 // TYPE - bit stream mod
         let modSize = derEncodingGetSizeFrom(publicKeyBits, at: &iterator)
         
-        let range:Range<Int> = iterator ..< (iterator + modSize)
-        
-        return publicKeyBits.subdata(in: range)
+        return publicKeyBits.subdataWithRange(NSMakeRange(iterator, modSize))
     }
     
-    func derEncodingGetSizeFrom(_ buf: NSData, inout at iterator: Int)->Int{
+    func derEncodingGetSizeFrom(buf: NSData, inout at iterator: Int)->Int{
         
-        var data = [UInt8](repeating: 0, count: buf.count)
-        buf.copyBytes(to: &data, count: buf.count)
+        var data = [UInt8](count: buf.length, repeatedValue: 0)
+        buf.getBytes(&data, length: buf.length)
         
         var itr = iterator
         var numOfBytes = 1
