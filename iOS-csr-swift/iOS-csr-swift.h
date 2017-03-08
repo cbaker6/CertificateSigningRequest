@@ -15,5 +15,5 @@ FOUNDATION_EXPORT double iOS_csr_swiftVersionNumber;
 FOUNDATION_EXPORT const unsigned char iOS_csr_swiftVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <iOS_csr_swift/PublicHeader.h>
-
+#import <CommonCrypto/CommonCrypto.h>
 
