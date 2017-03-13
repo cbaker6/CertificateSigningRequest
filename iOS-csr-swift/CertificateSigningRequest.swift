@@ -93,10 +93,10 @@ public class CertificateSigningRequest:NSObject {
     // See: http://oid-info.com/get/1.2.840.113549.1.1.5
     private let SEQUENCE_OBJECT_sha1WithRSAEncryption:[UInt8] = [0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 1, 1, 5, 0x05, 0x00]
     
-    // SeeL http://oid-info.com/get/1.2.840.113549.1.1.11
+    // See: http://oid-info.com/get/1.2.840.113549.1.1.11
     private let SEQUENCE_OBJECT_sha256WithRSAEncryption:[UInt8] = [0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 1, 1, 0x0B, 0x05, 0x00]
     
-    // SeeL http://oid-info.com/get/1.2.840.113549.1.1.13
+    // See: http://oid-info.com/get/1.2.840.113549.1.1.13
     private let SEQUENCE_OBJECT_sha512WithRSAEncryption:[UInt8] = [0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 1, 1, 0x0D, 0x05, 0x00]
     
     private let SEQUENCE_tag:UInt8 = 0x30
