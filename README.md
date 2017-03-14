@@ -1,4 +1,4 @@
-# iOS-csr-swift
+# iOSCSRSwift
 Generate a certificate signing request (CSR) in iOS using Swift
 
 This is a port of ios-csr by Ales Teska (https://github.com/ateska/ios-csr) from Objective-C to Swift 3.0 (a Swift 2.3 version is available on the 2.3 branch). 
