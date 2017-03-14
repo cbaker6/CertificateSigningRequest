@@ -16,6 +16,7 @@
 		910920DF1E78AB5F008E5535 /* CommonCryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920DE1E78AB5F008E5535 /* CommonCryptoTests.swift */; };
 		910920E11E78AB5F008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 910920D31E78AB5F008E5535 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		910920E91E78AB9A008E5535 /* CommonCrypto.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 910920E81E78AB9A008E5535 /* CommonCrypto.xcconfig */; };
+		910920EE1E78BAF3008E5535 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910920D11E78AB5F008E5535 /* CommonCrypto.framework */; };
 		917B68901DD0F4FD00AE5629 /* iOSCSRSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917B68861DD0F4FD00AE5629 /* iOSCSRSwift.framework */; };
 		917B68A21DD0F5B000AE5629 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 917B68A01DD0F5B000AE5629 /* LICENSE */; };
 		917B68A31DD0F5B000AE5629 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 917B68A11DD0F5B000AE5629 /* README.md */; };
@@ -79,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				910920EE1E78BAF3008E5535 /* CommonCrypto.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
