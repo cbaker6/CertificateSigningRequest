@@ -1,0 +1,5 @@
+module CommonCrypto [system] {
+    header "$(PLATFORM_DEVELOPER_USR_DIR)/include/CommonCrypto/CommonCrypto.h"//"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonCrypto.h"
+    header "$(PLATFORM_DEVELOPER_USR_DIR)/include/CommonCrypto/CommonRandom.h"//"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonRandom.h"
+    export *
+}
