@@ -13,6 +13,6 @@ Then simply build your CSR using your publicKey(bits) and privateKey using, let 
 
 Note: You can get your publicKey in bit by querying it from the iOS keychain using String(kSecReturnData): kCFBooleanTrue in your query. 
 
-~~Note2: If you use this as a framework, you will need to go to Targets->APPNAME->General and add "iOSCSRSwift" to Embedded Binaries". You may need to add "CommonCrypto" as well. If you just use want to use CertificateSigningRequest.swift you will need to import CommonCrypto into your project. To do this follow the directions here: http://stackoverflow.com/questions/25248598/importing-commoncrypto-in-a-swift-framework?answertab=votes#tab-top~~
+Note2: If you use this as a framework, you will need to go to Targets->APPNAME->General and add "iOSCSRSwift" to Embedded Binaries". You may need to add "CommonCrypto" as well. If you just use want to use CertificateSigningRequest.swift you will need to import CommonCrypto into your project. To do this follow the directions here: http://stackoverflow.com/questions/25248598/importing-commoncrypto-in-a-swift-framework?answertab=votes#tab-top
 
 Feel free to use in your projects and contribute to this one.
