@@ -91,7 +91,7 @@ Pod::Spec.new do |s|
   # s.resources = "Resources/*.png"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
-  s.preserve_paths = "CommonCrypto/iphoneos.modulemap", "CommonCrypto/iphonesimulator.modulemap", "CommonCrypto/macos.modulemap"
+  s.preserve_paths = "CommonCrypto/iphoneos.private.modulemap", "CommonCrypto/iphonesimulator.private.modulemap", "CommonCrypto/macos.private.modulemap"
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
