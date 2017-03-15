@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "iOSCSRSwift"
-  s.version      = "0.0.93"
+  s.version      = "0.0.94"
   s.summary      = "Generate a certificate signing request (CSR) in iOS using Swift"
 
   # This description is used to generate tags and improve search results.
@@ -77,7 +77,7 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = "Classes/**/*.h"
 
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3', 'SWIFT_INCLUDE_PATHS' => 'CommonCrypto/Platforms/**' }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3' }, 'SWIFT_INCLUDE_PATHS' => 'CommonCrypto/Platforms/**' }
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
