@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "iOSCSRSwift"
-  s.version      = "0.0.95"
+  s.version      = "0.0.96"
   s.summary      = "Generate a certificate signing request (CSR) in iOS using Swift"
 
   s.description  = <<-DESC 
