@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "iOSCSRSwift"
-  s.version      = "0.0.6"
+  s.version      = "0.0.8"
   s.summary      = "Generate a certificate signing request (CSR) in iOS using Swift"
 
   # This description is used to generate tags and improve search results.
@@ -53,7 +53,7 @@ Pod::Spec.new do |s|
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
-
+  
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -72,7 +72,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "iOS-csr-swift", "iOSCSRSwift/**/*.{h,m,swift}"
+  s.source_files  = "iOS-csr-swift", "iOSCSRSwift/**/*.{h,m,swift}", "CommonCrypto/**/*.{c,h}"
   s.exclude_files = "iOS-csr-swift/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
