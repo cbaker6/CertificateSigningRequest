@@ -72,7 +72,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "iOS-csr-swift", "iOSCSRSwift/**/*.{h,m,swift}", "CommonCrypto/**/*.{c,h}"
+  s.source_files  = "iOS-csr-swift", "iOSCSRSwift/**/*.{h,m,swift}", "CommonCrypto/**/*.{c,h,xcconfig,modulemap}"
   s.exclude_files = "iOS-csr-swift/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"

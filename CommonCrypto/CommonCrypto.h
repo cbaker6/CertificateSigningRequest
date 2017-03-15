@@ -16,4 +16,4 @@ FOUNDATION_EXPORT const unsigned char CommonCryptoVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like <CommonCrypto/PublicHeader.h>
 
-
+//Note: Copied Crypto files on 3/14/16. Xcode 8.2.1
