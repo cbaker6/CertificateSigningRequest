@@ -1,5 +1,5 @@
 framework module CommonCrypto [system] {
-    header "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonCrypto.h"//"Platforms/iPhoneOS/CommonCrypto/CommonCrypto.h" //"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"$(PLATFORM_DEVELOPER_USR_DIR)/include/CommonCrypto/CommonCrypto.h"
-    header "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonRandom.h" //"CommonRandom.h" //"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonRandom.h" // // "$(PLATFORM_DEVELOPER_USR_DIR)/include/CommonCrypto/CommonRandom.h"
-    export *
+    header "CommonCrypto/Platforms/iPhoneSimulator/CommonCrypto/CommonCrypto.h" //"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"$(PLATFORM_DEVELOPER_USR_DIR)/include/CommonCrypto/CommonCrypto.h"
+    //header "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonRandom.h" //"CommonRandom.h" //"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonRandom.h" // // "$(PLATFORM_DEVELOPER_USR_DIR)/include/CommonCrypto/CommonRandom.h"
+    //export *
 }
