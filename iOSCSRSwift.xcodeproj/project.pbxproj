@@ -15,7 +15,6 @@
 		910920DA1E78AB5F008E5535 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910920D11E78AB5F008E5535 /* CommonCrypto.framework */; };
 		910920DF1E78AB5F008E5535 /* CommonCryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920DE1E78AB5F008E5535 /* CommonCryptoTests.swift */; };
 		910920E11E78AB5F008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 910920D31E78AB5F008E5535 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		910920E91E78AB9A008E5535 /* CommonCrypto.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 910920E81E78AB9A008E5535 /* CommonCrypto.xcconfig */; };
 		910920EE1E78BAF3008E5535 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910920D11E78AB5F008E5535 /* CommonCrypto.framework */; };
 		917B68901DD0F4FD00AE5629 /* iOSCSRSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917B68861DD0F4FD00AE5629 /* iOSCSRSwift.framework */; };
 		917B68A21DD0F5B000AE5629 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 917B68A01DD0F5B000AE5629 /* LICENSE */; };
@@ -51,9 +50,9 @@
 		910920D91E78AB5F008E5535 /* CommonCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		910920DE1E78AB5F008E5535 /* CommonCryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCryptoTests.swift; sourceTree = "<group>"; };
 		910920E01E78AB5F008E5535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		910920E81E78AB9A008E5535 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		910920EC1E78B87D008E5535 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
 		910920ED1E78B87D008E5535 /* iphoneos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphoneos.modulemap; sourceTree = "<group>"; };
+		910920EF1E78BC7D008E5535 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		917B68861DD0F4FD00AE5629 /* iOSCSRSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSCSRSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		917B688F1DD0F4FD00AE5629 /* iOSCSRSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSCSRSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		917B68A01DD0F5B000AE5629 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -100,9 +99,9 @@
 			children = (
 				910920D31E78AB5F008E5535 /* CommonCrypto.h */,
 				910920D41E78AB5F008E5535 /* Info.plist */,
-				910920E81E78AB9A008E5535 /* CommonCrypto.xcconfig */,
 				910920EC1E78B87D008E5535 /* iphonesimulator.modulemap */,
 				910920ED1E78B87D008E5535 /* iphoneos.modulemap */,
+				910920EF1E78BC7D008E5535 /* CommonCrypto.xcconfig */,
 			);
 			path = CommonCrypto;
 			sourceTree = "<group>";
@@ -311,7 +310,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				910920E91E78AB9A008E5535 /* CommonCrypto.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
