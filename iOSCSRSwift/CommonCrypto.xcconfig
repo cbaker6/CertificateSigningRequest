@@ -7,6 +7,6 @@
 //
 
 
-MODULEMAP_PRIVATE_FILE[sdk=iphoneos*]        = $(SRCROOT)/CommonCrypto/iphoneos.private.modulemap
-MODULEMAP_PRIVATE_FILE[sdk=iphonesimulator*] = $(SRCROOT)/CommonCrypto/iphonesimulator.private.modulemap
-MODULEMAP_PRIVATE_FILE[sdk=macosx*]          = $(SRCROOT)/CommonCrypto/macosx.private.modulemap
+MODULEMAP_FILE[sdk=iphoneos*]        = $(SRCROOT)/CommonCrypto/iphoneos.modulemap
+MODULEMAP_FILE[sdk=iphonesimulator*] = $(SRCROOT)/CommonCrypto/iphonesimulator.modulemap
+MODULEMAP_FILE[sdk=macosx*]          = $(SRCROOT)/CommonCrypto/macosx.modulemap
