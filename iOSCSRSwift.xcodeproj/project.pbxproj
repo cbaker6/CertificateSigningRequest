@@ -14,7 +14,7 @@
 		910920DA1E78AB5F008E5535 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910920D11E78AB5F008E5535 /* CommonCrypto.framework */; };
 		910920DF1E78AB5F008E5535 /* CommonCryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920DE1E78AB5F008E5535 /* CommonCryptoTests.swift */; };
 		910920EE1E78BAF3008E5535 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910920D11E78AB5F008E5535 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		910921921E79E165008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921761E79E164008E5535 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		910921921E79E165008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921761E79E164008E5535 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		910921931E79E165008E5535 /* CommonCryptoError.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921771E79E164008E5535 /* CommonCryptoError.h */; };
 		910921941E79E165008E5535 /* CommonCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921781E79E164008E5535 /* CommonCryptor.h */; };
 		910921951E79E165008E5535 /* CommonDigest.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921791E79E164008E5535 /* CommonDigest.h */; };
