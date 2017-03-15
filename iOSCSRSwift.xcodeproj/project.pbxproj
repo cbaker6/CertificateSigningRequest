@@ -54,10 +54,7 @@
 		910920991E787BE3008E5535 /* CertificateSigningRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CertificateSigningRequest.swift; path = iOSCSRSwift/CertificateSigningRequest.swift; sourceTree = SOURCE_ROOT; };
 		9109209E1E787BFA008E5535 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iOSCSRSwiftTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		910920A21E788CB1008E5535 /* iOS_csr_swiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOS_csr_swiftTests.swift; sourceTree = "<group>"; };
-		910920D31E78AB5F008E5535 /* CommonCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
 		910920D41E78AB5F008E5535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		910920DE1E78AB5F008E5535 /* CommonCryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCryptoTests.swift; sourceTree = "<group>"; };
-		910920E01E78AB5F008E5535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		910920EC1E78B87D008E5535 /* iphonesimulator.private.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.private.modulemap; sourceTree = "<group>"; };
 		910920EF1E78BC7D008E5535 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		910920FC1E798D9A008E5535 /* macos.private.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macos.private.modulemap; sourceTree = "<group>"; };
@@ -116,22 +113,12 @@
 			children = (
 				910921381E79AC39008E5535 /* Platforms */,
 				910920FE1E799B9B008E5535 /* iphoneos.private.modulemap */,
-				910920D31E78AB5F008E5535 /* CommonCrypto.h */,
 				910920EF1E78BC7D008E5535 /* CommonCrypto.xcconfig */,
 				910920D41E78AB5F008E5535 /* Info.plist */,
 				910920EC1E78B87D008E5535 /* iphonesimulator.private.modulemap */,
 				910920FC1E798D9A008E5535 /* macos.private.modulemap */,
 			);
 			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
-		910920DD1E78AB5F008E5535 /* CommonCryptoTests */ = {
-			isa = PBXGroup;
-			children = (
-				910920DE1E78AB5F008E5535 /* CommonCryptoTests.swift */,
-				910920E01E78AB5F008E5535 /* Info.plist */,
-			);
-			path = CommonCryptoTests;
 			sourceTree = "<group>";
 		};
 		910921381E79AC39008E5535 /* Platforms */ = {
@@ -221,7 +208,6 @@
 				917B68881DD0F4FD00AE5629 /* iOSCSRSwift */,
 				917B68931DD0F4FD00AE5629 /* iOSCSRSwiftTests */,
 				910920D21E78AB5F008E5535 /* CommonCrypto */,
-				910920DD1E78AB5F008E5535 /* CommonCryptoTests */,
 				917B68871DD0F4FD00AE5629 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -538,6 +524,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.onedegree.iOSCSRSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -562,6 +549,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.onedegree.iOSCSRSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

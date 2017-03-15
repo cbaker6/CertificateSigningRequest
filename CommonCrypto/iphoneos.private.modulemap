@@ -1,5 +1,5 @@
 explicit framework module CommonCrypto [system] {
-    header "Platforms/iPhoneOS/CommonCrypto/CommonCrypto.h" //"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"$(PLATFORM_DEVELOPER_USR_DIR)/include/CommonCrypto/CommonCrypto.h"
+    header "Platforms/isPhoneOS/CommonCrypto/CommonCrypto.h" //"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"$(PLATFORM_DEVELOPER_USR_DIR)/include/CommonCrypto/CommonCrypto.h"
     /*header "Platforms/iPhoneOS/CommonCrypto/CommonCryptoError.h"
     header "Platforms/iPhoneOS/CommonCrypto/CommonCryptor.h"
     header "Platforms/iPhoneOS/CommonCrypto/CommonDigest.h"
