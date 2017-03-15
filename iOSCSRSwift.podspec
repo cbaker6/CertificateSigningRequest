@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "iOSCSRSwift"
-  s.version      = "0.0.96"
+  s.version      = "0.0.97"
   s.summary      = "Generate a certificate signing request (CSR) in iOS using Swift"
 
   s.description  = <<-DESC 
@@ -17,17 +17,17 @@ Pod::Spec.new do |s|
 
 
   s.source_files  = "iOS-csr-swift", "iOSCSRSwift/**/*.{h,m,swift}", "CommonCrypto/**/*.{c,h}"
-  s.exclude_files = "iOS-csr-swift/Exclude"
+  #s.exclude_files = "iOS-csr-swift/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
   s.private_header_files = "CommonCrypto/**/*.{c,h}"
 
   # s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3', 'SWIFT_INCLUDE_PATHS' => 'CommonCrypto/Platforms/**' }
   s.pod_target_xcconfig = { 
-	'SWIFT_VERSION' => '3',
-	'SWIFT_INCLUDE_PATHS[sdk=iphoneos*]' => 'CommonCrypto/Platforms/iPhoneOS/**', 
-	'SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]' => 'CommonCrypto/Platforms/iPhoneSimulator/**',
-	'SWIFT_INCLUDE_PATHS[sdk=macosx*]' => 'CommonCrypto/Platforms/MacOSX/**'
+	'SWIFT_VERSION' 				=> '3',
+	'SWIFT_INCLUDE_PATHS[sdk=iphoneos*]' 		=> 'CommonCrypto/Platforms/iPhoneOS/**', 
+	'SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]' 	=> 'CommonCrypto/Platforms/iPhoneSimulator/**',
+	'SWIFT_INCLUDE_PATHS[sdk=macosx*]' 		=> 'CommonCrypto/Platforms/MacOSX/**'
   }	
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"
