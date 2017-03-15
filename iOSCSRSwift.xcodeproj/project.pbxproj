@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9109209A1E787BE3008E5535 /* iOSCSRSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 910920971E787BE3008E5535 /* iOSCSRSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9109209B1E787BE3008E5535 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 910920981E787BE3008E5535 /* Info.plist */; };
 		9109209C1E787BE3008E5535 /* CertificateSigningRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920991E787BE3008E5535 /* CertificateSigningRequest.swift */; };
 		910920A01E787BFA008E5535 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9109209E1E787BFA008E5535 /* Info.plist */; };
 		910920A31E788CB1008E5535 /* iOS_csr_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920A21E788CB1008E5535 /* iOS_csr_swiftTests.swift */; };
@@ -259,7 +258,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "One Degree Technologies";
 				TargetAttributes = {
 					910920D01E78AB5F008E5535 = {
@@ -324,7 +323,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9109209B1E787BE3008E5535 /* Info.plist in Resources */,
 				910920A01E787BFA008E5535 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +476,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -532,6 +531,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
