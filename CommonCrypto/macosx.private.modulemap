@@ -1,0 +1,6 @@
+explicit framework module CommonCrypto [system] {
+    header "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"CommonCrypto/Platforms/iPhoneSimulator.platform/CommonCrypto/CommonCrypto.h" //"$(DEVELOPER_SDK_DIR)/MacOSX.sdk/usr/include/CommonCrypto/CommonCrypto.h"
+    //export *
+    header "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/CommonCrypto/CommonRandom.h" //"CommonCrypto/Platforms/iPhoneSimulator.platform/CommonCrypto/CommonRandom.h" //"$(DEVELOPER_SDK_DIR)/MacOSX.sdk/usr/include/CommonCrypto/CommonRandom.h"
+    //export *
+}

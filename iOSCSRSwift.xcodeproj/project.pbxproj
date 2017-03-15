@@ -57,7 +57,6 @@
 		910920D41E78AB5F008E5535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		910920EC1E78B87D008E5535 /* iphonesimulator.private.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.private.modulemap; sourceTree = "<group>"; };
 		910920EF1E78BC7D008E5535 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
-		910920FC1E798D9A008E5535 /* macos.private.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macos.private.modulemap; sourceTree = "<group>"; };
 		910920FE1E799B9B008E5535 /* iphoneos.private.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphoneos.private.modulemap; sourceTree = "<group>"; };
 		9109213B1E79AC39008E5535 /* CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
 		9109213C1E79AC39008E5535 /* CommonCryptoError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCryptoError.h; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		910921541E79AC39008E5535 /* CommonKeyDerivation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonKeyDerivation.h; sourceTree = "<group>"; };
 		910921551E79AC39008E5535 /* CommonRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonRandom.h; sourceTree = "<group>"; };
 		910921561E79AC39008E5535 /* CommonSymmetricKeywrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSymmetricKeywrap.h; sourceTree = "<group>"; };
+		9109216F1E79C101008E5535 /* macosx.private.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macosx.private.modulemap; sourceTree = "<group>"; };
 		917B68861DD0F4FD00AE5629 /* iOSCSRSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSCSRSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		917B688F1DD0F4FD00AE5629 /* iOSCSRSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSCSRSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		917B68A01DD0F5B000AE5629 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -111,12 +111,12 @@
 		910920D21E78AB5F008E5535 /* CommonCrypto */ = {
 			isa = PBXGroup;
 			children = (
-				910921381E79AC39008E5535 /* Platforms */,
-				910920FE1E799B9B008E5535 /* iphoneos.private.modulemap */,
 				910920EF1E78BC7D008E5535 /* CommonCrypto.xcconfig */,
 				910920D41E78AB5F008E5535 /* Info.plist */,
+				910920FE1E799B9B008E5535 /* iphoneos.private.modulemap */,
 				910920EC1E78B87D008E5535 /* iphonesimulator.private.modulemap */,
-				910920FC1E798D9A008E5535 /* macos.private.modulemap */,
+				9109216F1E79C101008E5535 /* macosx.private.modulemap */,
+				910921381E79AC39008E5535 /* Platforms */,
 			);
 			path = CommonCrypto;
 			sourceTree = "<group>";
@@ -507,7 +507,7 @@
 		917B689B1DD0F4FD00AE5629 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DEFINES_MODULE = YES;
@@ -525,7 +525,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.onedegree.iOSCSRSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/CommonCrypto/Platrforms/**";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -533,7 +533,7 @@
 		917B689C1DD0F4FD00AE5629 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DEFINES_MODULE = YES;
@@ -551,7 +551,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.onedegree.iOSCSRSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/CommonCrypto/Platrforms/**";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
