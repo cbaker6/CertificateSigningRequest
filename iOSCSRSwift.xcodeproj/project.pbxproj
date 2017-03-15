@@ -19,7 +19,7 @@
 		9109215C1E79AC39008E5535 /* CommonKeyDerivation.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921401E79AC39008E5535 /* CommonKeyDerivation.h */; };
 		9109215D1E79AC39008E5535 /* CommonRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921411E79AC39008E5535 /* CommonRandom.h */; };
 		9109215E1E79AC39008E5535 /* CommonSymmetricKeywrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921421E79AC39008E5535 /* CommonSymmetricKeywrap.h */; };
-		9109215F1E79AC39008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921451E79AC39008E5535 /* CommonCrypto.h */; };
+		9109215F1E79AC39008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921451E79AC39008E5535 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		910921601E79AC39008E5535 /* CommonCryptoError.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921461E79AC39008E5535 /* CommonCryptoError.h */; };
 		910921611E79AC39008E5535 /* CommonCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921471E79AC39008E5535 /* CommonCryptor.h */; };
 		910921621E79AC39008E5535 /* CommonDigest.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921481E79AC39008E5535 /* CommonDigest.h */; };
@@ -27,7 +27,7 @@
 		910921641E79AC39008E5535 /* CommonKeyDerivation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109214A1E79AC39008E5535 /* CommonKeyDerivation.h */; };
 		910921651E79AC39008E5535 /* CommonRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109214B1E79AC39008E5535 /* CommonRandom.h */; };
 		910921661E79AC39008E5535 /* CommonSymmetricKeywrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109214C1E79AC39008E5535 /* CommonSymmetricKeywrap.h */; };
-		910921671E79AC39008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109214F1E79AC39008E5535 /* CommonCrypto.h */; };
+		910921671E79AC39008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109214F1E79AC39008E5535 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		910921681E79AC39008E5535 /* CommonCryptoError.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921501E79AC39008E5535 /* CommonCryptoError.h */; };
 		910921691E79AC39008E5535 /* CommonCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921511E79AC39008E5535 /* CommonCryptor.h */; };
 		9109216A1E79AC39008E5535 /* CommonDigest.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921521E79AC39008E5535 /* CommonDigest.h */; };
