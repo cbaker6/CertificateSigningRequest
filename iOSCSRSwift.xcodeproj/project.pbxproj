@@ -15,10 +15,8 @@
 		910920DA1E78AB5F008E5535 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910920D11E78AB5F008E5535 /* CommonCrypto.framework */; };
 		910920DF1E78AB5F008E5535 /* CommonCryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920DE1E78AB5F008E5535 /* CommonCryptoTests.swift */; };
 		910920E11E78AB5F008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 910920D31E78AB5F008E5535 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		910920EE1E78BAF3008E5535 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910920D11E78AB5F008E5535 /* CommonCrypto.framework */; };
+		910920EE1E78BAF3008E5535 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910920D11E78AB5F008E5535 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		917B68901DD0F4FD00AE5629 /* iOSCSRSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917B68861DD0F4FD00AE5629 /* iOSCSRSwift.framework */; };
-		917B68A21DD0F5B000AE5629 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 917B68A01DD0F5B000AE5629 /* LICENSE */; };
-		917B68A31DD0F5B000AE5629 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 917B68A11DD0F5B000AE5629 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,10 +96,10 @@
 			isa = PBXGroup;
 			children = (
 				910920D31E78AB5F008E5535 /* CommonCrypto.h */,
-				910920D41E78AB5F008E5535 /* Info.plist */,
-				910920EC1E78B87D008E5535 /* iphonesimulator.modulemap */,
-				910920ED1E78B87D008E5535 /* iphoneos.modulemap */,
 				910920EF1E78BC7D008E5535 /* CommonCrypto.xcconfig */,
+				910920D41E78AB5F008E5535 /* Info.plist */,
+				910920ED1E78B87D008E5535 /* iphoneos.modulemap */,
+				910920EC1E78B87D008E5535 /* iphonesimulator.modulemap */,
 			);
 			path = CommonCrypto;
 			sourceTree = "<group>";
@@ -142,9 +140,9 @@
 		917B68881DD0F4FD00AE5629 /* iOSCSRSwift */ = {
 			isa = PBXGroup;
 			children = (
-				910920971E787BE3008E5535 /* iOSCSRSwift.h */,
-				910920981E787BE3008E5535 /* Info.plist */,
 				910920991E787BE3008E5535 /* CertificateSigningRequest.swift */,
+				910920981E787BE3008E5535 /* Info.plist */,
+				910920971E787BE3008E5535 /* iOSCSRSwift.h */,
 			);
 			path = iOSCSRSwift;
 			sourceTree = "<group>";
@@ -325,7 +323,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9109209B1E787BE3008E5535 /* Info.plist in Resources */,
-				917B68A21DD0F5B000AE5629 /* LICENSE in Resources */,
 				910920A01E787BFA008E5535 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,7 +357,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9109209C1E787BE3008E5535 /* CertificateSigningRequest.swift in Sources */,
-				917B68A31DD0F5B000AE5629 /* README.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,6 +638,7 @@
 				910920E31E78AB5F008E5535 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		910920E71E78AB5F008E5535 /* Build configuration list for PBXNativeTarget "CommonCryptoTests" */ = {
 			isa = XCConfigurationList;
@@ -650,6 +647,7 @@
 				910920E51E78AB5F008E5535 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		917B68801DD0F4FD00AE5629 /* Build configuration list for PBXProject "iOSCSRSwift" */ = {
 			isa = XCConfigurationList;
