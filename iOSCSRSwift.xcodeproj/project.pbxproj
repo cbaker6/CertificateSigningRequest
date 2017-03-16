@@ -10,7 +10,7 @@
 		9109209A1E787BE3008E5535 /* iOSCSRSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 910920971E787BE3008E5535 /* iOSCSRSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9109209C1E787BE3008E5535 /* CertificateSigningRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920991E787BE3008E5535 /* CertificateSigningRequest.swift */; };
 		910920A01E787BFA008E5535 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9109209E1E787BFA008E5535 /* Info.plist */; };
-		910920A31E788CB1008E5535 /* iOS_csr_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920A21E788CB1008E5535 /* iOS_csr_swiftTests.swift */; };
+		910920A31E788CB1008E5535 /* iOSCSRSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920A21E788CB1008E5535 /* iOSCSRSwiftTests.swift */; };
 		917B68901DD0F4FD00AE5629 /* iOSCSRSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917B68861DD0F4FD00AE5629 /* iOSCSRSwift.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,8 +29,7 @@
 		910920981E787BE3008E5535 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iOSCSRSwift/Info.plist; sourceTree = SOURCE_ROOT; };
 		910920991E787BE3008E5535 /* CertificateSigningRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CertificateSigningRequest.swift; path = iOSCSRSwift/CertificateSigningRequest.swift; sourceTree = SOURCE_ROOT; };
 		9109209E1E787BFA008E5535 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iOSCSRSwiftTests/Info.plist; sourceTree = SOURCE_ROOT; };
-		910920A21E788CB1008E5535 /* iOS_csr_swiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOS_csr_swiftTests.swift; sourceTree = "<group>"; };
-		910920D41E78AB5F008E5535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		910920A21E788CB1008E5535 /* iOSCSRSwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSCSRSwiftTests.swift; sourceTree = "<group>"; };
 		910920EC1E78B87D008E5535 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
 		910920FE1E799B9B008E5535 /* iphoneos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphoneos.modulemap; sourceTree = "<group>"; };
 		9109216F1E79C101008E5535 /* macosx.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macosx.modulemap; sourceTree = "<group>"; };
@@ -63,7 +62,6 @@
 		910920D21E78AB5F008E5535 /* CommonCrypto */ = {
 			isa = PBXGroup;
 			children = (
-				910920D41E78AB5F008E5535 /* Info.plist */,
 				910920FE1E799B9B008E5535 /* iphoneos.modulemap */,
 				910920EC1E78B87D008E5535 /* iphonesimulator.modulemap */,
 				9109216F1E79C101008E5535 /* macosx.modulemap */,
@@ -106,7 +104,7 @@
 		917B68931DD0F4FD00AE5629 /* iOSCSRSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				910920A21E788CB1008E5535 /* iOS_csr_swiftTests.swift */,
+				910920A21E788CB1008E5535 /* iOSCSRSwiftTests.swift */,
 				9109209E1E787BFA008E5535 /* Info.plist */,
 			);
 			path = iOSCSRSwiftTests;
@@ -234,7 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				910920A31E788CB1008E5535 /* iOS_csr_swiftTests.swift in Sources */,
+				910920A31E788CB1008E5535 /* iOSCSRSwiftTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
