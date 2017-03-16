@@ -1,15 +1,15 @@
 //
-//  iOS_csr_swiftTests.swift
-//  iOS-csr-swiftTests
+//  iOSCSRSwiftTests.swift
+//  iOSCSRSwift
 //
 //  Created by Corey Baker on 11/7/16.
 //  Copyright © 2016 One Degree Technologies. All rights reserved.
 //
 
 import XCTest
-@testable import iOS_csr_swift
+import iOSCSRSwift
 
-class iOS_csr_swiftTests: XCTestCase {
+class iOSCSRSwiftTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

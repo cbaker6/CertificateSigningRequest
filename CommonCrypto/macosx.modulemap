@@ -1,0 +1,9 @@
+framework module iOSCSRSwift [system] {
+    
+    module CommonCrypto{
+        header "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"$(DEVELOPER_SDK_DIR)/MacOSX.sdk/usr/include/CommonCrypto/CommonCrypto.h"
+        //export *
+        //header "CommonCrypto/Platforms/iPhoneSimulator.platform/CommonCrypto/CommonRandom.h" //"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/CommonCrypto/CommonRandom.h" //"$(DEVELOPER_SDK_DIR)/MacOSX.sdk/usr/include/CommonCrypto/CommonRandom.h"
+        //export *
+    }
+}

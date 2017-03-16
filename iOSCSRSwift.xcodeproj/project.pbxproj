@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9117CAD21E7B06DA009C29D6 /* CommonCrypto.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9117CAD11E7B06DA009C29D6 /* CommonCrypto.xcconfig */; };
 		917B68901DD0F4FD00AE5629 /* iOSCSRSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917B68861DD0F4FD00AE5629 /* iOSCSRSwift.framework */; };
-		917B68951DD0F4FD00AE5629 /* iOS_csr_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917B68941DD0F4FD00AE5629 /* iOS_csr_swiftTests.swift */; };
-		917B68971DD0F4FD00AE5629 /* iOS-csr-swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 917B68891DD0F4FD00AE5629 /* iOS-csr-swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		917B68951DD0F4FD00AE5629 /* iOSCSRSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917B68941DD0F4FD00AE5629 /* iOSCSRSwiftTests.swift */; };
+		917B68971DD0F4FD00AE5629 /* iOSCSRSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 917B68891DD0F4FD00AE5629 /* iOSCSRSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		917B68A51DD0F5DD00AE5629 /* CertificateSigningRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917B68A41DD0F5DD00AE5629 /* CertificateSigningRequest.swift */; };
 /* End PBXBuildFile section */
 
@@ -19,16 +20,20 @@
 			containerPortal = 917B687D1DD0F4FD00AE5629 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 917B68851DD0F4FD00AE5629;
-			remoteInfo = "iOS-csr-swift";
+			remoteInfo = "iOSCSRSwift";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9117CACE1E7B0686009C29D6 /* iphoneos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphoneos.modulemap; sourceTree = "<group>"; };
+		9117CACF1E7B0686009C29D6 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
+		9117CAD01E7B0686009C29D6 /* macosx.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macosx.modulemap; sourceTree = "<group>"; };
+		9117CAD11E7B06DA009C29D6 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		917B68861DD0F4FD00AE5629 /* iOSCSRSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSCSRSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		917B68891DD0F4FD00AE5629 /* iOS-csr-swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS-csr-swift.h"; sourceTree = "<group>"; };
+		917B68891DD0F4FD00AE5629 /* iOSCSRSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSCSRSwift.h; sourceTree = "<group>"; };
 		917B688A1DD0F4FD00AE5629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		917B688F1DD0F4FD00AE5629 /* iOSCSRSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSCSRSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		917B68941DD0F4FD00AE5629 /* iOS_csr_swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_csr_swiftTests.swift; sourceTree = "<group>"; };
+		917B68941DD0F4FD00AE5629 /* iOSCSRSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCSRSwiftTests.swift; sourceTree = "<group>"; };
 		917B68961DD0F4FD00AE5629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		917B68A01DD0F5B000AE5629 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		917B68A11DD0F5B000AE5629 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -54,13 +59,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9117CACD1E7B0686009C29D6 /* CommonCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				9117CACE1E7B0686009C29D6 /* iphoneos.modulemap */,
+				9117CACF1E7B0686009C29D6 /* iphonesimulator.modulemap */,
+				9117CAD01E7B0686009C29D6 /* macosx.modulemap */,
+			);
+			name = CommonCrypto;
+			path = ../CommonCrypto;
+			sourceTree = "<group>";
+		};
 		917B687C1DD0F4FD00AE5629 = {
 			isa = PBXGroup;
 			children = (
 				917B68A01DD0F5B000AE5629 /* LICENSE */,
 				917B68A11DD0F5B000AE5629 /* README.md */,
-				917B68881DD0F4FD00AE5629 /* iOS-csr-swift */,
-				917B68931DD0F4FD00AE5629 /* iOS-csr-swiftTests */,
+				917B68881DD0F4FD00AE5629 /* iOSCSRSwift */,
+				917B68931DD0F4FD00AE5629 /* iOSCSRSwiftTests */,
 				917B68871DD0F4FD00AE5629 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,23 +90,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		917B68881DD0F4FD00AE5629 /* iOS-csr-swift */ = {
+		917B68881DD0F4FD00AE5629 /* iOSCSRSwift */ = {
 			isa = PBXGroup;
 			children = (
 				917B68A41DD0F5DD00AE5629 /* CertificateSigningRequest.swift */,
-				917B68891DD0F4FD00AE5629 /* iOS-csr-swift.h */,
+				917B68891DD0F4FD00AE5629 /* iOSCSRSwift.h */,
+				9117CAD11E7B06DA009C29D6 /* CommonCrypto.xcconfig */,
+				9117CACD1E7B0686009C29D6 /* CommonCrypto */,
 				917B688A1DD0F4FD00AE5629 /* Info.plist */,
 			);
-			path = "iOS-csr-swift";
+			name = iOSCSRSwift;
+			path = "iOSCSRSwift";
 			sourceTree = "<group>";
 		};
-		917B68931DD0F4FD00AE5629 /* iOS-csr-swiftTests */ = {
+		917B68931DD0F4FD00AE5629 /* iOSCSRSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				917B68941DD0F4FD00AE5629 /* iOS_csr_swiftTests.swift */,
+				917B68941DD0F4FD00AE5629 /* iOSCSRSwiftTests.swift */,
 				917B68961DD0F4FD00AE5629 /* Info.plist */,
 			);
-			path = "iOS-csr-swiftTests";
+			name = iOSCSRSwiftTests;
+			path = "iOSCSRSwiftTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -100,7 +120,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				917B68971DD0F4FD00AE5629 /* iOS-csr-swift.h in Headers */,
+				917B68971DD0F4FD00AE5629 /* iOSCSRSwift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,7 +141,7 @@
 			dependencies = (
 			);
 			name = iOSCSRSwift;
-			productName = "iOS-csr-swift";
+			productName = "iOSCSRSwift";
 			productReference = 917B68861DD0F4FD00AE5629 /* iOSCSRSwift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -139,7 +159,7 @@
 				917B68921DD0F4FD00AE5629 /* PBXTargetDependency */,
 			);
 			name = iOSCSRSwiftTests;
-			productName = "iOS-csr-swiftTests";
+			productName = "iOSCSRSwiftTests";
 			productReference = 917B688F1DD0F4FD00AE5629 /* iOSCSRSwiftTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -188,6 +208,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9117CAD21E7B06DA009C29D6 /* CommonCrypto.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				917B68951DD0F4FD00AE5629 /* iOS_csr_swiftTests.swift in Sources */,
+				917B68951DD0F4FD00AE5629 /* iOSCSRSwiftTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +251,7 @@
 /* Begin XCBuildConfiguration section */
 		917B68981DD0F4FD00AE5629 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9117CAD11E7B06DA009C29D6 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -283,6 +305,7 @@
 		};
 		917B68991DD0F4FD00AE5629 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9117CAD11E7B06DA009C29D6 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -329,6 +352,7 @@
 		};
 		917B689B1DD0F4FD00AE5629 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9117CAD11E7B06DA009C29D6 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -336,10 +360,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "iOS-csr-swift/Info.plist";
+				INFOPLIST_FILE = "iOSCSRSwift/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.onedegree.iOS-csr-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.onedegree.iOSCSRSwift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 2.3;
@@ -348,6 +372,7 @@
 		};
 		917B689C1DD0F4FD00AE5629 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9117CAD11E7B06DA009C29D6 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -355,10 +380,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "iOS-csr-swift/Info.plist";
+				INFOPLIST_FILE = "iOSCSRSwift/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.onedegree.iOS-csr-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.onedegree.iOSCSRSwift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 2.3;
@@ -367,12 +392,13 @@
 		};
 		917B689E1DD0F4FD00AE5629 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9117CAD11E7B06DA009C29D6 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = K26KDKYY38;
-				INFOPLIST_FILE = "iOS-csr-swiftTests/Info.plist";
+				INFOPLIST_FILE = "iOSCSRSwiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.onedegree.iOS-csr-swiftTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.onedegree.iOSCSRSwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -380,12 +406,13 @@
 		};
 		917B689F1DD0F4FD00AE5629 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9117CAD11E7B06DA009C29D6 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = K26KDKYY38;
-				INFOPLIST_FILE = "iOS-csr-swiftTests/Info.plist";
+				INFOPLIST_FILE = "iOSCSRSwiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.onedegree.iOS-csr-swiftTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.onedegree.iOSCSRSwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
