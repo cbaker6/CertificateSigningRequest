@@ -1,5 +1,5 @@
-module CommonCrypto [system] {
-    header "CommonCrypto.h" //"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"CommonCrypto/Platforms/iPhoneSimulator.platform/CommonCrypto/CommonCrypto.h" //"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/CommonCrypto/CommonCrypto.h"
+framework module CommonCrypto [system] {
+    header "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"CommonCrypto/Platforms/iPhoneSimulator.platform/CommonCrypto/CommonCrypto.h" //"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/CommonCrypto/CommonCrypto.h"
     /*export *
     header "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/CommonCrypto/CommonRandom.h" //"CommonCrypto/Platforms/iPhoneSimulator.platform/CommonCrypto/CommonRandom.h" //"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/CommonCrypto/CommonRandom.h"
     export * */
