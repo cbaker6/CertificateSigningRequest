@@ -11,30 +11,6 @@
 		9109209C1E787BE3008E5535 /* CertificateSigningRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920991E787BE3008E5535 /* CertificateSigningRequest.swift */; };
 		910920A01E787BFA008E5535 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9109209E1E787BFA008E5535 /* Info.plist */; };
 		910920A31E788CB1008E5535 /* iOS_csr_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920A21E788CB1008E5535 /* iOS_csr_swiftTests.swift */; };
-		910921571E79AC39008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109213B1E79AC39008E5535 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		910921581E79AC39008E5535 /* CommonCryptoError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109213C1E79AC39008E5535 /* CommonCryptoError.h */; };
-		910921591E79AC39008E5535 /* CommonCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109213D1E79AC39008E5535 /* CommonCryptor.h */; };
-		9109215A1E79AC39008E5535 /* CommonDigest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109213E1E79AC39008E5535 /* CommonDigest.h */; };
-		9109215B1E79AC39008E5535 /* CommonHMAC.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109213F1E79AC39008E5535 /* CommonHMAC.h */; };
-		9109215C1E79AC39008E5535 /* CommonKeyDerivation.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921401E79AC39008E5535 /* CommonKeyDerivation.h */; };
-		9109215D1E79AC39008E5535 /* CommonRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921411E79AC39008E5535 /* CommonRandom.h */; };
-		9109215E1E79AC39008E5535 /* CommonSymmetricKeywrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921421E79AC39008E5535 /* CommonSymmetricKeywrap.h */; };
-		9109215F1E79AC39008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921451E79AC39008E5535 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		910921601E79AC39008E5535 /* CommonCryptoError.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921461E79AC39008E5535 /* CommonCryptoError.h */; };
-		910921611E79AC39008E5535 /* CommonCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921471E79AC39008E5535 /* CommonCryptor.h */; };
-		910921621E79AC39008E5535 /* CommonDigest.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921481E79AC39008E5535 /* CommonDigest.h */; };
-		910921631E79AC39008E5535 /* CommonHMAC.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921491E79AC39008E5535 /* CommonHMAC.h */; };
-		910921641E79AC39008E5535 /* CommonKeyDerivation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109214A1E79AC39008E5535 /* CommonKeyDerivation.h */; };
-		910921651E79AC39008E5535 /* CommonRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109214B1E79AC39008E5535 /* CommonRandom.h */; };
-		910921661E79AC39008E5535 /* CommonSymmetricKeywrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109214C1E79AC39008E5535 /* CommonSymmetricKeywrap.h */; };
-		910921671E79AC39008E5535 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 9109214F1E79AC39008E5535 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		910921681E79AC39008E5535 /* CommonCryptoError.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921501E79AC39008E5535 /* CommonCryptoError.h */; };
-		910921691E79AC39008E5535 /* CommonCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921511E79AC39008E5535 /* CommonCryptor.h */; };
-		9109216A1E79AC39008E5535 /* CommonDigest.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921521E79AC39008E5535 /* CommonDigest.h */; };
-		9109216B1E79AC39008E5535 /* CommonHMAC.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921531E79AC39008E5535 /* CommonHMAC.h */; };
-		9109216C1E79AC39008E5535 /* CommonKeyDerivation.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921541E79AC39008E5535 /* CommonKeyDerivation.h */; };
-		9109216D1E79AC39008E5535 /* CommonRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921551E79AC39008E5535 /* CommonRandom.h */; };
-		9109216E1E79AC39008E5535 /* CommonSymmetricKeywrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 910921561E79AC39008E5535 /* CommonSymmetricKeywrap.h */; };
 		917B68901DD0F4FD00AE5629 /* iOSCSRSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917B68861DD0F4FD00AE5629 /* iOSCSRSwift.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,30 +33,6 @@
 		910920D41E78AB5F008E5535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		910920EC1E78B87D008E5535 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
 		910920FE1E799B9B008E5535 /* iphoneos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphoneos.modulemap; sourceTree = "<group>"; };
-		9109213B1E79AC39008E5535 /* CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
-		9109213C1E79AC39008E5535 /* CommonCryptoError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCryptoError.h; sourceTree = "<group>"; };
-		9109213D1E79AC39008E5535 /* CommonCryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCryptor.h; sourceTree = "<group>"; };
-		9109213E1E79AC39008E5535 /* CommonDigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDigest.h; sourceTree = "<group>"; };
-		9109213F1E79AC39008E5535 /* CommonHMAC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHMAC.h; sourceTree = "<group>"; };
-		910921401E79AC39008E5535 /* CommonKeyDerivation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonKeyDerivation.h; sourceTree = "<group>"; };
-		910921411E79AC39008E5535 /* CommonRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonRandom.h; sourceTree = "<group>"; };
-		910921421E79AC39008E5535 /* CommonSymmetricKeywrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSymmetricKeywrap.h; sourceTree = "<group>"; };
-		910921451E79AC39008E5535 /* CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
-		910921461E79AC39008E5535 /* CommonCryptoError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCryptoError.h; sourceTree = "<group>"; };
-		910921471E79AC39008E5535 /* CommonCryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCryptor.h; sourceTree = "<group>"; };
-		910921481E79AC39008E5535 /* CommonDigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDigest.h; sourceTree = "<group>"; };
-		910921491E79AC39008E5535 /* CommonHMAC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHMAC.h; sourceTree = "<group>"; };
-		9109214A1E79AC39008E5535 /* CommonKeyDerivation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonKeyDerivation.h; sourceTree = "<group>"; };
-		9109214B1E79AC39008E5535 /* CommonRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonRandom.h; sourceTree = "<group>"; };
-		9109214C1E79AC39008E5535 /* CommonSymmetricKeywrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSymmetricKeywrap.h; sourceTree = "<group>"; };
-		9109214F1E79AC39008E5535 /* CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
-		910921501E79AC39008E5535 /* CommonCryptoError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCryptoError.h; sourceTree = "<group>"; };
-		910921511E79AC39008E5535 /* CommonCryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCryptor.h; sourceTree = "<group>"; };
-		910921521E79AC39008E5535 /* CommonDigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDigest.h; sourceTree = "<group>"; };
-		910921531E79AC39008E5535 /* CommonHMAC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHMAC.h; sourceTree = "<group>"; };
-		910921541E79AC39008E5535 /* CommonKeyDerivation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonKeyDerivation.h; sourceTree = "<group>"; };
-		910921551E79AC39008E5535 /* CommonRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonRandom.h; sourceTree = "<group>"; };
-		910921561E79AC39008E5535 /* CommonSymmetricKeywrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSymmetricKeywrap.h; sourceTree = "<group>"; };
 		9109216F1E79C101008E5535 /* macosx.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macosx.modulemap; sourceTree = "<group>"; };
 		910921721E79DE64008E5535 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		917B68861DD0F4FD00AE5629 /* iOSCSRSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSCSRSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,167 +66,7 @@
 				910920D41E78AB5F008E5535 /* Info.plist */,
 				910920FE1E799B9B008E5535 /* iphoneos.modulemap */,
 				910920EC1E78B87D008E5535 /* iphonesimulator.modulemap */,
-				910920FC1E798D9A008E5535 /* macosx.modulemap */,
 				9109216F1E79C101008E5535 /* macosx.modulemap */,
-				910921381E79AC39008E5535 /* Platforms */,
-			);
-			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
-		910921381E79AC39008E5535 /* Platforms */ = {
-			isa = PBXGroup;
-			children = (
-				910921391E79AC39008E5535 /* iPhoneOS */,
-				910921431E79AC39008E5535 /* iPhoneSimulator */,
-				9109214D1E79AC39008E5535 /* MacOSX */,
-			);
-			path = Platforms;
-			sourceTree = "<group>";
-		};
-		910921391E79AC39008E5535 /* iPhoneOS */ = {
-			isa = PBXGroup;
-			children = (
-				9109213A1E79AC39008E5535 /* CommonCrypto */,
-			);
-			path = iPhoneOS;
-			sourceTree = "<group>";
-		};
-		9109213A1E79AC39008E5535 /* CommonCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				9109213B1E79AC39008E5535 /* CommonCrypto.h */,
-				9109213C1E79AC39008E5535 /* CommonCryptoError.h */,
-				9109213D1E79AC39008E5535 /* CommonCryptor.h */,
-				9109213E1E79AC39008E5535 /* CommonDigest.h */,
-				9109213F1E79AC39008E5535 /* CommonHMAC.h */,
-				910921401E79AC39008E5535 /* CommonKeyDerivation.h */,
-				910921411E79AC39008E5535 /* CommonRandom.h */,
-				910921421E79AC39008E5535 /* CommonSymmetricKeywrap.h */,
-			);
-			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
-		910921431E79AC39008E5535 /* iPhoneSimulator */ = {
-			isa = PBXGroup;
-			children = (
-				910921441E79AC39008E5535 /* CommonCrypto */,
-			);
-			path = iPhoneSimulator;
-			sourceTree = "<group>";
-		};
-		910921441E79AC39008E5535 /* CommonCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				910921451E79AC39008E5535 /* CommonCrypto.h */,
-				910921461E79AC39008E5535 /* CommonCryptoError.h */,
-				910921471E79AC39008E5535 /* CommonCryptor.h */,
-				910921481E79AC39008E5535 /* CommonDigest.h */,
-				910921491E79AC39008E5535 /* CommonHMAC.h */,
-				9109214A1E79AC39008E5535 /* CommonKeyDerivation.h */,
-				9109214B1E79AC39008E5535 /* CommonRandom.h */,
-				9109214C1E79AC39008E5535 /* CommonSymmetricKeywrap.h */,
-			);
-			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
-		9109214D1E79AC39008E5535 /* MacOSX */ = {
-			isa = PBXGroup;
-			children = (
-				9109214E1E79AC39008E5535 /* CommonCrypto */,
-			);
-			path = MacOSX;
-			sourceTree = "<group>";
-		};
-		9109214E1E79AC39008E5535 /* CommonCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				9109214F1E79AC39008E5535 /* CommonCrypto.h */,
-				910921501E79AC39008E5535 /* CommonCryptoError.h */,
-				910921511E79AC39008E5535 /* CommonCryptor.h */,
-				910921521E79AC39008E5535 /* CommonDigest.h */,
-				910921531E79AC39008E5535 /* CommonHMAC.h */,
-				910921541E79AC39008E5535 /* CommonKeyDerivation.h */,
-				910921551E79AC39008E5535 /* CommonRandom.h */,
-				910921561E79AC39008E5535 /* CommonSymmetricKeywrap.h */,
-			);
-			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
-		910921731E79E164008E5535 /* Platforms */ = {
-			isa = PBXGroup;
-			children = (
-				910921741E79E164008E5535 /* iPhoneOS */,
-				9109217E1E79E164008E5535 /* iPhoneSimulator */,
-				910921881E79E165008E5535 /* MacOSX */,
-			);
-			path = Platforms;
-			sourceTree = "<group>";
-		};
-		910921741E79E164008E5535 /* iPhoneOS */ = {
-			isa = PBXGroup;
-			children = (
-				910921751E79E164008E5535 /* CommonCrypto */,
-			);
-			path = iPhoneOS;
-			sourceTree = "<group>";
-		};
-		910921751E79E164008E5535 /* CommonCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				910921761E79E164008E5535 /* CommonCrypto.h */,
-				910921771E79E164008E5535 /* CommonCryptoError.h */,
-				910921781E79E164008E5535 /* CommonCryptor.h */,
-				910921791E79E164008E5535 /* CommonDigest.h */,
-				9109217A1E79E164008E5535 /* CommonHMAC.h */,
-				9109217B1E79E164008E5535 /* CommonKeyDerivation.h */,
-				9109217C1E79E164008E5535 /* CommonRandom.h */,
-				9109217D1E79E164008E5535 /* CommonSymmetricKeywrap.h */,
-			);
-			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
-		9109217E1E79E164008E5535 /* iPhoneSimulator */ = {
-			isa = PBXGroup;
-			children = (
-				9109217F1E79E165008E5535 /* CommonCrypto */,
-			);
-			path = iPhoneSimulator;
-			sourceTree = "<group>";
-		};
-		9109217F1E79E165008E5535 /* CommonCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				910921801E79E165008E5535 /* CommonCrypto.h */,
-				910921811E79E165008E5535 /* CommonCryptoError.h */,
-				910921821E79E165008E5535 /* CommonCryptor.h */,
-				910921831E79E165008E5535 /* CommonDigest.h */,
-				910921841E79E165008E5535 /* CommonHMAC.h */,
-				910921851E79E165008E5535 /* CommonKeyDerivation.h */,
-				910921861E79E165008E5535 /* CommonRandom.h */,
-				910921871E79E165008E5535 /* CommonSymmetricKeywrap.h */,
-			);
-			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
-		910921881E79E165008E5535 /* MacOSX */ = {
-			isa = PBXGroup;
-			children = (
-				910921891E79E165008E5535 /* CommonCrypto */,
-			);
-			path = MacOSX;
-			sourceTree = "<group>";
-		};
-		910921891E79E165008E5535 /* CommonCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				9109218A1E79E165008E5535 /* CommonCrypto.h */,
-				9109218B1E79E165008E5535 /* CommonCryptoError.h */,
-				9109218C1E79E165008E5535 /* CommonCryptor.h */,
-				9109218D1E79E165008E5535 /* CommonDigest.h */,
-				9109218E1E79E165008E5535 /* CommonHMAC.h */,
-				9109218F1E79E165008E5535 /* CommonKeyDerivation.h */,
-				910921901E79E165008E5535 /* CommonRandom.h */,
-				910921911E79E165008E5535 /* CommonSymmetricKeywrap.h */,
 			);
 			path = CommonCrypto;
 			sourceTree = "<group>";
@@ -327,31 +119,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9109216A1E79AC39008E5535 /* CommonDigest.h in Headers */,
-				910921671E79AC39008E5535 /* CommonCrypto.h in Headers */,
-				9109215F1E79AC39008E5535 /* CommonCrypto.h in Headers */,
-				910921571E79AC39008E5535 /* CommonCrypto.h in Headers */,
-				910921611E79AC39008E5535 /* CommonCryptor.h in Headers */,
-				910921621E79AC39008E5535 /* CommonDigest.h in Headers */,
-				910921591E79AC39008E5535 /* CommonCryptor.h in Headers */,
 				9109209A1E787BE3008E5535 /* iOSCSRSwift.h in Headers */,
-				9109215A1E79AC39008E5535 /* CommonDigest.h in Headers */,
-				910921631E79AC39008E5535 /* CommonHMAC.h in Headers */,
-				910921641E79AC39008E5535 /* CommonKeyDerivation.h in Headers */,
-				9109216E1E79AC39008E5535 /* CommonSymmetricKeywrap.h in Headers */,
-				910921661E79AC39008E5535 /* CommonSymmetricKeywrap.h in Headers */,
-				9109215B1E79AC39008E5535 /* CommonHMAC.h in Headers */,
-				9109215E1E79AC39008E5535 /* CommonSymmetricKeywrap.h in Headers */,
-				910921691E79AC39008E5535 /* CommonCryptor.h in Headers */,
-				910921581E79AC39008E5535 /* CommonCryptoError.h in Headers */,
-				9109215D1E79AC39008E5535 /* CommonRandom.h in Headers */,
-				910921601E79AC39008E5535 /* CommonCryptoError.h in Headers */,
-				910921651E79AC39008E5535 /* CommonRandom.h in Headers */,
-				9109215C1E79AC39008E5535 /* CommonKeyDerivation.h in Headers */,
-				9109216B1E79AC39008E5535 /* CommonHMAC.h in Headers */,
-				9109216C1E79AC39008E5535 /* CommonKeyDerivation.h in Headers */,
-				9109216D1E79AC39008E5535 /* CommonRandom.h in Headers */,
-				910921681E79AC39008E5535 /* CommonCryptoError.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,7 +376,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.onedegree.iOSCSRSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/CommonCrypto/Platrforms/**";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -635,7 +403,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.onedegree.iOSCSRSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/CommonCrypto/Platrforms/**";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
