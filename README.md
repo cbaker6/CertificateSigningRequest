@@ -15,6 +15,7 @@ Note1: To use out of the box, build the project, look under frameworks, and drag
 
 - In your project Targets, click on "General"
 - Place "iOSCSRSwift.framework" in "Embedded Binaries" and "Linked Frameworks and Libraries"
+- Then, simply place import iOSCSRSwift at the top of any file that needs the framework.
 
 Note2: You can get your publicKey in bit by querying it from the iOS keychain using String(kSecReturnData): kCFBooleanTrue in your query (see "setUp()" in iOSCSRSwiftTests.swift). 
 
