@@ -9,7 +9,12 @@ To use, initiatlize the class using one of the following (an example of how to d
 - let csr = CertificateSigningRequest(cryptoAlgorithm: CryptoAlgorithm)
 - let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, cryptoAlgorithm: CryptoAlgorithm)
 
-Then simply build your CSR using your publicKey(bits) and privateKey using, let builtCSR = csr.build(publicKeyBits, privateKey: privateKey).
+Then simply build your CSR using your publicKey(bits) and privateKey using, let builtCSR = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey).
+
+Two other methods are available depending on your needs.
+
+- To get CSR without header and footer info use: let builtCSR = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey).
+- To get CSR as Data use: let builtCSR = csr.build(publicKeyBits, privateKey: privateKey).
 
 Note1: To use out of the box, build the project, look under frameworks, and drag "iOSCSRSwift.framework" into your project. You will need to do this in two places:
 
