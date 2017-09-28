@@ -121,15 +121,12 @@ class iOSCSRSwiftTests: XCTestCase {
             return
         }
         
-        let csrString = csrBuild.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0)).addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics)
-        //stringByAddingPercentEncodingForFormUrlencoded()!
-        
-        guard csrString == nil else{
+        guard let csrString = csrBuild.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0)).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else{
             XCTAssert(false, "Could not encode CSR to string")
             return
         }
         
-        if !csrString!.isEmpty{
+        if !csrString.isEmpty{
             XCTAssert(true, csrString!)
         }else{
         
