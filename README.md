@@ -5,16 +5,16 @@ This is a port of ios-csr by Ales Teska (https://github.com/ateska/ios-csr) from
 Additions have been made to allow SHA256 and SHA512. Also, this is setup to be added as a framework to your project.
 
 To use, initiatlize the class using one of the following (an example of how to do can be found at https://github.com/cbaker6/iOSCSRSwift/blob/master/iOSCSRSwiftTests/iOSCSRSwiftTests.swift): 
-- let csr = CertificateSigningRequest()
-- let csr = CertificateSigningRequest(cryptoAlgorithm: CryptoAlgorithm)
-- let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, cryptoAlgorithm: CryptoAlgorithm)
+- `let csr = CertificateSigningRequest()`
+- `let csr = CertificateSigningRequest(cryptoAlgorithm: CryptoAlgorithm)`
+- `let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, cryptoAlgorithm: CryptoAlgorithm)`
 
-Then simply build your CSR using your publicKey(bits) and privateKey using, let builtCSR = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey).
+Then simply build your CSR using your publicKey(bits) and privateKey using, `let builtCSR = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)`.
 
 Two other methods are available depending on your needs.
 
-- To get CSR without header and footer info use: let builtCSR = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey).
-- To get CSR as Data use: let builtCSR = csr.build(publicKeyBits, privateKey: privateKey).
+- To get CSR without header and footer info use: `let builtCSR = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)`.
+- To get CSR as Data use: `let builtCSR = csr.build(publicKeyBits, privateKey: privateKey)`.
 
 Note1: To use out of the box, build the project, look under frameworks, and drag "iOSCSRSwift.framework" into your project. You will need to do this in two places:
 
@@ -22,7 +22,7 @@ Note1: To use out of the box, build the project, look under frameworks, and drag
 - Place "iOSCSRSwift.framework" in "Embedded Binaries" and "Linked Frameworks and Libraries"
 - Then, simply place "import iOSCSRSwift" at the top of any file that needs the framework.
 
-Note2: You can get your publicKey in bit by querying it from the iOS keychain using String(kSecReturnData): kCFBooleanTrue in your query (see "setUp()" in iOSCSRSwiftTests.swift). 
+Note2: You can get your publicKey in bit by querying it from the iOS keychain using `String(kSecReturnData): kCFBooleanTrue` in your query (see "testiOSKeyCreation()" in iOSCSRSwiftTests.swift). 
 
 Note3: Do not try to run the testcase from within the framework, it **WILL FAIL**. I believe this is because a framework doesn't have the same entitlements as an application and therefore doesn't have access to a keychain. You should be able to run the testcase by copy/pasting it inside of your own application unit test.
 
