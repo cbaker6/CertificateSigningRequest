@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 //! Project version number for iOSCSRSwift.
-FOUNDATION_EXPORT double iOSCSRSwiftVersionNumber; //iOS_csr_swiftVersionNumber
+FOUNDATION_EXPORT double iOSCSRSwiftVersionNumber;
 
 //! Project version string for iOSCSRSwift.
-FOUNDATION_EXPORT const unsigned char iOSCSRSwiftVersionString[]; //iOS_csr_swiftVersionString
+FOUNDATION_EXPORT const unsigned char iOSCSRSwiftVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <iOS_csr_swift/PublicHeader.h>
 //#import <CommonCrypto/CommonCrypto.h>

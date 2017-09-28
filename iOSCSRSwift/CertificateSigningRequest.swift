@@ -36,7 +36,7 @@ import Foundation
 public enum CryptoAlgorithm {
     case md5, sha1, sha224, sha256, sha384, sha512
     
-    var HMACAlgorithm: CCHmacAlgorithm {
+    public var HMACAlgorithm: CCHmacAlgorithm {
         var result: Int = 0
         switch self {
         case .md5:      result = kCCHmacAlgMD5
@@ -49,7 +49,7 @@ public enum CryptoAlgorithm {
         return CCHmacAlgorithm(result)
     }
     
-    var digestLength: Int {
+    public var digestLength: Int {
         var result: Int32 = 0
         switch self {
         case .md5:      result = CC_MD5_DIGEST_LENGTH
