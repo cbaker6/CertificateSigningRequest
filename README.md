@@ -22,7 +22,7 @@ Note1: To use out of the box, build the project, look under frameworks, and drag
 - Place "iOSCSRSwift.framework" in "Embedded Binaries" and it should automatically appear in "Linked Frameworks and Libraries"
 - Then, simply place "import iOSCSRSwift" at the top of any file that needs the framework.
 
-Note2: You can get your publicKey in bit by querying it from the iOS keychain using String(kSecReturnData): kCFBooleanTrue in your query (see "testiOSKeyCreation()" in iOSCSRSwiftTests.swift). 
+Note2: You can get your publicKey in bit by querying it from the iOS keychain using `String(kSecReturnData): kCFBooleanTrue` in your query (see "testiOSKeyCreation()" in iOSCSRSwiftTests.swift). 
 
 Note3: Do not try to run the testcase from within the framework, it **WILL FAIL**. I believe this is because a framework doesn't have the same entitlements as an application and therefore doesn't have access to a keychain. You should be able to run the testcase by copy/pasting it inside of your own application unit test.
 
