@@ -116,23 +116,18 @@ class iOSCSRSwiftTests: XCTestCase {
         let csr = CertificateSigningRequest()
         
         guard let csrBuild = csr.build(publicKeyBits!, privateKey: privateKey!) else{
-            
             XCTAssert(false, "Could not build CSR")
             return
         }
         
-        let csrString = csrBuild.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0)).addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics)
-        //stringByAddingPercentEncodingForFormUrlencoded()!
-        
-        guard csrString == nil else{
+        guard let csrString = csrBuild.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0)).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else{
             XCTAssert(false, "Could not encode CSR to string")
             return
         }
-        
-        if !csrString!.isEmpty{
-            XCTAssert(true, csrString!)
+
+        if !csrString.isEmpty{
+            XCTAssert(true, csrString)
         }else{
-        
             XCTAssert(false, "Encoded CSR string was empty")
         }
 
