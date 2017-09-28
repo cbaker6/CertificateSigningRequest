@@ -6,8 +6,8 @@ Additions have been made to allow SHA256 and SHA512. Also, this is setup to be a
 
 To use, initiatlize the class using one of the following (an example of how to do can be found at https://github.com/cbaker6/iOSCSRSwift/blob/master/iOSCSRSwiftTests/iOSCSRSwiftTests.swift): 
 - `let csr = CertificateSigningRequest()`
-- `let csr = CertificateSigningRequest(cryptoAlgorithm: CryptoAlgorithm)`
-- `let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, cryptoAlgorithm: CryptoAlgorithm)`
+- `let csr = CertificateSigningRequest(signAlgorithm: SignAlgorithm)`
+- `let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, signAlgorithm: SignAlgorithm)`
 
 Then simply build your CSR using your publicKey(bits) and privateKey using, `let builtCSR = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)`.
 
