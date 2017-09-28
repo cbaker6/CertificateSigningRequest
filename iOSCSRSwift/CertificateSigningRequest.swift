@@ -36,7 +36,7 @@ import Foundation
 public enum CryptoAlgorithm {
     case md5, sha1, sha224, sha256, sha384, sha512
     
-    var HMACAlgorithm: CCHmacAlgorithm {
+    public var HMACAlgorithm: CCHmacAlgorithm {
         var result: Int = 0
         switch self {
         case .md5:      result = kCCHmacAlgMD5
@@ -49,7 +49,7 @@ public enum CryptoAlgorithm {
         return CCHmacAlgorithm(result)
     }
     
-    var digestLength: Int {
+    public var digestLength: Int {
         var result: Int32 = 0
         switch self {
         case .md5:      result = CC_MD5_DIGEST_LENGTH
@@ -187,6 +187,50 @@ public class CertificateSigningRequest:NSObject {
         enclose(&certificationRequest, by: SEQUENCE_tag) // Enclose into SEQUENCE
         
         return certificationRequest
+    }
+    
+    public func buildAndEncodeDataAsString(_ publicKeyBits:Data, privateKey: SecKey)-> String? {
+        
+        guard let buildData = self.build(publicKeyBits, privateKey: privateKey) else{
+            return nil
+        }
+        
+        return buildData.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        
+    }
+    
+    public func buildCSRAndReturnString(_ publicKeyBits:Data, privateKey: SecKey)-> String? {
+        
+        guard let csrString = self.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey) else{
+            return nil
+        }
+        
+        let head = "-----BEGIN CERTIFICATE REQUEST-----\n";
+        let foot = "-----END CERTIFICATE REQUEST-----\n";
+        var isMultiple = false;
+        var newCSRString = head;
+        
+        //Check if string size is a multiple of 64
+        if (csrString.count % 64 == 0){
+            isMultiple = true;
+        }
+        
+        for (i, char) in csrString.enumerated() {
+            newCSRString.append(char)
+            
+            if ((i != 0) && ((i+1) % 64 == 0)){
+                newCSRString.append("\n")
+            }
+            
+            if ((i == csrString.count-1) && !isMultiple){
+                newCSRString.append("\n")
+            }
+            
+        }
+        
+        newCSRString = newCSRString+foot
+        
+        return newCSRString
     }
     
     func buldCertificationRequestInfo(_ publicKeyBits:Data) -> Data{
