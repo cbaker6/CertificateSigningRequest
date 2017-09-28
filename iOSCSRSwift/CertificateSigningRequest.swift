@@ -189,6 +189,51 @@ public class CertificateSigningRequest:NSObject {
         return certificationRequest
     }
     
+    public func buildAndEncodeDataAsString(_ publicKeyBits:Data, privateKey: SecKey)-> String? {
+        
+        guard let buildData = self.build(publicKeyBits, privateKey: privateKey) else{
+            return nil
+        }
+        
+        return buildData.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        
+    }
+    
+    public func buildCSRAndReturnString(_ publicKeyBits:Data, privateKey: SecKey)-> String? {
+        
+        guard let csrString = self.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey) else{
+            return nil
+        }
+        
+        let head = "-----BEGIN CERTIFICATE REQUEST-----\n";
+        let foot = "-----END CERTIFICATE REQUEST-----\n";
+        var isMultiple = false;
+        var newCSRString = head;
+        
+        //Check if string size is a multiple of 64
+        if (csrString.count % 64 == 0){
+            isMultiple = true;
+        }
+        
+        for (i, char) in csrString.enumerated() {
+            newCSRString.append(char)
+            
+            if ((i != 0) && ((i+1) % 64 == 0)){
+                newCSRString.append("\n")
+            }
+            
+            if ((i == csrString.count-1) && !isMultiple){
+                newCSRString.append("\n")
+            }
+         
+        }
+   
+        newCSRString = newCSRString+foot
+        
+        return newCSRString
+    }
+    
+   
     func buldCertificationRequestInfo(_ publicKeyBits:Data) -> Data{
         var certificationRequestInfo = Data(capacity: 256)
         

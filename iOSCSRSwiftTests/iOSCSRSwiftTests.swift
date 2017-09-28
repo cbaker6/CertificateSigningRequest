@@ -23,7 +23,15 @@ class iOSCSRSwiftTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        
+    }
+    
+    override func tearDown() {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
+    }
+    
+    func testiOSKeyCreation(_ test:Bool=true) {
+        // This is an example of a functional test case.
         if (publicKey != nil) && (privateKey != nil) && keyBlockSize != nil{
             //Keys only need to be created once, after they can be used over again
             return
@@ -51,7 +59,7 @@ class iOSCSRSwiftTests: XCTestCase {
             String(kSecReturnRef): kCFBooleanTrue,
             kSecPublicKeyAttrs as String: publicKeyParameters as AnyObject,
             kSecPrivateKeyAttrs as String: privateKeyParameters as AnyObject,
-        ]
+            ]
         
         //Use Apple Security Framework to generate keys, save them to application keychain
         let result = SecKeyGeneratePair(parameters as CFDictionary, &publicKey, &privateKey)
@@ -61,12 +69,16 @@ class iOSCSRSwiftTests: XCTestCase {
             print("Public and private key pair created")
             
             guard publicKey != nil else {
-                XCTAssert(false, "Error  in setUp(). PublicKey shouldn't be nil")
+                if test{
+                    XCTAssert(false, "Error  in setUp(). PublicKey shouldn't be nil")
+                }
                 return
             }
             
             guard privateKey != nil else{
-                XCTAssert(false, "Error  in setUp(). PrivateKey shouldn't be nil")
+                if test{
+                    XCTAssert(false, "Error  in setUp(). PrivateKey shouldn't be nil")
+                }
                 return
             }
             
@@ -89,29 +101,43 @@ class iOSCSRSwiftTests: XCTestCase {
             case errSecSuccess:
                 
                 guard let keyBits = tempPublicKeyBits as? Data else {
-                    XCTAssert(false, "Error: couldn't cast publicKeyBits from AnyObject to Data")
+                    if test{
+                        XCTAssert(false, "Error: couldn't cast publicKeyBits from AnyObject to Data")
+                    }
                     return
                 }
                 
                 publicKeyBits = keyBits
                 
+                if test{
+                    XCTAssert(true, "Pass")
+                }
+                
             default:
-                XCTAssert(false, "Error when retrieving publicKey in bits from the keychain: \(result)")
+                if test{
+                    XCTAssert(false, "Error when retrieving publicKey in bits from the keychain: \(result)")
+                }
             }
             
         default:
-            XCTAssert(false, "Error occured: \(result)")
+            XCTAssert(false, "Error occured: \(result), keys weren't created")
         }
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+        
     }
     
     func testStandardInitializer() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        //Ensure keys are available
+        self.testiOSKeyCreation(false)
+        
+        if (publicKey != nil) && (privateKey != nil) && keyBlockSize != nil{
+            //Keys only need to be created once, after they can be used over again
+            XCTAssert(false, "Keys were not created")
+            return
+        }
+        
         
         let csr = CertificateSigningRequest()
         
@@ -126,6 +152,7 @@ class iOSCSRSwiftTests: XCTestCase {
         }
         
         if !csrString.isEmpty{
+            print("Test out CSR here: https://redkestrel.co.uk/products/decoder/")
             XCTAssert(true, csrString)
         }else{
         
