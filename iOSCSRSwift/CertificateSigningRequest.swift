@@ -333,13 +333,13 @@ public class CertificateSigningRequest:NSObject {
         
         var publicKeyASN = Data(capacity: 260)
         
-        let mod = getPublicKeyMod(publicKeyBits) //COREY not needed for EC
+        let mod = getPublicKeyMod(publicKeyBits)
         let integer:UInt8 = 0x02 //Integer
         publicKeyASN.append(integer)
         appendDERLength(mod.count, into: &publicKeyASN)
         publicKeyASN.append(mod)
         
-        let exp = getPublicKeyExp(publicKeyBits) //COREY not needed for EC
+        let exp = getPublicKeyExp(publicKeyBits)
         publicKeyASN.append(integer)
         appendDERLength(exp.count, into: &publicKeyASN)
         publicKeyASN.append(exp)
