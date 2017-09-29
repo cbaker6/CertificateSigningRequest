@@ -33,17 +33,17 @@ import Foundation
 
 
 //See: http://stackoverflow.com/questions/24099520/commonhmac-in-swift
-public enum CryptoAlgorithm {
-    case md5, sha1, sha224, sha256, sha384, sha512
+public enum SignAlgorithm {
+    case /*md5, */sha1, /*sha224,*/ sha256, /*sha384,*/ sha512
     
     public var HMACAlgorithm: CCHmacAlgorithm {
         var result: Int = 0
         switch self {
-        case .md5:      result = kCCHmacAlgMD5
+        //case .md5:      result = kCCHmacAlgMD5
         case .sha1:     result = kCCHmacAlgSHA1
-        case .sha224:   result = kCCHmacAlgSHA224
+        //case .sha224:   result = kCCHmacAlgSHA224
         case .sha256:   result = kCCHmacAlgSHA256
-        case .sha384:   result = kCCHmacAlgSHA384
+        //case .sha384:   result = kCCHmacAlgSHA384
         case .sha512:   result = kCCHmacAlgSHA512
         }
         return CCHmacAlgorithm(result)
@@ -52,15 +52,19 @@ public enum CryptoAlgorithm {
     public var digestLength: Int {
         var result: Int32 = 0
         switch self {
-        case .md5:      result = CC_MD5_DIGEST_LENGTH
+        //case .md5:      result = CC_MD5_DIGEST_LENGTH
         case .sha1:     result = CC_SHA1_DIGEST_LENGTH
-        case .sha224:   result = CC_SHA224_DIGEST_LENGTH
+        //case .sha224:   result = CC_SHA224_DIGEST_LENGTH
         case .sha256:   result = CC_SHA256_DIGEST_LENGTH
-        case .sha384:   result = CC_SHA384_DIGEST_LENGTH
+        //case .sha384:   result = CC_SHA384_DIGEST_LENGTH
         case .sha512:   result = CC_SHA512_DIGEST_LENGTH
         }
         return Int(result)
     }
+}
+
+public enum KeyAlgorithm {
+    case rsa, ec
 }
 
 public class CertificateSigningRequest:NSObject {
@@ -70,13 +74,15 @@ public class CertificateSigningRequest:NSObject {
     private let commonName:String?
     
     private var subjectDER:Data?
-    private var cryptoAlgorithm: CryptoAlgorithm!
+    private var signAlgorithm: SignAlgorithm!
+    private var keyAlgorithm: KeyAlgorithm!
     
     private let OBJECT_commonName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x03]
     private let OBJECT_countryName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x06]
     private let OBJECT_organizationName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0A]
     private let OBJECT_organizationalUnitName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0B]
     
+    /* RSA */
     private let OBJECT_rsaEncryptionNULL:[UInt8] = [0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00]
     
     //Guide to translate OID's to bytes for ANS.1 (Look at comment section on page): https://msdn.microsoft.com/en-us/library/bb540809(v=vs.85).aspx
@@ -90,27 +96,40 @@ public class CertificateSigningRequest:NSObject {
     // See: http://oid-info.com/get/1.2.840.113549.1.1.13
     private let SEQUENCE_OBJECT_sha512WithRSAEncryption:[UInt8] = [0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 1, 1, 0x0D, 0x05, 0x00]
     
+    /* EC */
+    private let OBJECT_ecEncryptionNULL:[UInt8] = [0x06, 0x08, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x03, 0x01, 0x07]
+    
+    
+    private let SEQUENCE_OBJECT_sha1WithECEncryption:[UInt8] = [0x30, 0x0A ,0x06, 0x07, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x04, 0x01]
+    
+    // See: http://www.oid-info.com/get/1.2.840.10045.4.3.2
+    private let SEQUENCE_OBJECT_sha256WithECEncryption:[UInt8] = [0x30, 0x0A ,0x06, 0x08, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x04, 0x03, 0x02]
+    
+    // See: http://oid-info.com/get/1.2.840.10045.4.3.4
+    private let SEQUENCE_OBJECT_sha512WithECEncryption:[UInt8] = [0x30, 0x0A ,0x06, 0x08, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x04, 0x03, 0x04]
+    
     private let SEQUENCE_tag:UInt8 = 0x30
     private let SET_tag:UInt8 = 0x31
     
-    public init(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, cryptoAlgorithm: CryptoAlgorithm){
+    public init(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, keyAlgorithm: KeyAlgorithm, signAlgorithm: SignAlgorithm){
         
         self.commonName = commonName
         self.organizationName = organizationName
         self.organizationUnitName = organizationUnitName
         self.countryName = countryName
         self.subjectDER = nil
-        self.cryptoAlgorithm = cryptoAlgorithm
+        self.signAlgorithm = signAlgorithm
+        self.keyAlgorithm = keyAlgorithm
         
         super.init()
     }
     
     public convenience override init(){
-        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, cryptoAlgorithm: CryptoAlgorithm.sha1)
+        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, keyAlgorithm: KeyAlgorithm.rsa, signAlgorithm: SignAlgorithm.sha1)
     }
     
-    public convenience init(cryptoAlgorithm: CryptoAlgorithm){
-        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, cryptoAlgorithm: cryptoAlgorithm)
+    public convenience init(keyAlgorithm: KeyAlgorithm, signAlgorithm: SignAlgorithm){
+        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, keyAlgorithm: keyAlgorithm, signAlgorithm: signAlgorithm)
     }
     
     public func build(_ publicKeyBits:Data, privateKey: SecKey) -> Data?{
@@ -122,17 +141,23 @@ public class CertificateSigningRequest:NSObject {
         certificationRequestInfo.copyBytes(to: &certificationRequestInfoBytes, count: certificationRequestInfo.count)
         var digest:[UInt8]
         
-        switch cryptoAlgorithm! {
+        switch signAlgorithm! {
         case .sha1:
             
             // Build signature - step 1: SHA1 hash
             var SHA1 = CC_SHA1_CTX()
             CC_SHA1_Init(&SHA1)
             CC_SHA1_Update(&SHA1, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-            digest = [UInt8](repeating: 0, count: cryptoAlgorithm.digestLength)
+            digest = [UInt8](repeating: 0, count: signAlgorithm.digestLength)
             CC_SHA1_Final(&digest, &SHA1)
-            shaBytes = SEQUENCE_OBJECT_sha1WithRSAEncryption
             padding = SecPadding.PKCS1SHA1
+            
+            switch keyAlgorithm! {
+            case .rsa:
+                shaBytes = SEQUENCE_OBJECT_sha1WithRSAEncryption
+            case .ec:
+                shaBytes = SEQUENCE_OBJECT_sha1WithECEncryption
+            }
             
         case .sha256:
             
@@ -140,10 +165,16 @@ public class CertificateSigningRequest:NSObject {
             var SHA256 = CC_SHA256_CTX()
             CC_SHA256_Init(&SHA256)
             CC_SHA256_Update(&SHA256, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-            digest = [UInt8](repeating: 0, count: cryptoAlgorithm.digestLength)
+            digest = [UInt8](repeating: 0, count: signAlgorithm.digestLength)
             CC_SHA256_Final(&digest, &SHA256)
-            shaBytes = SEQUENCE_OBJECT_sha256WithRSAEncryption
             padding = SecPadding.PKCS1SHA256
+            
+            switch keyAlgorithm! {
+            case .rsa:
+                shaBytes = SEQUENCE_OBJECT_sha256WithRSAEncryption
+            case .ec:
+                shaBytes = SEQUENCE_OBJECT_sha256WithECEncryption
+            }
             
         case .sha512:
             
@@ -151,14 +182,20 @@ public class CertificateSigningRequest:NSObject {
             var SHA512 = CC_SHA512_CTX()
             CC_SHA512_Init(&SHA512)
             CC_SHA512_Update(&SHA512, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-            digest = [UInt8](repeating: 0, count: cryptoAlgorithm.digestLength)
+            digest = [UInt8](repeating: 0, count: signAlgorithm.digestLength)
             CC_SHA512_Final(&digest, &SHA512)
-            shaBytes = SEQUENCE_OBJECT_sha512WithRSAEncryption
             padding = SecPadding.PKCS1SHA512
+            
+            switch keyAlgorithm! {
+            case .rsa:
+                shaBytes = SEQUENCE_OBJECT_sha512WithRSAEncryption
+            case .ec:
+                shaBytes = SEQUENCE_OBJECT_sha512WithECEncryption
+            }
             
         default:
             
-            print("Error: crypto algotirthm \(cryptoAlgorithm) is not implemented")
+            print("Error: crypto algotirthm \(signAlgorithm) is not implemented")
             return nil
         }
         
@@ -282,6 +319,13 @@ public class CertificateSigningRequest:NSObject {
         
         var publicKeyInfo = Data(capacity: 390)
         
+        switch keyAlgorithm! {
+        case .rsa:
+            publicKeyInfo.append(OBJECT_rsaEncryptionNULL, count: OBJECT_rsaEncryptionNULL.count)
+        case .ec:
+            publicKeyInfo.append(OBJECT_ecEncryptionNULL, count: OBJECT_ecEncryptionNULL.count)
+        }
+        
         publicKeyInfo.append(OBJECT_rsaEncryptionNULL, count: OBJECT_rsaEncryptionNULL.count)
         enclose(&publicKeyInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
         
@@ -389,6 +433,11 @@ public class CertificateSigningRequest:NSObject {
     
     func getPublicKeyExp(_ publicKeyBits:Data)->Data{
         
+        //Do nothing if EC, credit: @aleemrazzaq, https://github.com/aleemrazzaq/CSR_EC_256
+        if self.keyAlgorithm == KeyAlgorithm.ec{
+            return publicKeyBits
+        }
+        
         var iterator = 0
         
         iterator+=1 // TYPE - bit stream - mod + exp
@@ -407,6 +456,11 @@ public class CertificateSigningRequest:NSObject {
     }
     
     func getPublicKeyMod(_ publicKeyBits: Data)->Data{
+        
+        //Do nothing if EC, credit: @aleemrazzaq, https://github.com/aleemrazzaq/CSR_EC_256
+        if self.keyAlgorithm == KeyAlgorithm.ec{
+            return publicKeyBits
+        }
         
         var iterator = 0
         

@@ -2,12 +2,12 @@
 Generate a certificate signing request (CSR) in iOS using Swift
 
 This is a port of ios-csr by Ales Teska (https://github.com/ateska/ios-csr) from Objective-C to Swift 3.0 (a Swift 2.3 version is available on the "2.3" branch). 
-Additions have been made to allow SHA256 and SHA512. Also, this is setup to be added as a framework to your project.
+Additions have been made to support RSA and EC (iOS only supports 256 bit keys for now) allow SHA256 and SHA512. Also, this is setup to be added as a framework to your project.
 
 To use, initiatlize the class using one of the following (an example of how to do can be found at https://github.com/cbaker6/iOSCSRSwift/blob/master/iOSCSRSwiftTests/iOSCSRSwiftTests.swift): 
 - `let csr = CertificateSigningRequest()`
-- `let csr = CertificateSigningRequest(cryptoAlgorithm: CryptoAlgorithm)`
-- `let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, cryptoAlgorithm: CryptoAlgorithm)`
+- `let csr = CertificateSigningRequest(keyAlgorithm: KeyAlgorithm, signAlgorithm: SignAlgorithm)`
+- `let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, keyAlgorithm: KeyAlgorithm, signAlgorithm: SignAlgorithm)`
 
 Then simply build your CSR using your publicKey(bits) and privateKey using, `let builtCSR = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)`.
 
