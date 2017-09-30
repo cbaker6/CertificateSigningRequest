@@ -54,8 +54,8 @@ class iOSCSRSwiftTests: XCTestCase {
         
         //Define what type of keys to be generated here
         let parameters: [String: AnyObject] = [
-            String(kSecAttrKeyType): kSecAttrKeyTypeRSA,
-            String(kSecAttrKeySizeInBits): 2048 as AnyObject,
+            String(kSecAttrKeyType): KeyAlgorithm.ec.secKeyAttrType,
+            String(kSecAttrKeySizeInBits): KeyAlgorithm.ec.availableKeySizes.last! as AnyObject,
             String(kSecReturnRef): kCFBooleanTrue,
             kSecPublicKeyAttrs as String: publicKeyParameters as AnyObject,
             kSecPrivateKeyAttrs as String: privateKeyParameters as AnyObject,
@@ -88,7 +88,7 @@ class iOSCSRSwiftTests: XCTestCase {
             //Ask keychain to provide the publicKey in bits
             let query: [String: AnyObject] = [
                 String(kSecClass): kSecClassKey,
-                String(kSecAttrKeyType): kSecAttrKeyTypeRSA,
+                String(kSecAttrKeyType): KeyAlgorithm.ec.secKeyAttrType,
                 String(kSecAttrApplicationTag): tagPublic as AnyObject,
                 String(kSecReturnData): kCFBooleanTrue
             ]

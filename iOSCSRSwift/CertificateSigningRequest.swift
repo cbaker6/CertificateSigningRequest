@@ -65,6 +65,41 @@ public enum SignAlgorithm {
 
 public enum KeyAlgorithm {
     case rsa, ec
+    
+    @available(iOS 10, *)
+    public var secKeyAttrType: CFString {
+        var result: CFString
+        switch self {
+            
+        case .rsa:  result = kSecAttrKeyTypeRSA
+        case .ec:   result = kSecAttrKeyTypeECSECPrimeRandom
+            
+        }
+        return result
+    }
+    
+    @available(iOS, deprecated: 10.0)
+    public var secKeyAttrTypeiOS10: CFString {
+        var result: CFString
+        switch self {
+        
+        case .rsa:  result = kSecAttrKeyTypeRSA
+        case .ec:   result = kSecAttrKeyTypeEC
+        
+        }
+        return result
+    }
+    
+    public var availableKeySizes: [Int] {
+        var result: [Int]
+        switch self {
+            
+        case .rsa:  result = [512, 1024, 2048]
+        case .ec:   result = [256]
+            
+        }
+        return result
+    }
 }
 
 public class CertificateSigningRequest:NSObject {
@@ -100,6 +135,7 @@ public class CertificateSigningRequest:NSObject {
     /* EC */
     private let OBJECT_ecEncryptionNULL:[UInt8] = [0x06, 0x08, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x03, 0x01, 0x07]
     
+    private let OBJECT_ecPubicKey:[UInt8] = [0x06, 0x07, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x02, 0x01]
     
     private let SEQUENCE_OBJECT_sha1WithECEncryption:[UInt8] = [0x30, 0x0A ,0x06, 0x07, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x04, 0x01]
     
@@ -194,11 +230,12 @@ public class CertificateSigningRequest:NSObject {
             case .ec:
                 shaBytes = SEQUENCE_OBJECT_sha512WithECEncryption
             }
-            
+        /*
         default:
             
-            print("Error: crypto algotirthm \(signAlgorithm) is not implemented")
+            print("Error: signing algotirthm \(signAlgorithm) is not implemented")
             return nil
+         */
         }
         
         
@@ -326,27 +363,35 @@ public class CertificateSigningRequest:NSObject {
         case .rsa:
             publicKeyInfo.append(OBJECT_rsaEncryptionNULL, count: OBJECT_rsaEncryptionNULL.count)
         case .ec:
+            publicKeyInfo.append(OBJECT_ecPubicKey, count: OBJECT_ecPubicKey.count)
             publicKeyInfo.append(OBJECT_ecEncryptionNULL, count: OBJECT_ecEncryptionNULL.count)
         }
-        
+
         enclose(&publicKeyInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
         
         var publicKeyASN = Data(capacity: 260)
+        switch keyAlgorithm!  {
+        case .ec:
+            let key = getPublicKey(publicKeyBits)
+            publicKeyASN.append(key)
+            
+        default:
+            
+            let mod = getPublicKeyMod(publicKeyBits)
+            let integer:UInt8 = 0x02 //Integer
+            publicKeyASN.append(integer)
+            appendDERLength(mod.count, into: &publicKeyASN)
+            publicKeyASN.append(mod)
+            
+            let exp = getPublicKeyExp(publicKeyBits)
+            publicKeyASN.append(integer)
+            appendDERLength(exp.count, into: &publicKeyASN)
+            publicKeyASN.append(exp)
+            
+            enclose(&publicKeyASN, by: SEQUENCE_tag)// Enclose into ??
+        }
         
-        let mod = getPublicKeyMod(publicKeyBits)
-        let integer:UInt8 = 0x02 //Integer
-        publicKeyASN.append(integer)
-        appendDERLength(mod.count, into: &publicKeyASN)
-        publicKeyASN.append(mod)
-        
-        let exp = getPublicKeyExp(publicKeyBits)
-        publicKeyASN.append(integer)
-        appendDERLength(exp.count, into: &publicKeyASN)
-        publicKeyASN.append(exp)
-        
-        enclose(&publicKeyASN, by: SEQUENCE_tag)// Enclose into ??
         prependByte(0x00, into: &publicKeyASN) //Prepend 0 (?)
-        
         appendBITSTRING(publicKeyASN, into: &publicKeyInfo)
         
         enclose(&publicKeyInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
@@ -431,14 +476,21 @@ public class CertificateSigningRequest:NSObject {
         into = newData
     }
     
+    func getPublicKey(_ publicKeyBits:Data)->Data{
+        
+        //Current only supports uncompressed keys, 65=1+32+32
+        var iterator = 0
+        
+        _ = derEncodingSpecificSize(publicKeyBits, at: &iterator, numOfBytes: 8)
+ 
+        let range:Range<Int> = 0 ..< 65
+        
+        return publicKeyBits.subdata(in: range)
+    }
+    
     // From http://stackoverflow.com/questions/3840005/how-to-find-out-the-modulus-and-exponent-of-rsa-public-key-on-iphone-objective-c
     
     func getPublicKeyExp(_ publicKeyBits:Data)->Data{
-        
-        //Do nothing if EC, credit: @aleemrazzaq, https://github.com/aleemrazzaq/CSR_EC_256
-        if self.keyAlgorithm == KeyAlgorithm.ec{
-            return publicKeyBits
-        }
         
         var iterator = 0
         
@@ -459,11 +511,6 @@ public class CertificateSigningRequest:NSObject {
     
     func getPublicKeyMod(_ publicKeyBits: Data)->Data{
         
-        //Do nothing if EC, credit: @aleemrazzaq, https://github.com/aleemrazzaq/CSR_EC_256
-        if self.keyAlgorithm == KeyAlgorithm.ec{
-            return publicKeyBits
-        }
-        
         var iterator = 0
         
         iterator+=1 // TYPE - bit stream - mod + exp
@@ -475,6 +522,18 @@ public class CertificateSigningRequest:NSObject {
         let range:Range<Int> = iterator ..< (iterator + modSize)
         
         return publicKeyBits.subdata(in: range)
+    }
+    
+    func derEncodingSpecificSize(_ buf: Data, at iterator: inout Int, numOfBytes: Int)->Int{
+        
+        var data = [UInt8](repeating: 0, count: buf.count)
+        buf.copyBytes(to: &data, count: buf.count)
+        
+        if data[0] != 0x04{
+            print("Error, framework only supports uncompressed keys")
+        }
+        
+        return buf.count
     }
     
     func derEncodingGetSizeFrom(_ buf: Data, at iterator: inout Int)->Int{
