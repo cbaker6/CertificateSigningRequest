@@ -1,6 +1,6 @@
 //
 //  CertificateSigningRequest.swift
-//  iOSCSRSwift
+//  CertificateSigningRequestSwift
 //
 //  Created by Corey Baker on 10/19/16.
 //  Copyright © Corey Baker. All rights reserved.
