@@ -19,6 +19,7 @@ class CertificateSigningRequestSwiftTests: XCTestCase {
     var privateKey: SecKey?
     var keyBlockSize: Int?
     var publicKeyBits: Data?
+    let keyAlgoorithm = KeyAlgorithm.ec(signatureType: .sha256)
     
     override func setUp() {
         super.setUp()
@@ -53,79 +54,123 @@ class CertificateSigningRequestSwiftTests: XCTestCase {
         ]
         
         //Define what type of keys to be generated here
-        let parameters: [String: AnyObject] = [
-            String(kSecAttrKeyType): KeyAlgorithm.ec.secKeyAttrType,
-            String(kSecAttrKeySizeInBits): KeyAlgorithm.ec.availableKeySizes.last! as AnyObject,
+        var parameters: [String: AnyObject] = [
             String(kSecReturnRef): kCFBooleanTrue,
             kSecPublicKeyAttrs as String: publicKeyParameters as AnyObject,
             kSecPrivateKeyAttrs as String: privateKeyParameters as AnyObject,
             ]
         
+        parameters[String(kSecAttrKeySizeInBits)] = keyAlgoorithm.availableKeySizes.last! as AnyObject
+        
+        if #available(iOS 10, *) {
+            parameters[String(kSecAttrKeyType)] = keyAlgoorithm.secKeyAttrType
+        } else {
+            // Fallback on earlier versions
+            parameters[String(kSecAttrKeyType)] = keyAlgoorithm.secKeyAttrTypeiOS9
+        }
+        
         //Use Apple Security Framework to generate keys, save them to application keychain
-        let result = SecKeyGeneratePair(parameters as CFDictionary, &publicKey, &privateKey)
+        if #available(iOS 10.0, *) {
+            
+            var error: Unmanaged<CFError>?
+            self.privateKey = SecKeyCreateRandomKey(parameters as CFDictionary, &error)
+            
+            if self.privateKey == nil{
+                XCTAssert(false, "Error occured: \(error!.takeRetainedValue() as Error), keys weren't created")
+                return
+            }
+            
+            //Get generated public key
+            let query: [String: AnyObject] = [
+                String(kSecClass): kSecClassKey,
+                String(kSecAttrKeyType): keyAlgoorithm.secKeyAttrType,
+                String(kSecAttrApplicationTag): tagPublic as AnyObject,
+                String(kSecReturnRef): kCFBooleanTrue
+            ]
+            
+            var publicKeyReturn:AnyObject?
+            
+            let result = SecItemCopyMatching(query as CFDictionary, &publicKeyReturn)
+            
+            if result != errSecSuccess{
+                XCTAssert(false,"Error occured: \(result)")
+                return
+            }
+            
+            self.publicKey = publicKeyReturn as! SecKey?
+            
+        } else {
+            // Fallback on earlier versions
+            
+            let result = SecKeyGeneratePair(parameters as CFDictionary, &publicKey, &privateKey)
+            
+            if result != errSecSuccess{
+                XCTAssert(false, "Error occured: \(result), keys weren't created")
+                return
+            }
+        }
+        
+        print("Public and private key pair created")
+        
+        guard publicKey != nil else {
+            if test{
+                XCTAssert(false, "Error  in setUp(). PublicKey shouldn't be nil")
+            }
+            return
+        }
+        
+        guard privateKey != nil else{
+            if test{
+                XCTAssert(false, "Error  in setUp(). PrivateKey shouldn't be nil")
+            }
+            return
+        }
+        
+        //Set block size
+        keyBlockSize = SecKeyGetBlockSize(publicKey!)
+        
+        //Ask keychain to provide the publicKey in bits
+        var query: [String: AnyObject] = [
+            String(kSecClass): kSecClassKey,
+            String(kSecAttrApplicationTag): tagPublic as AnyObject,
+            String(kSecReturnData): kCFBooleanTrue
+        ]
+        
+        if #available(iOS 10, *) {
+            query[String(kSecAttrKeyType)] = self.keyAlgoorithm.secKeyAttrType
+        } else {
+            // Fallback on earlier versions
+            query[String(kSecAttrKeyType)] = self.keyAlgoorithm.secKeyAttrTypeiOS9
+        }
+        
+        var tempPublicKeyBits:AnyObject?
+        
+        let result = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
         
         switch result {
         case errSecSuccess:
-            print("Public and private key pair created")
             
-            guard publicKey != nil else {
+            guard let keyBits = tempPublicKeyBits as? Data else {
                 if test{
-                    XCTAssert(false, "Error  in setUp(). PublicKey shouldn't be nil")
+                    XCTAssert(false, "Error: couldn't cast publicKeyBits from AnyObject to Data")
                 }
                 return
             }
             
-            guard privateKey != nil else{
-                if test{
-                    XCTAssert(false, "Error  in setUp(). PrivateKey shouldn't be nil")
-                }
-                return
-            }
+            publicKeyBits = keyBits
             
-            //Set block size
-            keyBlockSize = SecKeyGetBlockSize(publicKey!)
-            
-            //Ask keychain to provide the publicKey in bits
-            let query: [String: AnyObject] = [
-                String(kSecClass): kSecClassKey,
-                String(kSecAttrKeyType): KeyAlgorithm.ec.secKeyAttrType,
-                String(kSecAttrApplicationTag): tagPublic as AnyObject,
-                String(kSecReturnData): kCFBooleanTrue
-            ]
-            
-            var tempPublicKeyBits:AnyObject?
-            
-            let result = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
-            
-            switch result {
-            case errSecSuccess:
-                
-                guard let keyBits = tempPublicKeyBits as? Data else {
-                    if test{
-                        XCTAssert(false, "Error: couldn't cast publicKeyBits from AnyObject to Data")
-                    }
-                    return
-                }
-                
-                publicKeyBits = keyBits
-                
-                if test{
-                    XCTAssert(true, "Pass")
-                }
-                
-            default:
-                if test{
-                    XCTAssert(false, "Error when retrieving publicKey in bits from the keychain: \(result)")
-                }
+            if test{
+                XCTAssert(true, "Pass")
             }
             
         default:
-            XCTAssert(false, "Error occured: \(result), keys weren't created")
+            if test{
+                XCTAssert(false, "Error when retrieving publicKey in bits from the keychain: \(result)")
+            }
         }
-        
     }
     
-    func testStandardInitializer() {
+    func testCSRStandardInitializer() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
@@ -137,7 +182,6 @@ class CertificateSigningRequestSwiftTests: XCTestCase {
             XCTAssert(false, "Keys were not created")
             return
         }
-        
         
         let csr = CertificateSigningRequest()
         
@@ -152,13 +196,12 @@ class CertificateSigningRequestSwiftTests: XCTestCase {
         }
         
         if !csrString.isEmpty{
-            print("Test out CSR here: https://redkestrel.co.uk/products/decoder/")
             XCTAssert(true, csrString)
         }else{
-        
+            
             XCTAssert(false, "Encoded CSR string was empty")
         }
-
+        
     }
     
     func testPerformanceExample() {

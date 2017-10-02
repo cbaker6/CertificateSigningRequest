@@ -123,7 +123,7 @@ public enum KeyAlgorithm {
     }
     
     @available(iOS, deprecated: 10.0)
-    var padding: SecPadding {
+    public var padding: SecPadding {
         let result: SecPadding
         
         switch self {
