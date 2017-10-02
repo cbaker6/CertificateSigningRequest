@@ -1,6 +1,6 @@
 //
-//  iOSCSRSwiftTests.swift
-//  iOSCSRSwiftTests
+//  CertificateSigningRequestSwiftTests.swift
+//  CertificateSigningRequestSwiftTests
 //
 //  Created by Corey Baker on 11/7/16.
 //  Copyright © 2016 One Degree Technologies. All rights reserved.
@@ -8,12 +8,12 @@
 
 import XCTest
 import Foundation
-//@testable import iOSCSRSwift
-import iOSCSRSwift //Only testing public functions
+//@testable import CertificateSigningRequestSwift
+import CertificateSigningRequestSwift //Only testing public functions
 
 //NOTE: Testcases won't work when testing within framework. I believe this because an Application needs to have an entitlement to have Keychain access
 
-class iOSCSRSwiftTests: XCTestCase {
+class CertificateSigningRequestSwiftTests: XCTestCase {
     
     var publicKey: SecKey?
     var privateKey: SecKey?

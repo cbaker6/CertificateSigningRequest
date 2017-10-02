@@ -1,4 +1,4 @@
-framework module iOSCSRSwift [system] {
+framework module CertificateSigningRequestSwift [system] {
     
     module CommonCrypto{
         header "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/CommonCrypto/CommonCrypto.h" //"$(DEVELOPER_SDK_DIR)/MacOSX.sdk/usr/include/CommonCrypto/CommonCrypto.h"
