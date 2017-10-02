@@ -6,8 +6,8 @@ Additions have been made to support RSA and EC (iOS only supports 256 bit keys f
 
 To use, initiatlize the class using one of the following (an example of how to do can be found at https://github.com/cbaker6/CertificateSigningRequestSwift/blob/master/CertificateSigningRequestSwiftTests/CertificateSigningRequestSwiftTests.swift): 
 - `let csr = CertificateSigningRequest()`
-- `let csr = CertificateSigningRequest(keyAlgorithm: KeyAlgorithm, signAlgorithm: SignAlgorithm)`
-- `let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, keyAlgorithm: KeyAlgorithm, signAlgorithm: SignAlgorithm)`
+- `let csr = CertificateSigningRequest(keyAlgorithm: KeyAlgorithm)`
+- `let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, keyAlgorithm: KeyAlgorithm)`
 
 Then simply build your CSR using your publicKey(bits) and privateKey using, `let builtCSR = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)`.
 
