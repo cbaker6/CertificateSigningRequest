@@ -1,4 +1,5 @@
 # CertificateSigningRequestSwift
+![Swift Version 4](https://img.shields.io/badge/Swift-v4-yellow.svg)
 Generate a certificate signing request (CSR) in iOS using Swift
 
 **NEW: A simple mobile application is available to test this framework here: https://github.com/cbaker6/CertificateSigningRequestSwift_Test**
