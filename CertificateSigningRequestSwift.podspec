@@ -1,33 +1,33 @@
 Pod::Spec.new do |s|
 
-  s.name         = "iOSCSRSwift"
+  s.name         = "CertificateSigningRequestSwift"
   s.version      = "0.0.992"
-  s.summary      = "Generate a certificate signing request (CSR) in iOS using Swift"
+  s.summary      = "Generate a self-signed certificate signing request (CSR) in iOS using Swift"
 
   s.description  = <<-DESC 
-  	CertificateSigningRequest lets you enables you to generate a CSR directly on an iOS device
+  	CertificateSigningRequest creates a self-signed CSR's directly an iOS devices
                    DESC
 
-  s.homepage     = "https://github.com/cbaker6/iOSCSRSwift"
+  s.homepage     = "https://github.com/cbaker6/CertificateSigningRequestSwift"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "Corey Baker" => "coreyearleon@icloud.com" }
-  s.platform     = :ios, "10.0"
+  s.platform     = :ios, "9.3"
 
-  s.source       = { :git => "https://github.com/cbaker6/iOSCSRSwift.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/cbaker6/CertificateSigningRequestSwift.git", :tag => "#{s.version}" }
 
 
-  s.source_files  = "iOS-csr-swift", "iOSCSRSwift/**/*.{h,m,swift}", "CommonCrypto/**/*.{c,h}"
+  s.source_files  = "CertificateSigningRequestSwift" #, "CertificateSigningRequestSwift/**/*.{h,m,swift}", "CommonCrypto/**/*.{c,h}"
   #s.exclude_files = "iOS-csr-swift/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
-  s.private_header_files = "CommonCrypto/**/*.{c,h}"
+  # s.private_header_files = "CommonCrypto/**/*.{c,h}"
 
   # s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3', 'SWIFT_INCLUDE_PATHS' => 'CommonCrypto/Platforms/**' }
   s.pod_target_xcconfig = { 
-	'SWIFT_VERSION' 				=> '3',
-	'SWIFT_INCLUDE_PATHS[sdk=iphoneos*]' 		=> 'CommonCrypto/Platforms/iPhoneOS/**', 
-	'SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]' 	=> 'CommonCrypto/Platforms/iPhoneSimulator/**',
-	'SWIFT_INCLUDE_PATHS[sdk=macosx*]' 		=> 'CommonCrypto/Platforms/MacOSX/**'
+	'SWIFT_VERSION' 				=> '4'#,
+	#'SWIFT_INCLUDE_PATHS[sdk=iphoneos*]' 		=> 'CommonCrypto/ iPhoneOS/**', 
+	#'SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]' 	=> 'CommonCrypto/Platforms/iPhoneSimulator/**',
+	#'SWIFT_INCLUDE_PATHS[sdk=macosx*]' 		=> 'CommonCrypto/Platforms/MacOSX/**'
   }	
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"

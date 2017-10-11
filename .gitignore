@@ -6,6 +6,8 @@
 build/
 DerivedData/
 
+CertificateSigningRequestSwiftn.swift
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
