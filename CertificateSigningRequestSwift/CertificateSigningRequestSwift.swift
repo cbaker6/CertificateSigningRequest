@@ -34,12 +34,16 @@ import Foundation
 public class CertificateSigningRequest:NSObject {
     private let OBJECT_commonName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x03]
     private let OBJECT_countryName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x06]
+    private let OBJECT_stateOrProvinceName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x08]
+    private let OBJECT_localityName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x07]
     private let OBJECT_organizationName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0A]
     private let OBJECT_organizationalUnitName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0B]
     private let SEQUENCE_tag:UInt8 = 0x30
     private let SET_tag:UInt8 = 0x31
     
     private let countryName:String?
+    private let stateOrProvinceName:String?
+    private let localityName:String?
     private let organizationName:String?
     private let organizationUnitName:String?
     private let commonName:String?
@@ -47,12 +51,14 @@ public class CertificateSigningRequest:NSObject {
     private var subjectDER:Data?
     
     
-    public init(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, keyAlgorithm: KeyAlgorithm){
+    public init(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: KeyAlgorithm){        
         
         self.commonName = commonName
         self.organizationName = organizationName
         self.organizationUnitName = organizationUnitName
         self.countryName = countryName
+        self.stateOrProvinceName = stateOrProvinceName
+        self.localityName = localityName
         self.subjectDER = nil
         self.keyAlgorithm = keyAlgorithm
         
@@ -60,11 +66,11 @@ public class CertificateSigningRequest:NSObject {
     }
     
     public convenience override init(){
-        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, keyAlgorithm: KeyAlgorithm.rsa(signatureType: .sha512))
+        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, stateOrProvinceName:nil, localityName:nil, keyAlgorithm: KeyAlgorithm.rsa(signatureType: .sha512))
     }
     
     public convenience init(keyAlgorithm: KeyAlgorithm){
-        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, keyAlgorithm: keyAlgorithm)
+        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, stateOrProvinceName:nil, localityName:nil, keyAlgorithm: keyAlgorithm)
     }
     
     public func build(_ publicKeyBits:Data, privateKey: SecKey) -> Data?{
@@ -214,6 +220,14 @@ public class CertificateSigningRequest:NSObject {
         var subject = Data(capacity: 256)
         if countryName != nil{
             appendSubjectItem(OBJECT_countryName, value: countryName!, into: &subject)
+        }
+        
+        if stateOrProvinceName != nil {
+            appendSubjectItem(OBJECT_stateOrProvinceName, value: stateOrProvinceName!, into: &subject)
+        }
+        
+        if localityName != nil {
+            appendSubjectItem(OBJECT_localityName, value: localityName!, into: &subject)
         }
         
         if organizationName != nil{
