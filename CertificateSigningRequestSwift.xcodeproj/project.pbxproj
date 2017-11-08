@@ -10,7 +10,6 @@
 		910920A31E788CB1008E5535 /* CertificateSigningRequestSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910920A21E788CB1008E5535 /* CertificateSigningRequestSwiftTests.swift */; };
 		917B68901DD0F4FD00AE5629 /* CertificateSigningRequestSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917B68861DD0F4FD00AE5629 /* CertificateSigningRequestSwift.framework */; };
 		91B5FF9E1F81A19E0074ECF4 /* CertificateSigningRequestSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B5FF9D1F81A19E0074ECF4 /* CertificateSigningRequestSwift.swift */; };
-		91C5B0B71F8AA7FB009323A6 /* CertificateSigningRequestSwiftn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C5B0B61F8AA7FB009323A6 /* CertificateSigningRequestSwiftn.swift */; };
 		91C5B0B91F8ADB91009323A6 /* CertificateSigningRequestSwiftConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C5B0B81F8ADB91009323A6 /* CertificateSigningRequestSwiftConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +37,6 @@
 		91B5FF9D1F81A19E0074ECF4 /* CertificateSigningRequestSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateSigningRequestSwift.swift; sourceTree = "<group>"; };
 		91B5FF9F1F81A3370074ECF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91B5FFA01F81A3700074ECF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		91C5B0B61F8AA7FB009323A6 /* CertificateSigningRequestSwiftn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateSigningRequestSwiftn.swift; sourceTree = "<group>"; };
 		91C5B0B81F8ADB91009323A6 /* CertificateSigningRequestSwiftConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateSigningRequestSwiftConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +95,6 @@
 			children = (
 				91C5B0B81F8ADB91009323A6 /* CertificateSigningRequestSwiftConstants.swift */,
 				91B5FF9D1F81A19E0074ECF4 /* CertificateSigningRequestSwift.swift */,
-				91C5B0B61F8AA7FB009323A6 /* CertificateSigningRequestSwiftn.swift */,
 				91AA931A1F7C810000AE23E0 /* CertificateSigningRequestSwift.h */,
 				910921721E79DE64008E5535 /* CommonCrypto.xcconfig */,
 				91B5FF9F1F81A3370074ECF4 /* Info.plist */,
@@ -227,7 +224,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91C5B0B71F8AA7FB009323A6 /* CertificateSigningRequestSwiftn.swift in Sources */,
 				91B5FF9E1F81A19E0074ECF4 /* CertificateSigningRequestSwift.swift in Sources */,
 				91C5B0B91F8ADB91009323A6 /* CertificateSigningRequestSwiftConstants.swift in Sources */,
 			);
