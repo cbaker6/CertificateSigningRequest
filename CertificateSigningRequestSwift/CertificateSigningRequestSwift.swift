@@ -34,19 +34,19 @@ import Foundation
 public class CertificateSigningRequest:NSObject {
     private let OBJECT_commonName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x03]
     private let OBJECT_countryName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x06]
-    private let OBJECT_stateOrProvinceName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x08]
     private let OBJECT_localityName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x07]
     private let OBJECT_organizationName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0A]
     private let OBJECT_organizationalUnitName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0B]
+    private let OBJECT_stateOrProvinceName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x08]
     private let SEQUENCE_tag:UInt8 = 0x30
     private let SET_tag:UInt8 = 0x31
     
+    private let commonName:String?
     private let countryName:String?
-    private let stateOrProvinceName:String?
     private let localityName:String?
     private let organizationName:String?
     private let organizationUnitName:String?
-    private let commonName:String?
+    private let stateOrProvinceName:String?
     private var keyAlgorithm: KeyAlgorithm!
     private var subjectDER:Data?
     
