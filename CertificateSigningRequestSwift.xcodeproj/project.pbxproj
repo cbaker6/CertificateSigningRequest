@@ -25,10 +25,6 @@
 
 /* Begin PBXFileReference section */
 		910920A21E788CB1008E5535 /* CertificateSigningRequestSwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateSigningRequestSwiftTests.swift; sourceTree = "<group>"; };
-		910920EC1E78B87D008E5535 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
-		910920FE1E799B9B008E5535 /* iphoneos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphoneos.modulemap; sourceTree = "<group>"; };
-		9109216F1E79C101008E5535 /* macosx.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macosx.modulemap; sourceTree = "<group>"; };
-		910921721E79DE64008E5535 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		917B68861DD0F4FD00AE5629 /* CertificateSigningRequestSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CertificateSigningRequestSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		917B688F1DD0F4FD00AE5629 /* CertificateSigningRequestSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertificateSigningRequestSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		917B68A01DD0F5B000AE5629 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -59,16 +55,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		910920D21E78AB5F008E5535 /* CommonCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				910920FE1E799B9B008E5535 /* iphoneos.modulemap */,
-				910920EC1E78B87D008E5535 /* iphonesimulator.modulemap */,
-				9109216F1E79C101008E5535 /* macosx.modulemap */,
-			);
-			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
 		917B687C1DD0F4FD00AE5629 = {
 			isa = PBXGroup;
 			children = (
@@ -76,7 +62,6 @@
 				917B68A11DD0F5B000AE5629 /* README.md */,
 				917B68881DD0F4FD00AE5629 /* CertificateSigningRequestSwift */,
 				917B68931DD0F4FD00AE5629 /* CertificateSigningRequestSwiftTests */,
-				910920D21E78AB5F008E5535 /* CommonCrypto */,
 				917B68871DD0F4FD00AE5629 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,7 +81,6 @@
 				91C5B0B81F8ADB91009323A6 /* CertificateSigningRequestSwiftConstants.swift */,
 				91B5FF9D1F81A19E0074ECF4 /* CertificateSigningRequestSwift.swift */,
 				91AA931A1F7C810000AE23E0 /* CertificateSigningRequestSwift.h */,
-				910921721E79DE64008E5535 /* CommonCrypto.xcconfig */,
 				91B5FF9F1F81A3370074ECF4 /* Info.plist */,
 			);
 			path = CertificateSigningRequestSwift;
@@ -189,6 +173,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 917B687C1DD0F4FD00AE5629;
@@ -250,7 +235,6 @@
 /* Begin XCBuildConfiguration section */
 		917B68981DD0F4FD00AE5629 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 910921721E79DE64008E5535 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -300,7 +284,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				"MODULEMAP_FILE[sdk=iphoneos*]" = "$(SRCROOT)/CommonCrypto/iphoneos.modulemap";
+				MODULEMAP_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -316,7 +300,6 @@
 		};
 		917B68991DD0F4FD00AE5629 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 910921721E79DE64008E5535 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -360,6 +343,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MODULEMAP_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_INCLUDE_PATHS = "$(DEVELOPER_DIR)/Platforms/";
@@ -374,7 +358,6 @@
 		};
 		917B689B1DD0F4FD00AE5629 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 910921721E79DE64008E5535 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -389,9 +372,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				"MODULEMAP_FILE[sdk=iphoneos*]" = "$(SRCROOT)/CommonCrypto/iphoneos.modulemap";
-				"MODULEMAP_FILE[sdk=iphonesimulator*]" = "$(SRCROOT)/CommonCrypto/iphonesimulator.modulemap";
-				"MODULEMAP_FILE[sdk=macosx*]" = "$(SRCROOT)/CommonCrypto/macosx.modulemap";
 				MODULEMAP_PRIVATE_FILE = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.onedegree.CertificateSigningRequestSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -403,7 +383,6 @@
 		};
 		917B689C1DD0F4FD00AE5629 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 910921721E79DE64008E5535 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -418,9 +397,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				"MODULEMAP_FILE[sdk=iphoneos*]" = "$(SRCROOT)/CommonCrypto/iphoneos.modulemap";
-				"MODULEMAP_FILE[sdk=iphonesimulator*]" = "$(SRCROOT)/CommonCrypto/iphonesimulator.modulemap";
-				"MODULEMAP_FILE[sdk=macosx*]" = "$(SRCROOT)/CommonCrypto/macosx.modulemap";
 				MODULEMAP_PRIVATE_FILE = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.onedegree.CertificateSigningRequestSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -431,7 +407,6 @@
 		};
 		917B689E1DD0F4FD00AE5629 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 910921721E79DE64008E5535 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -449,7 +424,6 @@
 		};
 		917B689F1DD0F4FD00AE5629 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 910921721E79DE64008E5535 /* CommonCrypto.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
