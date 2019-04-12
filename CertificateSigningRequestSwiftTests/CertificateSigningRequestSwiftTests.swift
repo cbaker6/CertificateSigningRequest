@@ -3,7 +3,7 @@
 //  CertificateSigningRequestSwiftTests
 //
 //  Created by Corey Baker on 11/7/16.
-//  Copyright © 2016 One Degree Technologies. All rights reserved.
+//  Copyright © 2016 Network Reconnaissance Lab. All rights reserved.
 //
 
 import XCTest
@@ -19,7 +19,7 @@ class CertificateSigningRequestSwiftTests: XCTestCase {
     var privateKey: SecKey?
     var keyBlockSize: Int?
     var publicKeyBits: Data?
-    let keyAlgoorithm = KeyAlgorithm.ec(signatureType: .sha256)
+    let keyAlgorithm = KeyAlgorithm.ec(signatureType: .sha256)
     
     override func setUp() {
         super.setUp()
@@ -55,7 +55,7 @@ class CertificateSigningRequestSwiftTests: XCTestCase {
         
         #if !arch(i386) && !arch(x86_64)
             //This only works for Secure Enclave consistign of 256 bit key, note, the signatureType is irrelavent for this check
-            if keyAlgorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
+        if keyAlgorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
                 let access = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                                              kSecAttrAccessibleAlwaysThisDeviceOnly,
                                                              .privateKeyUsage,
@@ -72,19 +72,19 @@ class CertificateSigningRequestSwiftTests: XCTestCase {
             kSecPrivateKeyAttrs as String: privateKeyParameters as AnyObject,
             ]
         
-        parameters[String(kSecAttrKeySizeInBits)] = keyAlgoorithm.availableKeySizes.last! as AnyObject
+        parameters[String(kSecAttrKeySizeInBits)] = keyAlgorithm.availableKeySizes.last! as AnyObject
         
         if #available(iOS 10, *) {
-            parameters[String(kSecAttrKeyType)] = keyAlgoorithm.secKeyAttrType
+            parameters[String(kSecAttrKeyType)] = keyAlgorithm.secKeyAttrType
         } else {
             // Fallback on earlier versions
-            parameters[String(kSecAttrKeyType)] = keyAlgoorithm.secKeyAttrTypeiOS9
+            parameters[String(kSecAttrKeyType)] = keyAlgorithm.secKeyAttrTypeiOS9
         }
         
         #if !arch(i386) && !arch(x86_64)
             
             //iOS only allows EC 256 keys to be secured in enclave. This will attempt to allow any EC key in the enclave, assuming iOS will do it outside of the enclave if it doesn't like the key size, note: the signatureType is irrelavent for this check
-            if keyAlgorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
+        if keyAlgorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
                 parameters[String(kSecAttrTokenID)] = kSecAttrTokenIDSecureEnclave
             }
             
@@ -104,7 +104,7 @@ class CertificateSigningRequestSwiftTests: XCTestCase {
             //Get generated public key
             let query: [String: AnyObject] = [
                 String(kSecClass): kSecClassKey,
-                String(kSecAttrKeyType): keyAlgoorithm.secKeyAttrType,
+                String(kSecAttrKeyType): keyAlgorithm.secKeyAttrType,
                 String(kSecAttrApplicationTag): tagPublic as AnyObject,
                 String(kSecReturnRef): kCFBooleanTrue
             ]
@@ -158,10 +158,10 @@ class CertificateSigningRequestSwiftTests: XCTestCase {
         ]
         
         if #available(iOS 10, *) {
-            query[String(kSecAttrKeyType)] = self.keyAlgoorithm.secKeyAttrType
+            query[String(kSecAttrKeyType)] = self.keyAlgorithm.secKeyAttrType
         } else {
             // Fallback on earlier versions
-            query[String(kSecAttrKeyType)] = self.keyAlgoorithm.secKeyAttrTypeiOS9
+            query[String(kSecAttrKeyType)] = self.keyAlgorithm.secKeyAttrTypeiOS9
         }
         
         var tempPublicKeyBits:AnyObject?

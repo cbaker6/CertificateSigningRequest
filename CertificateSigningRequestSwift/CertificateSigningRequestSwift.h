@@ -3,7 +3,7 @@
 //  CertificateSigningRequestSwift
 //
 //  Created by Corey Baker on 11/7/16.
-//  Copyright © 2016 One Degree Technologies. All rights reserved.
+//  Copyright © 2016 Network Reconnaissance Lab. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

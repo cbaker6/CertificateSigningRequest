@@ -3,10 +3,11 @@
 //  CertificateSigningRequestSwift
 //
 //  Created by Corey Baker on 10/8/17.
-//  Copyright © 2017 One Degree Technologies. All rights reserved.
+//  Copyright © 2017 Network Reconnaissance Lab. All rights reserved.
 //
 
 import Foundation
+import CommonCrypto
 
 // Use e.g., https://misc.daniel-marschall.de/asn.1/oid-converter/online.php to convert OID (OBJECT IDENTIFIER) to ASN.1 DER hex forms
 //Guide to translate OID's to bytes for ANS.1 (Look at comment section on page): https://msdn.microsoft.com/en-us/library/bb540809(v=vs.85).aspx
