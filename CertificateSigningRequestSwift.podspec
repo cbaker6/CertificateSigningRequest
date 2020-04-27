@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CertificateSigningRequestSwift'
-  s.version          = '0.1.0'
+  s.version          = '1.0'
   s.summary          = 'Generate a self-signed certificate signing request (CSR) in iOS using Swift'
 
 # This description is used to generate tags and improve search results.
