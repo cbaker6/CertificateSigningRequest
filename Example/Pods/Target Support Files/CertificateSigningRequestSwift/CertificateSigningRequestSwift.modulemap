@@ -1,0 +1,6 @@
+framework module CertificateSigningRequestSwift {
+  umbrella header "CertificateSigningRequestSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
