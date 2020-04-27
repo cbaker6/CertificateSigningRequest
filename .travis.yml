@@ -11,5 +11,5 @@ language: swift
 # - pod install --project-directory=Example
 # -sdk iphonesimulator13.2
 script:
-- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/CertificateSigningRequestSwift.xcworkspace -scheme CertificateSigningRequestSwift-Example -destination 'platform=iOS Simulator,name=iPhone X,OS=13.2' ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/CertificateSigningRequestSwift.xcworkspace -scheme CertificateSigningRequestSwift-Example -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.2' ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint
