@@ -34,7 +34,21 @@ Note2: You can get your publicKey in bit by querying it from the iOS keychain us
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+To run the example project, clone the repo, and run `pod install` from the Example directory first. An example certificate from this framework is below:
+
+```
+-----BEGIN CERTIFICATE REQUEST-----
+MIIBMDCB1wIBADB1MQswCQYDVQQGDAJVUzELMAkGA1UECAwCS1kxDTALBgNVBAcM
+BFRlc3QxDTALBgNVBAoMBFRlc3QxDTALBgNVBAsMBFRlc3QxLDAqBgNVBAMMI0Nl
+cnRpZmljYXRlU2lnbmluZ1JlcXVlc3RTd2lmdCBUZXN0MFkwEwYHKoZIzj0CAQYI
+KoZIzj0DAQcDQgAEc3JdBSW0N7iZf0gve+BOOqjCTnIV0AmrE4PjDUSho3PIhs2B
+QdQtnFDemc5oUSsHdHBGr0PQF5tnQp6xyR4iJaAAMAoGCCqGSM49BAMCA0gAMEUC
+IHFkI7fhxek/pFy2El0I6Ztf1dvTtihMVij/IysmJhQeAiEA7EFCm/COuUTib1qS
+hI1w3O8KdAXbV/GVeRfBSxJsznY=
+-----END CERTIFICATE REQUEST-----
+```
+
+You can test if the CSR was created correctly here: [https://redkestrel.co.uk/products/decoder/](https://redkestrel.co.uk/products/decoder/)
 
 ## Requirements
 
