@@ -5,31 +5,170 @@ import Nimble
 import CertificateSigningRequestSwift
 
 class TableOfContentsSpec: QuickSpec {
+    
     override func spec() {
         describe("these will fail") {
-
-            it("can do maths") {
-                expect(1) == 2
-            }
-
-            it("can read") {
-                expect("number") == "string"
-            }
-
+            
+            /*
             it("will eventually fail") {
                 expect("time").toEventually( equal("done") )
-            }
+            }*/
             
             context("these will pass") {
-
-                it("can do maths") {
-                    expect(23) == 23
+    
+                it("create CSR using Eliptic Curve keys") {
+                    let tagPrivate = "com.csr.private.ec"
+                    let tagPublic = "com.csr.public.ec"
+                    let keyAlgorithm = KeyAlgorithm.ec(signatureType: .sha256)
+                    
+                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                    guard let privateKey = potentialPrivateKey,
+                        let publicKey = potentialPublicKey else{
+                            expect(potentialPrivateKey) != nil
+                            expect(potentialPublicKey) != nil
+                            return
+                    }
+                    
+                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                    guard let publicKeyBits = potentialPublicKeyBits,
+                        let _ = potentialPublicKeyBlockSize else{
+                            expect(potentialPublicKeyBits) != nil
+                            expect(potentialPublicKeyBlockSize) != nil
+                            return
+                    }
+                    
+                    //Initiale CSR
+                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequestSwift Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                    //Build the CSR
+                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                    if let csrRegular = csrBuild{
+                        print("CSR string no header and footer")
+                        print(csrRegular)
+                    }
+                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                    if let csrWithHeaderFooter = csrBuild2{
+                        print("CSR string with header and footer")
+                        print(csrWithHeaderFooter)
+                    }
+                    expect(csrBuild?.count) > 0
+                    expect(csrBuild2?.contains("BEGIN")) == true
                 }
 
-                it("can read") {
-                    expect("🐮") == "🐮"
+                it("create CSR using RSA keys with sha512") {
+                    let tagPrivate = "com.csr.private.rsa"
+                    let tagPublic = "com.csr.public.rsa"
+                    let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha512)
+                    
+                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                    guard let privateKey = potentialPrivateKey,
+                        let publicKey = potentialPublicKey else{
+                            expect(potentialPrivateKey) != nil
+                            expect(potentialPublicKey) != nil
+                            return
+                    }
+                    
+                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                    guard let publicKeyBits = potentialPublicKeyBits,
+                        let _ = potentialPublicKeyBlockSize else{
+                            expect(potentialPublicKeyBits) != nil
+                            expect(potentialPublicKeyBlockSize) != nil
+                            return
+                    }
+                    
+                    //Initiale CSR
+                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequestSwift Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                    //Build the CSR
+                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                    if let csrRegular = csrBuild{
+                        print("CSR string no header and footer")
+                        print(csrRegular)
+                    }
+                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                    if let csrWithHeaderFooter = csrBuild2{
+                        print("CSR string with header and footer")
+                        print(csrWithHeaderFooter)
+                    }
+                    expect(csrBuild?.count) > 0
+                    expect(csrBuild2?.contains("BEGIN")) == true
                 }
-
+                
+                it("create CSR using RSA keys with sha256") {
+                    let tagPrivate = "com.csr.private.rsa256"
+                    let tagPublic = "com.csr.public.rsa256"
+                    let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha256)
+                    
+                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                    guard let privateKey = potentialPrivateKey,
+                        let publicKey = potentialPublicKey else{
+                            expect(potentialPrivateKey) != nil
+                            expect(potentialPublicKey) != nil
+                            return
+                    }
+                    
+                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                    guard let publicKeyBits = potentialPublicKeyBits,
+                        let _ = potentialPublicKeyBlockSize else{
+                            expect(potentialPublicKeyBits) != nil
+                            expect(potentialPublicKeyBlockSize) != nil
+                            return
+                    }
+                    
+                    //Initiale CSR
+                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequestSwift Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                    //Build the CSR
+                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                    if let csrRegular = csrBuild{
+                        print("CSR string no header and footer")
+                        print(csrRegular)
+                    }
+                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                    if let csrWithHeaderFooter = csrBuild2{
+                        print("CSR string with header and footer")
+                        print(csrWithHeaderFooter)
+                    }
+                    expect(csrBuild?.count) > 0
+                    expect(csrBuild2?.contains("BEGIN")) == true
+                }
+                
+                it("create CSR using RSA keys with sha1") {
+                    let tagPrivate = "com.csr.private.rsa1"
+                    let tagPublic = "com.csr.public.rsa1"
+                    let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha1)
+                    
+                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                    guard let privateKey = potentialPrivateKey,
+                        let publicKey = potentialPublicKey else{
+                            expect(potentialPrivateKey) != nil
+                            expect(potentialPublicKey) != nil
+                            return
+                    }
+                    
+                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                    guard let publicKeyBits = potentialPublicKeyBits,
+                        let _ = potentialPublicKeyBlockSize else{
+                            expect(potentialPublicKeyBits) != nil
+                            expect(potentialPublicKeyBlockSize) != nil
+                            return
+                    }
+                    
+                    //Initiale CSR
+                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequestSwift Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                    //Build the CSR
+                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                    if let csrRegular = csrBuild{
+                        print("CSR string no header and footer")
+                        print(csrRegular)
+                    }
+                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                    if let csrWithHeaderFooter = csrBuild2{
+                        print("CSR string with header and footer")
+                        print(csrWithHeaderFooter)
+                    }
+                    expect(csrBuild?.count) > 0
+                    expect(csrBuild2?.contains("BEGIN")) == true
+                }
+                
+                /*
                 it("will eventually pass") {
                     var time = "passing"
 
@@ -43,8 +182,93 @@ class TableOfContentsSpec: QuickSpec {
 
                         done()
                     }
-                }
+                }*/
             }
         }
     }
+    
+    func generateKeysAndStoreInKeychain(_ algorithm: KeyAlgorithm, tagPrivate: String, tagPublic: String)->(SecKey?,SecKey?){
+        let publicKeyParameters: [String: AnyObject] = [
+            String(kSecAttrIsPermanent): kCFBooleanTrue,
+            String(kSecAttrApplicationTag): tagPublic as AnyObject,
+            String(kSecAttrAccessible): kSecAttrAccessibleAlways
+        ]
+        
+        var privateKeyParameters: [String: AnyObject] = [
+            String(kSecAttrIsPermanent): kCFBooleanTrue,
+            String(kSecAttrApplicationTag): tagPrivate as AnyObject,
+            String(kSecAttrAccessible): kSecAttrAccessibleAlways
+        ]
+        
+        #if !arch(i386) && !arch(x86_64)
+            //This only works for Secure Enclave consistign of 256 bit key, note, the signatureType is irrelavent for this check
+            if keyAlgorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
+                let access = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
+                                                             kSecAttrAccessibleAlwaysThisDeviceOnly,
+                                                             .privateKeyUsage,
+                                                             nil)!   // Ignore error
+                
+                privateKeyParameters[String(kSecAttrAccessControl)] = access
+            }
+        #endif
+        
+        //Define what type of keys to be generated here
+        var parameters: [String: AnyObject] = [
+            String(kSecAttrKeyType): algorithm.secKeyAttrType,
+            String(kSecAttrKeySizeInBits): algorithm.availableKeySizes.last! as AnyObject,
+            String(kSecReturnRef): kCFBooleanTrue,
+            kSecPublicKeyAttrs as String: publicKeyParameters as AnyObject,
+            kSecPrivateKeyAttrs as String: privateKeyParameters as AnyObject,
+        ]
+        
+        #if !arch(i386) && !arch(x86_64)
+            //iOS only allows EC 256 keys to be secured in enclave. This will attempt to allow any EC key in the enclave, assuming iOS will do it outside of the enclave if it doesn't like the key size, note: the signatureType is irrelavent for this check
+            if keyAlgorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
+                parameters[String(kSecAttrTokenID)] = kSecAttrTokenIDSecureEnclave
+            }
+        #endif
+        
+        //Use Apple Security Framework to generate keys, save them to application keychain
+        var error: Unmanaged<CFError>?
+        let privateKey = SecKeyCreateRandomKey(parameters as CFDictionary, &error)
+        if privateKey == nil{
+            print("Error creating keys occured: \(error!.takeRetainedValue() as Error), keys weren't created")
+            return (nil,nil)
+        }
+        
+        //Get generated public key
+        let query: [String: AnyObject] = [
+            String(kSecClass): kSecClassKey,
+            String(kSecAttrKeyType): algorithm.secKeyAttrType,
+            String(kSecAttrApplicationTag): tagPublic as AnyObject,
+            String(kSecReturnRef): kCFBooleanTrue
+        ]
+        var publicKeyReturn:AnyObject?
+        let result = SecItemCopyMatching(query as CFDictionary, &publicKeyReturn)
+        if result != errSecSuccess{
+            print("Error getting publicKey fron keychain occured: \(result)")
+            return (privateKey,nil)
+        }
+        let publicKey = publicKeyReturn as! SecKey?
+        return (privateKey,publicKey)
+    }
+    
+    func getPublicKeyBits(_ algorithm: KeyAlgorithm, publicKey: SecKey, tagPublic: String)->(Data?,Int?) {
+        //Set block size
+        let keyBlockSize = SecKeyGetBlockSize(publicKey)
+        //Ask keychain to provide the publicKey in bits
+        let query: [String: AnyObject] = [
+            String(kSecClass): kSecClassKey,
+            String(kSecAttrKeyType): algorithm.secKeyAttrType,
+            String(kSecAttrApplicationTag): tagPublic as AnyObject,
+            String(kSecReturnData): kCFBooleanTrue
+        ]
+        var tempPublicKeyBits:AnyObject?
+        var _ = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
+        guard let keyBits = tempPublicKeyBits as? Data else {
+            return (nil,nil)
+        }
+        return (keyBits,keyBlockSize)
+    }
+    
 }
