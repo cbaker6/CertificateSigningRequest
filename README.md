@@ -28,7 +28,25 @@ Note1: To use out of the box, build the project, look under frameworks, and drag
 - Place "CertificateSigningRequestSwift.framework" in "Embedded Binaries" and it should automatically appear in "Linked Frameworks and Libraries"
 - Then, simply place "import CertificateSigningRequestSwift" at the top of any file that needs the framework.
 
-Note2: You can get your publicKey in bit by querying it from the iOS keychain using `String(kSecReturnData): kCFBooleanTrue` in your query (see "testiOSKeyCreation()" in CertificateSigningRequestSwiftTests.swift).  An app to test the framework is available here: https://github.com/cbaker6/CertificateSigningRequestSwift_Test. Just run the test and the CSR will be printing in the debug window. You can test if the CSR was created correctly here: https://redkestrel.co.uk/products/decoder/
+Note2: You can get your publicKey in bit by querying it from the iOS keychain using `String(kSecReturnData): kCFBooleanTrue` in your query. For example:
+
+```swift
+let keyBlockSize = SecKeyGetBlockSize(publicKey)
+//Ask keychain to provide the publicKey in bits
+let query: [String: AnyObject] = [
+    String(kSecClass): kSecClassKey,
+    String(kSecAttrKeyType): algorithm.secKeyAttrType,
+    String(kSecAttrApplicationTag): tagPublic as AnyObject,
+    String(kSecReturnData): kCFBooleanTrue
+]
+var tempPublicKeyBits:AnyObject?
+var _ = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
+guard let keyBits = tempPublicKeyBits as? Data else {
+    return (nil,nil)
+}
+```
+
+You can test if your CSRs are correct by running the [test file](https://github.com/cbaker6/CertificateSigningRequestSwift/blob/830b97fa1435024209577917628a58aa53323990/Example/Tests/Tests.swift#L68). The output of the CSR will print in the console window. You can test if the CSR was created correctly here: https://redkestrel.co.uk/products/decoder/
 
 ~~Note3: If you use this as a framework, you will need to go to Targets->APPNAME->General and add "CertificateSigningRequestSwift.framework" to Embedded Binaries". You may need to add "CommonCrypto.framework" as well. If you just use want to use CertificateSigningRequest.swift you will need to import CommonCrypto into your project. To do this follow the directions here: http://stackoverflow.com/questions/25248598/importing-commoncrypto-in-a-swift-framework?answertab=votes#tab-top~~
 
