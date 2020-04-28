@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		457BC617045F13F015890244 /* Pods_CertificateSigningRequestSwift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B2F5A7AA27389647AC6A6F /* Pods_CertificateSigningRequestSwift_Example.framework */; };
 		4CEB0311B2B21286F3F3ADD3 /* Pods_CertificateSigningRequestSwift_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A25AB9DA16290AE5FC9A5C /* Pods_CertificateSigningRequestSwift_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -15,6 +14,8 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		91715A8A245887F30090E9C7 /* Pods_CertificateSigningRequestSwift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B2F5A7AA27389647AC6A6F /* Pods_CertificateSigningRequestSwift_Example.framework */; };
+		91715A8B245887F30090E9C7 /* Pods_CertificateSigningRequestSwift_Example.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F0B2F5A7AA27389647AC6A6F /* Pods_CertificateSigningRequestSwift_Example.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +27,20 @@
 			remoteInfo = CertificateSigningRequestSwift;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		91715A8C245887F30090E9C7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				91715A8B245887F30090E9C7 /* Pods_CertificateSigningRequestSwift_Example.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		05A25AB9DA16290AE5FC9A5C /* Pods_CertificateSigningRequestSwift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CertificateSigningRequestSwift_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +58,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7877073DD4C857C6527D2EE1 /* Pods-CertificateSigningRequestSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequestSwift_Example.debug.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequestSwift_Example/Pods-CertificateSigningRequestSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		91715A892458864C0090E9C7 /* CertificateSigningRequestSwift_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CertificateSigningRequestSwift_Example.entitlements; sourceTree = "<group>"; };
 		B063FDCE44E73C9B9C7B57D9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		D78B2528575F88C4AFC9CEC9 /* Pods-CertificateSigningRequestSwift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequestSwift_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequestSwift_Tests/Pods-CertificateSigningRequestSwift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		F0B2F5A7AA27389647AC6A6F /* Pods_CertificateSigningRequestSwift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CertificateSigningRequestSwift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				457BC617045F13F015890244 /* Pods_CertificateSigningRequestSwift_Example.framework in Frameworks */,
+				91715A8A245887F30090E9C7 /* Pods_CertificateSigningRequestSwift_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +99,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				91715A892458864C0090E9C7 /* CertificateSigningRequestSwift_Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for CertificateSigningRequestSwift */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -171,6 +188,7 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				498420630AC85FA753F7ED6D /* [CP] Embed Pods Frameworks */,
+				91715A8C245887F30090E9C7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -501,6 +519,7 @@
 			baseConfigurationReference = 7877073DD4C857C6527D2EE1 /* Pods-CertificateSigningRequestSwift_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CertificateSigningRequestSwift_Example.entitlements;
 				DEVELOPMENT_TEAM = K26KDKYY38;
 				INFOPLIST_FILE = CertificateSigningRequestSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -508,8 +527,10 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -518,6 +539,7 @@
 			baseConfigurationReference = 2009B441EFA02D2BF028FAA4 /* Pods-CertificateSigningRequestSwift_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CertificateSigningRequestSwift_Example.entitlements;
 				DEVELOPMENT_TEAM = K26KDKYY38;
 				INFOPLIST_FILE = CertificateSigningRequestSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -525,8 +547,10 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

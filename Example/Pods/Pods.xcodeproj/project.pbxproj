@@ -1030,6 +1030,37 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0B7548BCA74A9AD99B94A08118EB7BF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C53158B5AC553553BF8697A48467497C /* CertificateSigningRequestSwift.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift.modulemap";
+				PRODUCT_MODULE_NAME = CertificateSigningRequestSwift;
+				PRODUCT_NAME = CertificateSigningRequestSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		0BB2B50075FEC9A4156C6BECF11B4615 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AED1A9A08D3EC0D0A6D6E7A500C6743E /* Nimble.release.xcconfig */;
@@ -1055,69 +1086,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1E7B44466FCFB36DA55082EBD0DF0A82 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C53158B5AC553553BF8697A48467497C /* CertificateSigningRequestSwift.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift.modulemap";
-				PRODUCT_MODULE_NAME = CertificateSigningRequestSwift;
-				PRODUCT_NAME = CertificateSigningRequestSwift;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		31DC366971E973762063DB4996CE796D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44B47C0390D484628A6A4FC0D6C0B1CF /* CertificateSigningRequestSwift.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift.modulemap";
-				PRODUCT_MODULE_NAME = CertificateSigningRequestSwift;
-				PRODUCT_NAME = CertificateSigningRequestSwift;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1445,6 +1413,38 @@
 			};
 			name = Debug;
 		};
+		D1C706F08F13199578B69AD978AA74C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44B47C0390D484628A6A4FC0D6C0B1CF /* CertificateSigningRequestSwift.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CertificateSigningRequestSwift/CertificateSigningRequestSwift.modulemap";
+				PRODUCT_MODULE_NAME = CertificateSigningRequestSwift;
+				PRODUCT_NAME = CertificateSigningRequestSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		D786D4838DDE7FF84FD603B90BD016C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D667B90B8BA83D1FBB1683F8C892AD88 /* Quick.release.xcconfig */;
@@ -1519,8 +1519,8 @@
 		84CD28AD053A7C51C3D7226ACF4930A7 /* Build configuration list for PBXNativeTarget "CertificateSigningRequestSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1E7B44466FCFB36DA55082EBD0DF0A82 /* Debug */,
-				31DC366971E973762063DB4996CE796D /* Release */,
+				0B7548BCA74A9AD99B94A08118EB7BF8 /* Debug */,
+				D1C706F08F13199578B69AD978AA74C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,6 +1,6 @@
 {
   "name": "CertificateSigningRequestSwift",
-  "version": "0.1.0",
+  "version": "1.0",
   "summary": "Generate a self-signed certificate signing request (CSR) in iOS using Swift",
   "description": "CertificateSigningRequest creates a self-signed CSRs directly an iOS devices",
   "homepage": "https://github.com/cbaker6/CertificateSigningRequestSwift",
@@ -13,10 +13,11 @@
   },
   "source": {
     "git": "https://github.com/cbaker6/CertificateSigningRequestSwift.git",
-    "tag": "0.1.0"
+    "tag": "1.0"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "9.3",
+    "osx": "10.12"
   },
   "swift_versions": [
     "4.0",

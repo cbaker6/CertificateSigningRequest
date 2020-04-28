@@ -28,7 +28,8 @@ CertificateSigningRequest creates a self-signed CSRs directly an iOS devices
   s.source           = { :git => 'https://github.com/cbaker6/CertificateSigningRequestSwift.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target  = '9.0'
+  s.ios.deployment_target  = '9.3'
+  s.osx.deployment_target  = '10.12'
   s.swift_versions = ['4.0', '5.0']
   s.source_files = 'CertificateSigningRequestSwift/Classes/**/*'
   

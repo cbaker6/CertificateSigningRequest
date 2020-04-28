@@ -80,7 +80,7 @@ public class CertificateSigningRequest:NSObject {
         var signature = [UInt8](repeating: 0, count: 256)
         var signatureLen:Int = signature.count
         
-        if #available(iOS 11, *) {
+        if #available(iOS 11, macCatalyst 13.0, macOS 12.0, *) {
             // Build signature - step 1: SHA1 hash
             // Build signature - step 2: Sign hash
             var error: Unmanaged<CFError>?
@@ -99,6 +99,26 @@ public class CertificateSigningRequest:NSObject {
                 print("Error in creating signature: \(error!.takeRetainedValue())")
             }
         } else {
+            //Bootleg way to so OSX build stops complaining, for some reason it's ignoring the macOS 12.0 above
+            #if os(OSX)
+            // Build signature - step 1: SHA1 hash
+            // Build signature - step 2: Sign hash
+            var error: Unmanaged<CFError>?
+            if let signatureData = SecKeyCreateSignature(privateKey, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, &error) as Data?{
+                signatureData.copyBytes(to: &signature, count: signatureData.count)
+                signatureLen = signatureData.count
+                if publicKey != nil{
+                    if !SecKeyVerifySignature(publicKey!, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, signatureData as CFData, &error){
+                        print(error!.takeRetainedValue())
+                        return nil
+                    }
+                }
+            }
+            
+            if error != nil{
+                print("Error in creating signature: \(error!.takeRetainedValue())")
+            }
+            #else
             // Fallback on earlier versions
         
             // Build signature - step 1: SHA1 hash
@@ -138,7 +158,6 @@ public class CertificateSigningRequest:NSObject {
                  return nil
                  */
             }
-            
             // Build signature - step 2: Sign hash
             let result = SecKeyRawSign(privateKey, padding, digest, digest.count, &signature, &signatureLen)
             
@@ -146,7 +165,7 @@ public class CertificateSigningRequest:NSObject {
                 print("Error signing: \(result)")
                 return nil
             }
-        
+            #endif
         }
         
         
