@@ -13,7 +13,7 @@ class TableOfContentsSpec: QuickSpec {
                 //Clear out App Keychain
                 var query: [String:AnyObject] = [String(kSecClass): kSecClassKey]
                 SecItemDelete(query as CFDictionary)
-                
+
                 query = [String(kSecClass): kSecClassKey]
                 SecItemDelete(query as CFDictionary)
                 
@@ -287,20 +287,20 @@ class TableOfContentsSpec: QuickSpec {
         let publicKeyParameters: [String: AnyObject] = [
             String(kSecAttrIsPermanent): kCFBooleanTrue,
             String(kSecAttrApplicationTag): tagPublic as AnyObject,
-            String(kSecAttrAccessible): kSecAttrAccessibleAlways
+            String(kSecAttrAccessible): kSecAttrAccessibleAfterFirstUnlock
         ]
         
         var privateKeyParameters: [String: AnyObject] = [
             String(kSecAttrIsPermanent): kCFBooleanTrue,
             String(kSecAttrApplicationTag): tagPrivate as AnyObject,
-            String(kSecAttrAccessible): kSecAttrAccessibleAlways
+            String(kSecAttrAccessible): kSecAttrAccessibleAfterFirstUnlock
         ]
         
-        #if !arch(i386) && !arch(x86_64)
+        #if !targetEnvironment(simulator)
             //This only works for Secure Enclave consistign of 256 bit key, note, the signatureType is irrelavent for this check
             if algorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
                 let access = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
-                                                             kSecAttrAccessibleAlwaysThisDeviceOnly,
+                                                             kSecAttrAccessibleAfterFirstUnlock,
                                                              .privateKeyUsage,
                                                              nil)!   // Ignore error
                 
@@ -313,11 +313,11 @@ class TableOfContentsSpec: QuickSpec {
             String(kSecAttrKeyType): algorithm.secKeyAttrType,
             String(kSecAttrKeySizeInBits): keySize as AnyObject,
             String(kSecReturnRef): kCFBooleanTrue,
-            kSecPublicKeyAttrs as String: publicKeyParameters as AnyObject,
-            kSecPrivateKeyAttrs as String: privateKeyParameters as AnyObject,
+            String(kSecPublicKeyAttrs): publicKeyParameters as AnyObject,
+            String(kSecPrivateKeyAttrs): privateKeyParameters as AnyObject,
         ]
         
-        #if !arch(i386) && !arch(x86_64)
+        #if !targetEnvironment(simulator)
             //iOS only allows EC 256 keys to be secured in enclave. This will attempt to allow any EC key in the enclave, assuming iOS will do it outside of the enclave if it doesn't like the key size, note: the signatureType is irrelavent for this check
             if algorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
                 parameters[String(kSecAttrTokenID)] = kSecAttrTokenIDSecureEnclave
