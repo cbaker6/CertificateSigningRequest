@@ -5,10 +5,24 @@ import Nimble
 import CertificateSigningRequestSwift
 
 class TableOfContentsSpec: QuickSpec {
-    
+        
     override func spec() {
+        
         describe("these will fail") {
-            
+            beforeEach {
+                //Clear out App Keychain
+                var query: [String:AnyObject] = [String(kSecClass): kSecClassKey]
+                SecItemDelete(query as CFDictionary)
+                
+                query = [String(kSecClass): kSecClassKey]
+                SecItemDelete(query as CFDictionary)
+                
+                query = [String(kSecClass): kSecClassCertificate]
+                SecItemDelete(query as CFDictionary)
+                
+                query = [String(kSecClass): kSecClassIdentity]
+                SecItemDelete(query as CFDictionary)
+            }
             /*
             it("will eventually fail") {
                 expect("time").toEventually( equal("done") )
@@ -41,12 +55,12 @@ class TableOfContentsSpec: QuickSpec {
                     //Initiale CSR
                     let csr = CertificateSigningRequest(commonName: "CertificateSigningRequestSwift Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
                     //Build the CSR
-                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
                     if let csrRegular = csrBuild{
                         print("CSR string no header and footer")
                         print(csrRegular)
                     }
-                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
                     if let csrWithHeaderFooter = csrBuild2{
                         print("CSR string with header and footer")
                         print(csrWithHeaderFooter)
@@ -284,7 +298,7 @@ class TableOfContentsSpec: QuickSpec {
         
         #if !arch(i386) && !arch(x86_64)
             //This only works for Secure Enclave consistign of 256 bit key, note, the signatureType is irrelavent for this check
-            if keyAlgorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
+            if algorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
                 let access = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                                              kSecAttrAccessibleAlwaysThisDeviceOnly,
                                                              .privateKeyUsage,
@@ -305,7 +319,7 @@ class TableOfContentsSpec: QuickSpec {
         
         #if !arch(i386) && !arch(x86_64)
             //iOS only allows EC 256 keys to be secured in enclave. This will attempt to allow any EC key in the enclave, assuming iOS will do it outside of the enclave if it doesn't like the key size, note: the signatureType is irrelavent for this check
-            if keyAlgorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
+            if algorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type{
                 parameters[String(kSecAttrTokenID)] = kSecAttrTokenIDSecureEnclave
             }
         #endif
