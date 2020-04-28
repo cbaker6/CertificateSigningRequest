@@ -213,10 +213,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = K26KDKYY38;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = K26KDKYY38;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -499,6 +501,7 @@
 			baseConfigurationReference = 7877073DD4C857C6527D2EE1 /* Pods-CertificateSigningRequestSwift_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = K26KDKYY38;
 				INFOPLIST_FILE = CertificateSigningRequestSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -515,6 +518,7 @@
 			baseConfigurationReference = 2009B441EFA02D2BF028FAA4 /* Pods-CertificateSigningRequestSwift_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = K26KDKYY38;
 				INFOPLIST_FILE = CertificateSigningRequestSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -530,6 +534,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D78B2528575F88C4AFC9CEC9 /* Pods-CertificateSigningRequestSwift_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = K26KDKYY38;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -552,6 +557,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FEBE9F5B85B524FE8469FB8A /* Pods-CertificateSigningRequestSwift_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = K26KDKYY38;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",

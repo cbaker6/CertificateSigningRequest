@@ -74,38 +74,38 @@ public class CertificateSigningRequest:NSObject {
         self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, stateOrProvinceName:nil, localityName:nil, keyAlgorithm: keyAlgorithm)
     }
     
-    public func build(_ publicKeyBits:Data, privateKey: SecKey) -> Data?{
-        
+    public func build(_ publicKeyBits:Data, privateKey: SecKey, publicKey: SecKey?=nil) -> Data?{
         let certificationRequestInfo = buldCertificationRequestInfo(publicKeyBits)
-        var certificationRequestInfoBytes = [UInt8](repeating: 0, count: certificationRequestInfo.count)
-        certificationRequestInfo.copyBytes(to: &certificationRequestInfoBytes, count: certificationRequestInfo.count)
         let shaBytes = keyAlgorithm.sequenceObjectEncryptionType
-        
-        
         var signature = [UInt8](repeating: 0, count: 256)
         var signatureLen:Int = signature.count
-        
         
         if #available(iOS 11, *) {
             // Build signature - step 1: SHA1 hash
             // Build signature - step 2: Sign hash
             var error: Unmanaged<CFError>?
-            
             if let signatureData = SecKeyCreateSignature(privateKey, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, &error) as Data?{
                 signatureData.copyBytes(to: &signature, count: signatureData.count)
                 signatureLen = signatureData.count
+                if publicKey != nil{
+                    if !SecKeyVerifySignature(publicKey!, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, signatureData as CFData, &error){
+                        print(error!.takeRetainedValue())
+                        return nil
+                    }
+                }
             }
             
             if error != nil{
                 print("Error in creating signature: \(error!.takeRetainedValue())")
             }
-            
         } else {
             // Fallback on earlier versions
         
             // Build signature - step 1: SHA1 hash
             var digest = [UInt8](repeating: 0, count: keyAlgorithm.digestLength)
             let padding = keyAlgorithm.padding
+            var certificationRequestInfoBytes = [UInt8](repeating: 0, count: certificationRequestInfo.count)
+            certificationRequestInfo.copyBytes(to: &certificationRequestInfoBytes, count: certificationRequestInfo.count)
         
             switch keyAlgorithm! {
                 
@@ -165,9 +165,9 @@ public class CertificateSigningRequest:NSObject {
         return certificationRequest
     }
     
-    public func buildAndEncodeDataAsString(_ publicKeyBits:Data, privateKey: SecKey)-> String? {
+    public func buildAndEncodeDataAsString(_ publicKeyBits:Data, privateKey: SecKey, publicKey: SecKey?=nil)-> String? {
         
-        guard let buildData = self.build(publicKeyBits, privateKey: privateKey) else{
+        guard let buildData = self.build(publicKeyBits, privateKey: privateKey, publicKey: publicKey) else{
             return nil
         }
         
@@ -175,9 +175,9 @@ public class CertificateSigningRequest:NSObject {
         
     }
     
-    public func buildCSRAndReturnString(_ publicKeyBits:Data, privateKey: SecKey)-> String? {
+    public func buildCSRAndReturnString(_ publicKeyBits:Data, privateKey: SecKey, publicKey: SecKey?=nil)-> String? {
         
-        guard let csrString = self.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey) else{
+        guard let csrString = self.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey, publicKey: publicKey) else{
             return nil
         }
         

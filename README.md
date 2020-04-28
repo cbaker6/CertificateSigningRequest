@@ -1,5 +1,5 @@
 # CertificateSigningRequestSwift
-![Swift Version 4.2](https://img.shields.io/badge/Swift-v4.2-yellow.svg)
+![Swift Version 4.2](https://img.shields.io/badge/Swift-v5.0-yellow.svg)
 [![CI Status](https://img.shields.io/travis/cbaker6/CertificateSigningRequestSwift.svg?style=flat)](https://travis-ci.org/cbaker6/CertificateSigningRequestSwift)
 [![Version](https://img.shields.io/cocoapods/v/CertificateSigningRequestSwift.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequestSwift)
 [![License](https://img.shields.io/cocoapods/l/CertificateSigningRequestSwift.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequestSwift)
@@ -7,10 +7,10 @@
 
 Generate a certificate signing request (CSR) in iOS using Swift
 
-This is a port of ios-csr by Ales Teska (https://github.com/ateska/ios-csr) from Objective-C to Swift 4.2 (a Swift 3.2 version is available on the "3.2" branch).
+This is a port of ios-csr by Ales Teska (https://github.com/ateska/ios-csr) from Objective-C to Swift 5.0 (a Swift 3.2 version is available on the "3.2" branch).
 Additions have been made to support RSA and EC (iOS only supports 256 bit keys for now) allow SHA256 and SHA512. Also, this is setup to be added as a framework to your project.
 
-To use, initiatlize the class using one of the following (an example of how to do can be found at https://github.com/cbaker6/CertificateSigningRequestSwift/blob/master/CertificateSigningRequestSwiftTests/CertificateSigningRequestSwiftTests.swift): 
+To use, initiatlize the class using one of the following (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequestSwift/blob/460e288156285e910af3181e0298a3aadd7f53a9/Example/Tests/Tests.swift#L19) file: 
 - `let csr = CertificateSigningRequest()`
 - `let csr = CertificateSigningRequest(keyAlgorithm: KeyAlgorithm)`
 - `let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: KeyAlgorithm)`
@@ -41,10 +41,10 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 MIIBMDCB1wIBADB1MQswCQYDVQQGDAJVUzELMAkGA1UECAwCS1kxDTALBgNVBAcM
 BFRlc3QxDTALBgNVBAoMBFRlc3QxDTALBgNVBAsMBFRlc3QxLDAqBgNVBAMMI0Nl
 cnRpZmljYXRlU2lnbmluZ1JlcXVlc3RTd2lmdCBUZXN0MFkwEwYHKoZIzj0CAQYI
-KoZIzj0DAQcDQgAEc3JdBSW0N7iZf0gve+BOOqjCTnIV0AmrE4PjDUSho3PIhs2B
-QdQtnFDemc5oUSsHdHBGr0PQF5tnQp6xyR4iJaAAMAoGCCqGSM49BAMCA0gAMEUC
-IHFkI7fhxek/pFy2El0I6Ztf1dvTtihMVij/IysmJhQeAiEA7EFCm/COuUTib1qS
-hI1w3O8KdAXbV/GVeRfBSxJsznY=
+KoZIzj0DAQcDQgAExrSyR8PBMPaW9llanSqOhl3l5LhlXv0LwYEW+Yhg8e5MOPs4
+SlG8f33OFVUPPNWd09TnmtKg+P4VTuEfJphsqKAAMAoGCCqGSM49BAMCA0gAMEUC
+IQDF/PwAitcohl4lByxuqxJpSLJ5vueWq8US53/66RUREQIgMLInVDKCCoPHWDYM
+vtFAmaxL8+rK+Hr55f0PLZQ5PcM=
 -----END CERTIFICATE REQUEST-----
 ```
 
