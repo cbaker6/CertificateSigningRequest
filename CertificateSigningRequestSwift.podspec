@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CertificateSigningRequestSwift'
-  s.version          = '1.0'
-  s.summary          = 'Generate a self-signed certificate signing request (CSR) in iOS using Swift'
+  s.version          = '1.1'
+  s.summary          = 'Generate self-signed certificate signing requests (CSRs) on iOS, macOS, and macCatalyst.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-CertificateSigningRequest creates a self-signed CSRs directly an iOS devices
+  Enables your app to create self-signed CSRs directly on iOS devices. These CSRs can then be sent somewhere else and turned into certificates. The framework should also work on macCatalyst and macOS 10.12+, assuming the keys are created correctly (the test cases shows how to create keys using the iOS Keychain).
                        DESC
 
   s.homepage         = 'https://github.com/cbaker6/CertificateSigningRequestSwift'
