@@ -80,7 +80,7 @@ public class CertificateSigningRequest:NSObject {
         var signature = [UInt8](repeating: 0, count: 256)
         var signatureLen:Int = signature.count
         
-        if #available(iOS 11, macCatalyst 13.0, macOS 12.0, *) {
+        if #available(iOS 11, macCatalyst 13.0, macOS 10.12, *) {
             // Build signature - step 1: SHA1 hash
             // Build signature - step 2: Sign hash
             var error: Unmanaged<CFError>?
@@ -99,7 +99,7 @@ public class CertificateSigningRequest:NSObject {
                 print("Error in creating signature: \(error!.takeRetainedValue())")
             }
         } else {
-            //Bootleg way to so OSX build stops complaining, for some reason it's ignoring the macOS 12.0 above
+            //Bootleg way to so OSX build stops complaining, for some reason it's ignoring the macOS 10.12 above
             #if os(OSX)
             // Build signature - step 1: SHA1 hash
             // Build signature - step 2: Sign hash
