@@ -41,7 +41,6 @@ public class CertificateSigningRequest:NSObject {
     private let OBJECT_stateOrProvinceName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x08]
     private let SEQUENCE_tag:UInt8 = 0x30
     private let SET_tag:UInt8 = 0x31
-    
     private let commonName:String?
     private let countryName:String?
     private let localityName:String?
@@ -52,8 +51,7 @@ public class CertificateSigningRequest:NSObject {
     private var subjectDER:Data?
     
     
-    public init(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: KeyAlgorithm){        
-        
+    public init(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: KeyAlgorithm){
         self.commonName = commonName
         self.organizationName = organizationName
         self.organizationUnitName = organizationUnitName
@@ -62,7 +60,6 @@ public class CertificateSigningRequest:NSObject {
         self.localityName = localityName
         self.subjectDER = nil
         self.keyAlgorithm = keyAlgorithm
-        
         super.init()
     }
     
@@ -76,81 +73,73 @@ public class CertificateSigningRequest:NSObject {
     
     public func build(_ publicKeyBits:Data, privateKey: SecKey, publicKey: SecKey?=nil) -> Data?{
         let certificationRequestInfo = buldCertificationRequestInfo(publicKeyBits)
-        let shaBytes = keyAlgorithm.sequenceObjectEncryptionType
         var signature = [UInt8](repeating: 0, count: 256)
         var signatureLen:Int = signature.count
         
         if #available(iOS 11, macCatalyst 13.0, macOS 10.12, *) {
-            // Build signature - step 1: SHA1 hash
+            // Build signature - step 1: SHA hash
             // Build signature - step 2: Sign hash
             var error: Unmanaged<CFError>?
-            if let signatureData = SecKeyCreateSignature(privateKey, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, &error) as Data?{
-                signatureData.copyBytes(to: &signature, count: signatureData.count)
-                signatureLen = signatureData.count
-                if publicKey != nil{
-                    if !SecKeyVerifySignature(publicKey!, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, signatureData as CFData, &error){
-                        print(error!.takeRetainedValue())
-                        return nil
-                    }
+            guard let signatureData = SecKeyCreateSignature(privateKey, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, &error) as Data? else{
+                if error != nil{
+                    print("Error in creating signature: \(error!.takeRetainedValue())")
                 }
+                return nil
             }
-            
-            if error != nil{
-                print("Error in creating signature: \(error!.takeRetainedValue())")
+            signatureData.copyBytes(to: &signature, count: signatureData.count)
+            signatureLen = signatureData.count
+            if publicKey != nil{
+                if !SecKeyVerifySignature(publicKey!, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, signatureData as CFData, &error){
+                    print(error!.takeRetainedValue())
+                    return nil
+                }
             }
         } else {
-            //Bootleg way to so OSX build stops complaining, for some reason it's ignoring the macOS 10.12 above
+            //Bootleg way to do this since OSX should have used the if statement above,
+            //but I needed OSX build's to stop complaining. For some reason it's ignoring the macOS 10.12 above
             #if os(OSX)
-            // Build signature - step 1: SHA1 hash
+            // Build signature - step 1: SHA hash
             // Build signature - step 2: Sign hash
             var error: Unmanaged<CFError>?
-            if let signatureData = SecKeyCreateSignature(privateKey, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, &error) as Data?{
-                signatureData.copyBytes(to: &signature, count: signatureData.count)
-                signatureLen = signatureData.count
-                if publicKey != nil{
-                    if !SecKeyVerifySignature(publicKey!, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, signatureData as CFData, &error){
-                        print(error!.takeRetainedValue())
-                        return nil
-                    }
+            guard let signatureData = SecKeyCreateSignature(privateKey, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, &error) as Data? else{
+                if error != nil{
+                    print("Error in creating signature: \(error!.takeRetainedValue())")
                 }
+                return nil
             }
-            
-            if error != nil{
-                print("Error in creating signature: \(error!.takeRetainedValue())")
+            signatureData.copyBytes(to: &signature, count: signatureData.count)
+            signatureLen = signatureData.count
+            if publicKey != nil{
+                if !SecKeyVerifySignature(publicKey!, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, signatureData as CFData, &error){
+                    print(error!.takeRetainedValue())
+                    return nil
+                }
             }
             #else
             // Fallback on earlier versions
         
-            // Build signature - step 1: SHA1 hash
+            // Build signature - step 1: SHA hash
             var digest = [UInt8](repeating: 0, count: keyAlgorithm.digestLength)
             let padding = keyAlgorithm.padding
             var certificationRequestInfoBytes = [UInt8](repeating: 0, count: certificationRequestInfo.count)
             certificationRequestInfo.copyBytes(to: &certificationRequestInfoBytes, count: certificationRequestInfo.count)
         
             switch keyAlgorithm! {
-                
             case .rsa(signatureType: .sha1), .ec(signatureType: .sha1):
-                
                 var SHA1 = CC_SHA1_CTX()
                 CC_SHA1_Init(&SHA1)
                 CC_SHA1_Update(&SHA1, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-                
                 CC_SHA1_Final(&digest, &SHA1)
-                
             case .rsa(signatureType: .sha256), .ec(signatureType: .sha256):
-                
                 var SHA256 = CC_SHA256_CTX()
                 CC_SHA256_Init(&SHA256)
                 CC_SHA256_Update(&SHA256, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
                 CC_SHA256_Final(&digest, &SHA256)
-                
             case .rsa(signatureType: .sha512), .ec(signatureType: .sha512):
-                
                 var SHA512 = CC_SHA512_CTX()
                 CC_SHA512_Init(&SHA512)
                 CC_SHA512_Update(&SHA512, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
                 CC_SHA512_Final(&digest, &SHA512)
-                
                 /*
                  default:
                  
@@ -171,6 +160,7 @@ public class CertificateSigningRequest:NSObject {
         
         var certificationRequest = Data(capacity: 1024)
         certificationRequest.append(certificationRequestInfo)
+        let shaBytes = keyAlgorithm.sequenceObjectEncryptionType
         certificationRequest.append(shaBytes, count: shaBytes.count)
         
         var signData = Data(capacity: 257)
