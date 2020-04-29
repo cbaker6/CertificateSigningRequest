@@ -1,6 +1,7 @@
 # CertificateSigningRequest
 ![Swift Version 5.0](https://img.shields.io/badge/Swift-v5.0-yellow.svg)
 [![CI Status](https://img.shields.io/travis/cbaker6/CertificateSigningRequest.svg?style=flat)](https://travis-ci.org/cbaker6/CertificateSigningRequest)
+[![SPM](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![Version](https://img.shields.io/cocoapods/v/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
 [![License](https://img.shields.io/cocoapods/l/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
 [![Platform](https://img.shields.io/cocoapods/p/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
