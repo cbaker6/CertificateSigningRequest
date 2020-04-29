@@ -13,3 +13,11 @@ language: swift
 script:
 - set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/CertificateSigningRequest.xcworkspace -scheme CertificateSigningRequest-Example -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.3' ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint
+deploy:
+  provider: script
+  script:
+  - source ~/.rvm/scripts/rvm
+  - rvm use default
+  - pod trunk push
+  on:
+    tags: true
