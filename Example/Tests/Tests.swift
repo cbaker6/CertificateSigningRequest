@@ -8,7 +8,7 @@ class TableOfContentsSpec: QuickSpec {
         
     override func spec() {
         
-        describe("these will fail") {
+        describe("test suite of different configurations") {
             beforeEach {
                 //Clear out App Keychain
                 var query: [String:AnyObject] = [String(kSecClass): kSecClassKey]
@@ -28,375 +28,412 @@ class TableOfContentsSpec: QuickSpec {
                 expect("time").toEventually( equal("done") )
             }*/
             
-            context("these will pass") {
-    
-                it("create CSR using Eliptic Curve key size 256") {
-                    let tagPrivate = "com.csr.private.ec"
-                    let tagPublic = "com.csr.public.ec"
-                    let keyAlgorithm = KeyAlgorithm.ec(signatureType: .sha256)
-                    let sizeOfKey = keyAlgorithm.availableKeySizes.last!
-                    
-                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
-                    guard let privateKey = potentialPrivateKey,
-                        let publicKey = potentialPublicKey else{
-                            expect(potentialPrivateKey) != nil
-                            expect(potentialPublicKey) != nil
-                            return
-                    }
-                    
-                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
-                    guard let publicKeyBits = potentialPublicKeyBits,
-                        let _ = potentialPublicKeyBlockSize else{
-                            expect(potentialPublicKeyBits) != nil
-                            expect(potentialPublicKeyBlockSize) != nil
-                            return
-                    }
-                    
-                    //Initiale CSR
-                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
-                    //Build the CSR
-                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
-                    if let csrRegular = csrBuild{
-                        print("CSR string no header and footer")
-                        print(csrRegular)
-                    }
-                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
-                    if let csrWithHeaderFooter = csrBuild2{
-                        print("CSR string with header and footer")
-                        print(csrWithHeaderFooter)
-                    }
-                    expect(csrBuild?.count) > 0
-                    expect(csrBuild2?.contains("BEGIN")) == true
-                }
-
-                it("create CSR using RSA key size 2048 with sha512") {
-                    let tagPrivate = "com.csr.private.rsa"
-                    let tagPublic = "com.csr.public.rsa"
-                    let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha512)
-                    let sizeOfKey = keyAlgorithm.availableKeySizes.last!
-                    
-                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
-                    guard let privateKey = potentialPrivateKey,
-                        let publicKey = potentialPublicKey else{
-                            expect(potentialPrivateKey) != nil
-                            expect(potentialPublicKey) != nil
-                            return
-                    }
-                    
-                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
-                    guard let publicKeyBits = potentialPublicKeyBits,
-                        let _ = potentialPublicKeyBlockSize else{
-                            expect(potentialPublicKeyBits) != nil
-                            expect(potentialPublicKeyBlockSize) != nil
-                            return
-                    }
-                    
-                    //Initiale CSR
-                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
-                    //Build the CSR
-                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
-                    if let csrRegular = csrBuild{
-                        print("CSR string no header and footer")
-                        print(csrRegular)
-                    }
-                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
-                    if let csrWithHeaderFooter = csrBuild2{
-                        print("CSR string with header and footer")
-                        print(csrWithHeaderFooter)
-                    }
-                    expect(csrBuild?.count) > 0
-                    expect(csrBuild2?.contains("BEGIN")) == true
+            it("create CSR using Eliptic Curve key size 256") {
+                let tagPrivate = "com.csr.private.ec"
+                let tagPublic = "com.csr.public.ec"
+                let keyAlgorithm = KeyAlgorithm.ec(signatureType: .sha256)
+                let sizeOfKey = keyAlgorithm.availableKeySizes.last!
+                
+                let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                guard let privateKey = potentialPrivateKey,
+                    let publicKey = potentialPublicKey else{
+                        expect(potentialPrivateKey) != nil
+                        expect(potentialPublicKey) != nil
+                        return
                 }
                 
-                it("create CSR using RSA key size 2048 with sha256") {
-                    let tagPrivate = "com.csr.private.rsa256"
-                    let tagPublic = "com.csr.public.rsa256"
-                    let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha256)
-                    let sizeOfKey = keyAlgorithm.availableKeySizes.last!
-                    
-                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
-                    guard let privateKey = potentialPrivateKey,
-                        let publicKey = potentialPublicKey else{
-                            expect(potentialPrivateKey) != nil
-                            expect(potentialPublicKey) != nil
-                            return
-                    }
-                    
-                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
-                    guard let publicKeyBits = potentialPublicKeyBits,
-                        let _ = potentialPublicKeyBlockSize else{
-                            expect(potentialPublicKeyBits) != nil
-                            expect(potentialPublicKeyBlockSize) != nil
-                            return
-                    }
-                    
-                    //Initiale CSR
-                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
-                    //Build the CSR
-                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
-                    if let csrRegular = csrBuild{
-                        print("CSR string no header and footer")
-                        print(csrRegular)
-                    }
-                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
-                    if let csrWithHeaderFooter = csrBuild2{
-                        print("CSR string with header and footer")
-                        print(csrWithHeaderFooter)
-                    }
-                    expect(csrBuild?.count) > 0
-                    expect(csrBuild2?.contains("BEGIN")) == true
+                let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                guard let publicKeyBits = potentialPublicKeyBits,
+                    let _ = potentialPublicKeyBlockSize else{
+                        expect(potentialPublicKeyBits) != nil
+                        expect(potentialPublicKeyBlockSize) != nil
+                        return
                 }
                 
-                it("create CSR using RSA key size 2048 with sha1") {
-                    let tagPrivate = "com.csr.private.rsa1"
-                    let tagPublic = "com.csr.public.rsa1"
-                    let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha1)
-                    let sizeOfKey = keyAlgorithm.availableKeySizes.last!
-                    
-                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
-                    guard let privateKey = potentialPrivateKey,
-                        let publicKey = potentialPublicKey else{
-                            expect(potentialPrivateKey) != nil
-                            expect(potentialPublicKey) != nil
-                            return
-                    }
-                    
-                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
-                    guard let publicKeyBits = potentialPublicKeyBits,
-                        let _ = potentialPublicKeyBlockSize else{
-                            expect(potentialPublicKeyBits) != nil
-                            expect(potentialPublicKeyBlockSize) != nil
-                            return
-                    }
-                    
-                    //Initiale CSR
-                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
-                    //Build the CSR
-                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
-                    if let csrRegular = csrBuild{
-                        print("CSR string no header and footer")
-                        print(csrRegular)
-                    }
-                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
-                    if let csrWithHeaderFooter = csrBuild2{
-                        print("CSR string with header and footer")
-                        print(csrWithHeaderFooter)
-                    }
-                    expect(csrBuild?.count) > 0
-                    expect(csrBuild2?.contains("BEGIN")) == true
+                //Initiale CSR
+                let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                //Build the CSR
+                let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
+                if let csrRegular = csrBuild{
+                    print("CSR string no header and footer")
+                    print(csrRegular)
                 }
-                
-                it("create CSR using RSA key size 1024 with sha512") {
-                    let tagPrivate = "com.csr.private.rsa1024"
-                    let tagPublic = "com.csr.public.rsa1024"
-                    let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha512)
-                    let sizeOfKey = keyAlgorithm.availableKeySizes[1]
-                    
-                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
-                    guard let privateKey = potentialPrivateKey,
-                        let publicKey = potentialPublicKey else{
-                            expect(potentialPrivateKey) != nil
-                            expect(potentialPublicKey) != nil
-                            return
-                    }
-                    
-                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
-                    guard let publicKeyBits = potentialPublicKeyBits,
-                        let _ = potentialPublicKeyBlockSize else{
-                            expect(potentialPublicKeyBits) != nil
-                            expect(potentialPublicKeyBlockSize) != nil
-                            return
-                    }
-                    
-                    //Initiale CSR
-                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
-                    //Build the CSR
-                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
-                    if let csrRegular = csrBuild{
-                        print("CSR string no header and footer")
-                        print(csrRegular)
-                    }
-                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
-                    if let csrWithHeaderFooter = csrBuild2{
-                        print("CSR string with header and footer")
-                        print(csrWithHeaderFooter)
-                    }
-                    expect(csrBuild?.count) > 0
-                    expect(csrBuild2?.contains("BEGIN")) == true
+                let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
+                if let csrWithHeaderFooter = csrBuild2{
+                    print("CSR string with header and footer")
+                    print(csrWithHeaderFooter)
                 }
-                
-                it("create CSR using RSA key size 1024 with sha256") {
-                    let tagPrivate = "com.csr.private.rsa1024sha256"
-                    let tagPublic = "com.csr.public.rsa1024sha256"
-                    let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha256)
-                    let sizeOfKey = keyAlgorithm.availableKeySizes[1]
-                    
-                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
-                    guard let privateKey = potentialPrivateKey,
-                        let publicKey = potentialPublicKey else{
-                            expect(potentialPrivateKey) != nil
-                            expect(potentialPublicKey) != nil
-                            return
-                    }
-                    
-                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
-                    guard let publicKeyBits = potentialPublicKeyBits,
-                        let _ = potentialPublicKeyBlockSize else{
-                            expect(potentialPublicKeyBits) != nil
-                            expect(potentialPublicKeyBlockSize) != nil
-                            return
-                    }
-                    
-                    //Initiale CSR
-                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
-                    //Build the CSR
-                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
-                    if let csrRegular = csrBuild{
-                        print("CSR string no header and footer")
-                        print(csrRegular)
-                    }
-                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
-                    if let csrWithHeaderFooter = csrBuild2{
-                        print("CSR string with header and footer")
-                        print(csrWithHeaderFooter)
-                    }
-                    expect(csrBuild?.count) > 0
-                    expect(csrBuild2?.contains("BEGIN")) == true
-                }
-                
-                it("create CSR using RSA key size 1024 with sha1") {
-                    let tagPrivate = "com.csr.private.rsa1024sha1"
-                    let tagPublic = "com.csr.public.rsa1024sha1"
-                    let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha1)
-                    let sizeOfKey = keyAlgorithm.availableKeySizes[1]
-                    
-                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
-                    guard let privateKey = potentialPrivateKey,
-                        let publicKey = potentialPublicKey else{
-                            expect(potentialPrivateKey) != nil
-                            expect(potentialPublicKey) != nil
-                            return
-                    }
-                    
-                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
-                    guard let publicKeyBits = potentialPublicKeyBits,
-                        let _ = potentialPublicKeyBlockSize else{
-                            expect(potentialPublicKeyBits) != nil
-                            expect(potentialPublicKeyBlockSize) != nil
-                            return
-                    }
-                    
-                    //Initiale CSR
-                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
-                    //Build the CSR
-                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
-                    if let csrRegular = csrBuild{
-                        print("CSR string no header and footer")
-                        print(csrRegular)
-                    }
-                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
-                    if let csrWithHeaderFooter = csrBuild2{
-                        print("CSR string with header and footer")
-                        print(csrWithHeaderFooter)
-                    }
-                    expect(csrBuild?.count) > 0
-                    expect(csrBuild2?.contains("BEGIN")) == true
-                }
-                
-                it("create CSR using RSA key size 512 with sha256") {
-                    let tagPrivate = "com.csr.private.rsa512"
-                    let tagPublic = "com.csr.public.rsa512"
-                    let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha256)
-                    let sizeOfKey = keyAlgorithm.availableKeySizes[0]
-                    
-                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
-                    guard let privateKey = potentialPrivateKey,
-                        let publicKey = potentialPublicKey else{
-                            expect(potentialPrivateKey) != nil
-                            expect(potentialPublicKey) != nil
-                            return
-                    }
-                    
-                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
-                    guard let publicKeyBits = potentialPublicKeyBits,
-                        let _ = potentialPublicKeyBlockSize else{
-                            expect(potentialPublicKeyBits) != nil
-                            expect(potentialPublicKeyBlockSize) != nil
-                            return
-                    }
-                    
-                    //Initiale CSR
-                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
-                    //Build the CSR
-                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
-                    if let csrRegular = csrBuild{
-                        print("CSR string no header and footer")
-                        print(csrRegular)
-                    }
-                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
-                    if let csrWithHeaderFooter = csrBuild2{
-                        print("CSR string with header and footer")
-                        print(csrWithHeaderFooter)
-                    }
-                    expect(csrBuild?.count) > 0
-                    expect(csrBuild2?.contains("BEGIN")) == true
-                }
-                
-                it("create CSR using RSA key size 512 with sha1") {
-                    let tagPrivate = "com.csr.private.rsa512sha1"
-                    let tagPublic = "com.csr.public.rsa512sha1"
-                    let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha1)
-                    let sizeOfKey = keyAlgorithm.availableKeySizes[0]
-                    
-                    let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
-                    guard let privateKey = potentialPrivateKey,
-                        let publicKey = potentialPublicKey else{
-                            expect(potentialPrivateKey) != nil
-                            expect(potentialPublicKey) != nil
-                            return
-                    }
-                    
-                    let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
-                    guard let publicKeyBits = potentialPublicKeyBits,
-                        let _ = potentialPublicKeyBlockSize else{
-                            expect(potentialPublicKeyBits) != nil
-                            expect(potentialPublicKeyBlockSize) != nil
-                            return
-                    }
-                    
-                    //Initiale CSR
-                    let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
-                    //Build the CSR
-                    let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
-                    if let csrRegular = csrBuild{
-                        print("CSR string no header and footer")
-                        print(csrRegular)
-                    }
-                    let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
-                    if let csrWithHeaderFooter = csrBuild2{
-                        print("CSR string with header and footer")
-                        print(csrWithHeaderFooter)
-                    }
-                    expect(csrBuild?.count) > 0
-                    expect(csrBuild2?.contains("BEGIN")) == true
-                }
-                
-                /*
-                it("will eventually pass") {
-                    var time = "passing"
-
-                    DispatchQueue.main.async {
-                        time = "done"
-                    }
-
-                    waitUntil { done in
-                        Thread.sleep(forTimeInterval: 0.5)
-                        expect(time) == "done"
-
-                        done()
-                    }
-                }*/
+                expect(csrBuild?.count) > 0
+                expect(csrBuild2?.contains("BEGIN")) == true
             }
+
+            it("create CSR using RSA key size 2048 with sha512") {
+                let tagPrivate = "com.csr.private.rsa"
+                let tagPublic = "com.csr.public.rsa"
+                let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha512)
+                let sizeOfKey = keyAlgorithm.availableKeySizes.last!
+                
+                let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                guard let privateKey = potentialPrivateKey,
+                    let publicKey = potentialPublicKey else{
+                        expect(potentialPrivateKey) != nil
+                        expect(potentialPublicKey) != nil
+                        return
+                }
+                
+                let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                guard let publicKeyBits = potentialPublicKeyBits,
+                    let _ = potentialPublicKeyBlockSize else{
+                        expect(potentialPublicKeyBits) != nil
+                        expect(potentialPublicKeyBlockSize) != nil
+                        return
+                }
+                
+                //Initiale CSR
+                let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                //Build the CSR
+                let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                if let csrRegular = csrBuild{
+                    print("CSR string no header and footer")
+                    print(csrRegular)
+                }
+                let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                if let csrWithHeaderFooter = csrBuild2{
+                    print("CSR string with header and footer")
+                    print(csrWithHeaderFooter)
+                }
+                expect(csrBuild?.count) > 0
+                expect(csrBuild2?.contains("BEGIN")) == true
+            }
+            
+            it("create CSR using RSA key size 2048 with sha256") {
+                let tagPrivate = "com.csr.private.rsa256"
+                let tagPublic = "com.csr.public.rsa256"
+                let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha256)
+                let sizeOfKey = keyAlgorithm.availableKeySizes.last!
+                
+                let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                guard let privateKey = potentialPrivateKey,
+                    let publicKey = potentialPublicKey else{
+                        expect(potentialPrivateKey) != nil
+                        expect(potentialPublicKey) != nil
+                        return
+                }
+                
+                let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                guard let publicKeyBits = potentialPublicKeyBits,
+                    let _ = potentialPublicKeyBlockSize else{
+                        expect(potentialPublicKeyBits) != nil
+                        expect(potentialPublicKeyBlockSize) != nil
+                        return
+                }
+                
+                //Initiale CSR
+                let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                //Build the CSR
+                let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                if let csrRegular = csrBuild{
+                    print("CSR string no header and footer")
+                    print(csrRegular)
+                }
+                let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                if let csrWithHeaderFooter = csrBuild2{
+                    print("CSR string with header and footer")
+                    print(csrWithHeaderFooter)
+                }
+                expect(csrBuild?.count) > 0
+                expect(csrBuild2?.contains("BEGIN")) == true
+            }
+            
+            it("create CSR using RSA key size 2048 with sha1") {
+                let tagPrivate = "com.csr.private.rsa1"
+                let tagPublic = "com.csr.public.rsa1"
+                let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha1)
+                let sizeOfKey = keyAlgorithm.availableKeySizes.last!
+                
+                let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                guard let privateKey = potentialPrivateKey,
+                    let publicKey = potentialPublicKey else{
+                        expect(potentialPrivateKey) != nil
+                        expect(potentialPublicKey) != nil
+                        return
+                }
+                
+                let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                guard let publicKeyBits = potentialPublicKeyBits,
+                    let _ = potentialPublicKeyBlockSize else{
+                        expect(potentialPublicKeyBits) != nil
+                        expect(potentialPublicKeyBlockSize) != nil
+                        return
+                }
+                
+                //Initiale CSR
+                let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                //Build the CSR
+                let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                if let csrRegular = csrBuild{
+                    print("CSR string no header and footer")
+                    print(csrRegular)
+                }
+                let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                if let csrWithHeaderFooter = csrBuild2{
+                    print("CSR string with header and footer")
+                    print(csrWithHeaderFooter)
+                }
+                expect(csrBuild?.count) > 0
+                expect(csrBuild2?.contains("BEGIN")) == true
+            }
+            
+            it("create CSR using RSA key size 1024 with sha512") {
+                let tagPrivate = "com.csr.private.rsa1024"
+                let tagPublic = "com.csr.public.rsa1024"
+                let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha512)
+                let sizeOfKey = keyAlgorithm.availableKeySizes[1]
+                
+                let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                guard let privateKey = potentialPrivateKey,
+                    let publicKey = potentialPublicKey else{
+                        expect(potentialPrivateKey) != nil
+                        expect(potentialPublicKey) != nil
+                        return
+                }
+                
+                let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                guard let publicKeyBits = potentialPublicKeyBits,
+                    let _ = potentialPublicKeyBlockSize else{
+                        expect(potentialPublicKeyBits) != nil
+                        expect(potentialPublicKeyBlockSize) != nil
+                        return
+                }
+                
+                //Initiale CSR
+                let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                //Build the CSR
+                let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                if let csrRegular = csrBuild{
+                    print("CSR string no header and footer")
+                    print(csrRegular)
+                }
+                let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                if let csrWithHeaderFooter = csrBuild2{
+                    print("CSR string with header and footer")
+                    print(csrWithHeaderFooter)
+                }
+                expect(csrBuild?.count) > 0
+                expect(csrBuild2?.contains("BEGIN")) == true
+            }
+            
+            it("create CSR using RSA key size 1024 with sha256") {
+                let tagPrivate = "com.csr.private.rsa1024sha256"
+                let tagPublic = "com.csr.public.rsa1024sha256"
+                let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha256)
+                let sizeOfKey = keyAlgorithm.availableKeySizes[1]
+                
+                let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                guard let privateKey = potentialPrivateKey,
+                    let publicKey = potentialPublicKey else{
+                        expect(potentialPrivateKey) != nil
+                        expect(potentialPublicKey) != nil
+                        return
+                }
+                
+                let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                guard let publicKeyBits = potentialPublicKeyBits,
+                    let _ = potentialPublicKeyBlockSize else{
+                        expect(potentialPublicKeyBits) != nil
+                        expect(potentialPublicKeyBlockSize) != nil
+                        return
+                }
+                
+                //Initiale CSR
+                let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                //Build the CSR
+                let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                if let csrRegular = csrBuild{
+                    print("CSR string no header and footer")
+                    print(csrRegular)
+                }
+                let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                if let csrWithHeaderFooter = csrBuild2{
+                    print("CSR string with header and footer")
+                    print(csrWithHeaderFooter)
+                }
+                expect(csrBuild?.count) > 0
+                expect(csrBuild2?.contains("BEGIN")) == true
+            }
+            
+            it("create CSR using RSA key size 1024 with sha1") {
+                let tagPrivate = "com.csr.private.rsa1024sha1"
+                let tagPublic = "com.csr.public.rsa1024sha1"
+                let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha1)
+                let sizeOfKey = keyAlgorithm.availableKeySizes[1]
+                
+                let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                guard let privateKey = potentialPrivateKey,
+                    let publicKey = potentialPublicKey else{
+                        expect(potentialPrivateKey) != nil
+                        expect(potentialPublicKey) != nil
+                        return
+                }
+                
+                let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                guard let publicKeyBits = potentialPublicKeyBits,
+                    let _ = potentialPublicKeyBlockSize else{
+                        expect(potentialPublicKeyBits) != nil
+                        expect(potentialPublicKeyBlockSize) != nil
+                        return
+                }
+                
+                //Initiale CSR
+                let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                //Build the CSR
+                let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                if let csrRegular = csrBuild{
+                    print("CSR string no header and footer")
+                    print(csrRegular)
+                }
+                let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                if let csrWithHeaderFooter = csrBuild2{
+                    print("CSR string with header and footer")
+                    print(csrWithHeaderFooter)
+                }
+                expect(csrBuild?.count) > 0
+                expect(csrBuild2?.contains("BEGIN")) == true
+            }
+            
+            it("fail to create CSR using RSA key size 512 with sha512") {
+                let tagPrivate = "com.csr.private.rsa512sha512"
+                let tagPublic = "com.csr.public.rsa512sha512"
+                let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha512)
+                let sizeOfKey = keyAlgorithm.availableKeySizes[0]
+                
+                let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                guard let privateKey = potentialPrivateKey,
+                    let publicKey = potentialPublicKey else{
+                        expect(potentialPrivateKey) != nil
+                        expect(potentialPublicKey) != nil
+                        return
+                }
+                
+                let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                guard let publicKeyBits = potentialPublicKeyBits,
+                    let _ = potentialPublicKeyBlockSize else{
+                        expect(potentialPublicKeyBits) != nil
+                        expect(potentialPublicKeyBlockSize) != nil
+                        return
+                }
+                
+                //Initiale CSR
+                let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                //Build the CSR
+                let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                if let csrRegular = csrBuild{
+                    print("CSR string no header and footer")
+                    print(csrRegular)
+                }
+                let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                if let csrWithHeaderFooter = csrBuild2{
+                    print("CSR string with header and footer")
+                    print(csrWithHeaderFooter)
+                }
+                expect(csrBuild2).to(beNil())
+                expect(csrBuild2).to(beNil())
+            }
+            
+            it("create CSR using RSA key size 512 with sha256") {
+                let tagPrivate = "com.csr.private.rsa512"
+                let tagPublic = "com.csr.public.rsa512"
+                let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha256)
+                let sizeOfKey = keyAlgorithm.availableKeySizes[0]
+                
+                let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                guard let privateKey = potentialPrivateKey,
+                    let publicKey = potentialPublicKey else{
+                        expect(potentialPrivateKey) != nil
+                        expect(potentialPublicKey) != nil
+                        return
+                }
+                
+                let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                guard let publicKeyBits = potentialPublicKeyBits,
+                    let _ = potentialPublicKeyBlockSize else{
+                        expect(potentialPublicKeyBits) != nil
+                        expect(potentialPublicKeyBlockSize) != nil
+                        return
+                }
+                
+                //Initiale CSR
+                let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                //Build the CSR
+                let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                if let csrRegular = csrBuild{
+                    print("CSR string no header and footer")
+                    print(csrRegular)
+                }
+                let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                if let csrWithHeaderFooter = csrBuild2{
+                    print("CSR string with header and footer")
+                    print(csrWithHeaderFooter)
+                }
+                expect(csrBuild?.count) > 0
+                expect(csrBuild2?.contains("BEGIN")) == true
+            }
+            
+            it("create CSR using RSA key size 512 with sha1") {
+                let tagPrivate = "com.csr.private.rsa512sha1"
+                let tagPublic = "com.csr.public.rsa512sha1"
+                let keyAlgorithm = KeyAlgorithm.rsa(signatureType: .sha1)
+                let sizeOfKey = keyAlgorithm.availableKeySizes[0]
+                
+                let (potentialPrivateKey,potentialPublicKey) = self.generateKeysAndStoreInKeychain(keyAlgorithm, keySize: sizeOfKey, tagPrivate: tagPrivate, tagPublic: tagPublic)
+                guard let privateKey = potentialPrivateKey,
+                    let publicKey = potentialPublicKey else{
+                        expect(potentialPrivateKey) != nil
+                        expect(potentialPublicKey) != nil
+                        return
+                }
+                
+                let (potentialPublicKeyBits, potentialPublicKeyBlockSize) = self.getPublicKeyBits(keyAlgorithm, publicKey: publicKey, tagPublic: tagPublic)
+                guard let publicKeyBits = potentialPublicKeyBits,
+                    let _ = potentialPublicKeyBlockSize else{
+                        expect(potentialPublicKeyBits) != nil
+                        expect(potentialPublicKeyBlockSize) != nil
+                        return
+                }
+                
+                //Initiale CSR
+                let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test", organizationName: "Test", organizationUnitName: "Test", countryName: "US", stateOrProvinceName: "KY", localityName: "Test", keyAlgorithm: keyAlgorithm)
+                //Build the CSR
+                let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
+                if let csrRegular = csrBuild{
+                    print("CSR string no header and footer")
+                    print(csrRegular)
+                }
+                let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+                if let csrWithHeaderFooter = csrBuild2{
+                    print("CSR string with header and footer")
+                    print(csrWithHeaderFooter)
+                }
+                expect(csrBuild?.count) > 0
+                expect(csrBuild2?.contains("BEGIN")) == true
+            }
+            
+            /*
+            it("will eventually pass") {
+                var time = "passing"
+
+                DispatchQueue.main.async {
+                    time = "done"
+                }
+
+                waitUntil { done in
+                    Thread.sleep(forTimeInterval: 0.5)
+                    expect(time) == "done"
+
+                    done()
+                }
+            }*/
+        
         }
     }
     

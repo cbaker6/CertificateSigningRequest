@@ -11,7 +11,7 @@ Supports RSA (key size: 512, 1024, 2048) and EC inside/outside of secure enclave
 
 To use, follow the following steps:
 
-1. Generate your publicKey/privateKey pair. This can be done using Keychain in iOS. An example can be found in the `generateKeysAndStoreInKeychain` function in the [testfile](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L403).
+1. Generate your publicKey/privateKey pair. This can be done using Keychain in iOS. An example can be found in the `generateKeysAndStoreInKeychain` function in the [testfile](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L440).
 2.  Get your publicKey in bits by querying it from the iOS keychain using `String(kSecReturnData): kCFBooleanTrue` in your query. For example:
 
 ```swift
@@ -29,7 +29,7 @@ guard let publicKeyBits = tempPublicKeyBits as? Data else {
     return
 }
 ```
-3. Initiatlize the `CertificateSigningRequest` using `KeyAlgorithm.ec` or `KeyAlgorithm.rsa` (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L36) file: 
+3. Initiatlize the `CertificateSigningRequest` using `KeyAlgorithm.ec` or `KeyAlgorithm.rsa` (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L34) file: 
 ```swift 
 let algorithm = KeyAlgorithm.ec(signatureType: .sha256)
 let csr = CertificateSigningRequest()
@@ -49,7 +49,7 @@ let csr = CertificateSigningRequest(commonName: String?, organizationName:String
 
 Note:
 
-You can test if your CSRs are correct by running the [test file](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L68). The output of the CSR will print in the console window. You can test if the CSR was created correctly by pasting it here: https://redkestrel.co.uk/products/decoder/ or by using openssl.
+You can test if your CSRs are correct by running and setting a break point the [test file](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L66). You can also let all test run and test the different CSR's. The output of the CSR will print in the console window. You can output the CSR's and your own app by printing to the console and check if they are created correctly by pasting them here: https://redkestrel.co.uk/products/decoder/ or by using openssl.
 
 ## Example
 
