@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CertificateSigningRequest'
-  s.version          = '1.2'
+  s.version          = '1.21'
   s.summary          = 'Generate self-signed certificate signing requests (CSRs) on iOS, macOS, and macCatalyst.'
 
 # This description is used to generate tags and improve search results.
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/cbaker6/CertificateSigningRequest'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'GNU', :file => 'LICENSE' }
+  s.license          = { :type => 'GPLv2', :file => 'LICENSE' }
   s.author           = { 'cbaker6' => 'coreyearleon@icloud.com' }
   s.source           = { :git => 'https://github.com/cbaker6/CertificateSigningRequest.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
