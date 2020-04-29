@@ -1,0 +1,12 @@
+use_frameworks!
+
+target 'CertificateSigningRequest_Example' do
+  pod 'CertificateSigningRequest', :path => '../'
+
+  target 'CertificateSigningRequest_Tests' do
+    inherit! :search_paths
+
+    pod 'Quick', '~> 1.2.0'
+    pod 'Nimble', '~> 7.0'
+  end
+end
