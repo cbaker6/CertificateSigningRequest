@@ -43,9 +43,9 @@ let csr = CertificateSigningRequest(commonName: String?, organizationName:String
  //Or if you want `CertificateSigningRequest` to verify the signature after building, pass in your publicKey to the same method:
  let builtCSR = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
  ``` 
--- Two other methods are available depending on your needs.
---- To get CSR without header and footer info use: `let builtCSR = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)`.
---- To get CSR as Data use: `let builtCSR = csr.build(publicKeyBits, privateKey: privateKey)`.
+- Two other methods are available depending on your needs.
+- To get CSR without header and footer info use: `let builtCSR = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)`.
+- To get CSR as Data use: `let builtCSR = csr.build(publicKeyBits, privateKey: privateKey)`.
 
 Note:
 
