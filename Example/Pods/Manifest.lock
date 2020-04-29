@@ -1,0 +1,27 @@
+PODS:
+  - CertificateSigningRequest (1.1)
+  - Nimble (7.3.4)
+  - Quick (1.2.0)
+
+DEPENDENCIES:
+  - CertificateSigningRequest (from `../`)
+  - Nimble (~> 7.0)
+  - Quick (~> 1.2.0)
+
+SPEC REPOS:
+  trunk:
+    - Nimble
+    - Quick
+
+EXTERNAL SOURCES:
+  CertificateSigningRequest:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CertificateSigningRequest: 57b8bc63981428dc864260baf7495f27d52d644f
+  Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+
+PODFILE CHECKSUM: b0241bf7f0af64b7cf27906cb18896b8585e5993
+
+COCOAPODS: 1.9.1

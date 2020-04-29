@@ -28,9 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1314AC813EACEDFFC6F1CFC6 /* CertificateSigningRequest.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = CertificateSigningRequest.podspec; path = ../CertificateSigningRequest.podspec; sourceTree = "<group>"; };
+		1314AC813EACEDFFC6F1CFC6 /* CertificateSigningRequest.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CertificateSigningRequest.podspec; path = ../CertificateSigningRequest.podspec; sourceTree = "<group>"; };
 		42CB196A0DC69AE256981883 /* Pods-CertificateSigningRequest_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Tests.release.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Tests/Pods-CertificateSigningRequest_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		4A8FADCBE0347DDE12DAE851 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		4A8FADCBE0347DDE12DAE851 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CertificateSigningRequest_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CertificateSigningRequest_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,8 +44,9 @@
 		650715B9021F1F5BE493A359 /* Pods-CertificateSigningRequest_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Example.debug.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Example/Pods-CertificateSigningRequest_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		70C5AFEDAC2945660B683D91 /* Pods-CertificateSigningRequest_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Example.release.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Example/Pods-CertificateSigningRequest_Example.release.xcconfig"; sourceTree = "<group>"; };
 		8EEAEA18FB37738487864EA9 /* Pods_CertificateSigningRequest_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CertificateSigningRequest_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91715AA5245903CC0090E9C7 /* CertificateSigningRequest_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CertificateSigningRequest_Example.entitlements; sourceTree = "<group>"; };
 		98FA40EA7CB700D8B323B84F /* Pods_CertificateSigningRequest_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CertificateSigningRequest_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BFDB760D52A188EDAC1F28E2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		BFDB760D52A188EDAC1F28E2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		FEDB8EC97962B2EEA411D874 /* Pods-CertificateSigningRequest_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Tests/Pods-CertificateSigningRequest_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,13 +78,13 @@
 				FEDB8EC97962B2EEA411D874 /* Pods-CertificateSigningRequest_Tests.debug.xcconfig */,
 				42CB196A0DC69AE256981883 /* Pods-CertificateSigningRequest_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				91715AA5245903CC0090E9C7 /* CertificateSigningRequest_Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for CertificateSigningRequest */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -214,10 +215,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = K26KDKYY38;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = K26KDKYY38;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -228,6 +231,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -440,7 +444,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -486,7 +490,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -499,13 +503,18 @@
 			baseConfigurationReference = 650715B9021F1F5BE493A359 /* Pods-CertificateSigningRequest_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CertificateSigningRequest_Example.entitlements;
+				DEVELOPMENT_TEAM = K26KDKYY38;
 				INFOPLIST_FILE = CertificateSigningRequest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -514,13 +523,18 @@
 			baseConfigurationReference = 70C5AFEDAC2945660B683D91 /* Pods-CertificateSigningRequest_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CertificateSigningRequest_Example.entitlements;
+				DEVELOPMENT_TEAM = K26KDKYY38;
 				INFOPLIST_FILE = CertificateSigningRequest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -528,6 +542,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FEDB8EC97962B2EEA411D874 /* Pods-CertificateSigningRequest_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = K26KDKYY38;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -550,6 +565,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 42CB196A0DC69AE256981883 /* Pods-CertificateSigningRequest_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = K26KDKYY38;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",

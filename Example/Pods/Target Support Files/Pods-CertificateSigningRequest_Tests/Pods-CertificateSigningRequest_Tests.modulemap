@@ -1,0 +1,6 @@
+framework module Pods_CertificateSigningRequest_Tests {
+  umbrella header "Pods-CertificateSigningRequest_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

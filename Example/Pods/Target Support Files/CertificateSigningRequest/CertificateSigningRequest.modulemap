@@ -1,0 +1,6 @@
+framework module CertificateSigningRequest {
+  umbrella header "CertificateSigningRequest-umbrella.h"
+
+  export *
+  module * { export * }
+}
