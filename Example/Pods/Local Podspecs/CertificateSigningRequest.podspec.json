@@ -1,6 +1,6 @@
 {
   "name": "CertificateSigningRequest",
-  "version": "1.22",
+  "version": "1.23",
   "summary": "Generate self-signed certificate signing requests (CSRs) on iOS, macOS, and macCatalyst.",
   "description": "Enables your app to create self-signed CSRs directly on iOS devices. These CSRs can then be sent somewhere else and turned into certificates. The framework should also work on macCatalyst and macOS 10.12+, assuming the keys are created correctly (the test cases shows how to create keys using the iOS Keychain).",
   "homepage": "https://github.com/cbaker6/CertificateSigningRequest",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/cbaker6/CertificateSigningRequest.git",
-    "tag": "1.22"
+    "tag": "1.23"
   },
   "platforms": {
     "ios": "9.3",
