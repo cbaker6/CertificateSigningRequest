@@ -1,34 +1,18 @@
 # CertificateSigningRequest
-![Swift Version 4.2](https://img.shields.io/badge/Swift-v5.0-yellow.svg)
+![Swift Version 5.0](https://img.shields.io/badge/Swift-v5.0-yellow.svg)
 [![CI Status](https://img.shields.io/travis/cbaker6/CertificateSigningRequest.svg?style=flat)](https://travis-ci.org/cbaker6/CertificateSigningRequest)
 [![Version](https://img.shields.io/cocoapods/v/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
 [![License](https://img.shields.io/cocoapods/l/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
 [![Platform](https://img.shields.io/cocoapods/p/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
 
-Generate a certificate signing request (CSR) in iOS using Swift
+Generate a certificate signing request (CSR) in iOS/macOS using Swift.
 
-This is a port of ios-csr by Ales Teska (https://github.com/ateska/ios-csr) from Objective-C to Swift 5.0 (a Swift 3.2 version is available on the "3.2" branch).
-Additions have been made to support RSA and EC (iOS only supports 256 bit keys for now) allow SHA256 and SHA512. Also, this is setup to be added as a framework to your project.
+Supports RSA (key size: 512, 1024, 2048) and EC inside/outside of secure enclave (iOS only supports 256 bit keys for now), SHA1, SHA256, and SHA512. 
 
-To use, initiatlize the class using one of the following (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequest/blob/460e288156285e910af3181e0298a3aadd7f53a9/Example/Tests/Tests.swift#L19) file: 
-- `let csr = CertificateSigningRequest()`
-- `let csr = CertificateSigningRequest(keyAlgorithm: KeyAlgorithm)`
-- `let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: KeyAlgorithm)`
+To use, follow the following steps:
 
-Then simply build your CSR using your publicKey(bits) and privateKey using, `let builtCSR = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)`.
-
-Two other methods are available depending on your needs.
-
-- To get CSR without header and footer info use: `let builtCSR = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)`.
-- To get CSR as Data use: `let builtCSR = csr.build(publicKeyBits, privateKey: privateKey)`.
-
-Note1: To use out of the box, build the project, look under frameworks, and drag "CertificateSigningRequest.framework" into your project. You will need to do this in two places:
-
-- In your project Targets, click on "General"
-- Place "CertificateSigningRequest.framework" in "Embedded Binaries" and it should automatically appear in "Linked Frameworks and Libraries"
-- Then, simply place "import CertificateSigningRequest" at the top of any file that needs the framework.
-
-Note2: You can get your publicKey in bit by querying it from the iOS keychain using `String(kSecReturnData): kCFBooleanTrue` in your query. For example:
+1. Generate your publicKey/privateKey pair. This can be done using Keychain in iOS. An example can be found in the `generateKeysAndStoreInKeychain` function in the [testfile](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L440).
+2.  Get your publicKey in bits by querying it from the iOS keychain using `String(kSecReturnData): kCFBooleanTrue` in your query. For example:
 
 ```swift
 let keyBlockSize = SecKeyGetBlockSize(publicKey)
@@ -41,14 +25,31 @@ let query: [String: AnyObject] = [
 ]
 var tempPublicKeyBits:AnyObject?
 var _ = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
-guard let keyBits = tempPublicKeyBits as? Data else {
-    return (nil,nil)
+guard let publicKeyBits = tempPublicKeyBits as? Data else {
+    return
 }
 ```
+3. Initiatlize the `CertificateSigningRequest` using `KeyAlgorithm.ec` or `KeyAlgorithm.rsa` (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L34) file: 
+```swift 
+let algorithm = KeyAlgorithm.ec(signatureType: .sha256)
+let csr = CertificateSigningRequest()
+let csr = CertificateSigningRequest(keyAlgorithm: algorithm)
+let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: algorithm)
+```
 
-You can test if your CSRs are correct by running the [test file](https://github.com/cbaker6/CertificateSigningRequest/blob/830b97fa1435024209577917628a58aa53323990/Example/Tests/Tests.swift#L68). The output of the CSR will print in the console window. You can test if the CSR was created correctly here: https://redkestrel.co.uk/products/decoder/
+4. Then simply build your CSR using your publicKey(bits) and privateKey using:
+ ```swift 
+ let builtCSR = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
+ //Or if you want `CertificateSigningRequest` to verify the signature after building, pass in your publicKey to the same method:
+ let builtCSR = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
+ ``` 
+- Two other methods are available depending on your needs.
+- To get CSR without header and footer info use: `let builtCSR = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)`.
+- To get CSR as Data use: `let builtCSR = csr.build(publicKeyBits, privateKey: privateKey)`.
 
-~~Note3: If you use this as a framework, you will need to go to Targets->APPNAME->General and add "CertificateSigningRequest.framework" to Embedded Binaries". You may need to add "CommonCrypto.framework" as well. If you just use want to use CertificateSigningRequest.swift you will need to import CommonCrypto into your project. To do this follow the directions here: http://stackoverflow.com/questions/25248598/importing-commoncrypto-in-a-swift-framework?answertab=votes#tab-top~~
+Note:
+
+You can test if your CSRs are correct by running and setting a break point the [test file](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L66). You can also let all test run and test the different CSR's. The output of the CSR will print in the console window. You can output the CSR's and your own app by printing to the console and check if they are created correctly by pasting them here: https://redkestrel.co.uk/products/decoder/ or by using openssl.
 
 ## Example
 
@@ -69,6 +70,8 @@ vtFAmaxL8+rK+Hr55f0PLZQ5PcM=
 You can test if the CSR was created correctly here: [https://redkestrel.co.uk/products/decoder/](https://redkestrel.co.uk/products/decoder/)
 
 ## Requirements
+- iOS 9+
+- mac OS 10.12+
 
 ## Installation
 
@@ -79,10 +82,14 @@ it, simply add the following line to your Podfile:
 pod 'CertificateSigningRequest'
 ```
 
+If you would like to use as a framework, clone and build the project, look under frameworks, and drag "CertificateSigningRequest.framework" into "Frameworks" section of your project, "check copy if needed".
+
+- In your project Targets, click on "General", make sure "CertificateSigningRequest.framework" shows up under "Embedded Binaries" and it should automatically appear in "Linked Frameworks and Libraries"
+- Then, simply place `import CertificateSigningRequest` at the top of any file that needs the framework.
+
 ## Author
 
 cbaker6, coreyearleon@icloud.com
 
 ## License
-
-CertificateSigningRequest is available under the MIT license. See the LICENSE file for more info.
+Components of CertificateSigningRequest was originally in [ios-csr](https://github.com/ateska/ios-csr) by Ales Teska written in Objective-C and ported by the author of CertificateSigningRequest to Swift. Therefore CertificateSigningRequest has the same GPLv2 license. See the LICENSE file for more info.

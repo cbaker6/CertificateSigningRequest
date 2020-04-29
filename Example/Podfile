@@ -1,5 +1,6 @@
 use_frameworks!
 platform :ios, '10.0'
+#platform :macos, '10.12'
 target 'CertificateSigningRequest_Example' do
   pod 'CertificateSigningRequest', :path => '../'
 
