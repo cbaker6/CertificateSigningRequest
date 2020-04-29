@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1314AC813EACEDFFC6F1CFC6 /* CertificateSigningRequest.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CertificateSigningRequest.podspec; path = ../CertificateSigningRequest.podspec; sourceTree = "<group>"; };
+		1314AC813EACEDFFC6F1CFC6 /* CertificateSigningRequest.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CertificateSigningRequest.podspec; path = ../CertificateSigningRequest.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		42CB196A0DC69AE256981883 /* Pods-CertificateSigningRequest_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Tests.release.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Tests/Pods-CertificateSigningRequest_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4A8FADCBE0347DDE12DAE851 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CertificateSigningRequest_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CertificateSigningRequest_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };

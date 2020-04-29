@@ -1,5 +1,5 @@
 PODS:
-  - CertificateSigningRequest (1.22)
+  - CertificateSigningRequest (1.23)
   - Nimble (8.0.7)
   - Quick (2.2.0)
 
@@ -18,7 +18,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CertificateSigningRequest: b0252d9e5a0d557fe4d5a5eff2977667c7db2557
+  CertificateSigningRequest: d427d2c5582a908b7ae2069008e7e47d446d2651
   Nimble: a73af6ecd4c9106f434f3d55fc54570be3739e0b
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
 
