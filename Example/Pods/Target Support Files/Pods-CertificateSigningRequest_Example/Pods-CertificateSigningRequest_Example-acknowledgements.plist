@@ -690,7 +690,7 @@ Public License instead of this License.  But first, please read
 &lt;http://www.gnu.org/philosophy/why-not-lgpl.html&gt;.
 </string>
 			<key>License</key>
-			<string>GNU</string>
+			<string>GPLv2</string>
 			<key>Title</key>
 			<string>CertificateSigningRequest</string>
 			<key>Type</key>
