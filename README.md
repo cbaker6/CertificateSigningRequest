@@ -30,12 +30,12 @@ guard let publicKeyBits = tempPublicKeyBits as? Data else {
     return
 }
 ```
-3. Initiatlize the `CertificateSigningRequest` using `KeyAlgorithm.ec` or `KeyAlgorithm.rsa` (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L34) file: 
+3. Initiatlize the `CertificateSigningRequest` using `KeyAlgorithm.ec` or `KeyAlgorithm.rsa` (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L34) file. Below are 3 possible ways to initialize: 
 ```swift 
+let csr = CertificateSigningRequest() //CSR with no fields, will use defaults of an RSA key with sha512
 let algorithm = KeyAlgorithm.ec(signatureType: .sha256)
-let csr = CertificateSigningRequest()
-let csr = CertificateSigningRequest(keyAlgorithm: algorithm)
-let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: algorithm)
+let csr = CertificateSigningRequest(keyAlgorithm: algorithm) //CSR with a specific key 
+let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: algorithm) //Define all fields and key algorithm
 ```
 
 4. Then simply build your CSR using your publicKey(bits) and privateKey using:
@@ -76,6 +76,10 @@ You can test if the CSR was created correctly here: [https://redkestrel.co.uk/pr
 
 ## Installation
 
+### Swift Package Manager (SPM) - Option 1
+CertificateSigningRequest can be installed via SPM. Open an existing project or create a new Xcode project and navigate to `File > Swift Packages > Add Package Dependency`. Enter the url `https://github.com/cbaker6/CertificateSigningRequest.git` and tap `Next`. Choose the master branch, and on the next screen, check off the package.
+
+### Cocoapods - Option 2
 CertificateSigningRequest is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
@@ -83,6 +87,7 @@ it, simply add the following line to your Podfile:
 pod 'CertificateSigningRequest'
 ```
 
+### Embedded Framework - Option 3
 If you would like to use as a framework, clone and build the project, look under frameworks, and drag "CertificateSigningRequest.framework" into "Frameworks" section of your project, "check copy if needed".
 
 - In your project Targets, click on "General", make sure "CertificateSigningRequest.framework" shows up under "Embedded Binaries" and it should automatically appear in "Linked Frameworks and Libraries"
