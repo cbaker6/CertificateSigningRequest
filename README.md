@@ -30,12 +30,12 @@ guard let publicKeyBits = tempPublicKeyBits as? Data else {
     return
 }
 ```
-3. Initiatlize the `CertificateSigningRequest` using `KeyAlgorithm.ec` or `KeyAlgorithm.rsa` (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L34) file: 
+3. Initiatlize the `CertificateSigningRequest` using `KeyAlgorithm.ec` or `KeyAlgorithm.rsa` (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequest/blob/master/Example/Tests/Tests.swift#L34) file. Below are 3 possible ways to initialize: 
 ```swift 
+let csr = CertificateSigningRequest() //CSR with no fields, will use defaults of an RSA key with sha512
 let algorithm = KeyAlgorithm.ec(signatureType: .sha256)
-let csr = CertificateSigningRequest()
-let csr = CertificateSigningRequest(keyAlgorithm: algorithm)
-let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: algorithm)
+let csr = CertificateSigningRequest(keyAlgorithm: algorithm) //CSR with a specific key 
+let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: algorithm) //Define all fields and key algorithm
 ```
 
 4. Then simply build your CSR using your publicKey(bits) and privateKey using:
