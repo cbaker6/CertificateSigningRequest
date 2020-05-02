@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target  = '9.3'
   s.osx.deployment_target  = '10.12'
   s.swift_versions = ['4.0', '5.0']
-  s.source_files = 'CertificateSigningRequest/Classes/**/*'
+  s.source_files = 'CertificateSigningRequest/Classes/**/*.swift'
   
   # s.resource_bundles = {
   #   'CertificateSigningRequest' => ['CertificateSigningRequest/Assets/*.png']
