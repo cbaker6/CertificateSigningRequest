@@ -23,6 +23,6 @@
     "4.0",
     "5.0"
   ],
-  "source_files": "CertificateSigningRequest/Classes/**/*",
+  "source_files": "CertificateSigningRequest/Classes/**/*.swift",
   "swift_version": "5.0"
 }

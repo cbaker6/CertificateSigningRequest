@@ -18,7 +18,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CertificateSigningRequest: d427d2c5582a908b7ae2069008e7e47d446d2651
+  CertificateSigningRequest: 7993f6d8c8df5a748e6ea5777c4a4b1ac1a8ee51
   Nimble: a73af6ecd4c9106f434f3d55fc54570be3739e0b
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
 
