@@ -2,20 +2,28 @@
 # * https://www.objc.io/issues/6-build-tools/travis-ci/
 # * https://github.com/supermarin/xcpretty#usage
 
-osx_image: xcode11.3
+osx_image: xcode11.5
 language: swift
-# cache: cocoapods
-# podfile: Example/Podfile
-# before_install:
-# - gem install cocoapods # Since Travis is not always on latest version
-# - pod install --project-directory=Example
-# -sdk iphonesimulator13.2
+stage: Build
 script:
-- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/CertificateSigningRequest.xcworkspace -scheme CertificateSigningRequest-Example -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.3' ONLY_ACTIVE_ARCH=NO | xcpretty
-- pod lib lint
+  - set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/CertificateSigningRequest.xcworkspace -scheme CertificateSigningRequest-Example -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.3' ONLY_ACTIVE_ARCH=NO | xcpretty
+
+jobs:
+  include:
+    - stage: Package Managers
+      env: Swift Package Manager
+      script:
+        - swift build
+        - swift test
+    - stage: Package Managers
+      env: Cocoapods
+      script:
+        - pod lib lint
+
 deploy:
   provider: script
   script:
+  - pod lib lint
   - source ~/.rvm/scripts/rvm
   - rvm use default
   - pod trunk push CertificateSigningRequest.podspec
