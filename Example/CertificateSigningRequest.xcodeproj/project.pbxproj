@@ -12,7 +12,12 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		915C84CB24BD253500AA187C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C84CA24BD253500AA187C /* AppDelegate.swift */; };
+		915C84CD24BD253500AA187C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C84CC24BD253500AA187C /* ContentView.swift */; };
+		915C84CF24BD253600AA187C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 915C84CE24BD253600AA187C /* Assets.xcassets */; };
+		915C84D224BD253600AA187C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 915C84D124BD253600AA187C /* Preview Assets.xcassets */; };
+		915C84D524BD253600AA187C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 915C84D324BD253600AA187C /* Main.storyboard */; };
+		915C84DC24BD268E00AA187C /* CertificateSigningRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C84DB24BD268E00AA187C /* CertificateSigningRequestTests.swift */; };
 		9B1DE81A7BE39CA2E4A553FE /* Pods_CertificateSigningRequest_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FA40EA7CB700D8B323B84F /* Pods_CertificateSigningRequest_Example.framework */; };
 		EDEFB8716C5C8BCD20CFF5BF /* Pods_CertificateSigningRequest_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEAEA18FB37738487864EA9 /* Pods_CertificateSigningRequest_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -25,13 +30,20 @@
 			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
 			remoteInfo = CertificateSigningRequest;
 		};
+		915C84DD24BD274900AA187C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 915C84C724BD253500AA187C;
+			remoteInfo = "CertificateSigningRequest (macOS)";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1314AC813EACEDFFC6F1CFC6 /* CertificateSigningRequest.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CertificateSigningRequest.podspec; path = ../CertificateSigningRequest.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		42CB196A0DC69AE256981883 /* Pods-CertificateSigningRequest_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Tests.release.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Tests/Pods-CertificateSigningRequest_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4A8FADCBE0347DDE12DAE851 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		607FACD01AFB9204008FA782 /* CertificateSigningRequest_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CertificateSigningRequest_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD01AFB9204008FA782 /* CertificateSigningRequest (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CertificateSigningRequest (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,10 +52,18 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* CertificateSigningRequest_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertificateSigningRequest_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		650715B9021F1F5BE493A359 /* Pods-CertificateSigningRequest_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Example.debug.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Example/Pods-CertificateSigningRequest_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		70C5AFEDAC2945660B683D91 /* Pods-CertificateSigningRequest_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Example.release.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Example/Pods-CertificateSigningRequest_Example.release.xcconfig"; sourceTree = "<group>"; };
 		8EEAEA18FB37738487864EA9 /* Pods_CertificateSigningRequest_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CertificateSigningRequest_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		915C84C824BD253500AA187C /* CertificateSigningRequest (macOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CertificateSigningRequest (macOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		915C84CA24BD253500AA187C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		915C84CC24BD253500AA187C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		915C84CE24BD253600AA187C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		915C84D124BD253600AA187C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		915C84D424BD253600AA187C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		915C84D624BD253600AA187C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		915C84D724BD253600AA187C /* CertificateSigningRequest__macOS_.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CertificateSigningRequest__macOS_.entitlements; sourceTree = "<group>"; };
+		915C84DB24BD268E00AA187C /* CertificateSigningRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CertificateSigningRequestTests.swift; path = ../../Tests/CertificateSigningRequestTests/CertificateSigningRequestTests.swift; sourceTree = "<group>"; };
 		91715AA5245903CC0090E9C7 /* CertificateSigningRequest_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CertificateSigningRequest_Example.entitlements; sourceTree = "<group>"; };
 		98FA40EA7CB700D8B323B84F /* Pods_CertificateSigningRequest_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CertificateSigningRequest_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFDB760D52A188EDAC1F28E2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -67,6 +87,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		915C84C524BD253500AA187C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -86,8 +113,9 @@
 			children = (
 				91715AA5245903CC0090E9C7 /* CertificateSigningRequest_Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
-				607FACD21AFB9204008FA782 /* Example for CertificateSigningRequest */,
+				607FACD21AFB9204008FA782 /* CertificateSigningRequest (iOS) */,
 				607FACE81AFB9204008FA782 /* Tests */,
+				915C84C924BD253500AA187C /* CertificateSigningRequest (macOS) */,
 				607FACD11AFB9204008FA782 /* Products */,
 				1CB85B86AE57C0E8E3B06DDD /* Pods */,
 				90788E550B78F38D6161C2A6 /* Frameworks */,
@@ -97,13 +125,14 @@
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD01AFB9204008FA782 /* CertificateSigningRequest_Example.app */,
+				607FACD01AFB9204008FA782 /* CertificateSigningRequest (iOS).app */,
 				607FACE51AFB9204008FA782 /* CertificateSigningRequest_Tests.xctest */,
+				915C84C824BD253500AA187C /* CertificateSigningRequest (macOS).app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		607FACD21AFB9204008FA782 /* Example for CertificateSigningRequest */ = {
+		607FACD21AFB9204008FA782 /* CertificateSigningRequest (iOS) */ = {
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
@@ -113,7 +142,7 @@
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
-			name = "Example for CertificateSigningRequest";
+			name = "CertificateSigningRequest (iOS)";
 			path = CertificateSigningRequest;
 			sourceTree = "<group>";
 		};
@@ -128,7 +157,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				915C84DB24BD268E00AA187C /* CertificateSigningRequestTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -161,12 +190,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		915C84C924BD253500AA187C /* CertificateSigningRequest (macOS) */ = {
+			isa = PBXGroup;
+			children = (
+				915C84CA24BD253500AA187C /* AppDelegate.swift */,
+				915C84CC24BD253500AA187C /* ContentView.swift */,
+				915C84CE24BD253600AA187C /* Assets.xcassets */,
+				915C84D324BD253600AA187C /* Main.storyboard */,
+				915C84D624BD253600AA187C /* Info.plist */,
+				915C84D724BD253600AA187C /* CertificateSigningRequest__macOS_.entitlements */,
+				915C84D024BD253600AA187C /* Preview Content */,
+			);
+			path = "CertificateSigningRequest (macOS)";
+			sourceTree = "<group>";
+		};
+		915C84D024BD253600AA187C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				915C84D124BD253600AA187C /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		607FACCF1AFB9204008FA782 /* CertificateSigningRequest_Example */ = {
+		607FACCF1AFB9204008FA782 /* CertificateSigningRequest (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "CertificateSigningRequest_Example" */;
+			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "CertificateSigningRequest (iOS)" */;
 			buildPhases = (
 				1F8279FF7A46908A8BD5A39C /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
@@ -178,9 +229,9 @@
 			);
 			dependencies = (
 			);
-			name = CertificateSigningRequest_Example;
+			name = "CertificateSigningRequest (iOS)";
 			productName = CertificateSigningRequest;
-			productReference = 607FACD01AFB9204008FA782 /* CertificateSigningRequest_Example.app */;
+			productReference = 607FACD01AFB9204008FA782 /* CertificateSigningRequest (iOS).app */;
 			productType = "com.apple.product-type.application";
 		};
 		607FACE41AFB9204008FA782 /* CertificateSigningRequest_Tests */ = {
@@ -197,11 +248,29 @@
 			);
 			dependencies = (
 				607FACE71AFB9204008FA782 /* PBXTargetDependency */,
+				915C84DE24BD274900AA187C /* PBXTargetDependency */,
 			);
 			name = CertificateSigningRequest_Tests;
 			productName = Tests;
 			productReference = 607FACE51AFB9204008FA782 /* CertificateSigningRequest_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		915C84C724BD253500AA187C /* CertificateSigningRequest (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 915C84DA24BD253600AA187C /* Build configuration list for PBXNativeTarget "CertificateSigningRequest (macOS)" */;
+			buildPhases = (
+				915C84C424BD253500AA187C /* Sources */,
+				915C84C524BD253500AA187C /* Frameworks */,
+				915C84C624BD253500AA187C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CertificateSigningRequest (macOS)";
+			productName = "CertificateSigningRequest (macOS)";
+			productReference = 915C84C824BD253500AA187C /* CertificateSigningRequest (macOS).app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -209,7 +278,7 @@
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
@@ -223,6 +292,11 @@
 						DevelopmentTeam = K26KDKYY38;
 						LastSwiftMigration = 1140;
 						TestTargetID = 607FACCF1AFB9204008FA782;
+					};
+					915C84C724BD253500AA187C = {
+						CreatedOnToolsVersion = 11.5;
+						DevelopmentTeam = K26KDKYY38;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -239,8 +313,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				607FACCF1AFB9204008FA782 /* CertificateSigningRequest_Example */,
+				607FACCF1AFB9204008FA782 /* CertificateSigningRequest (iOS) */,
 				607FACE41AFB9204008FA782 /* CertificateSigningRequest_Tests */,
+				915C84C724BD253500AA187C /* CertificateSigningRequest (macOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -260,6 +335,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		915C84C624BD253500AA187C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				915C84D524BD253600AA187C /* Main.storyboard in Resources */,
+				915C84D224BD253600AA187C /* Preview Assets.xcassets in Resources */,
+				915C84CF24BD253600AA187C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +449,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				915C84DC24BD268E00AA187C /* CertificateSigningRequestTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		915C84C424BD253500AA187C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				915C84CD24BD253500AA187C /* ContentView.swift in Sources */,
+				915C84CB24BD253500AA187C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,8 +467,13 @@
 /* Begin PBXTargetDependency section */
 		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 607FACCF1AFB9204008FA782 /* CertificateSigningRequest_Example */;
+			target = 607FACCF1AFB9204008FA782 /* CertificateSigningRequest (iOS) */;
 			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
+		};
+		915C84DE24BD274900AA187C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 915C84C724BD253500AA187C /* CertificateSigningRequest (macOS) */;
+			targetProxy = 915C84DD24BD274900AA187C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -393,6 +492,14 @@
 				607FACDF1AFB9204008FA782 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		915C84D324BD253600AA187C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				915C84D424BD253600AA187C /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -446,6 +553,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -494,6 +602,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -583,6 +692,67 @@
 			};
 			name = Release;
 		};
+		915C84D824BD253600AA187C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "CertificateSigningRequest (macOS)/CertificateSigningRequest__macOS_.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "\"CertificateSigningRequest (macOS)/Preview Content\"";
+				DEVELOPMENT_TEAM = K26KDKYY38;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "CertificateSigningRequest (macOS)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.uky.cs.netreconlab.CertificateSigningRequest--macOS-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		915C84D924BD253600AA187C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "CertificateSigningRequest (macOS)/CertificateSigningRequest__macOS_.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"CertificateSigningRequest (macOS)/Preview Content\"";
+				DEVELOPMENT_TEAM = K26KDKYY38;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "CertificateSigningRequest (macOS)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.uky.cs.netreconlab.CertificateSigningRequest--macOS-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -595,7 +765,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "CertificateSigningRequest_Example" */ = {
+		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "CertificateSigningRequest (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				607FACF01AFB9204008FA782 /* Debug */,
@@ -609,6 +779,15 @@
 			buildConfigurations = (
 				607FACF31AFB9204008FA782 /* Debug */,
 				607FACF41AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		915C84DA24BD253600AA187C /* Build configuration list for PBXNativeTarget "CertificateSigningRequest (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				915C84D824BD253600AA187C /* Debug */,
+				915C84D924BD253600AA187C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-               BuildableName = "CertificateSigningRequest_Example.app"
-               BlueprintName = "CertificateSigningRequest_Example"
+               BuildableName = "CertificateSigningRequest (iOS).app"
+               BlueprintName = "CertificateSigningRequest (iOS)"
                ReferencedContainer = "container:CertificateSigningRequest.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "CertificateSigningRequest_Example.app"
-            BlueprintName = "CertificateSigningRequest_Example"
+            BuildableName = "CertificateSigningRequest (iOS).app"
+            BlueprintName = "CertificateSigningRequest (iOS)"
             ReferencedContainer = "container:CertificateSigningRequest.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,8 +78,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "CertificateSigningRequest_Example.app"
-            BlueprintName = "CertificateSigningRequest_Example"
+            BuildableName = "CertificateSigningRequest (iOS).app"
+            BlueprintName = "CertificateSigningRequest (iOS)"
             ReferencedContainer = "container:CertificateSigningRequest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -95,8 +95,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "CertificateSigningRequest_Example.app"
-            BlueprintName = "CertificateSigningRequest_Example"
+            BuildableName = "CertificateSigningRequest (iOS).app"
+            BlueprintName = "CertificateSigningRequest (iOS)"
             ReferencedContainer = "container:CertificateSigningRequest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
