@@ -10,7 +10,7 @@ jobs:
       xcode_scheme: CertificateSigningRequest-Example
       xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 11 Pro Max
     - stage: Package Managers
-      env: Swift Package Manager
+      env: Build
       script:
         - security create-keychain -p "" temporary
         - security default-keychain -s temporary
@@ -20,7 +20,7 @@ jobs:
         - swift test --enable-code-coverage
         - xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
         - bash <(curl https://codecov.io/bash)
-    - stage: Package Managers
+    - stage: Release
       env: Cocoapods
       script:
         - pod lib lint
