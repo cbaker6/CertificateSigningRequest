@@ -677,7 +677,7 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CertificateSigningRequest_Example.app/CertificateSigningRequest_Example";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CertificateSigningRequest (iOS).app/CertificateSigningRequest (iOS)";
 			};
 			name = Debug;
 		};
@@ -699,7 +699,7 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CertificateSigningRequest_Example.app/CertificateSigningRequest_Example";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CertificateSigningRequest (iOS).app/CertificateSigningRequest (iOS)";
 			};
 			name = Release;
 		};
