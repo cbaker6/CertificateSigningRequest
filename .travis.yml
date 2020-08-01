@@ -8,7 +8,7 @@ jobs:
       env: iOS
       xcode_workspace: Example/CertificateSigningRequest.xcworkspace
       xcode_scheme: CertificateSigningRequest-Example
-      xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11 Pro Max
+      xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 11 Pro Max
     - stage: Package Managers
       env: Swift Package Manager
       script:
