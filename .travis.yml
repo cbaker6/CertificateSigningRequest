@@ -10,7 +10,6 @@ jobs:
       xcode_scheme: CertificateSigningRequest-Example
       xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 11 Pro Max
       after_success:
-        - xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
         - bash <(curl https://codecov.io/bash)
     - stage: Build
       env: Swift Package Manager

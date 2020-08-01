@@ -1,0 +1,11 @@
+coverage:
+  ignore:
+    - Example/.*
+  status:
+    patch: true
+    changes: false
+    project:
+      default:
+        target: 70
+comment:
+  require_changes: true
