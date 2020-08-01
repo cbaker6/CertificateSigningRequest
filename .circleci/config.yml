@@ -1,0 +1,45 @@
+version: 2.1
+
+defaults: &defaults
+    macos:
+      xcode: 11.6.0
+    shell: /bin/bash --login -eo pipefail
+
+aliases:
+- &prepare
+  |
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install swiftlint
+
+jobs:
+  ios-build-test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: *prepare
+      - run: xcodebuild -workspace Example/CertificateSigningRequest.xcworkspace -scheme CertificateSigningRequest-Example -destination platform\=iOS\ Simulator,OS\=13.6,name\=iPhone\ 11\ Pro\ Max build test | xcpretty
+      - store_test_results:
+          path: build/reports
+  spm-build-test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: *prepare
+      - run:
+          name: "Create and set the default keychain"
+          command: |
+            security create-keychain -p "" temporary
+            security default-keychain -s temporary
+            security unlock-keychain -p "" temporary
+            security set-keychain-settings -lut 7200 temporary
+      - run: swift build
+      - run: swift test --enable-code-coverage
+      - run: xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
+      - run: bash <(curl https://codecov.io/bash)
+      - store_test_results:
+          path: build/reports
+          
+workflows:
+build-test-lint:
+  jobs:
+    - ios-build-test
+    - spm-build-test
