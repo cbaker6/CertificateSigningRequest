@@ -23,9 +23,6 @@ jobs:
         - provider: script
           skip_cleanup: true
           script:
-            - pod lib lint
-            - source ~/.rvm/scripts/rvm
-            - rvm use default
             - pod trunk push CertificateSigningRequest.podspec
           on:
             - tags: true
