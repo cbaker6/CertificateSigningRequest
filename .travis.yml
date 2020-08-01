@@ -12,6 +12,10 @@ jobs:
       after_success:
         - xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
         - bash <(curl https://codecov.io/bash)
+    - stage: Build
+      env: Swift Package Manager
+      script:
+        - swift build
     - stage: Release
       env: Cocoapods
       script:
