@@ -8,7 +8,7 @@
 
 import XCTest
 import Foundation
-import CertificateSigningRequest //Testing public methods
+//import CertificateSigningRequest //Testing public methods
 @testable import CertificateSigningRequest
 
 final class CertificateSigningRequestTests: XCTestCase {
