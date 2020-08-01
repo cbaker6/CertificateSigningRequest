@@ -4,6 +4,22 @@ language: objective-c
 
 jobs:
   include:
+    - stage: Build
+      env: iOS
+      xcode_workspace: Example/CertificateSigningRequest.xcworkspace
+      xcode_scheme: CertificateSigningRequest-Example
+      xcode_destination: platform=iOS Simulator,OS=14.0,name=iPhone 11 Pro Max
+    - stage: Package Managers
+      env: Swift Package Manager
+      script:
+        - security create-keychain -p "" temporary
+        - security default-keychain -s temporary
+        - security unlock-keychain -p "" temporary
+        - security set-keychain-settings -lut 7200 temporary
+        - swift build
+        - swift test --enable-code-coverage
+        - xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
+        - bash <(curl https://codecov.io/bash)
     - stage: Package Managers
       env: Cocoapods
       script:
