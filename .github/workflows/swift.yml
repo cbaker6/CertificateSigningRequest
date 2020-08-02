@@ -39,7 +39,7 @@ jobs:
           pod lib lint --allow-warnings --verbose 
       - name: Deploy CocoaPods
         if: github.ref == 'refs/heads/master'
-        run: pod trunk push CertificateSigningRequest.podspec --allow-warnings
+        run: pod trunk push CertificateSigningRequest.podspec --allow-warnings --verbose
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
 
