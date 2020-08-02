@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-test-ios:
 
     runs-on: macos-latest
 
@@ -17,3 +17,12 @@ jobs:
       run: xcodebuild -workspace Example/CertificateSigningRequest.xcworkspace -scheme CertificateSigningRequest-Example -destination platform\=iOS\ Simulator,OS\=13.6,name\=iPhone\ 11\ Pro\ Max build test | xcpretty
     - name: Codecov
       run: bash <(curl https://codecov.io/bash)
+  
+  build-test-swift:
+    
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: swift build -v
