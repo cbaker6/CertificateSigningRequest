@@ -1,4 +1,4 @@
-name: Swift
+name: Build
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-test-ios:
+  swift-test-ios:
 
     runs-on: macos-latest
 
@@ -18,7 +18,7 @@ jobs:
     - name: Codecov
       run: bash <(curl https://codecov.io/bash)
   
-  build-test-swift:
+  build-test-spm:
     
     runs-on: macos-latest
 
@@ -28,7 +28,7 @@ jobs:
       run: swift build -v
   
   cocoapods:
-    needs: [build-test-ios]
+    needs: [swift-test-ios]
     runs-on: macos-latest
     
     steps:
@@ -45,7 +45,7 @@ jobs:
 
   carthage:
 
-   needs: build-test-ios
+   needs: swift-test-ios
    runs-on: macos-latest
 
    steps:
