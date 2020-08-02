@@ -26,3 +26,19 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build
       run: swift build -v
+  
+  cocoapods:
+    needs: [build-test-swift]
+    runs-on: macos-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: CocoaPods
+        run: |
+          set -eo pipefail
+          pod lib lint --allow-warnings
+      - name: Deploy CocoaPods
+        if: github.ref == 'refs/heads/master'
+        run: pod trunk push CertificateSigningRequest.podspec --allow-warnings
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
