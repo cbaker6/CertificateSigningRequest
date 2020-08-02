@@ -1,0 +1,54 @@
+name: Swift
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-test-ios:
+    
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: xcodebuild -workspace Example/CertificateSigningRequest.xcworkspace -scheme CertificateSigningRequest-Example -destination platform\=iOS\ Simulator,OS\=13.6,name\=iPhone\ 11\ Pro\ Max build test | xcpretty
+    - name: Codecov
+      run: bash <(curl https://codecov.io/bash)
+
+  build-test-swift:
+    
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: swift build -v
+
+  cocoapods:
+    needs: [build-test-swift]
+    runs-on: macos-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: CocoaPods
+        run: |
+          set -eo pipefail
+          pod lib lint --allow-warnings
+      - name: Deploy CocoaPods
+        if: github.ref == 'refs/heads/master'
+        run: pod trunk push CertificateSigningRequest.podspec --allow-warnings
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+ 
+  carthage:
+
+   needs: build-test-swift
+   runs-on: macos-latest
+
+   steps:
+     - uses: actions/checkout@v2
+     - name: Carthage 
+       run: carthage build --no-skip-current
