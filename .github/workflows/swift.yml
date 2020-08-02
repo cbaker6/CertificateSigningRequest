@@ -28,7 +28,7 @@ jobs:
       run: swift build -v
   
   cocoapods:
-    needs: [build-test-swift]
+    needs: [build-test-ios]
     runs-on: macos-latest
     
     steps:
@@ -36,9 +36,19 @@ jobs:
       - name: CocoaPods
         run: |
           set -eo pipefail
-          pod lib lint --allow-warnings
+          pod lib lint --allow-warnings --verbose 
       - name: Deploy CocoaPods
         if: github.ref == 'refs/heads/master'
         run: pod trunk push CertificateSigningRequest.podspec --allow-warnings
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+
+  carthage:
+
+   needs: build-test-ios
+   runs-on: macos-latest
+
+   steps:
+     - uses: actions/checkout@v2
+     - name: Carthage 
+       run: carthage build --no-skip-current --verbose
