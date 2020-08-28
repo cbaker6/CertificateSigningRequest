@@ -468,17 +468,25 @@ final class CertificateSigningRequestTests: XCTestCase {
     }
     */
     func generateKeysAndStoreInKeychain(_ algorithm: KeyAlgorithm, keySize: Int, tagPrivate: String, tagPublic: String)->(SecKey?,SecKey?){
-        let publicKeyParameters: [String: AnyObject] = [
+        var publicKeyParameters: [String: AnyObject] = [
             String(kSecAttrIsPermanent): kCFBooleanTrue,
-            String(kSecAttrApplicationTag): tagPublic as AnyObject,
+            //String(kSecAttrApplicationTag): tagPublic as AnyObject,
             String(kSecAttrAccessible): kSecAttrAccessibleAfterFirstUnlock
         ]
         
         var privateKeyParameters: [String: AnyObject] = [
             String(kSecAttrIsPermanent): kCFBooleanTrue,
-            String(kSecAttrApplicationTag): tagPrivate as AnyObject,
+            //String(kSecAttrApplicationTag): tagPrivate as AnyObject,
             String(kSecAttrAccessible): kSecAttrAccessibleAfterFirstUnlock
         ]
+        
+        if #available(iOS 11, *) {
+            publicKeyParameters[String(kSecAttrApplicationTag)] = tagPublic as AnyObject
+            privateKeyParameters[String(kSecAttrApplicationTag)] = tagPrivate as AnyObject
+        } else {
+            publicKeyParameters[String(kSecAttrApplicationTag)] = tagPublic.data(using: .utf8) as AnyObject
+            privateKeyParameters[String(kSecAttrApplicationTag)] = tagPrivate.data(using: .utf8) as AnyObject
+        }
         
         #if !targetEnvironment(simulator)
             //This only works for Secure Enclave consistign of 256 bit key, note, the signatureType is irrelavent for this check
@@ -517,12 +525,19 @@ final class CertificateSigningRequestTests: XCTestCase {
         }
         
         //Get generated public key
-        let query: [String: AnyObject] = [
+        var query: [String: AnyObject] = [
             String(kSecClass): kSecClassKey,
             String(kSecAttrKeyType): algorithm.secKeyAttrType,
-            String(kSecAttrApplicationTag): tagPublic as AnyObject,
+            //String(kSecAttrApplicationTag): tagPublic as AnyObject,
             String(kSecReturnRef): kCFBooleanTrue
         ]
+        
+        if #available(iOS 11, *) {
+            query[String(kSecAttrApplicationTag)] = tagPublic as AnyObject
+        } else {
+            query[String(kSecAttrApplicationTag)] = tagPublic.data(using: .utf8) as AnyObject
+        }
+        
         var publicKeyReturn:AnyObject?
         let result = SecItemCopyMatching(query as CFDictionary, &publicKeyReturn)
         if result != errSecSuccess{
@@ -534,21 +549,43 @@ final class CertificateSigningRequestTests: XCTestCase {
     }
     
     func getPublicKeyBits(_ algorithm: KeyAlgorithm, publicKey: SecKey, tagPublic: String)->(Data?,Int?) {
+        
         //Set block size
         let keyBlockSize = SecKeyGetBlockSize(publicKey)
         //Ask keychain to provide the publicKey in bits
-        let query: [String: AnyObject] = [
+        var query: [String: AnyObject] = [
             String(kSecClass): kSecClassKey,
             String(kSecAttrKeyType): algorithm.secKeyAttrType,
-            String(kSecAttrApplicationTag): tagPublic as AnyObject,
             String(kSecReturnData): kCFBooleanTrue
         ]
-        var tempPublicKeyBits:AnyObject?
-        var _ = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
-        guard let keyBits = tempPublicKeyBits as? Data else {
-            return (nil,nil)
+        
+        if #available(iOS 11, *) {
+            query[String(kSecAttrApplicationTag)] = tagPublic as AnyObject
+        } else {
+            query[String(kSecAttrApplicationTag)] = tagPublic.data(using: .utf8) as AnyObject
         }
-        return (keyBits,keyBlockSize)
+        
+        var tempPublicKeyBits:CFTypeRef?
+        var _ = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
+        
+        let returnKeyBits: Data!
+        
+        if #available(iOS 11, *) {
+            guard let keyBits = tempPublicKeyBits as? Data else {
+                return (nil,nil)
+            }
+            returnKeyBits = keyBits
+        } else {
+            var error:Unmanaged<CFError>? = nil
+            guard let keyBits = SecKeyCopyExternalRepresentation(tempPublicKeyBits as! SecKey, &error), error != nil else {
+                print("Error in CertificateSigningRequestTests.getPublicKeyBits(). \(error!)")
+                return (nil,nil)
+            }
+            
+            returnKeyBits = keyBits as Data
+        }
+
+        return (returnKeyBits,keyBlockSize)
     }
 
     static var allTests = [
