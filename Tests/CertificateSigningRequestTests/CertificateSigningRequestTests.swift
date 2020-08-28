@@ -470,13 +470,11 @@ final class CertificateSigningRequestTests: XCTestCase {
     func generateKeysAndStoreInKeychain(_ algorithm: KeyAlgorithm, keySize: Int, tagPrivate: String, tagPublic: String)->(SecKey?,SecKey?){
         var publicKeyParameters: [String: AnyObject] = [
             String(kSecAttrIsPermanent): kCFBooleanTrue,
-            //String(kSecAttrApplicationTag): tagPublic as AnyObject,
             String(kSecAttrAccessible): kSecAttrAccessibleAfterFirstUnlock
         ]
         
         var privateKeyParameters: [String: AnyObject] = [
             String(kSecAttrIsPermanent): kCFBooleanTrue,
-            //String(kSecAttrApplicationTag): tagPrivate as AnyObject,
             String(kSecAttrAccessible): kSecAttrAccessibleAfterFirstUnlock
         ]
         
@@ -528,7 +526,6 @@ final class CertificateSigningRequestTests: XCTestCase {
         var query: [String: AnyObject] = [
             String(kSecClass): kSecClassKey,
             String(kSecAttrKeyType): algorithm.secKeyAttrType,
-            //String(kSecAttrApplicationTag): tagPublic as AnyObject,
             String(kSecReturnRef): kCFBooleanTrue
         ]
         
@@ -538,7 +535,7 @@ final class CertificateSigningRequestTests: XCTestCase {
             query[String(kSecAttrApplicationTag)] = tagPublic.data(using: .utf8) as AnyObject
         }
         
-        var publicKeyReturn:AnyObject?
+        var publicKeyReturn:CFTypeRef?
         let result = SecItemCopyMatching(query as CFDictionary, &publicKeyReturn)
         if result != errSecSuccess{
             print("Error getting publicKey fron keychain occured: \(result)")
@@ -556,12 +553,13 @@ final class CertificateSigningRequestTests: XCTestCase {
         var query: [String: AnyObject] = [
             String(kSecClass): kSecClassKey,
             String(kSecAttrKeyType): algorithm.secKeyAttrType,
-            String(kSecReturnData): kCFBooleanTrue
         ]
         
         if #available(iOS 11, *) {
+            query[String(kSecReturnData)] = kCFBooleanTrue
             query[String(kSecAttrApplicationTag)] = tagPublic as AnyObject
         } else {
+            query[String(kSecReturnRef)] = kCFBooleanTrue
             query[String(kSecAttrApplicationTag)] = tagPublic.data(using: .utf8) as AnyObject
         }
         

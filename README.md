@@ -17,18 +17,40 @@ To use, follow the following steps:
 2.  Get your publicKey in bits by querying it from the iOS keychain using `String(kSecReturnData): kCFBooleanTrue` in your query. For example:
 
 ```swift
+//Set block size
 let keyBlockSize = SecKeyGetBlockSize(publicKey)
 //Ask keychain to provide the publicKey in bits
-let query: [String: AnyObject] = [
+var query: [String: AnyObject] = [
     String(kSecClass): kSecClassKey,
     String(kSecAttrKeyType): algorithm.secKeyAttrType,
-    String(kSecAttrApplicationTag): tagPublic as AnyObject,
-    String(kSecReturnData): kCFBooleanTrue
 ]
+
+if #available(iOS 11, *) {
+    query[String(kSecReturnData)] = kCFBooleanTrue
+    query[String(kSecAttrApplicationTag)] = tagPublic as AnyObject
+} else {
+    query[String(kSecReturnRef)] = kCFBooleanTrue
+    query[String(kSecAttrApplicationTag)] = tagPublic.data(using: .utf8) as AnyObject
+}
+
 var tempPublicKeyBits:CFTypeRef?
 var _ = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
-guard let publicKeyBits = tempPublicKeyBits as? Data else {
-    return
+
+let returnKeyBits: Data!
+
+if #available(iOS 11, *) {
+    guard let keyBits = tempPublicKeyBits as? Data else {
+        return (nil,nil)
+    }
+    returnKeyBits = keyBits
+} else {
+    var error:Unmanaged<CFError>? = nil
+    guard let keyBits = SecKeyCopyExternalRepresentation(tempPublicKeyBits as! SecKey, &error), error != nil else {
+        print("Error in CertificateSigningRequestTests.getPublicKeyBits(). \(error!)")
+        return (nil,nil)
+    }
+    
+    returnKeyBits = keyBits as Data
 }
 ```
 3. Initiatlize the `CertificateSigningRequest` using `KeyAlgorithm.ec` or `KeyAlgorithm.rsa` (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequest/blob/main/Example/Tests/Tests.swift#L34) file. Below are 3 possible ways to initialize: 
