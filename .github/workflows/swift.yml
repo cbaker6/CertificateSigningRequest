@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: xcodebuild -workspace Example/CertificateSigningRequest.xcworkspace -scheme CertificateSigningRequest-Example -destination platform\=iOS\ Simulator,OS\=13.6,name\=iPhone\ 11\ Pro\ Max build test | xcpretty
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Example/CertificateSigningRequest.xcworkspace -scheme CertificateSigningRequest-Example -destination platform\=iOS\ Simulator,OS\=13.6,name\=iPhone\ 11\ Pro\ Max build test | xcpretty
     - name: Codecov
       run: bash <(curl https://codecov.io/bash)
   
@@ -24,8 +24,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Create temporary Keychain
+      run: |
+        security create-keychain -p "" temporary
+        security default-keychain -s temporary
+        security unlock-keychain -p "" temporary
+        security set-keychain-settings -lut 7200 temporary
     - name: Build
       run: swift build -v
+    - name: Test
+      run: swift test -v
   
   cocoapods:
     needs: [swift-test-ios]
@@ -34,12 +42,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: CocoaPods
-        run: |
-          set -eo pipefail
-          pod lib lint --allow-warnings --verbose 
+        run: set -o pipefail && env NSUnbufferedIO=YES pod lib lint --allow-warnings --verbose 
       - name: Deploy CocoaPods
         if: github.ref == 'refs/heads/master'
-        run: pod trunk push CertificateSigningRequest.podspec --allow-warnings --verbose
+        run: set -o pipefail && env NSUnbufferedIO=YES pod trunk push CertificateSigningRequest.podspec --allow-warnings --verbose
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
 
