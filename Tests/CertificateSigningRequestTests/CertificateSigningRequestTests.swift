@@ -576,7 +576,7 @@ final class CertificateSigningRequestTests: XCTestCase {
         } else {
             var error:Unmanaged<CFError>? = nil
             guard let keyBits = SecKeyCopyExternalRepresentation(tempPublicKeyBits as! SecKey, &error), error != nil else {
-                print("Error in CertificateSigningRequestTests.getPublicKeyBits(). \(error!)")
+                print("Error in CertificateSigningRequestTests.getPublicKeyBits(). \(String(describing: error))")
                 return (nil,nil)
             }
             
