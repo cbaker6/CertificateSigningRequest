@@ -31,8 +31,6 @@ jobs:
         security unlock-keychain -p "" temporary
         security set-keychain-settings -lut 7200 temporary
     - name: Build
-      run: swift build -v
-    - name: Test
       run: swift test -v
   
   cocoapods:
