@@ -14,23 +14,23 @@ Supports RSA (key size: 512, 1024, 2048) and EC inside/outside of secure enclave
 To use, follow the following steps:
 
 1. Generate your publicKey/privateKey pair. This can be done using Keychain in iOS. An example can be found in the `generateKeysAndStoreInKeychain` function in the [testfile](https://github.com/cbaker6/CertificateSigningRequest/blob/main/Example/Tests/Tests.swift#L440).
-2.  Get your publicKey in bits by querying it from the iOS keychain using `String(kSecReturnData): kCFBooleanTrue` in your query. For example:
+2.  Get your publicKey in bits by querying it from the iOS keychain using `String(kSecReturnData): true` in your query. For example:
 
 ```swift
 //Set block size
 let keyBlockSize = SecKeyGetBlockSize(publicKey)
 //Ask keychain to provide the publicKey in bits
-var query: [String: AnyObject] = [
+var query: [String: Any] = [
     String(kSecClass): kSecClassKey,
     String(kSecAttrKeyType): algorithm.secKeyAttrType,
 ]
 
 if #available(iOS 11, *) {
-    query[String(kSecReturnData)] = kCFBooleanTrue
-    query[String(kSecAttrApplicationTag)] = tagPublic as AnyObject
+    query[String(kSecReturnData)] = true
+    query[String(kSecAttrApplicationTag)] = tagPublic
 } else {
-    query[String(kSecReturnRef)] = kCFBooleanTrue
-    query[String(kSecAttrApplicationTag)] = tagPublic.data(using: .utf8) as AnyObject
+    query[String(kSecReturnRef)] = true
+    query[String(kSecAttrApplicationTag)] = tagPublic.data(using: .utf8)
 }
 
 var tempPublicKeyBits:CFTypeRef?
