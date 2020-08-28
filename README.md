@@ -25,7 +25,7 @@ let query: [String: AnyObject] = [
     String(kSecAttrApplicationTag): tagPublic as AnyObject,
     String(kSecReturnData): kCFBooleanTrue
 ]
-var tempPublicKeyBits:AnyObject?
+var tempPublicKeyBits:CFTypeRef?
 var _ = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
 guard let publicKeyBits = tempPublicKeyBits as? Data else {
     return
