@@ -9,7 +9,13 @@
 
 Generate a certificate signing request (CSR) in iOS/macOS using Swift.
 
+## iOS
 Supports RSA (key size: 512, 1024, 2048) and EC inside/outside of secure enclave (iOS only supports 256 bit keys for now), SHA1, SHA256, and SHA512. 
+
+## macOS
+Supports RSA (key size: 1024, 2048) and EC inside/outside of secure enclave, SHA1, SHA256, and SHA512. 
+
+## Usage
 
 To use, follow the following steps:
 
@@ -20,37 +26,18 @@ To use, follow the following steps:
 //Set block size
 let keyBlockSize = SecKeyGetBlockSize(publicKey)
 //Ask keychain to provide the publicKey in bits
-var query: [String: Any] = [
+let query: [String: Any] = [
     String(kSecClass): kSecClassKey,
     String(kSecAttrKeyType): algorithm.secKeyAttrType,
+    String(kSecAttrApplicationTag): tagPublic.data(using: .utf8)!,
+    String(kSecReturnData): true
 ]
-
-if #available(iOS 11, *) {
-    query[String(kSecReturnData)] = true
-    query[String(kSecAttrApplicationTag)] = tagPublic
-} else {
-    query[String(kSecReturnRef)] = true
-    query[String(kSecAttrApplicationTag)] = tagPublic.data(using: .utf8)
-}
 
 var tempPublicKeyBits:CFTypeRef?
 var _ = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
 
-let returnKeyBits: Data!
-
-if #available(iOS 11, *) {
-    guard let keyBits = tempPublicKeyBits as? Data else {
-        return (nil,nil)
-    }
-    returnKeyBits = keyBits
-} else {
-    var error:Unmanaged<CFError>? = nil
-    guard let keyBits = SecKeyCopyExternalRepresentation(tempPublicKeyBits as! SecKey, &error), error != nil else {
-        print("Error in CertificateSigningRequestTests.getPublicKeyBits(). \(error!)")
-        return (nil,nil)
-    }
-    
-    returnKeyBits = keyBits as Data
+guard let keyBits = tempPublicKeyBits as? Data else {
+    return (nil,nil)
 }
 ```
 3. Initiatlize the `CertificateSigningRequest` using `KeyAlgorithm.ec` or `KeyAlgorithm.rsa` (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequest/blob/main/Example/Tests/Tests.swift#L34) file. Below are 3 possible ways to initialize: 

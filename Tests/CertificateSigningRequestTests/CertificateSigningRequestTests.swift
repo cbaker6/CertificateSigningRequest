@@ -34,6 +34,7 @@ final class CertificateSigningRequestTests: XCTestCase {
         SecItemDelete(query as CFDictionary)
     }
     
+    #if !os(macOS)
     func testCreateCSRwithECKey(){
         let tagPrivate = "com.csr.private.ec"
         let tagPublic = "com.csr.public.ec"
@@ -76,6 +77,7 @@ final class CertificateSigningRequestTests: XCTestCase {
             XCTAssertNotNil(csrBuild2, "CSR with header not generated")
         }
     }
+    #endif
     
     func testCreateCSRwithRSA2048KeySha512(){
         let tagPrivate = "com.csr.private.rsa"
@@ -335,6 +337,7 @@ final class CertificateSigningRequestTests: XCTestCase {
         }
     }
     
+    #if !os(macOS)
     func testCreateCSRwithRSA512KeySha512(){
         let tagPrivate = "com.csr.private.rsa512sha512"
         let tagPublic = "com.csr.public.rsa512sha512"
@@ -459,6 +462,8 @@ final class CertificateSigningRequestTests: XCTestCase {
             XCTAssertNotNil(csrBuild2, "CSR with header not generated")
         }
     }
+    #endif
+
     /*
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -467,6 +472,7 @@ final class CertificateSigningRequestTests: XCTestCase {
         }
     }
     */
+
     func generateKeysAndStoreInKeychain(_ algorithm: KeyAlgorithm, keySize: Int, tagPrivate: String, tagPublic: String)->(SecKey?,SecKey?){
         let publicKeyParameters: [String: Any] = [
             String(kSecAttrIsPermanent): true,
@@ -539,43 +545,24 @@ final class CertificateSigningRequestTests: XCTestCase {
         //Set block size
         let keyBlockSize = SecKeyGetBlockSize(publicKey)
         //Ask keychain to provide the publicKey in bits
-        var query: [String: Any] = [
+        let query: [String: Any] = [
             String(kSecClass): kSecClassKey,
             String(kSecAttrKeyType): algorithm.secKeyAttrType,
-            String(kSecAttrApplicationTag): tagPublic.data(using: .utf8)!
+            String(kSecAttrApplicationTag): tagPublic.data(using: .utf8)!,
+            String(kSecReturnData): true
         ]
-        
-        if #available(iOS 11, *) {
-            query[String(kSecReturnData)] = true
-        } else {
-            query[String(kSecReturnRef)] = true
-        }
         
         var tempPublicKeyBits:CFTypeRef?
         var _ = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
-        
-        let returnKeyBits: Data!
-        
-        if #available(iOS 11, *) {
-            guard let keyBits = tempPublicKeyBits as? Data else {
-                return (nil,nil)
-            }
-            returnKeyBits = keyBits
-        } else {
-            var error:Unmanaged<CFError>? = nil
-            guard let tempPublicKeyBits = tempPublicKeyBits,
-                let keyBits = SecKeyCopyExternalRepresentation(tempPublicKeyBits as! SecKey, &error), error != nil else {
-                print("Error in CertificateSigningRequestTests.getPublicKeyBits(). \(String(describing: error))")
-                return (nil,nil)
-            }
-            
-            returnKeyBits = keyBits as Data
-        }
 
-        return (returnKeyBits,keyBlockSize)
+        guard let keyBits = tempPublicKeyBits as? Data else {
+            return (nil,nil)
+        }
+    
+        return (keyBits,keyBlockSize)
     }
 
-    static var allTests = [
-        ("testCreateCSRwithECKey", testCreateCSRwithECKey), ("testCreateCSRwithRSA2048KeySha512", testCreateCSRwithRSA2048KeySha512), ("testCreateCSRwithRSA2048KeySha256", testCreateCSRwithRSA2048KeySha256), ("testCreateCSRwithRSA2048KeySha1", testCreateCSRwithRSA2048KeySha1), ("testCreateCSRwithRSA1024KeySha512", testCreateCSRwithRSA1024KeySha512), ("testCreateCSRwithRSA1024KeySha256", testCreateCSRwithRSA1024KeySha256), ("testCreateCSRwithRSA1024KeySha1", testCreateCSRwithRSA1024KeySha1), ("testCreateCSRwithRSA512KeySha512", testCreateCSRwithRSA512KeySha512), ("testCreateCSRwithRSA512KeySha256", testCreateCSRwithRSA512KeySha256), ("testCreateCSRwithRSA512KeySha1", testCreateCSRwithRSA512KeySha1),
+    static var mostTests = [
+        /*("testCreateCSRwithECKey", testCreateCSRwithECKey),*/ ("testCreateCSRwithRSA2048KeySha512", testCreateCSRwithRSA2048KeySha512), ("testCreateCSRwithRSA2048KeySha256", testCreateCSRwithRSA2048KeySha256), ("testCreateCSRwithRSA2048KeySha1", testCreateCSRwithRSA2048KeySha1), ("testCreateCSRwithRSA1024KeySha512", testCreateCSRwithRSA1024KeySha512), ("testCreateCSRwithRSA1024KeySha256", testCreateCSRwithRSA1024KeySha256), ("testCreateCSRwithRSA1024KeySha1", testCreateCSRwithRSA1024KeySha1), /*("testCreateCSRwithRSA512KeySha512", testCreateCSRwithRSA512KeySha512), ("testCreateCSRwithRSA512KeySha256", testCreateCSRwithRSA512KeySha256), ("testCreateCSRwithRSA512KeySha1", testCreateCSRwithRSA512KeySha1),*/
     ]
 }

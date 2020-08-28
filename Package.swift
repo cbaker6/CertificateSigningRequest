@@ -24,6 +24,6 @@ let package = Package(
             path: "CertificateSigningRequest/Classes"),
         .testTarget(
             name: "CertificateSigningRequestTests",
-            dependencies: ["CertificateSigningRequest"]),
+            dependencies: ["CertificateSigningRequest"])
     ]
 )
