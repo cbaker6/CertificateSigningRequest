@@ -24,13 +24,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Create temporary Keychain
-      run: |
-        security create-keychain -p "" temporary
-        security default-keychain -s temporary
-        security unlock-keychain -p "" temporary
-        security set-keychain-settings -lut 7200 temporary
-    - name: Build
+    - name: Build and Test
       run: swift test -v
   
   cocoapods:
