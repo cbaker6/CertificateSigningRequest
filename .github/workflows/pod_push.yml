@@ -1,0 +1,18 @@
+name: build
+
+on:
+  push:
+    tags: '*'
+    
+  cocoapods:
+    needs: swift-test-spm
+    runs-on: macos-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: CocoaPods
+        run: set -o pipefail && env NSUnbufferedIO=YES pod lib lint --allow-warnings --verbose 
+      - name: Deploy CocoaPods
+        run: set -o pipefail && env NSUnbufferedIO=YES pod trunk push CertificateSigningRequest.podspec --allow-warnings --verbose
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
