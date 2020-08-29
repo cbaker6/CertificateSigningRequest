@@ -1,5 +1,5 @@
 # CertificateSigningRequest
-![Swift Version 5.0](https://img.shields.io/badge/swift-v5.0-yellow.svg)
+![Swift Version 5.2](https://img.shields.io/badge/swift-v5.2-yellow.svg)
 [![CI Status](https://github.com/cbaker6/CertificateSigningRequest/workflows/build/badge.svg?branch=main)](https://github.com/cbaker6/CertificateSigningRequest/actions?query=workflow%3Abuild+branch%3Amain)
 [![Codecov](https://codecov.io/gh/cbaker6/CertificateSigningRequest/branches/main/graph/badge.svg)](https://codecov.io/gh/cbaker6/CertificateSigningRequest/branches/main)
 [![SPM](https://img.shields.io/badge/swift%20package%20manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)

@@ -40,7 +40,7 @@ let SEQUENCE_OBJECT_sha512WithECEncryption:[UInt8] = [0x30, 0x0A, 0x06, 0x08, 0x
 public enum KeyAlgorithm {
     case rsa(signatureType: signature), ec(signatureType: signature)
     
-    @available(iOS 10, macCatalyst 13.0, macOS 10.12, *)
+    @available(iOS 10, macCatalyst 13.0, macOS 10.12, tvOS 10.0, watchOS 3.0, *)
     public var secKeyAttrType: CFString {
         let result: CFString
         switch self {
@@ -93,7 +93,7 @@ public enum KeyAlgorithm {
         return result
     }
     
-    @available(iOS 10, macCatalyst 13.0, macOS 10.12, *)
+    @available(iOS 10, macCatalyst 13.0, macOS 10.12, tvOS 10.0, watchOS 3.0, *)
     public var signatureAlgorithm: SecKeyAlgorithm {
         let result: SecKeyAlgorithm
         switch self {
