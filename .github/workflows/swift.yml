@@ -30,7 +30,7 @@ jobs:
       run: xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
 
   cocoapods:
-    needs: [swift-test-ios]
+    needs: swift-test-spm
     runs-on: macos-latest
     
     steps:
@@ -45,7 +45,7 @@ jobs:
 
   carthage:
 
-   needs: swift-test-ios
+   needs: swift-test-spm
    runs-on: macos-latest
 
    steps:
