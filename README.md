@@ -1,34 +1,43 @@
 # CertificateSigningRequest
-![Swift Version 5.0](https://img.shields.io/badge/Swift-v5.0-yellow.svg)
-[![CI Status](https://github.com/cbaker6/CertificateSigningRequest/workflows/Build/badge.svg?branch=main)](https://github.com/cbaker6/CertificateSigningRequest/actions?query=workflow%3ABuild)
+![Swift Version 5.0](https://img.shields.io/badge/swift-v5.0-yellow.svg)
+[![CI Status](https://github.com/cbaker6/CertificateSigningRequest/workflows/build/badge.svg?branch=main)](https://github.com/cbaker6/CertificateSigningRequest/actions?query=workflow%3Abuild+branch%3Amain)
 [![Codecov](https://codecov.io/gh/cbaker6/CertificateSigningRequest/branches/main/graph/badge.svg)](https://codecov.io/gh/cbaker6/CertificateSigningRequest/branches/main)
-[![SPM](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![SPM](https://img.shields.io/badge/swift%20package%20manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![Version](https://img.shields.io/cocoapods/v/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
 [![License](https://img.shields.io/cocoapods/l/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
 [![Platform](https://img.shields.io/cocoapods/p/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
 
 Generate a certificate signing request (CSR) in iOS/macOS using Swift.
 
+## iOS
 Supports RSA (key size: 512, 1024, 2048) and EC inside/outside of secure enclave (iOS only supports 256 bit keys for now), SHA1, SHA256, and SHA512. 
+
+## macOS
+Supports RSA (key size: 1024, 2048) and EC inside/outside of secure enclave, SHA1, SHA256, and SHA512. 
+
+## Usage
 
 To use, follow the following steps:
 
 1. Generate your publicKey/privateKey pair. This can be done using Keychain in iOS. An example can be found in the `generateKeysAndStoreInKeychain` function in the [testfile](https://github.com/cbaker6/CertificateSigningRequest/blob/main/Example/Tests/Tests.swift#L440).
-2.  Get your publicKey in bits by querying it from the iOS keychain using `String(kSecReturnData): kCFBooleanTrue` in your query. For example:
+2.  Get your publicKey in bits by querying it from the iOS keychain using `String(kSecReturnData): true` in your query. For example:
 
 ```swift
+//Set block size
 let keyBlockSize = SecKeyGetBlockSize(publicKey)
 //Ask keychain to provide the publicKey in bits
-let query: [String: AnyObject] = [
+let query: [String: Any] = [
     String(kSecClass): kSecClassKey,
     String(kSecAttrKeyType): algorithm.secKeyAttrType,
-    String(kSecAttrApplicationTag): tagPublic as AnyObject,
-    String(kSecReturnData): kCFBooleanTrue
+    String(kSecAttrApplicationTag): tagPublic.data(using: .utf8)!,
+    String(kSecReturnData): true
 ]
-var tempPublicKeyBits:AnyObject?
+
+var tempPublicKeyBits:CFTypeRef?
 var _ = SecItemCopyMatching(query as CFDictionary, &tempPublicKeyBits)
-guard let publicKeyBits = tempPublicKeyBits as? Data else {
-    return
+
+guard let keyBits = tempPublicKeyBits as? Data else {
+    return (nil,nil)
 }
 ```
 3. Initiatlize the `CertificateSigningRequest` using `KeyAlgorithm.ec` or `KeyAlgorithm.rsa` (an example of how to do can be found in the [test](https://github.com/cbaker6/CertificateSigningRequest/blob/main/Example/Tests/Tests.swift#L34) file. Below are 3 possible ways to initialize: 

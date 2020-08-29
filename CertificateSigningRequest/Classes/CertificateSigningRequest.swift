@@ -95,29 +95,8 @@ public class CertificateSigningRequest:NSObject {
                 }
             }
         } else {
-            //Bootleg way to do this since OSX should have used the if statement above,
-            //but I needed OSX build's to stop complaining. For some reason it's ignoring the macOS 10.12 above
-            #if os(OSX)
-            // Build signature - step 1: SHA hash
-            // Build signature - step 2: Sign hash
-            var error: Unmanaged<CFError>?
-            guard let signatureData = SecKeyCreateSignature(privateKey, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, &error) as Data? else{
-                if error != nil{
-                    print("Error in creating signature: \(error!.takeRetainedValue())")
-                }
-                return nil
-            }
-            signatureData.copyBytes(to: &signature, count: signatureData.count)
-            signatureLen = signatureData.count
-            if publicKey != nil{
-                if !SecKeyVerifySignature(publicKey!, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, signatureData as CFData, &error){
-                    print(error!.takeRetainedValue())
-                    return nil
-                }
-            }
-            #else
             // Fallback on earlier versions
-        
+            #if !os(macOS)
             // Build signature - step 1: SHA hash
             var digest = [UInt8](repeating: 0, count: keyAlgorithm.digestLength)
             let padding = keyAlgorithm.padding

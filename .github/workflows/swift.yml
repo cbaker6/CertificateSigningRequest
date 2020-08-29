@@ -1,4 +1,4 @@
-name: Build
+name: build
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: xcodebuild -workspace Example/CertificateSigningRequest.xcworkspace -scheme CertificateSigningRequest-Example -destination platform\=iOS\ Simulator,OS\=13.6,name\=iPhone\ 11\ Pro\ Max build test | xcpretty
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Example/CertificateSigningRequest.xcworkspace -scheme CertificateSigningRequest-Example -destination platform\=iOS\ Simulator,OS\=13.6,name\=iPhone\ 11\ Pro\ Max build test | xcpretty
     - name: Codecov
       run: bash <(curl https://codecov.io/bash)
   
@@ -24,9 +24,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
-  
+    - name: Build and Test
+      run: swift test --enable-code-coverage -v
+    - name: Prepare codecov
+      run: xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
+
   cocoapods:
     needs: [swift-test-ios]
     runs-on: macos-latest
@@ -34,12 +36,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: CocoaPods
-        run: |
-          set -eo pipefail
-          pod lib lint --allow-warnings --verbose 
+        run: set -o pipefail && env NSUnbufferedIO=YES pod lib lint --allow-warnings --verbose 
       - name: Deploy CocoaPods
         if: github.ref == 'refs/heads/master'
-        run: pod trunk push CertificateSigningRequest.podspec --allow-warnings --verbose
+        run: set -o pipefail && env NSUnbufferedIO=YES pod trunk push CertificateSigningRequest.podspec --allow-warnings --verbose
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
 
