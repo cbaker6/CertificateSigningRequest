@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CertificateSigningRequest'
-  s.version          = '1.23'
-  s.summary          = 'Generate self-signed certificate signing requests (CSRs) on iOS, macOS, and macCatalyst.'
+  s.version          = '1.25.1'
+  s.summary          = 'Generate self-signed certificate signing requests (CSRs) on iOS, macOS, macCatalyst, watchOS, and tvOS.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -28,8 +28,10 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/cbaker6/CertificateSigningRequest.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target  = '9.3'
-  s.osx.deployment_target  = '10.12'
+  s.ios.deployment_target  = '10.0'
+  s.osx.deployment_target  = '10.13'
+  s.tvos.deployment_target  = '10.0'
+  s.watchos.deployment_target  = '3.0'
   s.swift_versions = ['4.0', '5.0']
   s.source_files = 'CertificateSigningRequest/Classes/**/*'
   

@@ -76,7 +76,7 @@ public class CertificateSigningRequest:NSObject {
         var signature = [UInt8](repeating: 0, count: 256)
         var signatureLen:Int = signature.count
         
-        if #available(iOS 11, macCatalyst 13.0, macOS 10.12, *) {
+        if #available(iOS 11, macCatalyst 13.0, macOS 10.12, tvOS 10.0, watchOS 3.0, *) {
             // Build signature - step 1: SHA hash
             // Build signature - step 2: Sign hash
             var error: Unmanaged<CFError>?
