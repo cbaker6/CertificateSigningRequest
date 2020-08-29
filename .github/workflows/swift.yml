@@ -38,7 +38,7 @@ jobs:
       - name: CocoaPods
         run: set -o pipefail && env NSUnbufferedIO=YES pod lib lint --allow-warnings --verbose 
       - name: Deploy CocoaPods
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: set -o pipefail && env NSUnbufferedIO=YES pod trunk push CertificateSigningRequest.podspec --allow-warnings --verbose
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
