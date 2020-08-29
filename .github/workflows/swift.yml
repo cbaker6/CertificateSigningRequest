@@ -27,7 +27,7 @@ jobs:
     - name: Build and Test
       run: swift test --enable-code-coverage -v
     - name: Prepare codecov
-      run: xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests-instr-profile .build/debug/codecov/default.profdata > info.lcov
+      run: xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
 
   cocoapods:
     needs: [swift-test-ios]
