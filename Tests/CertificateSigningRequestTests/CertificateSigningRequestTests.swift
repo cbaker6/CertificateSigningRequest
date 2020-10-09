@@ -5,7 +5,7 @@
 //  Created by Corey Baker on 11/7/16.
 //  Copyright © 2016 Network Reconnaissance Lab. All rights reserved.
 //
-
+#if !os(watchOS)
 import XCTest
 import Foundation
 //import CertificateSigningRequest //Testing public methods
@@ -566,3 +566,4 @@ final class CertificateSigningRequestTests: XCTestCase {
         /*("testCreateCSRwithECKey", testCreateCSRwithECKey),*/ ("testCreateCSRwithRSA2048KeySha512", testCreateCSRwithRSA2048KeySha512), ("testCreateCSRwithRSA2048KeySha256", testCreateCSRwithRSA2048KeySha256), ("testCreateCSRwithRSA2048KeySha1", testCreateCSRwithRSA2048KeySha1), ("testCreateCSRwithRSA1024KeySha512", testCreateCSRwithRSA1024KeySha512), ("testCreateCSRwithRSA1024KeySha256", testCreateCSRwithRSA1024KeySha256), ("testCreateCSRwithRSA1024KeySha1", testCreateCSRwithRSA1024KeySha1), /*("testCreateCSRwithRSA512KeySha512", testCreateCSRwithRSA512KeySha512), ("testCreateCSRwithRSA512KeySha256", testCreateCSRwithRSA512KeySha256), ("testCreateCSRwithRSA512KeySha1", testCreateCSRwithRSA512KeySha1),*/
     ]
 }
+#endif
