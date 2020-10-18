@@ -1,6 +1,0 @@
-version: "Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)"
-options: "45a17987935960e68145c0494d474ea0"
-build_time: [1598706441, 361572000]
-inputs:
-  "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/Tests/CertificateSigningRequestTests/CertificateSigningRequestTests.swift": [1598706012, 744592063]
-  "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/Tests/CertificateSigningRequestTests/XCTestManifests.swift": [1598706012, 745128289]
