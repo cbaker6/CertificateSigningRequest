@@ -53,8 +53,6 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* CertificateSigningRequest_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertificateSigningRequest_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		650715B9021F1F5BE493A359 /* Pods-CertificateSigningRequest_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Example.debug.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Example/Pods-CertificateSigningRequest_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		70C5AFEDAC2945660B683D91 /* Pods-CertificateSigningRequest_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Example.release.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Example/Pods-CertificateSigningRequest_Example.release.xcconfig"; sourceTree = "<group>"; };
 		8EEAEA18FB37738487864EA9 /* Pods_CertificateSigningRequest_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CertificateSigningRequest_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		915C84C824BD253500AA187C /* CertificateSigningRequest (macOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CertificateSigningRequest (macOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		915C84CA24BD253500AA187C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,8 +100,6 @@
 		1CB85B86AE57C0E8E3B06DDD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				650715B9021F1F5BE493A359 /* Pods-CertificateSigningRequest_Example.debug.xcconfig */,
-				70C5AFEDAC2945660B683D91 /* Pods-CertificateSigningRequest_Example.release.xcconfig */,
 				FEDB8EC97962B2EEA411D874 /* Pods-CertificateSigningRequest_Tests.debug.xcconfig */,
 				42CB196A0DC69AE256981883 /* Pods-CertificateSigningRequest_Tests.release.xcconfig */,
 				358A48E3E9FCBE7F4CC259DD /* Pods-CertificateSigningRequest (iOS).debug.xcconfig */,

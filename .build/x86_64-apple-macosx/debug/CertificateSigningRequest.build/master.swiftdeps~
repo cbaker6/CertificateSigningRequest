@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)"
+options: "85d9740b018021db6750591b13dd1bdc"
+build_time: [1598706440, 146299000]
+inputs:
+  "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/CertificateSigningRequest/Classes/CertificateSigningRequest.swift": [1598706353, 65134875]
+  "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/CertificateSigningRequest/Classes/CertificateSigningRequestConstants.swift": [1598706418, 776228290]

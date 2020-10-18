@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequest.build/master.swiftdeps"
+  },
+  "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/CertificateSigningRequest/Classes/CertificateSigningRequest.swift": {
+    "dependencies": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequest.build/CertificateSigningRequest.d",
+    "object": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequest.build/CertificateSigningRequest.swift.o",
+    "swiftmodule": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequest.build/CertificateSigningRequest~partial.swiftmodule",
+    "swift-dependencies": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequest.build/CertificateSigningRequest.swiftdeps"
+  },
+  "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/CertificateSigningRequest/Classes/CertificateSigningRequestConstants.swift": {
+    "dependencies": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequest.build/CertificateSigningRequestConstants.d",
+    "object": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequest.build/CertificateSigningRequestConstants.swift.o",
+    "swiftmodule": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequest.build/CertificateSigningRequestConstants~partial.swiftmodule",
+    "swift-dependencies": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequest.build/CertificateSigningRequestConstants.swiftdeps"
+  }
+}

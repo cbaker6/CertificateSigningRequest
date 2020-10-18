@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequestTests.build/master.swiftdeps"
+  },
+  "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/Tests/CertificateSigningRequestTests/CertificateSigningRequestTests.swift": {
+    "dependencies": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequestTests.build/CertificateSigningRequestTests.d",
+    "object": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequestTests.build/CertificateSigningRequestTests.swift.o",
+    "swiftmodule": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequestTests.build/CertificateSigningRequestTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequestTests.build/CertificateSigningRequestTests.swiftdeps"
+  },
+  "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/Tests/CertificateSigningRequestTests/XCTestManifests.swift": {
+    "dependencies": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequestTests.build/XCTestManifests.d",
+    "object": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequestTests.build/XCTestManifests.swift.o",
+    "swiftmodule": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequestTests.build/XCTestManifests~partial.swiftmodule",
+    "swift-dependencies": "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequestTests.build/XCTestManifests.swiftdeps"
+  }
+}

@@ -1,0 +1,245 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "OBJECT_rsaEncryptionNULL"
+- "SEQUENCE_OBJECT_sha1WithRSAEncryption"
+- "SEQUENCE_OBJECT_sha256WithRSAEncryption"
+- "SEQUENCE_OBJECT_sha512WithRSAEncryption"
+- "OBJECT_ecEncryptionNULL"
+- "OBJECT_ecPubicKey"
+- "SEQUENCE_OBJECT_sha1WithECEncryption"
+- "SEQUENCE_OBJECT_sha256WithECEncryption"
+- "SEQUENCE_OBJECT_sha512WithECEncryption"
+- "KeyAlgorithm"
+provides-nominal:
+- "25CertificateSigningRequest12KeyAlgorithmO"
+- "25CertificateSigningRequest12KeyAlgorithmO9signatureO"
+provides-member:
+- ["25CertificateSigningRequest12KeyAlgorithmO", ""]
+- ["25CertificateSigningRequest12KeyAlgorithmO9signatureO", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "=="
+- "AssignmentPrecedence"
+- !private "CC_SHA1_DIGEST_LENGTH"
+- !private "CC_SHA256_DIGEST_LENGTH"
+- !private "CC_SHA512_DIGEST_LENGTH"
+- "CFString"
+- "FloatLiteralType"
+- "Int"
+- !private "Int32"
+- "IntegerLiteralType"
+- "KeyAlgorithm"
+- "OBJECT_ecEncryptionNULL"
+- "OBJECT_ecPubicKey"
+- "OBJECT_rsaEncryptionNULL"
+- "SEQUENCE_OBJECT_sha1WithECEncryption"
+- "SEQUENCE_OBJECT_sha1WithRSAEncryption"
+- "SEQUENCE_OBJECT_sha256WithECEncryption"
+- "SEQUENCE_OBJECT_sha256WithRSAEncryption"
+- "SEQUENCE_OBJECT_sha512WithECEncryption"
+- "SEQUENCE_OBJECT_sha512WithRSAEncryption"
+- "SecKeyAlgorithm"
+- "SecPadding"
+- "String"
+- !private "StringLiteralType"
+- "UInt8"
+- !private "kSecAttrKeyTypeEC"
+- !private "kSecAttrKeyTypeECSECPrimeRandom"
+- !private "kSecAttrKeyTypeRSA"
+depends-member:
+- !private ["s18AdditiveArithmeticP", "init"]
+- !private ["Sz", "init"]
+- !private ["s7CVarArgP", "init"]
+- !private ["SL", "init"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["Se", "init"]
+- !private ["SE", "init"]
+- ["SQ", "=="]
+- !private ["SQ", "PKCS1SHA1"]
+- !private ["SQ", "PKCS1SHA256"]
+- !private ["SQ", "PKCS1SHA512"]
+- ["SQ", ""]
+- ["SQ", "_rawHashValue"]
+- !private ["SQ", "ecdsaSignatureMessageX962SHA1"]
+- !private ["SQ", "ecdsaSignatureMessageX962SHA256"]
+- !private ["SQ", "ecdsaSignatureMessageX962SHA512"]
+- ["SQ", "hash"]
+- ["SQ", "hashValue"]
+- !private ["SQ", "init"]
+- !private ["SQ", "rsaSignatureMessagePKCS1v15SHA1"]
+- !private ["SQ", "rsaSignatureMessagePKCS1v15SHA256"]
+- !private ["SQ", "rsaSignatureMessagePKCS1v15SHA512"]
+- ["SQ", "sha1"]
+- ["SQ", "sha256"]
+- ["SQ", "sha512"]
+- !private ["s25ExpressibleByArrayLiteralP", "PKCS1SHA1"]
+- !private ["s25ExpressibleByArrayLiteralP", "PKCS1SHA256"]
+- !private ["s25ExpressibleByArrayLiteralP", "PKCS1SHA512"]
+- !private ["s27ExpressibleByIntegerLiteralP", "init"]
+- !private ["s17FixedWidthIntegerP", "init"]
+- ["SH", "=="]
+- ["SH", ""]
+- ["SH", "_rawHashValue"]
+- !private ["SH", "ecdsaSignatureMessageX962SHA1"]
+- !private ["SH", "ecdsaSignatureMessageX962SHA256"]
+- !private ["SH", "ecdsaSignatureMessageX962SHA512"]
+- ["SH", "hash"]
+- ["SH", "hashValue"]
+- !private ["SH", "init"]
+- !private ["SH", "rsaSignatureMessagePKCS1v15SHA1"]
+- !private ["SH", "rsaSignatureMessagePKCS1v15SHA256"]
+- !private ["SH", "rsaSignatureMessagePKCS1v15SHA512"]
+- ["SH", "sha1"]
+- ["SH", "sha256"]
+- ["SH", "sha512"]
+- !private ["s6HasherV", "combine"]
+- !private ["Si", "init"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "CC_SHA1_DIGEST_LENGTH"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "CC_SHA256_DIGEST_LENGTH"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "CC_SHA512_DIGEST_LENGTH"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "CFString"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "Int"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "Int32"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "OBJECT_ecEncryptionNULL"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "OBJECT_rsaEncryptionNULL"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "SEQUENCE_OBJECT_sha1WithECEncryption"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "SEQUENCE_OBJECT_sha1WithRSAEncryption"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "SEQUENCE_OBJECT_sha256WithECEncryption"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "SEQUENCE_OBJECT_sha256WithRSAEncryption"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "SEQUENCE_OBJECT_sha512WithECEncryption"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "SEQUENCE_OBJECT_sha512WithRSAEncryption"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "SecKeyAlgorithm"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "SecPadding"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "String"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "UInt8"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "availableKeySizes"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "digestLength"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "ec"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "kSecAttrKeyTypeEC"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "kSecAttrKeyTypeECSECPrimeRandom"]
+- !private ["25CertificateSigningRequest12KeyAlgorithmO", "kSecAttrKeyTypeRSA"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "objectEncryptionKeyType"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "padding"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "rsa"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "secKeyAttrType"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "secKeyAttrTypeiOS9"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "sequenceObjectEncryptionType"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "signature"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "signatureAlgorithm"]
+- ["25CertificateSigningRequest12KeyAlgorithmO", "type"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s10MirrorPathP", "init"]
+- !private ["Sj", "init"]
+- !private ["s9OptionSetP", "PKCS1SHA1"]
+- !private ["s9OptionSetP", "PKCS1SHA256"]
+- !private ["s9OptionSetP", "PKCS1SHA512"]
+- !private ["SY", "PKCS1SHA1"]
+- !private ["SY", "PKCS1SHA256"]
+- !private ["SY", "PKCS1SHA512"]
+- !private ["SY", "ecdsaSignatureMessageX962SHA1"]
+- !private ["SY", "ecdsaSignatureMessageX962SHA256"]
+- !private ["SY", "ecdsaSignatureMessageX962SHA512"]
+- !private ["SY", "rsaSignatureMessagePKCS1v15SHA1"]
+- !private ["SY", "rsaSignatureMessagePKCS1v15SHA256"]
+- !private ["SY", "rsaSignatureMessagePKCS1v15SHA512"]
+- !private ["s10SIMDScalarP", "init"]
+- !private ["So15SecKeyAlgorithma", "ecdsaSignatureMessageX962SHA1"]
+- !private ["So15SecKeyAlgorithma", "ecdsaSignatureMessageX962SHA256"]
+- !private ["So15SecKeyAlgorithma", "ecdsaSignatureMessageX962SHA512"]
+- !private ["So15SecKeyAlgorithma", "rsaSignatureMessagePKCS1v15SHA1"]
+- !private ["So15SecKeyAlgorithma", "rsaSignatureMessagePKCS1v15SHA256"]
+- !private ["So15SecKeyAlgorithma", "rsaSignatureMessagePKCS1v15SHA512"]
+- !private ["So10SecPaddingV", "PKCS1SHA1"]
+- !private ["So10SecPaddingV", "PKCS1SHA256"]
+- !private ["So10SecPaddingV", "PKCS1SHA512"]
+- !private ["s10SetAlgebraP", "PKCS1SHA1"]
+- !private ["s10SetAlgebraP", "PKCS1SHA256"]
+- !private ["s10SetAlgebraP", "PKCS1SHA512"]
+- !private ["SZ", "init"]
+- !private ["s13SignedNumericP", "init"]
+- !private ["Sx", "init"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "init"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "ecdsaSignatureMessageX962SHA1"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "ecdsaSignatureMessageX962SHA256"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "ecdsaSignatureMessageX962SHA512"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "rsaSignatureMessagePKCS1v15SHA1"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "rsaSignatureMessagePKCS1v15SHA256"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "rsaSignatureMessagePKCS1v15SHA512"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s20_SwiftNewtypeWrapperP", "ecdsaSignatureMessageX962SHA1"]
+- !private ["s20_SwiftNewtypeWrapperP", "ecdsaSignatureMessageX962SHA256"]
+- !private ["s20_SwiftNewtypeWrapperP", "ecdsaSignatureMessageX962SHA512"]
+- !private ["s20_SwiftNewtypeWrapperP", "rsaSignatureMessagePKCS1v15SHA1"]
+- !private ["s20_SwiftNewtypeWrapperP", "rsaSignatureMessagePKCS1v15SHA256"]
+- !private ["s20_SwiftNewtypeWrapperP", "rsaSignatureMessagePKCS1v15SHA512"]
+- ["25CertificateSigningRequest12KeyAlgorithmO9signatureO", "=="]
+- ["25CertificateSigningRequest12KeyAlgorithmO9signatureO", "__derived_enum_equals"]
+- ["25CertificateSigningRequest12KeyAlgorithmO9signatureO", "_rawHashValue"]
+- ["25CertificateSigningRequest12KeyAlgorithmO9signatureO", "deinit"]
+- ["25CertificateSigningRequest12KeyAlgorithmO9signatureO", "hash"]
+- ["25CertificateSigningRequest12KeyAlgorithmO9signatureO", "hashValue"]
+- ["25CertificateSigningRequest12KeyAlgorithmO9signatureO", "sha1"]
+- ["25CertificateSigningRequest12KeyAlgorithmO9signatureO", "sha256"]
+- ["25CertificateSigningRequest12KeyAlgorithmO9signatureO", "sha512"]
+depends-nominal:
+- !private "s18AdditiveArithmeticP"
+- !private "Sz"
+- !private "s7CVarArgP"
+- !private "SL"
+- !private "s17CustomReflectableP"
+- !private "s23CustomStringConvertibleP"
+- !private "Se"
+- !private "SE"
+- "SQ"
+- !private "s25ExpressibleByArrayLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- !private "s17FixedWidthIntegerP"
+- "SH"
+- !private "s6HasherV"
+- !private "Si"
+- "25CertificateSigningRequest12KeyAlgorithmO"
+- !private "s25LosslessStringConvertibleP"
+- !private "s10MirrorPathP"
+- !private "Sj"
+- !private "s9OptionSetP"
+- !private "SY"
+- !private "s10SIMDScalarP"
+- !private "So15SecKeyAlgorithma"
+- !private "So10SecPaddingV"
+- !private "s10SetAlgebraP"
+- !private "SZ"
+- !private "s13SignedNumericP"
+- !private "Sx"
+- !private "s30_CustomPlaygroundQuickLookableP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "s21_ObjectiveCBridgeableP"
+- !private "s20_SwiftNewtypeWrapperP"
+- "25CertificateSigningRequest12KeyAlgorithmO9signatureO"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/XPC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/ObjectiveC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Combine.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Dispatch.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Darwin.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Foundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreFoundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreGraphics.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Swift.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/IOKit.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/SwiftOnoneSupport.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequest.build/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/xpc/XPC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "5c88f24bb174086bebf6b8b2f89ac448"

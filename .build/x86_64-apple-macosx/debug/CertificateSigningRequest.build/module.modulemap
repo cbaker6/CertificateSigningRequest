@@ -1,0 +1,4 @@
+module CertificateSigningRequest {
+    header "/Users/coreybaker/Documents/Xcode Projects/CertificateSigningRequest/.build/x86_64-apple-macosx/debug/CertificateSigningRequest.build/CertificateSigningRequest-Swift.h"
+    requires objc
+}
