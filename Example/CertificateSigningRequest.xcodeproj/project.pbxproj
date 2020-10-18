@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01A396AAE5048F3D78D2F7C4 /* Pods_CertificateSigningRequest__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF95403A07858FFA449A9FE /* Pods_CertificateSigningRequest__iOS_.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -18,7 +19,6 @@
 		915C84D224BD253600AA187C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 915C84D124BD253600AA187C /* Preview Assets.xcassets */; };
 		915C84D524BD253600AA187C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 915C84D324BD253600AA187C /* Main.storyboard */; };
 		915C84DC24BD268E00AA187C /* CertificateSigningRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C84DB24BD268E00AA187C /* CertificateSigningRequestTests.swift */; };
-		9B1DE81A7BE39CA2E4A553FE /* Pods_CertificateSigningRequest_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FA40EA7CB700D8B323B84F /* Pods_CertificateSigningRequest_Example.framework */; };
 		EDEFB8716C5C8BCD20CFF5BF /* Pods_CertificateSigningRequest_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEAEA18FB37738487864EA9 /* Pods_CertificateSigningRequest_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		1314AC813EACEDFFC6F1CFC6 /* CertificateSigningRequest.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CertificateSigningRequest.podspec; path = ../CertificateSigningRequest.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		358A48E3E9FCBE7F4CC259DD /* Pods-CertificateSigningRequest (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest (iOS).debug.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest (iOS)/Pods-CertificateSigningRequest (iOS).debug.xcconfig"; sourceTree = "<group>"; };
 		42CB196A0DC69AE256981883 /* Pods-CertificateSigningRequest_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Tests.release.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Tests/Pods-CertificateSigningRequest_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4A8FADCBE0347DDE12DAE851 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CertificateSigningRequest (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CertificateSigningRequest (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,8 +53,6 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* CertificateSigningRequest_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertificateSigningRequest_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		650715B9021F1F5BE493A359 /* Pods-CertificateSigningRequest_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Example.debug.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Example/Pods-CertificateSigningRequest_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		70C5AFEDAC2945660B683D91 /* Pods-CertificateSigningRequest_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Example.release.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Example/Pods-CertificateSigningRequest_Example.release.xcconfig"; sourceTree = "<group>"; };
 		8EEAEA18FB37738487864EA9 /* Pods_CertificateSigningRequest_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CertificateSigningRequest_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		915C84C824BD253500AA187C /* CertificateSigningRequest (macOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CertificateSigningRequest (macOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		915C84CA24BD253500AA187C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,8 +64,9 @@
 		915C84D724BD253600AA187C /* CertificateSigningRequest__macOS_.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CertificateSigningRequest__macOS_.entitlements; sourceTree = "<group>"; };
 		915C84DB24BD268E00AA187C /* CertificateSigningRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CertificateSigningRequestTests.swift; path = ../../Tests/CertificateSigningRequestTests/CertificateSigningRequestTests.swift; sourceTree = "<group>"; };
 		91715AA5245903CC0090E9C7 /* CertificateSigningRequest_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CertificateSigningRequest_Example.entitlements; sourceTree = "<group>"; };
-		98FA40EA7CB700D8B323B84F /* Pods_CertificateSigningRequest_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CertificateSigningRequest_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFDB760D52A188EDAC1F28E2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		C614D4A702D99DFDBA940C55 /* Pods-CertificateSigningRequest (iOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest (iOS).release.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest (iOS)/Pods-CertificateSigningRequest (iOS).release.xcconfig"; sourceTree = "<group>"; };
+		CDF95403A07858FFA449A9FE /* Pods_CertificateSigningRequest__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CertificateSigningRequest__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEDB8EC97962B2EEA411D874 /* Pods-CertificateSigningRequest_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CertificateSigningRequest_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CertificateSigningRequest_Tests/Pods-CertificateSigningRequest_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B1DE81A7BE39CA2E4A553FE /* Pods_CertificateSigningRequest_Example.framework in Frameworks */,
+				01A396AAE5048F3D78D2F7C4 /* Pods_CertificateSigningRequest__iOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,10 +100,10 @@
 		1CB85B86AE57C0E8E3B06DDD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				650715B9021F1F5BE493A359 /* Pods-CertificateSigningRequest_Example.debug.xcconfig */,
-				70C5AFEDAC2945660B683D91 /* Pods-CertificateSigningRequest_Example.release.xcconfig */,
 				FEDB8EC97962B2EEA411D874 /* Pods-CertificateSigningRequest_Tests.debug.xcconfig */,
 				42CB196A0DC69AE256981883 /* Pods-CertificateSigningRequest_Tests.release.xcconfig */,
+				358A48E3E9FCBE7F4CC259DD /* Pods-CertificateSigningRequest (iOS).debug.xcconfig */,
+				C614D4A702D99DFDBA940C55 /* Pods-CertificateSigningRequest (iOS).release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -184,8 +184,8 @@
 		90788E550B78F38D6161C2A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				98FA40EA7CB700D8B323B84F /* Pods_CertificateSigningRequest_Example.framework */,
 				8EEAEA18FB37738487864EA9 /* Pods_CertificateSigningRequest_Tests.framework */,
+				CDF95403A07858FFA449A9FE /* Pods_CertificateSigningRequest__iOS_.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -365,7 +365,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CertificateSigningRequest_Example-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-CertificateSigningRequest (iOS)-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -400,7 +400,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CertificateSigningRequest_Example/Pods-CertificateSigningRequest_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CertificateSigningRequest (iOS)/Pods-CertificateSigningRequest (iOS)-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CertificateSigningRequest/CertificateSigningRequest.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -409,7 +409,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CertificateSigningRequest_Example/Pods-CertificateSigningRequest_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CertificateSigningRequest (iOS)/Pods-CertificateSigningRequest (iOS)-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F5ECC79605934ADAAF863C74 /* [CP] Embed Pods Frameworks */ = {
@@ -611,7 +611,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 650715B9021F1F5BE493A359 /* Pods-CertificateSigningRequest_Example.debug.xcconfig */;
+			baseConfigurationReference = 358A48E3E9FCBE7F4CC259DD /* Pods-CertificateSigningRequest (iOS).debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CertificateSigningRequest_Example.entitlements;
@@ -636,7 +636,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70C5AFEDAC2945660B683D91 /* Pods-CertificateSigningRequest_Example.release.xcconfig */;
+			baseConfigurationReference = C614D4A702D99DFDBA940C55 /* Pods-CertificateSigningRequest (iOS).release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CertificateSigningRequest_Example.entitlements;

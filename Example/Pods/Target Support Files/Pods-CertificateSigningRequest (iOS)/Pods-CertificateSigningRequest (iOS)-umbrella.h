@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_CertificateSigningRequest_ExampleVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_CertificateSigningRequest_ExampleVersionString[];
+FOUNDATION_EXPORT double Pods_CertificateSigningRequest__iOS_VersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_CertificateSigningRequest__iOS_VersionString[];
 

@@ -7,7 +7,16 @@
 //
 
 import Foundation
+#if canImport(Security)
+import Security
+#endif
+#if canImport(CryptoKit)
+import CryptoKit
+#elseif canImport(Crypto)
+import Crypto
+#else
 import CommonCrypto
+#endif
 
 // Use e.g., https://misc.daniel-marschall.de/asn.1/oid-converter/online.php to convert OID (OBJECT IDENTIFIER) to ASN.1 DER hex forms
 //Guide to translate OID's to bytes for ANS.1 (Look at comment section on page): https://msdn.microsoft.com/en-us/library/bb540809(v=vs.85).aspx
@@ -51,19 +60,7 @@ public enum KeyAlgorithm {
         }
         return result
     }
-    
-    @available(iOS, deprecated: 10.0)
-    public var secKeyAttrTypeiOS9: CFString {
-        let result: CFString
-        switch self {
-            
-        case .rsa:  result = kSecAttrKeyTypeRSA
-        case .ec:   result = kSecAttrKeyTypeEC
-            
-        }
-        return result
-    }
-    
+
     public var availableKeySizes: [Int] {
         let result: [Int]
         switch self {
@@ -112,36 +109,6 @@ public enum KeyAlgorithm {
         }
         return result
         
-    }
-    
-    @available(iOS, deprecated: 10.0)
-    public var digestLength: Int {
-        let result: Int32
-        switch self {
-        //case .rsa(signatureType: .md5), .ec(signatureType: .md5):    result = CC_MD5_DIGEST_LENGTH
-        case .rsa(signatureType: .sha1), .ec(signatureType: .sha1):     result = CC_SHA1_DIGEST_LENGTH
-        //case .rsa(signatureType: .sha224), .ec(signatureType: .sha224):   result = CC_SHA224_DIGEST_LENGTH
-        case .rsa(signatureType: .sha256), .ec(signatureType: .sha256):   result = CC_SHA256_DIGEST_LENGTH
-        //case .rsa(signatureType: .sha384), .ec(signatureType: .sha384):   result = CC_SHA384_DIGEST_LENGTH
-        case .rsa(signatureType: .sha512), .ec(signatureType: .sha512):   result = CC_SHA512_DIGEST_LENGTH
-        }
-        return Int(result)
-    }
-    
-    @available(iOS, deprecated: 10.0)
-    public var padding: SecPadding {
-        let result: SecPadding
-        
-        switch self {
-        case .rsa(signatureType: .sha1), .ec(signatureType: .sha1):
-            result = SecPadding.PKCS1SHA1
-        case .rsa(signatureType: .sha256), .ec(signatureType: .sha256):
-            result = SecPadding.PKCS1SHA256
-        case .rsa(signatureType: .sha512), .ec(signatureType: .sha512):
-            result = SecPadding.PKCS1SHA512
-        }
-        
-        return result
     }
     
     var sequenceObjectEncryptionType: [UInt8]{
