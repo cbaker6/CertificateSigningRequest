@@ -30,7 +30,16 @@
  */
 
 import Foundation
+#if canImport(Security)
+import Security
+#endif
+#if canImport(CryptoKit)
+import CryptoKit
+#elseif canImport(Crypto)
+import Crypto
+#else
 import CommonCrypto
+#endif
 
 public class CertificateSigningRequest:NSObject {
     private let OBJECT_commonName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x03]
@@ -75,68 +84,23 @@ public class CertificateSigningRequest:NSObject {
         let certificationRequestInfo = buldCertificationRequestInfo(publicKeyBits)
         var signature = [UInt8](repeating: 0, count: 256)
         var signatureLen:Int = signature.count
-        
-        if #available(iOS 11, macCatalyst 13.0, macOS 10.12, tvOS 10.0, watchOS 3.0, *) {
-            // Build signature - step 1: SHA hash
-            // Build signature - step 2: Sign hash
-            var error: Unmanaged<CFError>?
-            guard let signatureData = SecKeyCreateSignature(privateKey, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, &error) as Data? else{
-                if error != nil{
-                    print("Error in creating signature: \(error!.takeRetainedValue())")
-                }
-                return nil
+
+        var error: Unmanaged<CFError>?
+        guard let signatureData = SecKeyCreateSignature(privateKey, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, &error) as Data? else{
+            if error != nil{
+                print("Error in creating signature: \(error!.takeRetainedValue())")
             }
-            signatureData.copyBytes(to: &signature, count: signatureData.count)
-            signatureLen = signatureData.count
-            if publicKey != nil{
-                if !SecKeyVerifySignature(publicKey!, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, signatureData as CFData, &error){
-                    print(error!.takeRetainedValue())
-                    return nil
-                }
-            }
-        } else {
-            // Fallback on earlier versions
-            #if !os(macOS)
-            // Build signature - step 1: SHA hash
-            var digest = [UInt8](repeating: 0, count: keyAlgorithm.digestLength)
-            let padding = keyAlgorithm.padding
-            var certificationRequestInfoBytes = [UInt8](repeating: 0, count: certificationRequestInfo.count)
-            certificationRequestInfo.copyBytes(to: &certificationRequestInfoBytes, count: certificationRequestInfo.count)
-        
-            switch keyAlgorithm! {
-            case .rsa(signatureType: .sha1), .ec(signatureType: .sha1):
-                var SHA1 = CC_SHA1_CTX()
-                CC_SHA1_Init(&SHA1)
-                CC_SHA1_Update(&SHA1, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-                CC_SHA1_Final(&digest, &SHA1)
-            case .rsa(signatureType: .sha256), .ec(signatureType: .sha256):
-                var SHA256 = CC_SHA256_CTX()
-                CC_SHA256_Init(&SHA256)
-                CC_SHA256_Update(&SHA256, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-                CC_SHA256_Final(&digest, &SHA256)
-            case .rsa(signatureType: .sha512), .ec(signatureType: .sha512):
-                var SHA512 = CC_SHA512_CTX()
-                CC_SHA512_Init(&SHA512)
-                CC_SHA512_Update(&SHA512, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
-                CC_SHA512_Final(&digest, &SHA512)
-                /*
-                 default:
-                 
-                 print("Error: signing algotirthm \(signAlgorithm) is not implemented")
-                 return nil
-                 */
-            }
-            // Build signature - step 2: Sign hash
-            let result = SecKeyRawSign(privateKey, padding, digest, digest.count, &signature, &signatureLen)
-            
-            if result != errSecSuccess{
-                print("Error signing: \(result)")
-                return nil
-            }
-            #endif
+            return nil
         }
-        
-        
+        signatureData.copyBytes(to: &signature, count: signatureData.count)
+        signatureLen = signatureData.count
+        if publicKey != nil{
+            if !SecKeyVerifySignature(publicKey!, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, signatureData as CFData, &error){
+                print(error!.takeRetainedValue())
+                return nil
+            }
+        }
+
         var certificationRequest = Data(capacity: 1024)
         certificationRequest.append(certificationRequestInfo)
         let shaBytes = keyAlgorithm.sequenceObjectEncryptionType
