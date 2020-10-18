@@ -81,8 +81,8 @@ vtFAmaxL8+rK+Hr55f0PLZQ5PcM=
 You can test if the CSR was created correctly here: [https://redkestrel.co.uk/products/decoder/](https://redkestrel.co.uk/products/decoder/)
 
 ## Requirements
-- iOS 9+
-- mac OS 10.12+
+- iOS 10+
+- mac OS 10.13+
 
 ## Installation
 
