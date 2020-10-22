@@ -33,13 +33,6 @@ import Foundation
 #if canImport(Security)
 import Security
 #endif
-#if canImport(CryptoKit)
-import CryptoKit
-#elseif canImport(Crypto)
-import Crypto
-#else
-import CommonCrypto
-#endif
 
 public class CertificateSigningRequest:NSObject {
     private let OBJECT_commonName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x03]

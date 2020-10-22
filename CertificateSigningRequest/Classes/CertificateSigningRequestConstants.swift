@@ -10,13 +10,6 @@ import Foundation
 #if canImport(Security)
 import Security
 #endif
-#if canImport(CryptoKit)
-import CryptoKit
-#elseif canImport(Crypto)
-import Crypto
-#else
-import CommonCrypto
-#endif
 
 // Use e.g., https://misc.daniel-marschall.de/asn.1/oid-converter/online.php to convert OID (OBJECT IDENTIFIER) to ASN.1 DER hex forms
 //Guide to translate OID's to bytes for ANS.1 (Look at comment section on page): https://msdn.microsoft.com/en-us/library/bb540809(v=vs.85).aspx
