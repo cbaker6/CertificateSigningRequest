@@ -5,7 +5,7 @@
 //  Created by Corey Baker on 10/19/16.
 //  Copyright © Corey Baker. All rights reserved.
 //
-//  This is a port of ios-csr by Ales Teska (https://github.com/ateska/ios-csr) 
+//  This is a port of ios-csr by Ales Teska (https://github.com/ateska/ios-csr)
 //  from Objective-c to Swift. Additions have been made to allow SHA256 and SHA512.
 //
 //  Copyright (C) 2016  Corey Baker
@@ -30,11 +30,12 @@
  */
 
 import Foundation
-#if canImport(Security)
-import Security
-#endif
+import CommonCrypto
 
+@available(iOS, deprecated: 10.0)
 public class CertificateSigningRequest:NSObject {
+    private let OBJECT_emailAddress:[UInt8] = [0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x09, 0x01]
+    private let OBJECT_descriptions:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0D]
     private let OBJECT_commonName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x03]
     private let OBJECT_countryName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x06]
     private let OBJECT_localityName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x07]
@@ -43,6 +44,8 @@ public class CertificateSigningRequest:NSObject {
     private let OBJECT_stateOrProvinceName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x08]
     private let SEQUENCE_tag:UInt8 = 0x30
     private let SET_tag:UInt8 = 0x31
+    private let emailAddress:String?
+    private let descriptions:String?
     private let commonName:String?
     private let countryName:String?
     private let localityName:String?
@@ -53,7 +56,9 @@ public class CertificateSigningRequest:NSObject {
     private var subjectDER:Data?
     
     
-    public init(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: KeyAlgorithm){
+    public init(emailAddress: String?, descriptions: String?, commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: KeyAlgorithm){
+        self.emailAddress = emailAddress
+        self.descriptions = descriptions
         self.commonName = commonName
         self.organizationName = organizationName
         self.organizationUnitName = organizationUnitName
@@ -66,34 +71,80 @@ public class CertificateSigningRequest:NSObject {
     }
     
     public convenience override init(){
-        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, stateOrProvinceName:nil, localityName:nil, keyAlgorithm: KeyAlgorithm.rsa(signatureType: .sha512))
+        self.init(emailAddress: nil, descriptions: nil, commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, stateOrProvinceName:nil, localityName:nil, keyAlgorithm: KeyAlgorithm.rsa(signatureType: .sha512))
     }
     
     public convenience init(keyAlgorithm: KeyAlgorithm){
-        self.init(commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, stateOrProvinceName:nil, localityName:nil, keyAlgorithm: keyAlgorithm)
+        self.init(emailAddress: nil, descriptions: nil, commonName: nil, organizationName:nil, organizationUnitName:nil, countryName:nil, stateOrProvinceName:nil, localityName:nil, keyAlgorithm: keyAlgorithm)
     }
     
     public func build(_ publicKeyBits:Data, privateKey: SecKey, publicKey: SecKey?=nil) -> Data?{
-        let certificationRequestInfo = buldCertificationRequestInfo(publicKeyBits)
+        let certificationRequestInfo = buildCertificationRequestInfo(publicKeyBits)
         var signature = [UInt8](repeating: 0, count: 256)
         var signatureLen:Int = signature.count
-
-        var error: Unmanaged<CFError>?
-        guard let signatureData = SecKeyCreateSignature(privateKey, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, &error) as Data? else{
-            if error != nil{
-                print("Error in creating signature: \(error!.takeRetainedValue())")
-            }
-            return nil
-        }
-        signatureData.copyBytes(to: &signature, count: signatureData.count)
-        signatureLen = signatureData.count
-        if publicKey != nil{
-            if !SecKeyVerifySignature(publicKey!, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, signatureData as CFData, &error){
-                print(error!.takeRetainedValue())
+        
+        if #available(iOS 11, macCatalyst 13.0, macOS 10.12, tvOS 10.0, watchOS 3.0, *) {
+            // Build signature - step 1: SHA hash
+            // Build signature - step 2: Sign hash
+            var error: Unmanaged<CFError>?
+            guard let signatureData = SecKeyCreateSignature(privateKey, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, &error) as Data? else{
+                if error != nil{
+                    print("Error in creating signature: \(error!.takeRetainedValue())")
+                }
                 return nil
             }
+            signatureData.copyBytes(to: &signature, count: signatureData.count)
+            signatureLen = signatureData.count
+            if publicKey != nil{
+                if !SecKeyVerifySignature(publicKey!, keyAlgorithm.signatureAlgorithm, certificationRequestInfo as CFData, signatureData as CFData, &error){
+                    print(error!.takeRetainedValue())
+                    return nil
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+            #if !os(macOS)
+            
+            // Build signature - step 1: SHA hash
+            var digest = [UInt8](repeating: 0, count: keyAlgorithm.digestLength)
+            let padding = keyAlgorithm.padding
+            var certificationRequestInfoBytes = [UInt8](repeating: 0, count: certificationRequestInfo.count)
+            certificationRequestInfo.copyBytes(to: &certificationRequestInfoBytes, count: certificationRequestInfo.count)
+        
+            switch keyAlgorithm! {
+            case .rsa(signatureType: .sha1), .ec(signatureType: .sha1):
+                var SHA1 = CC_SHA1_CTX()
+                CC_SHA1_Init(&SHA1)
+                CC_SHA1_Update(&SHA1, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
+                CC_SHA1_Final(&digest, &SHA1)
+            case .rsa(signatureType: .sha256), .ec(signatureType: .sha256):
+                var SHA256 = CC_SHA256_CTX()
+                CC_SHA256_Init(&SHA256)
+                CC_SHA256_Update(&SHA256, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
+                CC_SHA256_Final(&digest, &SHA256)
+            case .rsa(signatureType: .sha512), .ec(signatureType: .sha512):
+                var SHA512 = CC_SHA512_CTX()
+                CC_SHA512_Init(&SHA512)
+                CC_SHA512_Update(&SHA512, certificationRequestInfoBytes, CC_LONG(certificationRequestInfo.count))
+                CC_SHA512_Final(&digest, &SHA512)
+                /*
+                 default:
+                 
+                 print("Error: signing algotirthm \(signAlgorithm) is not implemented")
+                 return nil
+                 */
+            }
+            // Build signature - step 2: Sign hash
+            let result = SecKeyRawSign(privateKey, padding, digest, digest.count, &signature, &signatureLen)
+            
+            if result != errSecSuccess{
+                print("Error signing: \(result)")
+                return nil
+            }
+            #endif
         }
-
+        
+        
         var certificationRequest = Data(capacity: 1024)
         certificationRequest.append(certificationRequestInfo)
         let shaBytes = keyAlgorithm.sequenceObjectEncryptionType
@@ -103,14 +154,14 @@ public class CertificateSigningRequest:NSObject {
         let zero:UInt8 = 0 // Prepend zero
         signData.append(zero)
         signData.append(signature, count: signatureLen)
-        appendBITSTRING(signData, into: &certificationRequest)
+        appendingBITSTRING(signData, into: &certificationRequest)
         
-        enclose(&certificationRequest, by: SEQUENCE_tag) // Enclose into SEQUENCE
+        enclosing(&certificationRequest, by: SEQUENCE_tag) // Enclose into SEQUENCE
         
         return certificationRequest
     }
     
-    public func buildAndEncodeDataAsString(_ publicKeyBits:Data, privateKey: SecKey, publicKey: SecKey?=nil)-> String? {
+    public func buildAndEncodedDataAsString(_ publicKeyBits:Data, privateKey: SecKey, publicKey: SecKey?=nil)-> String? {
         
         guard let buildData = self.build(publicKeyBits, privateKey: privateKey, publicKey: publicKey) else{
             return nil
@@ -120,9 +171,9 @@ public class CertificateSigningRequest:NSObject {
         
     }
     
-    public func buildCSRAndReturnString(_ publicKeyBits:Data, privateKey: SecKey, publicKey: SecKey?=nil)-> String? {
+    public func buildCSRAndReturnToString(_ publicKeyBits:Data, privateKey: SecKey, publicKey: SecKey?=nil)-> String? {
         
-        guard let csrString = self.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey, publicKey: publicKey) else{
+        guard let csrString = self.buildAndEncodedDataAsString(publicKeyBits, privateKey: privateKey, publicKey: publicKey) else{
             return nil
         }
         
@@ -155,7 +206,7 @@ public class CertificateSigningRequest:NSObject {
     }
     
    
-    func buldCertificationRequestInfo(_ publicKeyBits:Data) -> Data{
+    func buildCertificationRequestInfo(_ publicKeyBits:Data) -> Data{
         var certificationRequestInfo = Data(capacity: 256)
         
         //Add version
@@ -164,51 +215,59 @@ public class CertificateSigningRequest:NSObject {
         
         //Add subject
         var subject = Data(capacity: 256)
-        if countryName != nil{
-            appendSubjectItem(OBJECT_countryName, value: countryName!, into: &subject)
-        }
+        if emailAddress != nil{
+                   appendingSubjectItem(OBJECT_emailAddress, value: emailAddress!, into: &subject)
+               }
         
-        if stateOrProvinceName != nil {
-            appendSubjectItem(OBJECT_stateOrProvinceName, value: stateOrProvinceName!, into: &subject)
-        }
-        
-        if localityName != nil {
-            appendSubjectItem(OBJECT_localityName, value: localityName!, into: &subject)
-        }
-        
-        if organizationName != nil{
-            appendSubjectItem(OBJECT_organizationName, value: organizationName!, into: &subject)
-        }
-        
-        if organizationUnitName != nil {
-            appendSubjectItem(OBJECT_organizationalUnitName, value: organizationUnitName!, into: &subject)
+        if descriptions != nil {
+            appendingSubjectItem(OBJECT_descriptions, value: descriptions!, into: &subject)
         }
         
         if commonName != nil{
-            appendSubjectItem(OBJECT_commonName, value: commonName!, into: &subject)
+                   appendingSubjectItem(OBJECT_commonName, value: commonName!, into: &subject)
+               }
+        
+        if organizationUnitName != nil {
+            appendingSubjectItem(OBJECT_organizationalUnitName, value: organizationUnitName!, into: &subject)
         }
         
-        enclose(&subject, by: SEQUENCE_tag)// Enclose into SEQUENCE
+        if organizationName != nil{
+            appendingSubjectItem(OBJECT_organizationName, value: organizationName!, into: &subject)
+        }
+        
+        if localityName != nil {
+            appendingSubjectItem(OBJECT_localityName, value: localityName!, into: &subject)
+        }
+        
+        if stateOrProvinceName != nil {
+            appendingSubjectItem(OBJECT_stateOrProvinceName, value: stateOrProvinceName!, into: &subject)
+        }
+        
+        if countryName != nil{
+            appendingSubjectItem(OBJECT_countryName, value: countryName!, into: &subject)
+        }
+        
+        enclosing(&subject, by: SEQUENCE_tag)// Enclose into SEQUENCE
         
         subjectDER = subject
         
         certificationRequestInfo.append(subject)
         
         //Add public key info
-        let publicKeyInfo = buildPublicKeyInfo(publicKeyBits)
+        let publicKeyInfo = buildPublicKeysInfo(publicKeyBits)
         certificationRequestInfo.append(publicKeyInfo)
         
         // Add attributes
         let attributes:[UInt8] = [0xA0, 0x00]
         certificationRequestInfo.append(attributes, count: attributes.count)
         
-        enclose(&certificationRequestInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
+        enclosing(&certificationRequestInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
         
         return certificationRequestInfo
     }
     
     // Utility class methods ...
-    func buildPublicKeyInfo(_ publicKeyBits:Data)-> Data{
+    func buildPublicKeysInfo(_ publicKeyBits:Data)-> Data{
         
         var publicKeyInfo = Data(capacity: 390)
         
@@ -220,39 +279,39 @@ public class CertificateSigningRequest:NSObject {
             publicKeyInfo.append(OBJECT_ecEncryptionNULL, count: OBJECT_ecEncryptionNULL.count)
         }
 
-        enclose(&publicKeyInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
+        enclosing(&publicKeyInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
         
         var publicKeyASN = Data(capacity: 260)
         switch keyAlgorithm!  {
         case .ec:
-            let key = getPublicKey(publicKeyBits)
+            let key = getPublicKeys(publicKeyBits)
             publicKeyASN.append(key)
             
         default:
             
-            let mod = getPublicKeyMod(publicKeyBits)
+            let mod = getPublicKeysMod(publicKeyBits)
             let integer:UInt8 = 0x02 //Integer
             publicKeyASN.append(integer)
-            appendDERLength(mod.count, into: &publicKeyASN)
+            appendingDERLength(mod.count, into: &publicKeyASN)
             publicKeyASN.append(mod)
             
-            let exp = getPublicKeyExp(publicKeyBits)
+            let exp = getPublicKeysExp(publicKeyBits)
             publicKeyASN.append(integer)
-            appendDERLength(exp.count, into: &publicKeyASN)
+            appendingDERLength(exp.count, into: &publicKeyASN)
             publicKeyASN.append(exp)
             
-            enclose(&publicKeyASN, by: SEQUENCE_tag)// Enclose into ??
+            enclosing(&publicKeyASN, by: SEQUENCE_tag)// Enclose into ??
         }
         
-        prependByte(0x00, into: &publicKeyASN) //Prepend 0 (?)
-        appendBITSTRING(publicKeyASN, into: &publicKeyInfo)
+        prependingByte(0x00, into: &publicKeyASN) //Prepend 0 (?)
+        appendingBITSTRING(publicKeyASN, into: &publicKeyInfo)
         
-        enclose(&publicKeyInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
+        enclosing(&publicKeyInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
         
         return publicKeyInfo
     }
     
-    func appendSubjectItem(_ what:[UInt8], value: String, into: inout Data ) ->(){
+    func appendingSubjectItem(_ what:[UInt8], value: String, into: inout Data ) ->(){
         
         if what.count != 5{
             print("Error: attempting to a non-subject item")
@@ -262,23 +321,23 @@ public class CertificateSigningRequest:NSObject {
         var subjectItem = Data(capacity: 128)
         
         subjectItem.append(what, count: what.count)
-        appendUTF8String(string: value, into: &subjectItem)
-        enclose(&subjectItem, by: SEQUENCE_tag)
-        enclose(&subjectItem, by: SET_tag)
+        appendingUTF8String(string: value, into: &subjectItem)
+        enclosing(&subjectItem, by: SEQUENCE_tag)
+        enclosing(&subjectItem, by: SET_tag)
         
         into.append(subjectItem)
     }
     
-    func appendUTF8String(string: String, into: inout Data) ->(){
+    func appendingUTF8String(string: String, into: inout Data) ->(){
         
         let strType:UInt8 = 0x0C //UTF8STRING
     
         into.append(strType)
-        appendDERLength(string.lengthOfBytes(using: String.Encoding.utf8), into: &into)
+        appendingDERLength(string.lengthOfBytes(using: String.Encoding.utf8), into: &into)
         into.append(string.data(using: String.Encoding.utf8)!)
     }
     
-    func appendDERLength(_ length: Int, into: inout Data){
+    func appendingDERLength(_ length: Int, into: inout Data){
         
         assert(length < 0x8000)
         
@@ -300,26 +359,26 @@ public class CertificateSigningRequest:NSObject {
         }
     }
     
-    func appendBITSTRING(_ data: Data, into: inout Data)->(){
+    func appendingBITSTRING(_ data: Data, into: inout Data)->(){
         
         let strType:UInt8 = 0x03 //BIT STRING
         into.append(strType)
-        appendDERLength(data.count, into: &into)
+        appendingDERLength(data.count, into: &into)
         into.append(data)
     }
     
-    func enclose(_ data: inout Data, by: UInt8){
+    func enclosing(_ data: inout Data, by: UInt8){
         
         var newData = Data(capacity: data.count + 4)
         
         newData.append(by)
-        appendDERLength(data.count, into: &newData)
+        appendingDERLength(data.count, into: &newData)
         newData.append(data)
         
         data = newData
     }
     
-    func prependByte(_ byte: UInt8, into: inout Data)->(){
+    func prependingByte(_ byte: UInt8, into: inout Data)->(){
      
         var newData = Data(capacity: into.count + 1)
         
@@ -329,12 +388,12 @@ public class CertificateSigningRequest:NSObject {
         into = newData
     }
     
-    func getPublicKey(_ publicKeyBits:Data)->Data{
+    func getPublicKeys(_ publicKeyBits:Data)->Data{
         
         //Current only supports uncompressed keys, 65=1+32+32
         var iterator = 0
         
-        _ = derEncodingSpecificSize(publicKeyBits, at: &iterator, numOfBytes: 8)
+        _ = derEncodingSpecificsSize(publicKeyBits, at: &iterator, numOfBytes: 8)
  
         let range:Range<Int> = 0 ..< 65
         
@@ -343,41 +402,41 @@ public class CertificateSigningRequest:NSObject {
     
     // From http://stackoverflow.com/questions/3840005/how-to-find-out-the-modulus-and-exponent-of-rsa-public-key-on-iphone-objective-c
     
-    func getPublicKeyExp(_ publicKeyBits:Data)->Data{
+    func getPublicKeysExp(_ publicKeyBits:Data)->Data{
         
         var iterator = 0
         
         iterator+=1 // TYPE - bit stream - mod + exp
-        _ = derEncodingGetSizeFrom(publicKeyBits, at: &iterator) // Total size
+        _ = derEncodingGetSizesFrom(publicKeyBits, at: &iterator) // Total size
         
         iterator+=1 // TYPE - bit stream mod
-        let modSize = derEncodingGetSizeFrom(publicKeyBits, at: &iterator)
+        let modSize = derEncodingGetSizesFrom(publicKeyBits, at: &iterator)
         iterator += modSize
         
         iterator+=1 // TYPE - bit stream exp
-        let expSize = derEncodingGetSizeFrom(publicKeyBits, at: &iterator)
+        let expSize = derEncodingGetSizesFrom(publicKeyBits, at: &iterator)
         
         let range:Range<Int> = iterator ..< (iterator + expSize)
         
         return publicKeyBits.subdata(in: range)
     }
     
-    func getPublicKeyMod(_ publicKeyBits: Data)->Data{
+    func getPublicKeysMod(_ publicKeyBits: Data)->Data{
         
         var iterator = 0
         
         iterator+=1 // TYPE - bit stream - mod + exp
-        _ = derEncodingGetSizeFrom(publicKeyBits, at: &iterator)
+        _ = derEncodingGetSizesFrom(publicKeyBits, at: &iterator)
         
         iterator+=1 // TYPE - bit stream mod
-        let modSize = derEncodingGetSizeFrom(publicKeyBits, at: &iterator)
+        let modSize = derEncodingGetSizesFrom(publicKeyBits, at: &iterator)
         
         let range:Range<Int> = iterator ..< (iterator + modSize)
         
         return publicKeyBits.subdata(in: range)
     }
     
-    func derEncodingSpecificSize(_ buf: Data, at iterator: inout Int, numOfBytes: Int)->Int{
+    func derEncodingSpecificsSize(_ buf: Data, at iterator: inout Int, numOfBytes: Int)->Int{
         
         var data = [UInt8](repeating: 0, count: buf.count)
         buf.copyBytes(to: &data, count: buf.count)
@@ -389,7 +448,7 @@ public class CertificateSigningRequest:NSObject {
         return buf.count
     }
     
-    func derEncodingGetSizeFrom(_ buf: Data, at iterator: inout Int)->Int{
+    func derEncodingGetSizesFrom(_ buf: Data, at iterator: inout Int)->Int{
         
         var data = [UInt8](repeating: 0, count: buf.count)
         buf.copyBytes(to: &data, count: buf.count)
