@@ -45,7 +45,7 @@ guard let keyBits = tempPublicKeyBits as? Data else {
 let csr = CertificateSigningRequest() //CSR with no fields, will use defaults of an RSA key with sha512
 let algorithm = KeyAlgorithm.ec(signatureType: .sha256)
 let csr = CertificateSigningRequest(keyAlgorithm: algorithm) //CSR with a specific key 
-let csr = CertificateSigningRequest(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: algorithm) //Define all fields and key algorithm
+let csr = CertificateSigningRequest(commonName: String?, organizationName: String?, organizationUnitName: String?, countryName: String?, stateOrProvinceName: String?, localityName: String?, emailAddress: String?, description: String?, keyAlgorithm: algorithm) //Define any field you want in your CSR along with the key algorithm
 ```
 
 4. Then simply build your CSR using your publicKey(bits) and privateKey using:
@@ -68,13 +68,14 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ```
 -----BEGIN CERTIFICATE REQUEST-----
-MIIBMDCB1wIBADB1MQswCQYDVQQGDAJVUzELMAkGA1UECAwCS1kxDTALBgNVBAcM
-BFRlc3QxDTALBgNVBAoMBFRlc3QxDTALBgNVBAsMBFRlc3QxLDAqBgNVBAMMI0Nl
-cnRpZmljYXRlU2lnbmluZ1JlcXVlc3RTd2lmdCBUZXN0MFkwEwYHKoZIzj0CAQYI
-KoZIzj0DAQcDQgAExrSyR8PBMPaW9llanSqOhl3l5LhlXv0LwYEW+Yhg8e5MOPs4
-SlG8f33OFVUPPNWd09TnmtKg+P4VTuEfJphsqKAAMAoGCCqGSM49BAMCA0gAMEUC
-IQDF/PwAitcohl4lByxuqxJpSLJ5vueWq8US53/66RUREQIgMLInVDKCCoPHWDYM
-vtFAmaxL8+rK+Hr55f0PLZQ5PcM=
+MIIBYTCCAQcCAQAwgaQxCzAJBgNVBAYMAlVTMQswCQYDVQQIDAJLWTENMAsGA1UE
+BwwEVGVzdDENMAsGA1UECgwEVGVzdDENMAsGA1UECwwEVGVzdDEnMCUGA1UEAwwe
+Q2VydGlmaWNhdGVTaWduaW5nUmVxdWVzdCBUZXN0MSIwIAYJKoZIhvcNAQkBDBNu
+ZXRyZWNvbkBjcy51a3kuZWR1MQ4wDAYDVQQNDAVoZWxsbzBZMBMGByqGSM49AgEG
+CCqGSM49AwEHA0IABN5Wp7zEAVkffuqmkC22j3mOCJalTo2Beff23N8Bv7sZ0iTM
+AdqeeF+A1fAO5yUwykbTYhAyNiwkT82jtOy09xKgADAKBggqhkjOPQQDAgNIADBF
+AiEAt85IAQ9kOptiplqYkLyRz4is/uB4DffNpWuP9EUJY74CIHtjMZ6QRwY1zPGI
+bXC5eX6Kpv5QLfvR6xX7Xqaoy6Ai
 -----END CERTIFICATE REQUEST-----
 ```
 

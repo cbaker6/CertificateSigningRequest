@@ -16,16 +16,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install pods
-      run: |
-        cd Example
-        pod install
-        cd ..
     - name: Build
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -workspace Example/CertificateSigningRequest.xcworkspace -scheme CertificateSigningRequest-Example -destination platform\=iOS\ Simulator,name\=iPhone\ 11\ Pro\ Max build test | xcpretty
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -scheme CertificateSigningRequest -destination platform\=iOS\ Simulator,name\=iPhone\ 11\ Pro\ Max test | xcpretty
     - name: Codecov
       run: bash <(curl https://codecov.io/bash)
-  
+
   swift-test-spm:
     
     runs-on: macos-latest
@@ -36,6 +31,8 @@ jobs:
       run: swift test --enable-code-coverage -v
     - name: Prepare codecov
       run: xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
+    - name: Codecov
+      run: bash <(curl https://codecov.io/bash)
 
   cocoapods:
     needs: swift-test-spm
@@ -44,16 +41,44 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: CocoaPods
-        run: set -o pipefail && env NSUnbufferedIO=YES pod lib lint --allow-warnings --verbose 
-
-  carthage:
-
-   needs: swift-test-spm
-   runs-on: macos-latest
-
-   steps:
-     - uses: actions/checkout@v2
-     - name: Carthage 
-       run: carthage build --no-skip-current --verbose
-       env: 
-        DEVELOPER_DIR: ${{ env.CI_XCODE_VER }}
+        run: set -o pipefail && env NSUnbufferedIO=YES pod lib lint --allow-warnings --verbose
+        
+  deploy_docs:
+    
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Gems
+        id: cache-gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gem-
+      - name: Install Bundle
+        run: |
+          bundle config path vendor/bundle
+          bundle install
+      - name: Create Jazzy Docs
+        run: |
+          ver=`/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" CertificateSigningRequest\ \(tvOS\)/Info.plist`
+          bundle exec jazzy \
+            --clean \
+            --author "Corey E. Baker" \
+            --author_url https://www.cs.uky.edu/~baker \
+            --github_url https://github.com/cbaker6/CertificateSigningRequest.git \
+            --root-url https://netreconlab.github.io/api/ \
+            --module-version ${ver} \
+            --theme fullwidth \
+            --skip-undocumented \
+            --output ./docs/api \
+            --module CertificateSigningRequest \
+            --swift-build-tool spm \
+            --build-tool-arguments -Xswiftc,-swift-version,-Xswiftc,5
+      - name: Deploy Jazzy Docs
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs

@@ -1,11 +1,15 @@
 coverage:
   ignore:
-    - Example/.*
+    - Tests/.*
+    - TestHost/.*
+    - TestHostTests/.*
+    - TestHostTV/.*
+    - TestHostTVTests/.*
   status:
     patch: true
     changes: false
     project:
       default:
-        target: 73
+        target: 90
 comment:
   require_changes: true
