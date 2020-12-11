@@ -17,10 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install pods
-      run: |
-        cd Example
-        pod install
-        cd ..
     - name: Build
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -scheme CertificateSigningRequest -destination platform\=iOS\ Simulator,name\=iPhone\ 11\ Pro\ Max test | xcpretty
     - name: Codecov
