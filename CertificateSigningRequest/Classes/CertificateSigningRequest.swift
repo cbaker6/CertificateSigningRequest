@@ -37,6 +37,8 @@ import Security
 public class CertificateSigningRequest:NSObject {
     private let OBJECT_commonName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x03]
     private let OBJECT_countryName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x06]
+    private let OBJECT_description:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0D]
+    private let OBJECT_emailAddress:[UInt8] = [0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x09, 0x01]
     private let OBJECT_localityName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x07]
     private let OBJECT_organizationName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0A]
     private let OBJECT_organizationalUnitName:[UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0B]
@@ -45,22 +47,25 @@ public class CertificateSigningRequest:NSObject {
     private let SET_tag:UInt8 = 0x31
     private let commonName:String?
     private let countryName:String?
+    private let emailAddress:String?
+    private let csrDescription:String?
     private let localityName:String?
     private let organizationName:String?
     private let organizationUnitName:String?
     private let stateOrProvinceName:String?
     private var keyAlgorithm: KeyAlgorithm!
-    private var subjectDER:Data?
+    private var subjectDER:Data? = nil
     
     
-    public init(commonName: String?, organizationName:String?, organizationUnitName:String?, countryName:String?, stateOrProvinceName:String?, localityName:String?, keyAlgorithm: KeyAlgorithm){
+    public init(commonName: String? = nil, organizationName: String? = nil, organizationUnitName: String? = nil, countryName: String? = nil, stateOrProvinceName: String? = nil, localityName: String? = nil, emailAddress: String? = nil, description: String? = nil, keyAlgorithm: KeyAlgorithm){
         self.commonName = commonName
         self.organizationName = organizationName
         self.organizationUnitName = organizationUnitName
         self.countryName = countryName
         self.stateOrProvinceName = stateOrProvinceName
         self.localityName = localityName
-        self.subjectDER = nil
+        self.emailAddress = emailAddress
+        self.csrDescription = description
         self.keyAlgorithm = keyAlgorithm
         super.init()
     }
@@ -164,34 +169,41 @@ public class CertificateSigningRequest:NSObject {
         
         //Add subject
         var subject = Data(capacity: 256)
-        if countryName != nil{
-            appendSubjectItem(OBJECT_countryName, value: countryName!, into: &subject)
+
+        if let countryName = countryName {
+            appendSubjectItem(OBJECT_countryName, value: countryName, into: &subject)
         }
         
-        if stateOrProvinceName != nil {
-            appendSubjectItem(OBJECT_stateOrProvinceName, value: stateOrProvinceName!, into: &subject)
+        if let stateOrProvinceName = stateOrProvinceName {
+            appendSubjectItem(OBJECT_stateOrProvinceName, value: stateOrProvinceName, into: &subject)
         }
         
-        if localityName != nil {
-            appendSubjectItem(OBJECT_localityName, value: localityName!, into: &subject)
+        if let localityName = localityName {
+            appendSubjectItem(OBJECT_localityName, value: localityName, into: &subject)
         }
         
-        if organizationName != nil{
-            appendSubjectItem(OBJECT_organizationName, value: organizationName!, into: &subject)
+        if let organizationName = organizationName {
+            appendSubjectItem(OBJECT_organizationName, value: organizationName, into: &subject)
         }
         
-        if organizationUnitName != nil {
-            appendSubjectItem(OBJECT_organizationalUnitName, value: organizationUnitName!, into: &subject)
+        if let organizationUnitName = organizationUnitName {
+            appendSubjectItem(OBJECT_organizationalUnitName, value: organizationUnitName, into: &subject)
         }
         
-        if commonName != nil{
-            appendSubjectItem(OBJECT_commonName, value: commonName!, into: &subject)
+        if let commonName = commonName {
+            appendSubjectItem(OBJECT_commonName, value: commonName, into: &subject)
+        }
+        
+        if let emailAddress = emailAddress {
+            appendSubjectItem(OBJECT_emailAddress, value: emailAddress, into: &subject)
+        }
+        
+        if let description = csrDescription {
+            appendSubjectItem(OBJECT_description, value: description, into: &subject)
         }
         
         enclose(&subject, by: SEQUENCE_tag)// Enclose into SEQUENCE
-        
         subjectDER = subject
-        
         certificationRequestInfo.append(subject)
         
         //Add public key info
@@ -201,7 +213,6 @@ public class CertificateSigningRequest:NSObject {
         // Add attributes
         let attributes:[UInt8] = [0xA0, 0x00]
         certificationRequestInfo.append(attributes, count: attributes.count)
-        
         enclose(&certificationRequestInfo, by: SEQUENCE_tag) // Enclose into SEQUENCE
         
         return certificationRequestInfo
@@ -254,8 +265,8 @@ public class CertificateSigningRequest:NSObject {
     
     func appendSubjectItem(_ what:[UInt8], value: String, into: inout Data ) ->(){
         
-        if what.count != 5{
-            print("Error: attempting to a non-subject item")
+        if what.count != 5 && what.count != 11 {
+            print("Error: appending to a non-subject item")
             return
         }
         
