@@ -31,6 +31,8 @@ jobs:
       run: swift test --enable-code-coverage -v
     - name: Prepare codecov
       run: xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
+    - name: Codecov
+      run: bash <(curl https://codecov.io/bash)
 
   cocoapods:
     needs: swift-test-spm
