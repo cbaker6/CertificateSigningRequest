@@ -68,7 +68,7 @@ jobs:
             --author "Corey E. Baker" \
             --author_url https://www.cs.uky.edu/~baker \
             --github_url https://github.com/cbaker6/CertificateSigningRequest.git \
-            --root-url https://netreconlab.github.io/api/ \
+            --root-url https://cbaker6.github.io/api/ \
             --module-version ${ver} \
             --theme fullwidth \
             --skip-undocumented \
