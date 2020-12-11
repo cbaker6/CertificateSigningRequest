@@ -62,7 +62,7 @@ jobs:
           bundle install
       - name: Create Jazzy Docs
         run: |
-          ver=`/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" CertificateSigningRequest (tvOS)/Info.plist`
+          ver=`/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" CertificateSigningRequest\ \(tvOS\)/Info.plist`
           bundle exec jazzy \
             --clean \
             --author "Corey E. Baker" \
