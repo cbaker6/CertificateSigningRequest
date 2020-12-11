@@ -39,16 +39,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: CocoaPods
-        run: set -o pipefail && env NSUnbufferedIO=YES pod lib lint --allow-warnings --verbose 
-
-  carthage:
-
-   needs: swift-test-spm
-   runs-on: macos-latest
-
-   steps:
-     - uses: actions/checkout@v2
-     - name: Carthage 
-       run: carthage build --no-skip-current --verbose
-       env: 
-        DEVELOPER_DIR: ${{ env.CI_XCODE_VER }}
+        run: set -o pipefail && env NSUnbufferedIO=YES pod lib lint --allow-warnings --verbose
