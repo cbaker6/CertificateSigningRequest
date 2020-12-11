@@ -1,0 +1,19 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/runner/work/CertificateSigningRequest/CertificateSigningRequest/Sources/CertificateSigningRequest/CertificateSigningRequest.swift",
+      "line": 38,
+      "symbol": "CertificateSigningRequest",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CertificateSigningRequest/CertificateSigningRequest/Sources/CertificateSigningRequest/CertificateSigningRequestConstants.swift",
+      "line": 52,
+      "symbol": "KeyAlgorithm",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/runner/work/CertificateSigningRequest/CertificateSigningRequest"
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CertificateSigningRequest  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+
+    <a title="CertificateSigningRequest  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          CertificateSigningRequest 1.0 Docs
+        </a>
+         (0% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/cbaker6/CertificateSigningRequest.git">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="dash-feed://https%3A%2F%2Fnetreconlab.github.io%2Fapi%2Fdocsets%2FCertificateSigningRequest.xml">
+            <img class="header-icon" src="img/dash.png"/>
+            Install in Dash
+          </a>
+        </p>
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">CertificateSigningRequest Reference</a>
+      <img class="carat" src="img/carat.png" />
+      CertificateSigningRequest  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            
+            <h1 id='certificatesigningrequest' class='heading'>CertificateSigningRequest</h1>
+
+<p><a href="https://swiftpackageindex.com/cbaker6/CertificateSigningRequest"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fcbaker6%2FCertificateSigningRequest%2Fbadge%3Ftype%3Dswift-versions" alt=""></a>
+<a href="https://swiftpackageindex.com/cbaker6/CertificateSigningRequest"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fcbaker6%2FCertificateSigningRequest%2Fbadge%3Ftype%3Dplatforms" alt=""></a>
+<a href="https://github.com/cbaker6/CertificateSigningRequest/actions?query=workflow%3Abuild+branch%3Amain"><img src="https://github.com/cbaker6/CertificateSigningRequest/workflows/build/badge.svg?branch=main" alt="CI Status"></a>
+<a href="https://codecov.io/gh/cbaker6/CertificateSigningRequest/branches/main"><img src="https://codecov.io/gh/cbaker6/CertificateSigningRequest/branches/main/graph/badge.svg" alt="Codecov"></a>
+<a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/swift%20package%20manager-compatible-brightgreen.svg" alt="SPM"></a>
+<a href="https://cocoapods.org/pods/CertificateSigningRequest"><img src="https://img.shields.io/cocoapods/v/CertificateSigningRequest.svg?style=flat" alt="Version"></a>
+<a href="https://cocoapods.org/pods/CertificateSigningRequest"><img src="https://img.shields.io/cocoapods/l/CertificateSigningRequest.svg?style=flat" alt="License"></a></p>
+
+<p>Generate a certificate signing request (CSR) in iOS/macOS using Swift.</p>
+<h2 id='ios' class='heading'>iOS</h2>
+
+<p>Supports RSA (key size: 512, 1024, 2048) and EC inside/outside of secure enclave (iOS only supports 256 bit keys for now), SHA1, SHA256, and SHA512. </p>
+<h2 id='macos' class='heading'>macOS</h2>
+
+<p>Supports RSA (key size: 1024, 2048) and EC inside/outside of secure enclave, SHA1, SHA256, and SHA512. </p>
+<h2 id='usage' class='heading'>Usage</h2>
+
+<p>To use, follow the following steps:</p>
+
+<ol>
+<li>Generate your publicKey/privateKey pair. This can be done using Keychain in iOS. An example can be found in the <code>generateKeysAndStoreInKeychain</code> function in the <a href="https://github.com/cbaker6/CertificateSigningRequest/blob/main/Example/Tests/Tests.swift#L440">testfile</a>.</li>
+<li>Get your publicKey in bits by querying it from the iOS keychain using <code>String(kSecReturnData): true</code> in your query. For example:</li>
+</ol>
+<pre class="highlight swift"><code><span class="c1">//Set block size</span>
+<span class="k">let</span> <span class="nv">keyBlockSize</span> <span class="o">=</span> <span class="kt">SecKeyGetBlockSize</span><span class="p">(</span><span class="n">publicKey</span><span class="p">)</span>
+<span class="c1">//Ask keychain to provide the publicKey in bits</span>
+<span class="k">let</span> <span class="nv">query</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="kt">String</span><span class="p">(</span><span class="n">kSecClass</span><span class="p">):</span> <span class="n">kSecClassKey</span><span class="p">,</span>
+    <span class="kt">String</span><span class="p">(</span><span class="n">kSecAttrKeyType</span><span class="p">):</span> <span class="n">algorithm</span><span class="o">.</span><span class="n">secKeyAttrType</span><span class="p">,</span>
+    <span class="kt">String</span><span class="p">(</span><span class="n">kSecAttrApplicationTag</span><span class="p">):</span> <span class="n">tagPublic</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">using</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+    <span class="kt">String</span><span class="p">(</span><span class="n">kSecReturnData</span><span class="p">):</span> <span class="kc">true</span>
+<span class="p">]</span>
+
+<span class="k">var</span> <span class="nv">tempPublicKeyBits</span><span class="p">:</span><span class="kt">CFTypeRef</span><span class="p">?</span>
+<span class="k">var</span> <span class="nv">_</span> <span class="o">=</span> <span class="kt">SecItemCopyMatching</span><span class="p">(</span><span class="n">query</span> <span class="k">as</span> <span class="kt">CFDictionary</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tempPublicKeyBits</span><span class="p">)</span>
+
+<span class="k">guard</span> <span class="k">let</span> <span class="nv">keyBits</span> <span class="o">=</span> <span class="n">tempPublicKeyBits</span> <span class="k">as?</span> <span class="kt">Data</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nf">return</span> <span class="p">(</span><span class="kc">nil</span><span class="p">,</span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<ol>
+<li><p>Initiatlize the <code>CertificateSigningRequest</code> using <code>KeyAlgorithm.ec</code> or <code>KeyAlgorithm.rsa</code> (an example of how to do can be found in the <a href="https://github.com/cbaker6/CertificateSigningRequest/blob/main/Example/Tests/Tests.swift#L34">test</a> file. Below are 3 possible ways to initialize: </p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">csr</span> <span class="o">=</span> <span class="kt">CertificateSigningRequest</span><span class="p">()</span> <span class="c1">//CSR with no fields, will use defaults of an RSA key with sha512</span>
+<span class="k">let</span> <span class="nv">algorithm</span> <span class="o">=</span> <span class="kt">KeyAlgorithm</span><span class="o">.</span><span class="nf">ec</span><span class="p">(</span><span class="nv">signatureType</span><span class="p">:</span> <span class="o">.</span><span class="n">sha256</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">csr</span> <span class="o">=</span> <span class="kt">CertificateSigningRequest</span><span class="p">(</span><span class="nv">keyAlgorithm</span><span class="p">:</span> <span class="n">algorithm</span><span class="p">)</span> <span class="c1">//CSR with a specific key </span>
+<span class="k">let</span> <span class="nv">csr</span> <span class="o">=</span> <span class="kt">CertificateSigningRequest</span><span class="p">(</span><span class="nv">commonName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">organizationName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">organizationUnitName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">countryName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">stateOrProvinceName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">localityName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">emailAddress</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">keyAlgorithm</span><span class="p">:</span> <span class="n">algorithm</span><span class="p">)</span> <span class="c1">//Define any field you want in your CSR along with the key algorithm</span>
+</code></pre></li>
+<li><p>Then simply build your CSR using your publicKey(bits) and privateKey using:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">builtCSR</span> <span class="o">=</span> <span class="n">csr</span><span class="o">.</span><span class="nf">buildCSRAndReturnString</span><span class="p">(</span><span class="n">publicKeyBits</span><span class="p">,</span> <span class="nv">privateKey</span><span class="p">:</span> <span class="n">privateKey</span><span class="p">)</span>
+<span class="c1">//Or if you want `CertificateSigningRequest` to verify the signature after building, pass in your publicKey to the same method:</span>
+<span class="k">let</span> <span class="nv">builtCSR</span> <span class="o">=</span> <span class="n">csr</span><span class="o">.</span><span class="nf">buildCSRAndReturnString</span><span class="p">(</span><span class="n">publicKeyBits</span><span class="p">,</span> <span class="nv">privateKey</span><span class="p">:</span> <span class="n">privateKey</span><span class="p">,</span> <span class="nv">publicKey</span><span class="p">:</span> <span class="n">publicKey</span><span class="p">)</span>
+</code></pre></li>
+<li><p>Two other methods are available depending on your needs.</p></li>
+<li><p>To get CSR without header and footer info use: <code>let builtCSR = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)</code>.</p></li>
+<li><p>To get CSR as Data use: <code>let builtCSR = csr.build(publicKeyBits, privateKey: privateKey)</code>.</p></li>
+</ol>
+
+<p>Note:</p>
+
+<p>You can test if your CSRs are correct by running and setting a break point the <a href="https://github.com/cbaker6/CertificateSigningRequest/blob/main/Example/Tests/Tests.swift#L66">test file</a>. You can also let all test run and test the different CSR&rsquo;s. The output of the CSR will print in the console window. You can output the CSR&rsquo;s and your own app by printing to the console and check if they are created correctly by pasting them here: <a href="https://redkestrel.co.uk/products/decoder/">https://redkestrel.co.uk/products/decoder/</a> or by using openssl.</p>
+<h2 id='example' class='heading'>Example</h2>
+
+<p>To run the example project, clone the repo, and run <code>pod install</code> from the Example directory first. An example certificate from this framework is below:</p>
+<pre class="highlight plaintext"><code>-----BEGIN CERTIFICATE REQUEST-----
+MIIBYTCCAQcCAQAwgaQxCzAJBgNVBAYMAlVTMQswCQYDVQQIDAJLWTENMAsGA1UE
+BwwEVGVzdDENMAsGA1UECgwEVGVzdDENMAsGA1UECwwEVGVzdDEnMCUGA1UEAwwe
+Q2VydGlmaWNhdGVTaWduaW5nUmVxdWVzdCBUZXN0MSIwIAYJKoZIhvcNAQkBDBNu
+ZXRyZWNvbkBjcy51a3kuZWR1MQ4wDAYDVQQNDAVoZWxsbzBZMBMGByqGSM49AgEG
+CCqGSM49AwEHA0IABN5Wp7zEAVkffuqmkC22j3mOCJalTo2Beff23N8Bv7sZ0iTM
+AdqeeF+A1fAO5yUwykbTYhAyNiwkT82jtOy09xKgADAKBggqhkjOPQQDAgNIADBF
+AiEAt85IAQ9kOptiplqYkLyRz4is/uB4DffNpWuP9EUJY74CIHtjMZ6QRwY1zPGI
+bXC5eX6Kpv5QLfvR6xX7Xqaoy6Ai
+-----END CERTIFICATE REQUEST-----
+</code></pre>
+
+<p>You can test if the CSR was created correctly here: <a href="https://redkestrel.co.uk/products/decoder/">https://redkestrel.co.uk/products/decoder/</a></p>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>iOS 10+</li>
+<li>mac OS 10.13+</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='swift-package-manager-spm-option-1' class='heading'>Swift Package Manager (SPM) - Option 1</h3>
+
+<p>CertificateSigningRequest can be installed via SPM. Open an existing project or create a new Xcode project and navigate to <code>File &gt; Swift Packages &gt; Add Package Dependency</code>. Enter the url <code>https://github.com/cbaker6/CertificateSigningRequest.git</code> and tap <code>Next</code>. Choose the main branch, and on the next screen, check off the package.</p>
+<h3 id='cocoapods-option-2' class='heading'>Cocoapods - Option 2</h3>
+
+<p>CertificateSigningRequest is available through <a href="https://cocoapods.org">CocoaPods</a>. To install
+it, simply add the following line to your Podfile:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'CertificateSigningRequest'</span>
+</code></pre>
+<h3 id='embedded-framework-option-3' class='heading'>Embedded Framework - Option 3</h3>
+
+<p>If you would like to use as a framework, clone and build the project, look under frameworks, and drag &ldquo;CertificateSigningRequest.framework&rdquo; into &ldquo;Frameworks&rdquo; section of your project, &ldquo;check copy if needed&rdquo;.</p>
+
+<ul>
+<li>In your project Targets, click on &ldquo;General&rdquo;, make sure &ldquo;CertificateSigningRequest.framework&rdquo; shows up under &ldquo;Embedded Binaries&rdquo; and it should automatically appear in &ldquo;Linked Frameworks and Libraries&rdquo;</li>
+<li>Then, simply place <code>import CertificateSigningRequest</code> at the top of any file that needs the framework.</li>
+</ul>
+<h2 id='author' class='heading'>Author</h2>
+
+<p>cbaker6, <a href="mailto:coreyearleon@icloud.com">coreyearleon@icloud.com</a></p>
+<h2 id='license' class='heading'>License</h2>
+
+<p>Components of CertificateSigningRequest was originally in <a href="https://github.com/ateska/ios-csr">ios-csr</a> by Ales Teska written in Objective-C and ported by the author of CertificateSigningRequest to Swift. Therefore CertificateSigningRequest has the same GPLv2 license. See the LICENSE file for more info.</p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="https://www.cs.uky.edu/~baker" target="_blank" rel="external">Corey E. Baker</a>. All rights reserved. (Last updated: 2020-12-11)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
