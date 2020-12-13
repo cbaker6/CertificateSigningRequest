@@ -16,5 +16,3 @@ $ cd CertificateSigningRequest # go into the clone directory
 ```sh
 $ brew install swiftlint
 ```
-
-* Please see [this comment](https://github.com/parse-community/Parse-Swift/pull/12#issuecomment-656918156) for details on developing with and testing the SDK.
