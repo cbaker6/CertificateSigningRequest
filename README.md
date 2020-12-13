@@ -60,7 +60,7 @@ let csr = CertificateSigningRequest(commonName: String?, organizationName: Strin
 
 Note:
 
-You can test if your CSRs are correct by running and setting a break point the [test file](https://github.com/cbaker6/CertificateSigningRequest/blob/d2cb683c4c5d081f85e810edf4984c36c5b9d252/Tests/CertificateSigningRequestTests/CertificateSigningRequestTests.swift#L125). You can also let all test run and test the different CSR's. The output of the CSR will print in the console window. You can output the CSR's and your own app by printing to the console and check if they are created correctly by pasting them here: https://redkestrel.co.uk/products/decoder/ or by using openssl.
+You can test if your CSRs are correct by running and setting a break point the [test file](https://github.com/cbaker6/CertificateSigningRequest/blob/d2cb683c4c5d081f85e810edf4984c36c5b9d252/Tests/CertificateSigningRequestTests/CertificateSigningRequestTests.swift#L127). You can also let all test run and test the different CSR's. The output of the CSR will print in the console window. You can output the CSR's and your own app by printing to the console and check if they are created correctly by pasting them here: https://redkestrel.co.uk/products/decoder/ or by using openssl.
 
 ## Example
 
