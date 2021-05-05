@@ -44,6 +44,7 @@ public class CertificateSigningRequest: NSObject {
     private let objectOrganizationName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0A]
     private let objectOrganizationalUnitName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0B]
     private let objectStateOrProvinceName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x08]
+   
     private let sequenceTag: UInt8 = 0x30
     private let setTag: UInt8 = 0x31
     private let commonName: String?
@@ -224,11 +225,19 @@ public class CertificateSigningRequest: NSObject {
         certificationRequestInfo.append(publicKeyInfo)
 
         // Add attributes
-        let attributes: [UInt8] = [0xA0, 0x00]
+        let attributes: [UInt8] = [0x06, 0x03, 0x55, 0x1D, 0x25]
         certificationRequestInfo.append(attributes, count: attributes.count)
+        
+        // need to add this OID ==> 2.5.29.37
+        // hex value is ==> 0x06, 0x03, 0x55, 0x1D, 0x25
+        // https://www.alvestrand.no/objectid/2.5.29.37.3.html
+        
         enclose(&certificationRequestInfo, by: sequenceTag) // Enclose into SEQUENCE
 
         return certificationRequestInfo
+        
+        // this is not working . please help me to add this to CSR.
+        
     }
 
     // Utility class methods ...
