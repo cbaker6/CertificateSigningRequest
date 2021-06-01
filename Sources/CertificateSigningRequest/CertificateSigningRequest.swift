@@ -284,9 +284,12 @@ public class CertificateSigningRequest: NSObject {
         }
 
         var subjectItem = Data(capacity: 128)
-
         subjectItem.append(what, count: what.count)
-        appendUTF8String(string: value, into: &subjectItem)
+        if what == objectCountryName {
+            appendPrintableString(string: value, into: &subjectItem)
+        } else {
+            appendUTF8String(string: value, into: &subjectItem)
+        }
         enclose(&subjectItem, by: sequenceTag)
         enclose(&subjectItem, by: setTag)
 
@@ -300,6 +303,15 @@ public class CertificateSigningRequest: NSObject {
         into.append(strType)
         appendDERLength(string.lengthOfBytes(using: String.Encoding.utf8), into: &into)
         into.append(string.data(using: String.Encoding.utf8)!)
+    }
+
+    func appendPrintableString(string: String, into: inout Data) {
+
+        let strType: UInt8 = 0x13 //PRINTABLESTRING
+
+        into.append(strType)
+        appendDERLength(string.lengthOfBytes(using: String.Encoding.ascii), into: &into)
+        into.append(string.data(using: String.Encoding.ascii)!)
     }
 
     func appendDERLength(_ length: Int, into: inout Data) {
