@@ -208,7 +208,7 @@ public class CertificateSigningRequest: NSObject {
         }
 
         if let emailAddress = emailAddress {
-            appendSubjectItem(objectEmailAddress, value: emailAddress, into: &subject)
+            appendSubjectItemEmail(objectEmailAddress, value: emailAddress, into: &subject)
         }
 
         if let description = csrDescription {
@@ -276,6 +276,23 @@ public class CertificateSigningRequest: NSObject {
         return publicKeyInfo
     }
 
+    func appendSubjectItemEmail(_ what: [UInt8], value: String, into: inout Data ) {
+        
+        if what.count != 5 && what.count != 11 {
+            print("Error: appending to a non-subject item")
+            return
+        }
+
+        var subjectItem = Data(capacity: 128)
+
+        subjectItem.append(what, count: what.count)
+        appendIA5String(string: value, into: &subjectItem)
+        enclose(&subjectItem, by: sequenceTag)
+        enclose(&subjectItem, by: setTag)
+
+        into.append(subjectItem)
+    }
+    
     func appendSubjectItem(_ what: [UInt8], value: String, into: inout Data ) {
 
         if what.count != 5 && what.count != 11 {
@@ -284,12 +301,9 @@ public class CertificateSigningRequest: NSObject {
         }
 
         var subjectItem = Data(capacity: 128)
+
         subjectItem.append(what, count: what.count)
-        if what == objectCountryName {
-            appendPrintableString(string: value, into: &subjectItem)
-        } else {
-            appendUTF8String(string: value, into: &subjectItem)
-        }
+        appendUTF8String(string: value, into: &subjectItem)
         enclose(&subjectItem, by: sequenceTag)
         enclose(&subjectItem, by: setTag)
 
@@ -304,14 +318,14 @@ public class CertificateSigningRequest: NSObject {
         appendDERLength(string.lengthOfBytes(using: String.Encoding.utf8), into: &into)
         into.append(string.data(using: String.Encoding.utf8)!)
     }
-
-    func appendPrintableString(string: String, into: inout Data) {
-
-        let strType: UInt8 = 0x13 //PRINTABLESTRING
+    
+    func appendIA5String(string: String, into: inout Data) {
+        
+        let strType: UInt8 = 0x16 //IA5String
 
         into.append(strType)
-        appendDERLength(string.lengthOfBytes(using: String.Encoding.ascii), into: &into)
-        into.append(string.data(using: String.Encoding.ascii)!)
+        appendDERLength(string.lengthOfBytes(using: String.Encoding.utf8), into: &into)
+        into.append(string.data(using: String.Encoding.utf8)!)
     }
 
     func appendDERLength(_ length: Int, into: inout Data) {
