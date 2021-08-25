@@ -276,23 +276,6 @@ public class CertificateSigningRequest: NSObject {
         return publicKeyInfo
     }
 
-    func appendSubjectItemEmail(_ what: [UInt8], value: String, into: inout Data ) {
-
-        if what.count != 5 && what.count != 11 {
-            print("Error: appending to a non-subject item")
-            return
-        }
-
-        var subjectItem = Data(capacity: 128)
-
-        subjectItem.append(what, count: what.count)
-        appendIA5String(string: value, into: &subjectItem)
-        enclose(&subjectItem, by: sequenceTag)
-        enclose(&subjectItem, by: setTag)
-
-        into.append(subjectItem)
-    }
-
     func appendSubjectItem(_ what: [UInt8], value: String, into: inout Data ) {
 
         if what.count != 5 && what.count != 11 {
@@ -304,6 +287,23 @@ public class CertificateSigningRequest: NSObject {
 
         subjectItem.append(what, count: what.count)
         appendUTF8String(string: value, into: &subjectItem)
+        enclose(&subjectItem, by: sequenceTag)
+        enclose(&subjectItem, by: setTag)
+
+        into.append(subjectItem)
+    }
+
+    func appendSubjectItemEmail(_ what: [UInt8], value: String, into: inout Data ) {
+
+        if what.count != 5 && what.count != 11 {
+            print("Error: appending to a non-subject item")
+            return
+        }
+
+        var subjectItem = Data(capacity: 128)
+
+        subjectItem.append(what, count: what.count)
+        appendIA5String(string: value, into: &subjectItem)
         enclose(&subjectItem, by: sequenceTag)
         enclose(&subjectItem, by: setTag)
 
