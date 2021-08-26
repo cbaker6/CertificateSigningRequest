@@ -559,8 +559,8 @@ final class CertificateSigningRequestTests: XCTestCase {
         ]
 
         #if !targetEnvironment(simulator)
-            //This only works for Secure Enclave consistign of 256 bit key,
-            //note, the signatureType is irrelavent for this check
+            //This only works for Secure Enclave consisting of 256 bit key,
+            //note, the signatureType is irrelevant for this check
             if algorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type {
                 let access = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                                              kSecAttrAccessibleAfterFirstUnlock,
