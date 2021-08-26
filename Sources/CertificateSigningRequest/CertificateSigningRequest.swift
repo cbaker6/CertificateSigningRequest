@@ -150,7 +150,7 @@ public class CertificateSigningRequest: NSObject {
         var isMultiple = false
         var newCSRString = head
 
-        //Check if string size is a multiple of 64
+        // Check if string size is a multiple of 64
         if csrString.count % 64 == 0 {
             isMultiple = true
         }
@@ -176,11 +176,11 @@ public class CertificateSigningRequest: NSObject {
     func buldCertificationRequestInfo(_ publicKeyBits: Data) -> Data {
         var certificationRequestInfo = Data(capacity: 256)
 
-        //Add version
+        // Add version
         let version: [UInt8] = [0x02, 0x01, 0x00] // ASN.1 Representation of integer with value 1
         certificationRequestInfo.append(version, count: version.count)
 
-        //Add subject
+        // Add subject
         var subject = Data(capacity: 256)
 
         if let countryName = countryName {
@@ -208,7 +208,7 @@ public class CertificateSigningRequest: NSObject {
         }
 
         if let emailAddress = emailAddress {
-            appendSubjectItem(objectEmailAddress, value: emailAddress, into: &subject)
+            appendSubjectItemEmail(objectEmailAddress, value: emailAddress, into: &subject)
         }
 
         if let description = csrDescription {
@@ -219,7 +219,7 @@ public class CertificateSigningRequest: NSObject {
         subjectDER = subject
         certificationRequestInfo.append(subject)
 
-        //Add public key info
+        // Add public key info
         let publicKeyInfo = buildPublicKeyInfo(publicKeyBits)
         certificationRequestInfo.append(publicKeyInfo)
 
@@ -255,7 +255,7 @@ public class CertificateSigningRequest: NSObject {
         default:
 
             let mod = getPublicKeyMod(publicKeyBits)
-            let integer: UInt8 = 0x02 //Integer
+            let integer: UInt8 = 0x02 // Integer
             publicKeyASN.append(integer)
             appendDERLength(mod.count, into: &publicKeyASN)
             publicKeyASN.append(mod)
@@ -268,7 +268,7 @@ public class CertificateSigningRequest: NSObject {
             enclose(&publicKeyASN, by: sequenceTag)// Enclose into ??
         }
 
-        prependByte(0x00, into: &publicKeyASN) //Prepend 0 (?)
+        prependByte(0x00, into: &publicKeyASN) // Prepend 0 (?)
         appendBITSTRING(publicKeyASN, into: &publicKeyInfo)
 
         enclose(&publicKeyInfo, by: sequenceTag) // Enclose into SEQUENCE
@@ -284,12 +284,26 @@ public class CertificateSigningRequest: NSObject {
         }
 
         var subjectItem = Data(capacity: 128)
+
         subjectItem.append(what, count: what.count)
-        if what == objectCountryName {
-            appendPrintableString(string: value, into: &subjectItem)
-        } else {
-            appendUTF8String(string: value, into: &subjectItem)
+        appendUTF8String(string: value, into: &subjectItem)
+        enclose(&subjectItem, by: sequenceTag)
+        enclose(&subjectItem, by: setTag)
+
+        into.append(subjectItem)
+    }
+
+    func appendSubjectItemEmail(_ what: [UInt8], value: String, into: inout Data ) {
+
+        if what.count != 5 && what.count != 11 {
+            print("Error: appending to a non-subject item")
+            return
         }
+
+        var subjectItem = Data(capacity: 128)
+
+        subjectItem.append(what, count: what.count)
+        appendIA5String(string: value, into: &subjectItem)
         enclose(&subjectItem, by: sequenceTag)
         enclose(&subjectItem, by: setTag)
 
@@ -298,20 +312,20 @@ public class CertificateSigningRequest: NSObject {
 
     func appendUTF8String(string: String, into: inout Data) {
 
-        let strType: UInt8 = 0x0C //UTF8STRING
+        let strType: UInt8 = 0x0C // UTF8STRING
 
         into.append(strType)
         appendDERLength(string.lengthOfBytes(using: String.Encoding.utf8), into: &into)
         into.append(string.data(using: String.Encoding.utf8)!)
     }
 
-    func appendPrintableString(string: String, into: inout Data) {
+    func appendIA5String(string: String, into: inout Data) {
 
-        let strType: UInt8 = 0x13 //PRINTABLESTRING
+        let strType: UInt8 = 0x16 // IA5String
 
         into.append(strType)
-        appendDERLength(string.lengthOfBytes(using: String.Encoding.ascii), into: &into)
-        into.append(string.data(using: String.Encoding.ascii)!)
+        appendDERLength(string.lengthOfBytes(using: String.Encoding.utf8), into: &into)
+        into.append(string.data(using: String.Encoding.utf8)!)
     }
 
     func appendDERLength(_ length: Int, into: inout Data) {
@@ -338,7 +352,7 @@ public class CertificateSigningRequest: NSObject {
 
     func appendBITSTRING(_ data: Data, into: inout Data) {
 
-        let strType: UInt8 = 0x03 //BIT STRING
+        let strType: UInt8 = 0x03 // BIT STRING
         into.append(strType)
         appendDERLength(data.count, into: &into)
         into.append(data)
@@ -368,7 +382,7 @@ public class CertificateSigningRequest: NSObject {
 
     func getPublicKey(_ publicKeyBits: Data) -> Data {
 
-        //Current only supports uncompressed keys, 65=1+32+32
+        // Current only supports uncompressed keys, 65=1+32+32
         var iterator = 0
 
         _ = derEncodingSpecificSize(publicKeyBits, at: &iterator, numOfBytes: 8)
