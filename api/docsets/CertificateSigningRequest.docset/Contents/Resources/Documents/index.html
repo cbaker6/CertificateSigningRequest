@@ -39,7 +39,7 @@
         </p>
     
         <p class="header-col header-col--secondary">
-          <a class="header-link" href="dash-feed://https%3A%2F%2Fnetreconlab.github.io%2Fapi%2Fdocsets%2FCertificateSigningRequest.xml">
+          <a class="header-link" href="dash-feed://https%3A%2F%2Fcbaker6.github.io%2Fapi%2Fdocsets%2FCertificateSigningRequest.xml">
             <img class="header-icon" src="img/dash.png"/>
             Install in Dash
           </a>
@@ -84,7 +84,7 @@
 <p>To use, follow the following steps:</p>
 
 <ol>
-<li>Generate your publicKey/privateKey pair. This can be done using Keychain in iOS. An example can be found in the <code>generateKeysAndStoreInKeychain</code> function in the <a href="https://github.com/cbaker6/CertificateSigningRequest/blob/main/Example/Tests/Tests.swift#L440">testfile</a>.</li>
+<li>Generate your publicKey/privateKey pair. This can be done using Keychain in iOS. An example can be found in the <code>generateKeysAndStoreInKeychain</code> function in the <a href="https://github.com/cbaker6/CertificateSigningRequest/blob/d2cb683c4c5d081f85e810edf4984c36c5b9d252/Tests/CertificateSigningRequestTests/CertificateSigningRequestTests.swift#L547">testfile</a>.</li>
 <li>Get your publicKey in bits by querying it from the iOS keychain using <code>String(kSecReturnData): true</code> in your query. For example:</li>
 </ol>
 <pre class="highlight swift"><code><span class="c1">//Set block size</span>
@@ -106,7 +106,7 @@
 </code></pre>
 
 <ol>
-<li><p>Initiatlize the <code>CertificateSigningRequest</code> using <code>KeyAlgorithm.ec</code> or <code>KeyAlgorithm.rsa</code> (an example of how to do can be found in the <a href="https://github.com/cbaker6/CertificateSigningRequest/blob/main/Example/Tests/Tests.swift#L34">test</a> file. Below are 3 possible ways to initialize: </p>
+<li><p>Initialize the <code>CertificateSigningRequest</code> using <code>KeyAlgorithm.ec</code> or <code>KeyAlgorithm.rsa</code> (an example of how to do can be found in the <a href="https://github.com/cbaker6/CertificateSigningRequest/blob/d2cb683c4c5d081f85e810edf4984c36c5b9d252/Tests/CertificateSigningRequestTests/CertificateSigningRequestTests.swift#L116">test</a> file. Below are 3 possible ways to initialize: </p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">csr</span> <span class="o">=</span> <span class="kt">CertificateSigningRequest</span><span class="p">()</span> <span class="c1">//CSR with no fields, will use defaults of an RSA key with sha512</span>
 <span class="k">let</span> <span class="nv">algorithm</span> <span class="o">=</span> <span class="kt">KeyAlgorithm</span><span class="o">.</span><span class="nf">ec</span><span class="p">(</span><span class="nv">signatureType</span><span class="p">:</span> <span class="o">.</span><span class="n">sha256</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">csr</span> <span class="o">=</span> <span class="kt">CertificateSigningRequest</span><span class="p">(</span><span class="nv">keyAlgorithm</span><span class="p">:</span> <span class="n">algorithm</span><span class="p">)</span> <span class="c1">//CSR with a specific key </span>
@@ -124,7 +124,7 @@
 
 <p>Note:</p>
 
-<p>You can test if your CSRs are correct by running and setting a break point the <a href="https://github.com/cbaker6/CertificateSigningRequest/blob/main/Example/Tests/Tests.swift#L66">test file</a>. You can also let all test run and test the different CSR&rsquo;s. The output of the CSR will print in the console window. You can output the CSR&rsquo;s and your own app by printing to the console and check if they are created correctly by pasting them here: <a href="https://redkestrel.co.uk/products/decoder/">https://redkestrel.co.uk/products/decoder/</a> or by using openssl.</p>
+<p>You can test if your CSRs are correct by running and setting a break point the <a href="https://github.com/cbaker6/CertificateSigningRequest/blob/d2cb683c4c5d081f85e810edf4984c36c5b9d252/Tests/CertificateSigningRequestTests/CertificateSigningRequestTests.swift#L127">test file</a>. You can also let all test run and test the different CSR&rsquo;s. The output of the CSR will print in the console window. You can output the CSR&rsquo;s and your own app by printing to the console and check if they are created correctly by pasting them here: <a href="https://redkestrel.co.uk/products/decoder/">https://redkestrel.co.uk/products/decoder/</a> or by using openssl.</p>
 <h2 id='example' class='heading'>Example</h2>
 
 <p>To run the example project, clone the repo, and run <code>pod install</code> from the Example directory first. An example certificate from this framework is below:</p>
