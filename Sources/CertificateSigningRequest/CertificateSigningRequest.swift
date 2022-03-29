@@ -36,7 +36,7 @@ import Security
 
 public enum SubjectItem {
     case commonName(String), organizationName(String), organizationUnitName(String),
-                  countryName(String), stateOrProvinceName(String), localityName(String), description(String), emailAddess(String)
+                  countryName(String), stateOrProvinceName(String), localityName(String), description(String), emailAddress(String)
     
     func getObjectKey() -> [UInt8] {
         switch self {
@@ -54,7 +54,7 @@ public enum SubjectItem {
                 return [0x06, 0x03, 0x55, 0x04, 0x07]
             case .description(_):
                 return [0x06, 0x03, 0x55, 0x04, 0x0D]
-            case .emailAddess(_):
+            case .emailAddress(_):
                 return [0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x09, 0x01]
         }
     }
@@ -75,7 +75,7 @@ public enum SubjectItem {
                 return value
             case .description(let value):
                 return value
-            case .emailAddess(let value):
+            case .emailAddress(let value):
                 return value
         }
     }
@@ -98,12 +98,45 @@ public class CertificateSigningRequest: NSObject {
         self.init(keyAlgorithm: KeyAlgorithm.rsa(signatureType: .sha512))
     }
 
+    public convenience init(commonName: String? = nil, organizationName: String? = nil,
+                organizationUnitName: String? = nil, countryName: String? = nil,
+                stateOrProvinceName: String? = nil, localityName: String? = nil,
+                emailAddress: String? = nil, description: String? = nil,
+                keyAlgorithm: KeyAlgorithm) {
+        self.init(keyAlgorithm: keyAlgorithm)
+
+        if let commonName = commonName {
+            self.addSubjectItem(.commonName(commonName))
+        }
+        if let organizationName = organizationName {
+            self.addSubjectItem(.organizationName(organizationName))
+        }
+        if let organizationUnitName = organizationUnitName {
+            self.addSubjectItem(.organizationUnitName(organizationUnitName))
+        }
+        if let countryName = countryName {
+            self.addSubjectItem(.countryName(countryName))
+        }
+        if let stateOrProvinceName = stateOrProvinceName {
+            self.addSubjectItem(.stateOrProvinceName(stateOrProvinceName))
+        }
+        if let localityName = localityName {
+            self.addSubjectItem(.localityName(localityName))
+        }
+        if let emailAddress = emailAddress {
+            self.addSubjectItem(.emailAddress(emailAddress))
+        }
+        if let description = description {
+            self.addSubjectItem(.description(description))
+        }
+    }
+
     public func addSubjectItem(_ subjectItem: SubjectItem) {
         subjectItems.append(subjectItem)
     }
 
     public func build(_ publicKeyBits: Data, privateKey: SecKey, publicKey: SecKey?=nil) -> Data? {
-        let certificationRequestInfo = buldCertificationRequestInfo(publicKeyBits)
+        let certificationRequestInfo = buildCertificationRequestInfo(publicKeyBits)
         var signature = [UInt8](repeating: 0, count: 256)
         var signatureLen: Int = signature.count
 
@@ -142,16 +175,15 @@ public class CertificateSigningRequest: NSObject {
         return certificationRequest
     }
 
-    public func buildAndEncodeDataAsString(_ publicKeyBits: Data, privateKey: SecKey,
+    public func buildAndEncodeDataAsString(_ publicKeyBits: Data,
+                                           privateKey: SecKey,
                                            publicKey: SecKey?=nil) -> String? {
-
         guard let buildData = self.build(publicKeyBits, privateKey: privateKey, publicKey: publicKey) else {
             return nil
         }
 
         return buildData.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
             .addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-
     }
 
     public func buildCSRAndReturnString(_ publicKeyBits: Data, privateKey: SecKey, publicKey: SecKey?=nil) -> String? {
@@ -189,7 +221,7 @@ public class CertificateSigningRequest: NSObject {
         return newCSRString
     }
 
-    func buldCertificationRequestInfo(_ publicKeyBits: Data) -> Data {
+    func buildCertificationRequestInfo(_ publicKeyBits: Data) -> Data {
         var certificationRequestInfo = Data(capacity: 256)
 
         // Add version
@@ -201,7 +233,7 @@ public class CertificateSigningRequest: NSObject {
 
         for subjectItem in subjectItems {
             switch subjectItem {
-                case let .emailAddess(emailAddress):
+                case let .emailAddress(emailAddress):
                     appendSubjectItemEmail(subjectItem.getObjectKey(), value: emailAddress, into: &subject)
                 default:
                     appendSubjectItem(subjectItem.getObjectKey(), value: subjectItem.getValue(), into: &subject)
