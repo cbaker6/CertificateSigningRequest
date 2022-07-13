@@ -44,6 +44,7 @@ public class CertificateSigningRequest: NSObject {
     private let objectOrganizationName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0A]
     private let objectOrganizationalUnitName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0B]
     private let objectStateOrProvinceName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x08]
+    private let objectSerialNumber: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x05]
     private let sequenceTag: UInt8 = 0x30
     private let setTag: UInt8 = 0x31
     private let commonName: String?
@@ -54,19 +55,21 @@ public class CertificateSigningRequest: NSObject {
     private let organizationName: String?
     private let organizationUnitName: String?
     private let stateOrProvinceName: String?
+    private let serialNumber: String?
     private var keyAlgorithm: KeyAlgorithm!
     private var subjectDER: Data?
 
     public init(commonName: String? = nil, organizationName: String? = nil,
                 organizationUnitName: String? = nil, countryName: String? = nil,
                 stateOrProvinceName: String? = nil, localityName: String? = nil,
-                emailAddress: String? = nil, description: String? = nil,
-                keyAlgorithm: KeyAlgorithm) {
+                serialNumber: String? = nil, emailAddress: String? = nil,
+                description: String? = nil, keyAlgorithm: KeyAlgorithm) {
         self.commonName = commonName
         self.organizationName = organizationName
         self.organizationUnitName = organizationUnitName
         self.countryName = countryName
         self.stateOrProvinceName = stateOrProvinceName
+        self.serialNumber = serialNumber
         self.localityName = localityName
         self.emailAddress = emailAddress
         self.csrDescription = description
@@ -77,13 +80,13 @@ public class CertificateSigningRequest: NSObject {
     public convenience override init() {
         self.init(commonName: nil, organizationName: nil, organizationUnitName: nil,
                   countryName: nil, stateOrProvinceName: nil, localityName: nil,
-                  keyAlgorithm: KeyAlgorithm.rsa(signatureType: .sha512))
+                  serialNumber: nil, keyAlgorithm: KeyAlgorithm.rsa(signatureType: .sha512))
     }
 
     public convenience init(keyAlgorithm: KeyAlgorithm) {
         self.init(commonName: nil, organizationName: nil, organizationUnitName: nil,
                   countryName: nil, stateOrProvinceName: nil, localityName: nil,
-                  keyAlgorithm: keyAlgorithm)
+                  serialNumber: nil, keyAlgorithm: keyAlgorithm)
     }
 
     public func build(_ publicKeyBits: Data, privateKey: SecKey, publicKey: SecKey?=nil) -> Data? {
@@ -213,6 +216,10 @@ public class CertificateSigningRequest: NSObject {
 
         if let description = csrDescription {
             appendSubjectItem(objectDescription, value: description, into: &subject)
+        }
+        
+        if let serialNumber = serialNumber {
+            appendSubjectItem(objectSerialNumber, value: serialNumber, into: &subject)
         }
 
         enclose(&subject, by: sequenceTag)// Enclose into SEQUENCE
