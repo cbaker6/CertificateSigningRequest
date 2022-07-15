@@ -64,8 +64,9 @@ final class CertificateSigningRequestTests: XCTestCase {
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
-                                            localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
-                                            description: "hello", keyAlgorithm: keyAlgorithm)
+                                            localityName: "Test", serialNumber: "Test",
+                                            emailAddress: "netrecon@cs.uky.edu", description: "hello",
+                                            keyAlgorithm: keyAlgorithm)
         //Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
@@ -116,8 +117,9 @@ final class CertificateSigningRequestTests: XCTestCase {
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
-                                            localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
-                                            description: "hello", keyAlgorithm: keyAlgorithm)
+                                            localityName: "Test", serialNumber: "Test",
+                                            emailAddress: "netrecon@cs.uky.edu", description: "hello",
+                                            keyAlgorithm: keyAlgorithm)
         //Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
@@ -167,8 +169,9 @@ final class CertificateSigningRequestTests: XCTestCase {
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
-                                            localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
-                                            description: "hello", keyAlgorithm: keyAlgorithm)
+                                            localityName: "Test", serialNumber: "Test",
+                                            emailAddress: "netrecon@cs.uky.edu", description: "hello",
+                                            keyAlgorithm: keyAlgorithm)
         //Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
@@ -218,8 +221,9 @@ final class CertificateSigningRequestTests: XCTestCase {
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
-                                            localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
-                                            description: "hello", keyAlgorithm: keyAlgorithm)
+                                            localityName: "Test", serialNumber: "Test",
+                                            emailAddress: "netrecon@cs.uky.edu", description: "hello",
+                                            keyAlgorithm: keyAlgorithm)
         //Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
@@ -269,8 +273,9 @@ final class CertificateSigningRequestTests: XCTestCase {
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
-                                            localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
-                                            description: "hello", keyAlgorithm: keyAlgorithm)
+                                            localityName: "Test", serialNumber: "Test",
+                                            emailAddress: "netrecon@cs.uky.edu", description: "hello",
+                                            keyAlgorithm: keyAlgorithm)
         //Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
@@ -320,8 +325,9 @@ final class CertificateSigningRequestTests: XCTestCase {
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
-                                            localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
-                                            description: "hello", keyAlgorithm: keyAlgorithm)
+                                            localityName: "Test", serialNumber: "Test",
+                                            emailAddress: "netrecon@cs.uky.edu", description: "hello",
+                                            keyAlgorithm: keyAlgorithm)
         //Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
@@ -371,8 +377,9 @@ final class CertificateSigningRequestTests: XCTestCase {
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
-                                            localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
-                                            description: "hello", keyAlgorithm: keyAlgorithm)
+                                            localityName: "Test", serialNumber: "Test",
+                                            emailAddress: "netrecon@cs.uky.edu", description: "hello",
+                                            keyAlgorithm: keyAlgorithm)
         //Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
@@ -423,8 +430,9 @@ final class CertificateSigningRequestTests: XCTestCase {
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
-                                            localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
-                                            description: "hello", keyAlgorithm: keyAlgorithm)
+                                            localityName: "Test", serialNumber: "Test",
+                                            emailAddress: "netrecon@cs.uky.edu", description: "hello",
+                                            keyAlgorithm: keyAlgorithm)
         //Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         if let csrRegular = csrBuild {
@@ -470,8 +478,9 @@ final class CertificateSigningRequestTests: XCTestCase {
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
-                                            localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
-                                            description: "hello", keyAlgorithm: keyAlgorithm)
+                                            localityName: "Test", serialNumber: "Test",
+                                            emailAddress: "netrecon@cs.uky.edu", description: "hello",
+                                            keyAlgorithm: keyAlgorithm)
         //Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
@@ -521,8 +530,9 @@ final class CertificateSigningRequestTests: XCTestCase {
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
-                                            localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
-                                            description: "hello", keyAlgorithm: keyAlgorithm)
+                                            localityName: "Test", serialNumber: "Test",
+                                            emailAddress: "netrecon@cs.uky.edu", description: "hello",
+                                            keyAlgorithm: keyAlgorithm)
         //Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
