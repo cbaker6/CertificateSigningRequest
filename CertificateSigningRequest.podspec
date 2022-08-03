@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CertificateSigningRequest'
-  s.version          = '1.28.0'
+  s.version          = '1.29.0'
   s.summary          = 'Generate self-signed certificate signing requests (CSRs) on iOS, macOS, macCatalyst, watchOS, and tvOS.'
 
 # This description is used to generate tags and improve search results.
@@ -28,11 +28,11 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/cbaker6/CertificateSigningRequest.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target  = '10.0'
-  s.osx.deployment_target  = '10.13'
-  s.tvos.deployment_target  = '10.0'
-  s.watchos.deployment_target  = '3.0'
-  s.swift_versions = ['4.0', '5.0']
+  s.ios.deployment_target  = '13.0'
+  s.osx.deployment_target  = '10.15'
+  s.tvos.deployment_target  = '13.0'
+  s.watchos.deployment_target  = '6.0'
+  s.swift_versions = ['4.0', '5.0', '5.1', '5.2', '5.3', '5.4', '5.5', '5.6']
   s.source_files = 'Sources/CertificateSigningRequest/**/*.swift'
   
   # s.resource_bundles = {
