@@ -36,8 +36,8 @@ import Security
 
 public enum SubjectItem {
     case commonName(String), organizationName(String), organizationUnitName(String),
-         countryName(String), stateOrProvinceName(String), localityName(String),
-         description(String), emailAddress(String)
+         countryName(String), stateOrProvinceName(String), serialNumber(String), 
+         localityName(String), description(String), emailAddress(String)
 
     func getObjectKey() -> [UInt8] {
         switch self {
@@ -51,6 +51,8 @@ public enum SubjectItem {
             return [0x06, 0x03, 0x55, 0x04, 0x06]
         case .stateOrProvinceName:
             return [0x06, 0x03, 0x55, 0x04, 0x08]
+        case .serialNumber:
+            return [0x06, 0x03, 0x55, 0x04, 0x05]
         case .localityName:
             return [0x06, 0x03, 0x55, 0x04, 0x07]
         case .description:
@@ -71,6 +73,8 @@ public enum SubjectItem {
         case .countryName(let value):
             return value
         case .stateOrProvinceName(let value):
+            return value
+        case .serialNumber(let value):
             return value
         case .localityName(let value):
             return value
@@ -105,6 +109,7 @@ public class CertificateSigningRequest: NSObject {
                             countryName: String? = nil,
                             stateOrProvinceName: String? = nil,
                             localityName: String? = nil,
+                            serialNumber: String? = nil,
                             emailAddress: String? = nil,
                             description: String? = nil,
                             keyAlgorithm: KeyAlgorithm) {
@@ -133,6 +138,9 @@ public class CertificateSigningRequest: NSObject {
         }
         if let description = description {
             self.addSubjectItem(.description(description))
+        }
+        if let serialNumber = serialNumber {
+            self.addSubjectItem(.serialNumber(serialNumber))
         }
     }
 
@@ -243,6 +251,10 @@ public class CertificateSigningRequest: NSObject {
             default:
                 appendSubjectItem(subjectItem.getObjectKey(), value: subjectItem.getValue(), into: &subject)
             }
+        }
+        
+        if let serialNumber = serialNumber {
+            appendSubjectItem(objectSerialNumber, value: serialNumber, into: &subject)
         }
 
         enclose(&subject, by: sequenceTag)// Enclose into SEQUENCE
