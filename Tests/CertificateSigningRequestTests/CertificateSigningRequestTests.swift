@@ -328,7 +328,7 @@ final class CertificateSigningRequestTests: XCTestCase {
                                             localityName: "Test", serialNumber: "Test",
                                             emailAddress: "netrecon@cs.uky.edu", description: "hello",
                                             keyAlgorithm: keyAlgorithm)
-        //Build the CSR
+        // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
         if let csrRegular = csrBuild {
@@ -551,7 +551,7 @@ final class CertificateSigningRequestTests: XCTestCase {
             XCTAssertNotNil(csrBuild2, "CSR with header not generated")
         }
     }
-    
+
     func testCreateEmptyCSRWithRSA512DefaultHash() {
         let tagPrivate = "com.csr.private.rsa1024sha256"
         let tagPublic = "com.csr.public.rsa1024sha256"
@@ -580,7 +580,7 @@ final class CertificateSigningRequestTests: XCTestCase {
 
         // Initiale CSR
         let csr = CertificateSigningRequest()
-        
+
         // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
@@ -599,7 +599,7 @@ final class CertificateSigningRequestTests: XCTestCase {
             XCTAssertNotNil(csrBuild2, "CSR with header not generated")
         }
     }
-    
+
     func testCreateEmptyCSRRSA2048SHA512() {
         let tagPrivate = "com.csr.private.rsa2048sha512"
         let tagPublic = "com.csr.public.rsa2048sha512"
@@ -628,7 +628,7 @@ final class CertificateSigningRequestTests: XCTestCase {
 
         // Initiale CSR
         let csr = CertificateSigningRequest(keyAlgorithm: keyAlgorithm)
-        
+
         // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)

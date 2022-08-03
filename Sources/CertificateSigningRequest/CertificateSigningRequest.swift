@@ -36,7 +36,7 @@ import Security
 
 public enum SubjectItem {
     case commonName(String), organizationName(String), organizationUnitName(String),
-         countryName(String), stateOrProvinceName(String), serialNumber(String), 
+         countryName(String), stateOrProvinceName(String), serialNumber(String),
          localityName(String), description(String), emailAddress(String)
 
     func getObjectKey() -> [UInt8] {
@@ -251,10 +251,6 @@ public class CertificateSigningRequest: NSObject {
             default:
                 appendSubjectItem(subjectItem.getObjectKey(), value: subjectItem.getValue(), into: &subject)
             }
-        }
-        
-        if let serialNumber = serialNumber {
-            appendSubjectItem(objectSerialNumber, value: serialNumber, into: &subject)
         }
 
         enclose(&subject, by: sequenceTag)// Enclose into SEQUENCE
