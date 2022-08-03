@@ -48,7 +48,7 @@ let sequenceObjectSHA256WithECEncryption: [UInt8] =
 let sequenceObjectSHA512WithECEncryption: [UInt8] =
     [0x30, 0x0A, 0x06, 0x08, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x04, 0x03, 0x04]
 
-//Enums
+// Enums
 public enum KeyAlgorithm {
     // swiftlint:disable:next identifier_name
     case rsa(signatureType: Signature), ec(signatureType: Signature)

@@ -34,63 +34,122 @@ import Foundation
 import Security
 #endif
 
+public enum SubjectItem {
+    case commonName(String), organizationName(String), organizationUnitName(String),
+         countryName(String), stateOrProvinceName(String), serialNumber(String),
+         localityName(String), description(String), emailAddress(String)
+
+    func getObjectKey() -> [UInt8] {
+        switch self {
+        case .commonName:
+            return [0x06, 0x03, 0x55, 0x04, 0x03]
+        case .organizationName:
+            return [0x06, 0x03, 0x55, 0x04, 0x0A]
+        case .organizationUnitName:
+            return [0x06, 0x03, 0x55, 0x04, 0x0B]
+        case .countryName:
+            return [0x06, 0x03, 0x55, 0x04, 0x06]
+        case .stateOrProvinceName:
+            return [0x06, 0x03, 0x55, 0x04, 0x08]
+        case .serialNumber:
+            return [0x06, 0x03, 0x55, 0x04, 0x05]
+        case .localityName:
+            return [0x06, 0x03, 0x55, 0x04, 0x07]
+        case .description:
+            return [0x06, 0x03, 0x55, 0x04, 0x0D]
+        case .emailAddress:
+            return [0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x09, 0x01]
+        }
+    }
+
+    func getValue() -> String {
+        switch self {
+        case .commonName(let value):
+            return value
+        case .organizationName(let value):
+            return value
+        case .organizationUnitName(let value):
+            return value
+        case .countryName(let value):
+            return value
+        case .stateOrProvinceName(let value):
+            return value
+        case .serialNumber(let value):
+            return value
+        case .localityName(let value):
+            return value
+        case .description(let value):
+            return value
+        case .emailAddress(let value):
+            return value
+        }
+    }
+}
+
 // swiftlint:disable:next type_body_length
 public class CertificateSigningRequest: NSObject {
-    private let objectCommonName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x03]
-    private let objectCountryName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x06]
-    private let objectDescription: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0D]
-    private let objectEmailAddress: [UInt8] = [0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x09, 0x01]
-    private let objectLocalityName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x07]
-    private let objectOrganizationName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0A]
-    private let objectOrganizationalUnitName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x0B]
-    private let objectStateOrProvinceName: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x08]
-    private let objectSerialNumber: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x05]
     private let sequenceTag: UInt8 = 0x30
     private let setTag: UInt8 = 0x31
-    private let commonName: String?
-    private let countryName: String?
-    private let emailAddress: String?
-    private let csrDescription: String?
-    private let localityName: String?
-    private let organizationName: String?
-    private let organizationUnitName: String?
-    private let stateOrProvinceName: String?
-    private let serialNumber: String?
-    private var keyAlgorithm: KeyAlgorithm!
+    private var subjectItems: [SubjectItem] = []
+    private let keyAlgorithm: KeyAlgorithm
     private var subjectDER: Data?
 
-    public init(commonName: String? = nil, organizationName: String? = nil,
-                organizationUnitName: String? = nil, countryName: String? = nil,
-                stateOrProvinceName: String? = nil, localityName: String? = nil,
-                serialNumber: String? = nil, emailAddress: String? = nil,
-                description: String? = nil, keyAlgorithm: KeyAlgorithm) {
-        self.commonName = commonName
-        self.organizationName = organizationName
-        self.organizationUnitName = organizationUnitName
-        self.countryName = countryName
-        self.stateOrProvinceName = stateOrProvinceName
-        self.serialNumber = serialNumber
-        self.localityName = localityName
-        self.emailAddress = emailAddress
-        self.csrDescription = description
+    public init(keyAlgorithm: KeyAlgorithm) {
         self.keyAlgorithm = keyAlgorithm
         super.init()
     }
 
     public convenience override init() {
-        self.init(commonName: nil, organizationName: nil, organizationUnitName: nil,
-                  countryName: nil, stateOrProvinceName: nil, localityName: nil,
-                  serialNumber: nil, keyAlgorithm: KeyAlgorithm.rsa(signatureType: .sha512))
+        self.init(keyAlgorithm: KeyAlgorithm.rsa(signatureType: .sha512))
     }
 
-    public convenience init(keyAlgorithm: KeyAlgorithm) {
-        self.init(commonName: nil, organizationName: nil, organizationUnitName: nil,
-                  countryName: nil, stateOrProvinceName: nil, localityName: nil,
-                  serialNumber: nil, keyAlgorithm: keyAlgorithm)
+    public convenience init(commonName: String? = nil,
+                            organizationName: String? = nil,
+                            organizationUnitName: String? = nil,
+                            countryName: String? = nil,
+                            stateOrProvinceName: String? = nil,
+                            localityName: String? = nil,
+                            serialNumber: String? = nil,
+                            emailAddress: String? = nil,
+                            description: String? = nil,
+                            keyAlgorithm: KeyAlgorithm) {
+        self.init(keyAlgorithm: keyAlgorithm)
+
+        if let commonName = commonName {
+            self.addSubjectItem(.commonName(commonName))
+        }
+        if let organizationName = organizationName {
+            self.addSubjectItem(.organizationName(organizationName))
+        }
+        if let organizationUnitName = organizationUnitName {
+            self.addSubjectItem(.organizationUnitName(organizationUnitName))
+        }
+        if let countryName = countryName {
+            self.addSubjectItem(.countryName(countryName))
+        }
+        if let stateOrProvinceName = stateOrProvinceName {
+            self.addSubjectItem(.stateOrProvinceName(stateOrProvinceName))
+        }
+        if let localityName = localityName {
+            self.addSubjectItem(.localityName(localityName))
+        }
+        if let emailAddress = emailAddress {
+            self.addSubjectItem(.emailAddress(emailAddress))
+        }
+        if let description = description {
+            self.addSubjectItem(.description(description))
+        }
+        if let serialNumber = serialNumber {
+            self.addSubjectItem(.serialNumber(serialNumber))
+        }
+    }
+
+    public func addSubjectItem(_ subjectItem: SubjectItem) {
+        subjectItems.append(subjectItem)
     }
 
     public func build(_ publicKeyBits: Data, privateKey: SecKey, publicKey: SecKey?=nil) -> Data? {
-        let certificationRequestInfo = buldCertificationRequestInfo(publicKeyBits)
+        let certificationRequestInfo = buildCertificationRequestInfo(publicKeyBits)
         var signature = [UInt8](repeating: 0, count: 256)
         var signatureLen: Int = signature.count
 
@@ -129,16 +188,15 @@ public class CertificateSigningRequest: NSObject {
         return certificationRequest
     }
 
-    public func buildAndEncodeDataAsString(_ publicKeyBits: Data, privateKey: SecKey,
+    public func buildAndEncodeDataAsString(_ publicKeyBits: Data,
+                                           privateKey: SecKey,
                                            publicKey: SecKey?=nil) -> String? {
-
         guard let buildData = self.build(publicKeyBits, privateKey: privateKey, publicKey: publicKey) else {
             return nil
         }
 
         return buildData.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
             .addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-
     }
 
     public func buildCSRAndReturnString(_ publicKeyBits: Data, privateKey: SecKey, publicKey: SecKey?=nil) -> String? {
@@ -176,7 +234,7 @@ public class CertificateSigningRequest: NSObject {
         return newCSRString
     }
 
-    func buldCertificationRequestInfo(_ publicKeyBits: Data) -> Data {
+    func buildCertificationRequestInfo(_ publicKeyBits: Data) -> Data {
         var certificationRequestInfo = Data(capacity: 256)
 
         // Add version
@@ -186,40 +244,13 @@ public class CertificateSigningRequest: NSObject {
         // Add subject
         var subject = Data(capacity: 256)
 
-        if let countryName = countryName {
-            appendSubjectItem(objectCountryName, value: countryName, into: &subject)
-        }
-
-        if let stateOrProvinceName = stateOrProvinceName {
-            appendSubjectItem(objectStateOrProvinceName, value: stateOrProvinceName, into: &subject)
-        }
-
-        if let localityName = localityName {
-            appendSubjectItem(objectLocalityName, value: localityName, into: &subject)
-        }
-
-        if let organizationName = organizationName {
-            appendSubjectItem(objectOrganizationName, value: organizationName, into: &subject)
-        }
-
-        if let organizationUnitName = organizationUnitName {
-            appendSubjectItem(objectOrganizationalUnitName, value: organizationUnitName, into: &subject)
-        }
-
-        if let commonName = commonName {
-            appendSubjectItem(objectCommonName, value: commonName, into: &subject)
-        }
-
-        if let emailAddress = emailAddress {
-            appendSubjectItemEmail(objectEmailAddress, value: emailAddress, into: &subject)
-        }
-
-        if let description = csrDescription {
-            appendSubjectItem(objectDescription, value: description, into: &subject)
-        }
-        
-        if let serialNumber = serialNumber {
-            appendSubjectItem(objectSerialNumber, value: serialNumber, into: &subject)
+        for subjectItem in subjectItems {
+            switch subjectItem {
+            case let .emailAddress(emailAddress):
+                appendSubjectItemEmail(subjectItem.getObjectKey(), value: emailAddress, into: &subject)
+            default:
+                appendSubjectItem(subjectItem.getObjectKey(), value: subjectItem.getValue(), into: &subject)
+            }
         }
 
         enclose(&subject, by: sequenceTag)// Enclose into SEQUENCE
@@ -243,7 +274,7 @@ public class CertificateSigningRequest: NSObject {
 
         var publicKeyInfo = Data(capacity: 390)
 
-        switch keyAlgorithm! {
+        switch keyAlgorithm {
         case .rsa:
             publicKeyInfo.append(objectRSAEncryptionNULL, count: objectRSAEncryptionNULL.count)
         case .ec:
@@ -254,7 +285,7 @@ public class CertificateSigningRequest: NSObject {
         enclose(&publicKeyInfo, by: sequenceTag) // Enclose into SEQUENCE
 
         var publicKeyASN = Data(capacity: 260)
-        switch keyAlgorithm! {
+        switch keyAlgorithm {
         case .ec:
             let key = getPublicKey(publicKeyBits)
             publicKeyASN.append(key)
