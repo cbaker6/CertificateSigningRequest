@@ -19,7 +19,7 @@ final class CertificateSigningRequestTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-        //Clear out App Keychain
+        // Clear out App Keychain
         var query: [String: Any] = [String(kSecClass): kSecClassKey]
         SecItemDelete(query as CFDictionary)
 
@@ -60,13 +60,13 @@ final class CertificateSigningRequestTests: XCTestCase {
                 return
         }
 
-        //Initiale CSR
+        // Initiale CSR
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
                                             localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
                                             description: "hello", keyAlgorithm: keyAlgorithm)
-        //Build the CSR
+        // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey, publicKey: publicKey)
         if let csrRegular = csrBuild {
@@ -112,13 +112,13 @@ final class CertificateSigningRequestTests: XCTestCase {
                 return
         }
 
-        //Initiale CSR
+        // Initiale CSR
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
                                             localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
                                             description: "hello", keyAlgorithm: keyAlgorithm)
-        //Build the CSR
+        // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
         if let csrRegular = csrBuild {
@@ -163,13 +163,13 @@ final class CertificateSigningRequestTests: XCTestCase {
                 return
         }
 
-        //Initiale CSR
+        // Initiale CSR
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
                                             localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
                                             description: "hello", keyAlgorithm: keyAlgorithm)
-        //Build the CSR
+        // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
         if let csrRegular = csrBuild {
@@ -214,13 +214,13 @@ final class CertificateSigningRequestTests: XCTestCase {
                 return
         }
 
-        //Initiale CSR
+        // Initiale CSR
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
                                             localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
                                             description: "hello", keyAlgorithm: keyAlgorithm)
-        //Build the CSR
+        // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
         if let csrRegular = csrBuild {
@@ -265,13 +265,13 @@ final class CertificateSigningRequestTests: XCTestCase {
                 return
         }
 
-        //Initiale CSR
+        // Initiale CSR
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
                                             localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
                                             description: "hello", keyAlgorithm: keyAlgorithm)
-        //Build the CSR
+        // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
         if let csrRegular = csrBuild {
@@ -316,13 +316,13 @@ final class CertificateSigningRequestTests: XCTestCase {
                 return
         }
 
-        //Initiale CSR
+        // Initiale CSR
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
                                             localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
                                             description: "hello", keyAlgorithm: keyAlgorithm)
-        //Build the CSR
+        // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
         if let csrRegular = csrBuild {
@@ -367,13 +367,13 @@ final class CertificateSigningRequestTests: XCTestCase {
                 return
         }
 
-        //Initiale CSR
+        // Initiale CSR
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
                                             localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
                                             description: "hello", keyAlgorithm: keyAlgorithm)
-        //Build the CSR
+        // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
         if let csrRegular = csrBuild {
@@ -419,13 +419,13 @@ final class CertificateSigningRequestTests: XCTestCase {
                 return
         }
 
-        //Initiale CSR
+        // Initiale CSR
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
                                             localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
                                             description: "hello", keyAlgorithm: keyAlgorithm)
-        //Build the CSR
+        // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         if let csrRegular = csrBuild {
             print("CSR string no header and footer")
@@ -466,13 +466,13 @@ final class CertificateSigningRequestTests: XCTestCase {
                 return
         }
 
-        //Initiale CSR
+        // Initiale CSR
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
                                             localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
                                             description: "hello", keyAlgorithm: keyAlgorithm)
-        //Build the CSR
+        // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
         if let csrRegular = csrBuild {
@@ -517,13 +517,13 @@ final class CertificateSigningRequestTests: XCTestCase {
                 return
         }
 
-        //Initiale CSR
+        // Initiale CSR
         let csr = CertificateSigningRequest(commonName: "CertificateSigningRequest Test",
                                             organizationName: "Test", organizationUnitName: "Test",
                                             countryName: "US", stateOrProvinceName: "KY",
                                             localityName: "Test", emailAddress: "netrecon@cs.uky.edu",
                                             description: "hello", keyAlgorithm: keyAlgorithm)
-        //Build the CSR
+        // Build the CSR
         let csrBuild = csr.buildAndEncodeDataAsString(publicKeyBits, privateKey: privateKey)
         let csrBuild2 = csr.buildCSRAndReturnString(publicKeyBits, privateKey: privateKey)
         if let csrRegular = csrBuild {
@@ -559,8 +559,8 @@ final class CertificateSigningRequestTests: XCTestCase {
         ]
 
         #if !targetEnvironment(simulator)
-            //This only works for Secure Enclave consisting of 256 bit key,
-            //note, the signatureType is irrelevant for this check
+            // This only works for Secure Enclave consisting of 256 bit key,
+            // note, the signatureType is irrelevant for this check
             if algorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type {
                 let access = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                                              kSecAttrAccessibleAfterFirstUnlock,
@@ -571,7 +571,7 @@ final class CertificateSigningRequestTests: XCTestCase {
             }
         #endif
 
-        //Define what type of keys to be generated here
+        // Define what type of keys to be generated here
         var parameters: [String: Any] = [
             String(kSecAttrKeyType): algorithm.secKeyAttrType,
             String(kSecAttrKeySizeInBits): keySize,
@@ -581,16 +581,16 @@ final class CertificateSigningRequestTests: XCTestCase {
         ]
 
         #if !targetEnvironment(simulator)
-            //iOS only allows EC 256 keys to be secured in enclave.
-            //This will attempt to allow any EC key in the enclave,
-            //assuming iOS will do it outside of the enclave if it
-            //doesn't like the key size, note: the signatureType is irrelavent for this check
+            // iOS only allows EC 256 keys to be secured in enclave.
+            // This will attempt to allow any EC key in the enclave,
+            // assuming iOS will do it outside of the enclave if it
+            // doesn't like the key size, note: the signatureType is irrelavent for this check
             if algorithm.type == KeyAlgorithm.ec(signatureType: .sha1).type {
                 parameters[String(kSecAttrTokenID)] = kSecAttrTokenIDSecureEnclave
             }
         #endif
 
-        //Use Apple Security Framework to generate keys, save them to application keychain
+        // Use Apple Security Framework to generate keys, save them to application keychain
         var error: Unmanaged<CFError>?
         let privateKey = SecKeyCreateRandomKey(parameters as CFDictionary, &error)
         if privateKey == nil {
@@ -598,7 +598,7 @@ final class CertificateSigningRequestTests: XCTestCase {
             return (nil, nil)
         }
 
-        //Get generated public key
+        // Get generated public key
         let query: [String: Any] = [
             String(kSecClass): kSecClassKey,
             String(kSecAttrKeyType): algorithm.secKeyAttrType,
@@ -619,9 +619,9 @@ final class CertificateSigningRequestTests: XCTestCase {
 
     func getPublicKeyBits(_ algorithm: KeyAlgorithm, publicKey: SecKey, tagPublic: String) -> (Data?, Int?) {
 
-        //Set block size
+        // Set block size
         let keyBlockSize = SecKeyGetBlockSize(publicKey)
-        //Ask keychain to provide the publicKey in bits
+        // Ask keychain to provide the publicKey in bits
         let query: [String: Any] = [
             String(kSecClass): kSecClassKey,
             String(kSecAttrKeyType): algorithm.secKeyAttrType,

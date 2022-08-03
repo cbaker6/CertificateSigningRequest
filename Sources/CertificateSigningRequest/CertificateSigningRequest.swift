@@ -36,47 +36,48 @@ import Security
 
 public enum SubjectItem {
     case commonName(String), organizationName(String), organizationUnitName(String),
-                  countryName(String), stateOrProvinceName(String), localityName(String), description(String), emailAddress(String)
-    
+         countryName(String), stateOrProvinceName(String), localityName(String),
+         description(String), emailAddress(String)
+
     func getObjectKey() -> [UInt8] {
         switch self {
-            case .commonName(_):
-                return [0x06, 0x03, 0x55, 0x04, 0x03]
-            case .organizationName(_):
-                return [0x06, 0x03, 0x55, 0x04, 0x0A]
-            case .organizationUnitName(_):
-                return [0x06, 0x03, 0x55, 0x04, 0x0B]
-            case .countryName(_):
-                return [0x06, 0x03, 0x55, 0x04, 0x06]
-            case .stateOrProvinceName(_):
-                return [0x06, 0x03, 0x55, 0x04, 0x08]
-            case .localityName(_):
-                return [0x06, 0x03, 0x55, 0x04, 0x07]
-            case .description(_):
-                return [0x06, 0x03, 0x55, 0x04, 0x0D]
-            case .emailAddress(_):
-                return [0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x09, 0x01]
+        case .commonName:
+            return [0x06, 0x03, 0x55, 0x04, 0x03]
+        case .organizationName:
+            return [0x06, 0x03, 0x55, 0x04, 0x0A]
+        case .organizationUnitName:
+            return [0x06, 0x03, 0x55, 0x04, 0x0B]
+        case .countryName:
+            return [0x06, 0x03, 0x55, 0x04, 0x06]
+        case .stateOrProvinceName:
+            return [0x06, 0x03, 0x55, 0x04, 0x08]
+        case .localityName:
+            return [0x06, 0x03, 0x55, 0x04, 0x07]
+        case .description:
+            return [0x06, 0x03, 0x55, 0x04, 0x0D]
+        case .emailAddress:
+            return [0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x09, 0x01]
         }
     }
 
     func getValue() -> String {
         switch self {
-            case .commonName(let value):
-                return value
-            case .organizationName(let value):
-                return value
-            case .organizationUnitName(let value):
-                return value
-            case .countryName(let value):
-                return value
-            case .stateOrProvinceName(let value):
-                return value
-            case .localityName(let value):
-                return value
-            case .description(let value):
-                return value
-            case .emailAddress(let value):
-                return value
+        case .commonName(let value):
+            return value
+        case .organizationName(let value):
+            return value
+        case .organizationUnitName(let value):
+            return value
+        case .countryName(let value):
+            return value
+        case .stateOrProvinceName(let value):
+            return value
+        case .localityName(let value):
+            return value
+        case .description(let value):
+            return value
+        case .emailAddress(let value):
+            return value
         }
     }
 }
@@ -98,11 +99,15 @@ public class CertificateSigningRequest: NSObject {
         self.init(keyAlgorithm: KeyAlgorithm.rsa(signatureType: .sha512))
     }
 
-    public convenience init(commonName: String? = nil, organizationName: String? = nil,
-                organizationUnitName: String? = nil, countryName: String? = nil,
-                stateOrProvinceName: String? = nil, localityName: String? = nil,
-                emailAddress: String? = nil, description: String? = nil,
-                keyAlgorithm: KeyAlgorithm) {
+    public convenience init(commonName: String? = nil,
+                            organizationName: String? = nil,
+                            organizationUnitName: String? = nil,
+                            countryName: String? = nil,
+                            stateOrProvinceName: String? = nil,
+                            localityName: String? = nil,
+                            emailAddress: String? = nil,
+                            description: String? = nil,
+                            keyAlgorithm: KeyAlgorithm) {
         self.init(keyAlgorithm: keyAlgorithm)
 
         if let commonName = commonName {
@@ -233,10 +238,10 @@ public class CertificateSigningRequest: NSObject {
 
         for subjectItem in subjectItems {
             switch subjectItem {
-                case let .emailAddress(emailAddress):
-                    appendSubjectItemEmail(subjectItem.getObjectKey(), value: emailAddress, into: &subject)
-                default:
-                    appendSubjectItem(subjectItem.getObjectKey(), value: subjectItem.getValue(), into: &subject)
+            case let .emailAddress(emailAddress):
+                appendSubjectItemEmail(subjectItem.getObjectKey(), value: emailAddress, into: &subject)
+            default:
+                appendSubjectItem(subjectItem.getObjectKey(), value: subjectItem.getValue(), into: &subject)
             }
         }
 
