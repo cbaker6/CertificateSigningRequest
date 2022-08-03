@@ -2,7 +2,14 @@
   "warnings": [
     {
       "file": "/Users/runner/work/CertificateSigningRequest/CertificateSigningRequest/Sources/CertificateSigningRequest/CertificateSigningRequest.swift",
-      "line": 38,
+      "line": 37,
+      "symbol": "SubjectItem",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CertificateSigningRequest/CertificateSigningRequest/Sources/CertificateSigningRequest/CertificateSigningRequest.swift",
+      "line": 90,
       "symbol": "CertificateSigningRequest",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
