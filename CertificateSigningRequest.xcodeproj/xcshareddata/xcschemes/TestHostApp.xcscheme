@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "91D1A00F2A0FDD7E001AA9D4"
-               BuildableName = "TestApp.app"
-               BlueprintName = "TestApp"
+               BuildableName = "TestHostApp.app"
+               BlueprintName = "TestHostApp"
                ReferencedContainer = "container:CertificateSigningRequest.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "91D1A00F2A0FDD7E001AA9D4"
-            BuildableName = "TestApp.app"
-            BlueprintName = "TestApp"
+            BuildableName = "TestHostApp.app"
+            BlueprintName = "TestHostApp"
             ReferencedContainer = "container:CertificateSigningRequest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "91D1A00F2A0FDD7E001AA9D4"
-            BuildableName = "TestApp.app"
-            BlueprintName = "TestApp"
+            BuildableName = "TestHostApp.app"
+            BlueprintName = "TestHostApp"
             ReferencedContainer = "container:CertificateSigningRequest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
