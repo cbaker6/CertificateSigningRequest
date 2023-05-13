@@ -16,8 +16,8 @@
     {
       "target" : {
         "containerPath" : "container:CertificateSigningRequest.xcodeproj",
-        "identifier" : "91CD464D2583D8EE002DEF03",
-        "name" : "TestHostTests"
+        "identifier" : "CertificateSigningRequest::CertificateSigningRequestTests",
+        "name" : "CertificateSigningRequestTests"
       }
     }
   ],

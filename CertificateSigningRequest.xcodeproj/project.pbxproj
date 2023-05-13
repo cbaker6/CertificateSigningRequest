@@ -26,6 +26,13 @@
 			remoteGlobalIDString = "CertificateSigningRequest::CertificateSigningRequest";
 			remoteInfo = CertificateSigningRequest;
 		};
+		91D1A01F2A0FDF59001AA9D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 91D1A00F2A0FDD7E001AA9D4;
+			remoteInfo = TestApp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -203,6 +210,7 @@
 			);
 			dependencies = (
 				OBJ_49 /* PBXTargetDependency */,
+				91D1A0202A0FDF59001AA9D4 /* PBXTargetDependency */,
 			);
 			name = CertificateSigningRequestTests;
 			productName = CertificateSigningRequestTests;
@@ -221,6 +229,9 @@
 				TargetAttributes = {
 					91D1A00F2A0FDD7E001AA9D4 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					"CertificateSigningRequest::CertificateSigningRequestTests" = {
+						TestTargetID = 91D1A00F2A0FDD7E001AA9D4;
 					};
 				};
 			};
@@ -309,6 +320,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		91D1A0202A0FDF59001AA9D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 91D1A00F2A0FDD7E001AA9D4 /* TestApp */;
+			targetProxy = 91D1A01F2A0FDF59001AA9D4 /* PBXContainerItemProxy */;
+		};
 		OBJ_49 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilters = (
@@ -642,7 +658,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = CertificateSigningRequest.xcodeproj/CertificateSigningRequestTests_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/../Frameworks",
@@ -659,8 +675,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
 				TARGET_NAME = CertificateSigningRequestTests;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TestApp";
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -676,7 +693,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = CertificateSigningRequest.xcodeproj/CertificateSigningRequestTests_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/../Frameworks",
@@ -693,8 +710,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
 				TARGET_NAME = CertificateSigningRequestTests;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TestApp";
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};
