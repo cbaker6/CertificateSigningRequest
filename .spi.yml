@@ -1,7 +1,4 @@
 version: 1
 builder:
   configs:
-  - platform: macos-spm
-    documentation_targets: [CertificateSigningRequest]
-  - platform: watchos
-    scheme: "CertificateSigningRequest (watchOS)"
+  - documentation_targets: [CertificateSigningRequest]

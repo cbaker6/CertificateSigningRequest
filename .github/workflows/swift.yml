@@ -6,40 +6,86 @@ on:
   pull_request:
     branches: [ main ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   CI_XCODE_VER: '/Applications/Xcode_11.7.app/Contents/Developer'
 
 jobs:
-  swift-test-ios:
-
+  test:
     runs-on: macos-latest
-
+    strategy:
+      matrix:
+        destination: ['platform=iOS\ Simulator,name=iPhone\ 14\ Pro\ Max', 'platform\=tvOS\ Simulator,name\=Apple\ TV', 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 5\ \(40mm\)', 'platform=macOS']
+        action: ['test', 'build']
+        exclude:
+          - destination: 'platform=iOS\ Simulator,name=iPhone\ 14\ Pro\ Max'
+            action: 'build'
+          - destination: 'platform\=tvOS\ Simulator,name\=Apple\ TV'
+            action: 'build'
+          - destination: 'platform=macOS'
+            action: 'build'
+          - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 5\ \(40mm\)'
+            action: 'test'
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - name: Use multiple cores
+      run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
+    - name: Create and set the default keychain
+      run: |
+        security create-keychain -p "" temporary
+        security default-keychain -s temporary
+        security unlock-keychain -p "" temporary
+        security set-keychain-settings -lut 7200 temporary
     - name: Build
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -scheme CertificateSigningRequest -destination platform\=iOS\ Simulator,name\=iPhone\ 11\ Pro\ Max test | xcpretty
-    - name: Codecov
-      run: bash <(curl https://codecov.io/bash)
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -scheme CertificateSigningRequest -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }}
+    - name: Prepare codecov
+      uses: sersoft-gmbh/swift-coverage-action@v3
+      id: coverage-files
+      with:
+        format: lcov
+        search-paths: ./DerivedData
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
+        fail_ci_if_error: false
 
   swift-test-spm:
-    
     runs-on: macos-latest
-
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - name: Use multiple cores
+      run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
+    - name: Create and set the default keychain
+      run: |
+        security create-keychain -p "" temporary
+        security default-keychain -s temporary
+        security unlock-keychain -p "" temporary
+        security set-keychain-settings -lut 7200 temporary
     - name: Build and Test
-      run: swift test --enable-code-coverage -v
+      run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage
     - name: Prepare codecov
-      run: xcrun llvm-cov export -format="lcov" .build/debug/CertificateSigningRequestPackageTests.xctest/Contents/MacOS/CertificateSigningRequestPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
-    - name: Codecov
-      run: bash <(curl https://codecov.io/bash)
+      uses: sersoft-gmbh/swift-coverage-action@v3
+      id: coverage-files
+      with:
+        format: lcov
+        search-paths: ./.build
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
+        env_vars: SPM
+        fail_ci_if_error: false
 
   cocoapods:
     needs: swift-test-spm
     runs-on: macos-latest
-    
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Use multiple cores
+        run: defaults write com.apple.dt.XCBuild EnableSwiftBuildSystemIntegration 1
       - name: CocoaPods
-        run: set -o pipefail && env NSUnbufferedIO=YES pod lib lint --allow-warnings --verbose
-        
+        run: set -o pipefail && env NSUnbufferedIO=YES pod lib lint --allow-warnings --verbose  

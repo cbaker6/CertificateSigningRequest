@@ -2,15 +2,20 @@
 //  ContentView.swift
 //  TestHost
 //
-//  Created by Corey Baker on 12/11/20.
+//  Created by Corey Baker on 5/13/23.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundColor(.accentColor)
+            Text("Hello, world!")
+        }
+        .padding()
     }
 }
 

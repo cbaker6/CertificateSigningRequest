@@ -2,14 +2,13 @@ coverage:
   ignore:
     - Tests/.*
     - TestHost/.*
-    - TestHostTests/.*
-    - TestHostTV/.*
-    - TestHostTVTests/.*
   status:
     patch: true
+      default:
+        target: 80
     changes: false
     project:
       default:
         target: 90
 comment:
-  require_changes: true
+  require_changes: false
