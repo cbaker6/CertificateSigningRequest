@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "9295E499-AA65-4D6B-88A2-58BBE7010B3D",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random",
+    "testRepetitionMode" : "retryOnFailure"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:CertificateSigningRequest.xcodeproj",
+        "identifier" : "91CD464D2583D8EE002DEF03",
+        "name" : "TestHostTests"
+      }
+    }
+  ],
+  "version" : 1
+}

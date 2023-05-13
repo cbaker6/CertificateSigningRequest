@@ -1,14 +1,14 @@
 //
-//  TestHostTVApp.swift
-//  TestHostTV
+//  TestAppApp.swift
+//  TestApp
 //
-//  Created by Corey Baker on 12/11/20.
+//  Created by Corey Baker on 5/13/23.
 //
 
 import SwiftUI
 
 @main
-struct TestHostTVApp: App {
+struct TestAppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
