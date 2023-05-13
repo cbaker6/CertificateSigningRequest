@@ -125,13 +125,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		91D1A0212A0FE111001AA9D4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		OBJ_11 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,7 +165,6 @@
 				OBJ_15 /* Products */,
 				OBJ_7 /* Sources */,
 				OBJ_11 /* Tests */,
-				91D1A0212A0FE111001AA9D4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
