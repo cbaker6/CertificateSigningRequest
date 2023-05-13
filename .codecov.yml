@@ -4,6 +4,8 @@ coverage:
     - TestHost/.*
   status:
     patch: true
+      default:
+        target: 80
     changes: false
     project:
       default:
