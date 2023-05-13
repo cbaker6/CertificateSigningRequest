@@ -2,9 +2,6 @@ coverage:
   ignore:
     - Tests/.*
     - TestHost/.*
-    - TestHostTests/.*
-    - TestHostTV/.*
-    - TestHostTVTests/.*
   status:
     patch: true
     changes: false
@@ -12,4 +9,4 @@ coverage:
       default:
         target: 90
 comment:
-  require_changes: true
+  require_changes: false
