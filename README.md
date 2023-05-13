@@ -1,13 +1,15 @@
 # CertificateSigningRequest
+[![Documentation](https://img.shields.io/badge/read_-docs-2196f3.svg)](https://swiftpackageindex.com/cbaker6/CertificateSigningRequest/documentation)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fcbaker6%2FCertificateSigningRequest%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/cbaker6/CertificateSigningRequest)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fcbaker6%2FCertificateSigningRequest%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/cbaker6/CertificateSigningRequest)
 [![CI Status](https://github.com/cbaker6/CertificateSigningRequest/workflows/build/badge.svg?branch=main)](https://github.com/cbaker6/CertificateSigningRequest/actions?query=workflow%3Abuild+branch%3Amain)
 [![Codecov](https://codecov.io/gh/cbaker6/CertificateSigningRequest/branches/main/graph/badge.svg)](https://codecov.io/gh/cbaker6/CertificateSigningRequest/branches/main)
-[![SPM](https://img.shields.io/badge/swift%20package%20manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
-[![Version](https://img.shields.io/cocoapods/v/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
-[![License](https://img.shields.io/cocoapods/l/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
+[![Pod](https://img.shields.io/cocoapods/v/CertificateSigningRequest.svg?style=flat)](https://cocoapods.org/pods/CertificateSigningRequest)
+[![License](https://img.shields.io/badge/license-GPL%202.0-green.svg)][license-link]
 
 Generate a certificate signing request (CSR) in iOS/macOS using Swift.
+
+[license-link]: LICENSE
 
 ## iOS
 Supports RSA (key size: 512, 1024, 2048) and EC inside/outside of secure enclave (iOS only supports 256 bit keys for now), SHA1, SHA256, and SHA512. 
