@@ -1,4 +1,4 @@
-name: build
+name: release
 
 on:
   push:
@@ -10,8 +10,6 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-      - name: CocoaPods
-        run: set -o pipefail && env NSUnbufferedIO=YES pod lib lint --allow-warnings --verbose 
       - name: Deploy CocoaPods
         run: set -o pipefail && env NSUnbufferedIO=YES pod trunk push CertificateSigningRequest.podspec --allow-warnings --verbose
         env:
