@@ -40,7 +40,7 @@ jobs:
         security unlock-keychain -p "" temporary
         security set-keychain-settings -lut 7200 temporary
     - name: Build
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -scheme CertificateSigningRequest -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }} | xcpretty -c
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -scheme CertificateSigningRequest -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }}
     - name: Prepare codecov
       uses: sersoft-gmbh/swift-coverage-action@v3
       id: coverage-files
