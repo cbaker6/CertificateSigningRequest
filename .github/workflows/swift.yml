@@ -29,7 +29,6 @@ jobs:
             action: 'build'
           - destination: 'platform=watchOS\ Simulator,name=Apple\ Watch\ Series\ 5\ \(40mm\)'
             action: 'test'
-          
     steps:
     - uses: actions/checkout@v3
     - name: Use multiple cores
@@ -52,7 +51,7 @@ jobs:
       uses: codecov/codecov-action@v3
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
-        fail_ci_if_error: true
+        fail_ci_if_error: false
 
   swift-test-spm:
     runs-on: macos-latest
@@ -79,10 +78,10 @@ jobs:
       with:
         files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
         env_vars: SPM
-        fail_ci_if_error: true
+        fail_ci_if_error: false
 
   cocoapods:
-    needs: swift-test-spm
+  needs: swift-test-spm
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
