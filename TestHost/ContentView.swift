@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  TestHostApp
+//  TestHost
 //
 //  Created by Corey Baker on 5/13/23.
 //

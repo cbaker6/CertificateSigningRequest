@@ -60,11 +60,11 @@
 
 /* Begin PBXFileReference section */
 		91D1A00B2A0FDC7E001AA9D4 /* CertificateSigningRequest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CertificateSigningRequest.xctestplan; sourceTree = "<group>"; };
-		91D1A0102A0FDD7E001AA9D4 /* TestHostApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHostApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		91D1A0102A0FDD7E001AA9D4 /* TestHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91D1A0122A0FDD7E001AA9D4 /* TestHostApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHostApp.swift; sourceTree = "<group>"; };
 		91D1A0142A0FDD7E001AA9D4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		91D1A0162A0FDD80001AA9D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		91D1A0182A0FDD80001AA9D4 /* TestHostApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestHostApp.entitlements; sourceTree = "<group>"; };
+		91D1A0182A0FDD80001AA9D4 /* TestHost.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestHost.entitlements; sourceTree = "<group>"; };
 		91D1A01A2A0FDD80001AA9D4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		"CertificateSigningRequest::CertificateSigningRequest::Product" /* CertificateSigningRequest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CertificateSigningRequest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"CertificateSigningRequest::CertificateSigningRequestTests::Product" /* CertificateSigningRequestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = CertificateSigningRequestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,16 +105,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		91D1A0112A0FDD7E001AA9D4 /* TestHostApp */ = {
+		91D1A0112A0FDD7E001AA9D4 /* TestHost */ = {
 			isa = PBXGroup;
 			children = (
 				91D1A0122A0FDD7E001AA9D4 /* TestHostApp.swift */,
 				91D1A0142A0FDD7E001AA9D4 /* ContentView.swift */,
 				91D1A0162A0FDD80001AA9D4 /* Assets.xcassets */,
-				91D1A0182A0FDD80001AA9D4 /* TestHostApp.entitlements */,
+				91D1A0182A0FDD80001AA9D4 /* TestHost.entitlements */,
 				91D1A0192A0FDD80001AA9D4 /* Preview Content */,
 			);
-			path = TestHostApp;
+			path = TestHost;
 			sourceTree = "<group>";
 		};
 		91D1A0192A0FDD80001AA9D4 /* Preview Content */ = {
@@ -148,7 +148,7 @@
 			children = (
 				"CertificateSigningRequest::CertificateSigningRequestTests::Product" /* CertificateSigningRequestTests.xctest */,
 				"CertificateSigningRequest::CertificateSigningRequest::Product" /* CertificateSigningRequest.framework */,
-				91D1A0102A0FDD7E001AA9D4 /* TestHostApp.app */,
+				91D1A0102A0FDD7E001AA9D4 /* TestHost.app */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -161,7 +161,7 @@
 				OBJ_19 /* CertificateSigningRequest.podspec */,
 				OBJ_6 /* Package.swift */,
 				91D1A00B2A0FDC7E001AA9D4 /* CertificateSigningRequest.xctestplan */,
-				91D1A0112A0FDD7E001AA9D4 /* TestHostApp */,
+				91D1A0112A0FDD7E001AA9D4 /* TestHost */,
 				OBJ_15 /* Products */,
 				OBJ_7 /* Sources */,
 				OBJ_11 /* Tests */,
@@ -189,9 +189,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		91D1A00F2A0FDD7E001AA9D4 /* TestHostApp */ = {
+		91D1A00F2A0FDD7E001AA9D4 /* TestHost */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 91D1A01C2A0FDD80001AA9D4 /* Build configuration list for PBXNativeTarget "TestHostApp" */;
+			buildConfigurationList = 91D1A01C2A0FDD80001AA9D4 /* Build configuration list for PBXNativeTarget "TestHost" */;
 			buildPhases = (
 				91D1A00C2A0FDD7E001AA9D4 /* Sources */,
 				91D1A00D2A0FDD7E001AA9D4 /* Frameworks */,
@@ -203,9 +203,9 @@
 			dependencies = (
 				91D1A0252A0FE111001AA9D4 /* PBXTargetDependency */,
 			);
-			name = TestHostApp;
+			name = TestHost;
 			productName = TestApp;
-			productReference = 91D1A0102A0FDD7E001AA9D4 /* TestHostApp.app */;
+			productReference = 91D1A0102A0FDD7E001AA9D4 /* TestHost.app */;
 			productType = "com.apple.product-type.application";
 		};
 		"CertificateSigningRequest::CertificateSigningRequest" /* CertificateSigningRequest */ = {
@@ -276,7 +276,7 @@
 			targets = (
 				"CertificateSigningRequest::CertificateSigningRequest" /* CertificateSigningRequest */,
 				"CertificateSigningRequest::CertificateSigningRequestTests" /* CertificateSigningRequestTests */,
-				91D1A00F2A0FDD7E001AA9D4 /* TestHostApp */,
+				91D1A00F2A0FDD7E001AA9D4 /* TestHost */,
 			);
 		};
 /* End PBXProject section */
@@ -348,7 +348,7 @@
 /* Begin PBXTargetDependency section */
 		91D1A0202A0FDF59001AA9D4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 91D1A00F2A0FDD7E001AA9D4 /* TestHostApp */;
+			target = 91D1A00F2A0FDD7E001AA9D4 /* TestHost */;
 			targetProxy = 91D1A01F2A0FDF59001AA9D4 /* PBXContainerItemProxy */;
 		};
 		91D1A0252A0FE111001AA9D4 /* PBXTargetDependency */ = {
@@ -385,12 +385,12 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = TestHostApp/TestHostApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TestHost/TestHost.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"TestHostApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"TestHost/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -418,7 +418,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uky.cs.netrecon.TestHostApp;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uky.cs.netrecon.TestHost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx watchos";
@@ -448,13 +448,13 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = TestHostApp/TestHostApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TestHost/TestHost.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"TestHostApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"TestHost/Preview Content\"";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -478,7 +478,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uky.cs.netrecon.TestHostApp;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uky.cs.netrecon.TestHost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx watchos";
@@ -706,7 +706,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
 				TARGET_NAME = CertificateSigningRequestTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestHostApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TestHostApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestHost.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TestHost";
 				TVOS_DEPLOYMENT_TARGET = 13.0;
 				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
@@ -741,7 +741,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
 				TARGET_NAME = CertificateSigningRequestTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestHostApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TestHostApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestHost.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TestHost";
 				TVOS_DEPLOYMENT_TARGET = 13.0;
 				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
@@ -750,7 +750,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		91D1A01C2A0FDD80001AA9D4 /* Build configuration list for PBXNativeTarget "TestHostApp" */ = {
+		91D1A01C2A0FDD80001AA9D4 /* Build configuration list for PBXNativeTarget "TestHost" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				91D1A01D2A0FDD80001AA9D4 /* Debug */,
