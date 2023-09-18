@@ -44,7 +44,7 @@ jobs:
     - name: Build
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -scheme CertificateSigningRequest -derivedDataPath DerivedData -destination ${{ matrix.destination }} ${{ matrix.action }}
     - name: Prepare codecov
-      uses: sersoft-gmbh/swift-coverage-action@v3
+      uses: sersoft-gmbh/swift-coverage-action@v4
       id: coverage-files
       with:
         format: lcov
@@ -70,7 +70,7 @@ jobs:
     - name: Build and Test
       run: set -o pipefail && env NSUnbufferedIO=YES swift test --enable-code-coverage
     - name: Prepare codecov
-      uses: sersoft-gmbh/swift-coverage-action@v3
+      uses: sersoft-gmbh/swift-coverage-action@v4
       id: coverage-files
       with:
         format: lcov
